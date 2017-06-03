@@ -1,13 +1,20 @@
 package Utility;
 
+import User.UserSecurity;
+import User.UserSecurityDAO;
+
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -19,7 +26,9 @@ import java.util.concurrent.ThreadLocalRandom;
  * inline with OWASP recommendations for algorithm and salt length. Overloads and base64 helpers
  * have been added for ease-of-use.
  */
-public class Passwords {
+public class SecurityUtility {
+
+    private static final MySQL DB = new MySQL();
     private static final Random RANDOM = new SecureRandom();
     private static final int MIN_ITERATIONS = 50_000;
     private static final int MAX_ITERATIONS = 100_000;
@@ -29,7 +38,7 @@ public class Passwords {
     /**
      * static utility class
      */
-    private Passwords() { }
+    private SecurityUtility() { }
 
     /**
      * Returns a random salt to be used to hash a password. DEFAULT_SALT_LENGTH is used as
@@ -208,5 +217,38 @@ public class Passwords {
 
     public static int getNextIteration() {
         return ThreadLocalRandom.current().nextInt(MIN_ITERATIONS, MAX_ITERATIONS + 1);
+    }
+
+    public static boolean loggingStatusChecker(HttpServletRequest request) throws IOException {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("loggingStatus") == null) return false;
+
+        String username = (String) session.getAttribute("username");
+
+        if (username != null) {
+            List<UserSecurity> users = UserSecurityDAO.getAllUsers(DB);
+            for (UserSecurity user : users) if ((user.getUsername()).equals(username)) return true;
+        }
+        return false;
+    }
+
+    public static boolean passwordAuthentication(String username, String password) {
+
+        char[] passwordArray = password.toCharArray();
+
+        // Get the user relating to the parsed-in username from the database.
+        UserSecurity user = UserSecurityDAO.getUser(DB, username);
+
+        // Get the salt byte array assigned to the user.
+        byte[] salt = user.getSalt();
+
+        // Get the hash byte array assigned to the user.
+        byte[] hash = user.getHash();
+
+        // Get the iterations, assigned to the user.
+        int iterations = user.getIterations();
+
+        // Call SecurityUtility method, isExpectedPassword to determine whether the user-parsed password matches the password stored in the database. The the result is returned.
+        return SecurityUtility.isExpectedPassword(passwordArray, salt, iterations, hash);
     }
 }

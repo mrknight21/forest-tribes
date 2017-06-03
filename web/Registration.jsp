@@ -1,5 +1,6 @@
 <%@ page import="ictgradschool.ex05.Server_Utility" %>
 <%@ page import="ictgradschool.ex05.MySQL" %>
+<%@ page import="Utility.SecurityUtility" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +9,7 @@
 </head>
 <body>
 
-<% if(Server_Utility.loggingStatusChecker(request)) response.sendRedirect("/ex05/Content.jsp"); %>
+<% if(SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/ex05/Home.jsp"); %>
 
 
 <h2>Create an Account</h2>
