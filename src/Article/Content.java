@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by wasia on 3/06/2017.
  */
-public class Content {
+public abstract class Content {
     protected int id;
     protected User author;
     protected String dateCreated;
