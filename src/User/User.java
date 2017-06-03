@@ -6,9 +6,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Barns on 3/06/17.
- */
 public class User implements Serializable {
 
     private String username;
