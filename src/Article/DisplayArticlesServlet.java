@@ -17,7 +17,6 @@ import java.io.IOException;
 public class DisplayArticlesServlet extends HttpServlet {
 
     private static final MySQL DB = new MySQL();
-    private static final int ITERATIONS = 50000;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
