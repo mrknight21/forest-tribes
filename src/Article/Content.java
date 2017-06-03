@@ -7,6 +7,7 @@ import java.util.List;
  * Created by wasia on 3/06/2017.
  */
 public class Content {
+    protected int id;
     protected String author;
     protected String dateCreated;
     protected String dateLastEdited;
