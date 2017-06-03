@@ -1,7 +1,8 @@
 package User;
 
-import Utility.Passwords;
+import Utility.SecurityUtility;
 import Utility.AbstractDB;
+
 import static Utility.BlobConverter.getBlob;
 import static Utility.BlobConverter.getByteArray;
 
@@ -93,12 +94,12 @@ public class UserSecurityDAO {
 
                 char[] passwordArray = password.toCharArray();
 
-                byte[] salt = Passwords.getNextSalt();
+                byte[] salt = SecurityUtility.getNextSalt();
                 Blob saltBlob = getBlob(salt);
 
-                int iterations = Passwords.getNextIteration();
+                int iterations = SecurityUtility.getNextIteration();
 
-                byte[] hash = Passwords.hash(passwordArray, salt, iterations);
+                byte[] hash = SecurityUtility.hash(passwordArray, salt, iterations);
                 Blob hashBlob = getBlob(hash);
 
                 p.setBlob(1, saltBlob);
