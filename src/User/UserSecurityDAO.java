@@ -2,8 +2,8 @@ package User;
 
 import Utility.Passwords;
 import Utility.AbstractDB;
-import static Utility.BlobManipulator.getBlob;
-import static Utility.BlobManipulator.getByteArray;
+import static Utility.BlobConverter.getBlob;
+import static Utility.BlobConverter.getByteArray;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class UserSecurityDAO {
         List<UserSecurity> users = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM web_lab_19")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_UserSecurity")) {
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         users.add(userFromResultSet(r));
@@ -35,7 +35,7 @@ public class UserSecurityDAO {
         UserSecurity user = null;
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM web_lab_19 WHERE username = ?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_UserSecurity WHERE username = ?")) {
                 p.setString(1, username);
 
                 try (ResultSet r = p.executeQuery()) {
@@ -56,7 +56,7 @@ public class UserSecurityDAO {
         boolean status;
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO web_lab_19 (username, salt, iterations, hash) VALUE (?, ?, ?, ?)")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_UserSecurity (username, salt, iterations, hash) VALUE (?, ?, ?, ?)")) {
 
                 byte[] salt = newUser.getSalt();
                 Blob saltBlob = getBlob(salt);
@@ -84,14 +84,14 @@ public class UserSecurityDAO {
         boolean status;
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE web_lab_19 SET salt = ?, iterations = ?, hash = ? WHERE username = ?")) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_UserSecurity SET salt = ?, iterations = ?, hash = ? WHERE username = ?")) {
 
                 char[] passwordArray = password.toCharArray();
 
                 byte[] salt = Passwords.getNextSalt();
                 Blob saltBlob = getBlob(salt);
 
-                int iterations = 50000;
+                int iterations = Passwords.getNextIteration();
 
                 byte[] hash = Passwords.hash(passwordArray, salt, iterations);
                 Blob hashBlob = getBlob(hash);
