@@ -1,0 +1,54 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: mche618
+  Date: 3/06/2017
+  Time: 2:57 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Editing_profile</title>
+</head>
+<body>
+<h1>Editing profile</h1>
+<form action="/Serve_Registration" method="post">
+
+    <fieldset>
+        <legend>membership information</legend>
+
+
+    </fieldset>
+    <fieldset>
+        <legend>Personal profile</legend>
+        <label for="registrationUsernameID"></label>
+        <input type="text" id="registrationUsernameID" name="registrationUsername" placeholder="Username"/>
+        <p></p>
+        <label for="registrationEmailID">Email: </label>
+        <input type="email" id="registrationEmailID" name="registrationEmail" placeholder="Email"/>
+        <p></p>
+        <label for="registrationPassword"></label>
+        <input type="password" id="registrationPassword" name="registrationPassword" placeholder="Password"/>
+        <p></p>
+    </fieldset>
+    <p></p>
+    <fieldset>
+        <legend>About you:    </legend>
+        <textarea id="additionalComment ID" name="profile_text_area" rows="6" cols="80"></textarea>
+    </fieldset>
+    <p></p>
+    <input type="submit" value="Create an Account"/>
+    <input type="reset" value="Clear"/>
+</form>
+
+</body>
+</html>
+
+
+education:
+gender:
+political orientation
+occupation
+Things you love:
+Issues you care:
+Short introduction:
