@@ -11,6 +11,7 @@ import java.util.List;
 
 public class UserSecurityDAO {
 
+    // Method to return all UserSecurity objects as an ArrayList from the database.
     public static List<UserSecurity> getAllUsers(AbstractDB db) {
 
         List<UserSecurity> users = new ArrayList<>();
@@ -30,6 +31,7 @@ public class UserSecurityDAO {
         return users;
     }
 
+    // Method to return a UserSecurity object relating to the parsed-in username, from the database.
     public static UserSecurity getUser(AbstractDB db, String username) {
 
         UserSecurity user = null;
@@ -51,6 +53,7 @@ public class UserSecurityDAO {
         return user;
     }
 
+    // Method to insert a parsed-in UserSecurity object into the database.
     public static boolean insertUser(AbstractDB db, UserSecurity newUser) {
 
         boolean status;
@@ -79,6 +82,8 @@ public class UserSecurityDAO {
         return status;
     }
 
+    // Method to update a UserSecurity object's password database value to the parsed-in
+    // password String, relating to the parsed-in username.
     public static boolean updatePassword(AbstractDB db, String username, String password) {
 
         boolean status;
@@ -104,7 +109,6 @@ public class UserSecurityDAO {
                 p.executeUpdate();
                 status = true;
             }
-
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             status = false;
@@ -112,6 +116,7 @@ public class UserSecurityDAO {
         return status;
     }
 
+    // Method to create a new UserSecurity object from the information stored in the ResultSet.
     private static UserSecurity userFromResultSet(ResultSet r) throws SQLException {
         Blob saltBlob = r.getBlob("salt");
         byte[] salt = getByteArray(saltBlob);
