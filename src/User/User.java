@@ -5,8 +5,8 @@ import Article.Article;
 import java.awt.*;
 import java.io.File;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
+import java.sql.Date;
 
 public class User implements Serializable {
 
@@ -20,6 +20,14 @@ public class User implements Serializable {
 
     public User() {
 
+    }
+
+    public User(String username, String first_name, String last_name, String email, Date date_of_birth) {
+        this.username = username;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
+        this.date_of_birth = date_of_birth;
     }
 
     public User(String username, String first_name, String last_name, String email, Date date_of_birth, List<Article> collectionList, Image profileImage) {
