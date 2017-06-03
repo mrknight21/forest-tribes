@@ -4,7 +4,7 @@ import javax.sql.rowset.serial.SerialBlob;
 import java.sql.Blob;
 import java.sql.SQLException;
 
-public class BlobManipulator {
+public class BlobConverter {
 
     public static byte[] getByteArray(Blob blob) {
         byte[] bytes;
@@ -30,5 +30,4 @@ public class BlobManipulator {
 
         return blob;
     }
-
 }
