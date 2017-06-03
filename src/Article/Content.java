@@ -1,7 +1,18 @@
 package Article;
 
+import java.io.File;
+import java.util.List;
+
 /**
  * Created by wasia on 3/06/2017.
  */
 public class Content {
+    protected String author;
+    protected String dateCreated;
+    protected String dateLastEdited;
+    protected int views;
+    protected String text;
+    protected File image;
+    protected String filePath;
+    protected List<Comment> comments;
 }
