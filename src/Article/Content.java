@@ -1,5 +1,7 @@
 package Article;
 
+import User.User;
+
 import java.io.File;
 import java.util.List;
 
@@ -8,7 +10,7 @@ import java.util.List;
  */
 public class Content {
     protected int id;
-    protected String author;
+    protected User author;
     protected String dateCreated;
     protected String dateLastEdited;
     protected int views;
