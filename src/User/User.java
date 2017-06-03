@@ -1,5 +1,7 @@
 package User;
 
+import Article.Article;
+
 import java.awt.*;
 import java.io.File;
 import java.io.Serializable;
@@ -13,14 +15,14 @@ public class User implements Serializable {
     private String last_name;
     private String email;
     private Date date_of_birth;
-    private List<File> collectionList;
+    private List<Article> collectionList;
     private Image profileImage;
 
     public User() {
 
     }
 
-    public User(String username, String first_name, String last_name, String email, Date date_of_birth, List<File> collectionList, Image profileImage) {
+    public User(String username, String first_name, String last_name, String email, Date date_of_birth, List<Article> collectionList, Image profileImage) {
         this.username = username;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -70,11 +72,11 @@ public class User implements Serializable {
         this.date_of_birth = date_of_birth;
     }
 
-    public List<File> getCollectionList() {
+    public List<Article> getCollectionList() {
         return collectionList;
     }
 
-    public void setCollectionList(List<File> collectionList) {
+    public void setCollectionList(List<Article> collectionList) {
         this.collectionList = collectionList;
     }
 
