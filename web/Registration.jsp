@@ -24,6 +24,7 @@
         <br><br>
         <label for="registrationPassword">Password</label>
         <input type="password" id="registrationPassword" name="registrationPassword" placeholder="Password"/>
+        
         <br>
     </fieldset>
     <br>
