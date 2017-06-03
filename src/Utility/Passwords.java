@@ -9,6 +9,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author Cameron Grout
@@ -20,7 +21,8 @@ import java.util.Random;
  */
 public class Passwords {
     private static final Random RANDOM = new SecureRandom();
-    private static final int DEFAULT_ITERATIONS = 100_000;
+    private static final int MIN_ITERATIONS = 50_000;
+    private static final int MAX_ITERATIONS = 100_000;
     private static final int KEY_LENGTH = 512;
     private static final int DEFAULT_SALT_LENGTH = 32;
 
@@ -97,7 +99,7 @@ public class Passwords {
     }
 
     /**
-     * Returns a salted and hashed password using the provided hash. DEFAULT_ITERATIONS
+     * Returns a salted and hashed password using the provided hash. MAX_ITERATIONS
      * is used for the iteration count in the hashing process.<br>
      * Note - side effect: the password is destroyed (the char[] is filled with zeros)
      *
@@ -107,7 +109,7 @@ public class Passwords {
      * @return the hashed password with a pinch of salt
      */
     public static byte[] hash(char[] password, byte[] salt) {
-        return hash(password, salt, DEFAULT_ITERATIONS);
+        return hash(password, salt, MAX_ITERATIONS);
     }
 
     /**
@@ -138,7 +140,7 @@ public class Passwords {
 
     /**
      * Returns true if the given password and salt match the hashed value, false otherwise.
-     * DEFAULT_ITERATIONS is used for the iteration count in the hashing process.<br>
+     * MAX_ITERATIONS is used for the iteration count in the hashing process.<br>
      * Note - side effect: the password is destroyed (the char[] is filled with zeros)
      *
      * @param password     the password to check
@@ -148,7 +150,7 @@ public class Passwords {
      * @return true if the given password and salt match the hashed value, false otherwise
      */
     public static boolean isExpectedPassword(char[] password, byte[] salt, byte[] expectedHash) {
-        return isExpectedPassword(password, salt, DEFAULT_ITERATIONS, expectedHash);
+        return isExpectedPassword(password, salt, MAX_ITERATIONS, expectedHash);
     }
 
     /**
@@ -202,5 +204,9 @@ public class Passwords {
      */
     public static String base64Encode(byte[] array) {
         return Base64.getEncoder().encodeToString(array);
+    }
+
+    public static int getNextIteration() {
+        return ThreadLocalRandom.current().nextInt(MIN_ITERATIONS, MAX_ITERATIONS + 1);
     }
 }

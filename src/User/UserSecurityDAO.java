@@ -9,11 +9,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO {
+public class UserSecurityDAO {
 
-    public static List<User> getAllUsers(AbstractDB db) {
+    public static List<UserSecurity> getAllUsers(AbstractDB db) {
 
-        List<User> users = new ArrayList<>();
+        List<UserSecurity> users = new ArrayList<>();
 
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM web_lab_19")) {
@@ -30,9 +30,9 @@ public class UserDAO {
         return users;
     }
 
-    public static User getUser(AbstractDB db, String username) {
+    public static UserSecurity getUser(AbstractDB db, String username) {
 
-        User user = null;
+        UserSecurity user = null;
 
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM web_lab_19 WHERE username = ?")) {
@@ -51,7 +51,7 @@ public class UserDAO {
         return user;
     }
 
-    /*public static boolean insertUser(AbstractDB db, User newUser) {
+    public static boolean insertUser(AbstractDB db, UserSecurity newUser) {
 
         boolean status;
 
@@ -77,7 +77,7 @@ public class UserDAO {
             status = false;
         }
         return status;
-    }*/
+    }
 
     public static boolean updatePassword(AbstractDB db, String username, String password) {
 
@@ -112,14 +112,14 @@ public class UserDAO {
         return status;
     }
 
-    private static User userFromResultSet(ResultSet r) throws SQLException {
+    private static UserSecurity userFromResultSet(ResultSet r) throws SQLException {
         Blob saltBlob = r.getBlob("salt");
         byte[] salt = getByteArray(saltBlob);
 
         Blob hashBlob = r.getBlob("hash");
         byte[] hash = getByteArray(hashBlob);
 
-        return new User(
+        return new UserSecurity(
                 r.getString("username"),
                 salt,
                 r.getInt("iterations"),
