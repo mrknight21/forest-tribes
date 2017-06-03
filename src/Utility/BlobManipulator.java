@@ -4,9 +4,6 @@ import javax.sql.rowset.serial.SerialBlob;
 import java.sql.Blob;
 import java.sql.SQLException;
 
-/**
- * Created by Barns on 31/05/17.
- */
 public class BlobManipulator {
 
     public static byte[] getByteArray(Blob blob) {
@@ -33,7 +30,5 @@ public class BlobManipulator {
 
         return blob;
     }
-
-
 
 }
