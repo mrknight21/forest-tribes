@@ -31,6 +31,10 @@
 
 
 <!--
+
+Todo: Add panel for articles (like the bootstrap web portfolio)
+
+
 Input: login page, login servelet, regits page,
 Session parameter: login, username
 
