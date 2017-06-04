@@ -60,7 +60,7 @@
             border-color: #029f5b;
         }
 
-        .panel-login>.panel-heading a{
+        .panel-login > .panel-heading a {
             text-decoration: none;
             color: #029f5b;
             font-weight: bold;
@@ -69,7 +69,8 @@
             -moz-transition: all 0.1s linear;
             transition: all 0.1s linear;
         }
-        .panel-login>.panel-heading a.active{
+
+        .panel-login > .panel-heading a.active {
             color: #029f5b;
             font-size: 18px;
         }
@@ -120,12 +121,13 @@
                                            class="form-control" placeholder="Password">
                                 </div>
                                 <div class="form-group text-center">
-                                    <input type="checkbox" tabindex="3" class="" name="loginRemember" id="loginRememberID">
+                                    <input type="checkbox" tabindex="3" class="" name="loginRemember"
+                                           id="loginRememberID">
                                     <label for="loginRememberID"> Remember Me</label>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-sm-6 col-sm-offset-3">
+                                        <div class="col-lg-12">
                                             <input type="submit" name="loginSubmit" id="loginSubmitID" tabindex="4"
                                                    class="form-control btn btn-login" value="Log In">
                                         </div>
@@ -169,7 +171,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-sm-6 col-sm-offset-3">
+                                        <div class="col-lg-12">
                                             <input type="submit" name="registrationSubmit" id="registrationSubmitID"
                                                    tabindex="7" class="form-control btn btn-register"
                                                    value="Register Now">
