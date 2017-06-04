@@ -13,7 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <style>
         .full {
-            background: url('Tahiti Bora Bora.jpg') no-repeat center center fixed;
+            background: url('lake-baikal-9.jpg') no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             background-size: cover;
@@ -22,6 +22,66 @@
 
         body {
             background-color: transparent;
+        }
+
+        .panel {
+            margin-top: 50%;
+        }
+
+        h2 {
+            margin-top: 0px;
+            margin-bottom: 10px;
+            font-family: 'Plump';
+            color: #029f5b;
+        }
+
+        h5 {
+            margin-bottom: 10px;
+            font-family: 'Amperzand';
+        }
+
+        .panel-body {
+            padding-top: 0px;
+        }
+
+        .panel-heading {
+            padding-bottom: 0px;
+        }
+
+        .btn-login, .btn-register {
+            background-color: #029f5b;
+            outline: none;
+            color: #fff;
+            font-size: 14px;
+            height: auto;
+            font-weight: normal;
+            padding: 14px 0;
+            text-transform: uppercase;
+            border-color: #029f5b;
+        }
+
+        .panel-login>.panel-heading a{
+            text-decoration: none;
+            color: #029f5b;
+            font-weight: bold;
+            font-size: 15px;
+            -webkit-transition: all 0.1s linear;
+            -moz-transition: all 0.1s linear;
+            transition: all 0.1s linear;
+        }
+        .panel-login>.panel-heading a.active{
+            color: #029f5b;
+            font-size: 18px;
+        }
+
+        @font-face {
+            font-family: Plump;
+            src: url('Plumpfull.ttf');
+        }
+
+        @font-face {
+            font-family: Amperzand;
+            src: url('Amperzand.ttf');
         }
     </style>
 </head>
@@ -48,6 +108,8 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
+                            <h2 style="text-align: center">Forest Tribes</h2>
+                            <h5 style="text-align: center">The Beauty of Interconnectedness</h5>
                             <form id="loginFormID" action="" method="post" role="form" style="display: block;">
                                 <div class="form-group">
                                     <input type="text" name="loginUsername" id="loginUsernameID" tabindex="1"
