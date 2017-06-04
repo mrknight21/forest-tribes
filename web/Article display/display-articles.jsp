@@ -112,7 +112,7 @@
 
 <script type="text/javascript">
     var articleContainer = document.getElementById("article-container");
-    for (i = 0; i < 9; i++){
+    for (var i = 0; i < 9; i++){
         var articleClone = document.getElementById("article").cloneNode(true);
         articleContainer.appendChild(articleClone);
     }
