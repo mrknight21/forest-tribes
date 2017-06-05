@@ -28,14 +28,14 @@
             margin-top: 50%;
         }
 
-        h2 {
+        h1 {
             margin-top: 0px;
             margin-bottom: 10px;
             font-family: 'Plump';
             color: #029f5b;
         }
 
-        h5 {
+        h4 {
             margin-bottom: 10px;
             font-family: 'Amperzand';
         }
@@ -84,6 +84,10 @@
             font-family: Amperzand;
             src: url('Amperzand.ttf');
         }
+
+        .input-group {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -109,14 +113,16 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h2 style="text-align: center">Forest Tribes</h2>
-                            <h5 style="text-align: center">The Beauty of Interconnectedness</h5>
+                            <h1 style="text-align: center">Forest Tribes</h1>
+                            <h4 style="text-align: center">The Beauty of Interconnectedness</h4>
                             <form id="loginFormID" action="" method="post" role="form" style="display: block;">
-                                <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                     <input type="text" name="loginUsername" id="loginUsernameID" tabindex="1"
                                            class="form-control" placeholder="Username" value="">
                                 </div>
-                                <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                     <input type="password" name="loginPassword" id="loginPasswordID" tabindex="2"
                                            class="form-control" placeholder="Password">
                                 </div>
@@ -144,27 +150,33 @@
                                 </div>
                             </form>
                             <form id="registrationFormID" action="" method="post" role="form" style="display: none;">
-                                <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                     <input type="text" name="registrationUsername" id="registrationUsernameID"
                                            tabindex="1" class="form-control" placeholder="Username" value="">
                                 </div>
-                                <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                     <input type="text" name="registrationFirstName" id="registrationFirstNameID"
                                            tabindex="2" class="form-control" placeholder="First Name" value="">
                                 </div>
-                                <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                     <input type="text" name="registrationLastName" id="registrationLastNameID"
                                            tabindex="3" class="form-control" placeholder="Last Name" value="">
                                 </div>
-                                <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                                     <input type="email" name="registrationEmail" id="registrationEmailID" tabindex="4"
                                            class="form-control" placeholder="Email" value="">
                                 </div>
-                                <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                     <input type="password" name="registrationPassword" id="registrationPasswordID"
                                            tabindex="5" class="form-control" placeholder="Password">
                                 </div>
-                                <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                     <input type="password" name="registrationConfirmPassword"
                                            id="registrationConfirmPasswordID" tabindex="6" class="form-control"
                                            placeholder="Confirm Password">
