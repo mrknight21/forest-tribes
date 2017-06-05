@@ -11,6 +11,6 @@
     <title>$Title$</title>
   </head>
   <body>
-  <a href="Login.jsp">Go to login</a>
+  <a href="login_interface/Login.jsp">Go to login</a>
   </body>
 </html>
