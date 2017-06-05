@@ -13,7 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <style>
         .full {
-            background: url('lake-baikal-9.jpg') no-repeat center center fixed;
+            background: url('login_interface/lake-baikal-9.jpg') no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             background-size: cover;
@@ -77,12 +77,12 @@
 
         @font-face {
             font-family: Plump;
-            src: url('Plumpfull.ttf');
+            src: url('../WEB-INF/Plumpfull.ttf');
         }
 
         @font-face {
             font-family: Amperzand;
-            src: url('Amperzand.ttf');
+            src: url('../WEB-INF/Amperzand.ttf');
         }
 
         .input-group {
