@@ -1,22 +1,27 @@
 package Article;
 
-import User.UserSecurity;
-import User.UserSecurityDAO;
-import Utility.MySQL;
-import User.UserDAO;
-import Utility.SecurityUtility;
+import org.json.simple.JSONObject;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Enumeration;
 
 public class ArticlesServlet extends HttpServlet {
 
-    private static final MySQL DB = new MySQL();
+    protected String articlesRoot;
+
+    @Override
+    public void init( ){
+        // Directory location of articles.
+        articlesRoot = getServletContext().getRealPath("/WEB-INF/articles") + "/";
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,63 +31,87 @@ public class ArticlesServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 
-        try {
-            if (SecurityUtility.loggingStatusChecker(request)){
-            response.sendRedirect("/ex05/Home.jsp");
-            return;
-            }else {
-                HttpSession session = request.getSession();
-                String username = request.getParameter("loginUsername");
-                String password = request.getParameter("loginPassword");
+        Enumeration<String> params = request.getParameterNames();
 
-                if(UserSecurityDAO.getUser(DB, username) != null){
-                    if(SecurityUtility.passwordAuthentication(username, password)){
-                        session.setAttribute("loggingStatus", true);
-                        session.setAttribute("username", username);
-                        request.setAttribute("Welcome", "Welcome logging!!");
-                        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ex05/Home.jsp");
-                        System.out.println("logged in");
-                        dispatcher.forward(request, response);
-                    }else {
-                        request.setAttribute("loginProb", "The combination of username and password you have entered is incorrect");
-                        System.out.println("Password was wrong");
-                        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ex05/Login.jsp");
-                        dispatcher.forward(request, response);
-                    }
-                }else {
-                    request.setAttribute("loginProb", "The combination of username and password you have entered is incorrect");
-                    System.out.println("Password was wrong");
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ex05/Login.jsp");
-                    dispatcher.forward(request, response);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (params.hasMoreElements()) {
+            // This is the result of either a submit form, or clear form
+            int numFieldsFilledIn = storeUserArticleDataToJSON(request);
+
+            if (numFieldsFilledIn == 0);
+                // "<p>No information entered.</p><p>To return to the registration page, click <a href='Register'>here</a>.</p>"
         }
+    }
+
+    protected int storeUserArticleDataToJSON(HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+
+        String userName = (String) session.getAttribute("username");
+
+        String articleTitle = request.getParameter("article-title");
+        String articleContent = request.getParameter("article-content");
+
+        File jsonFile = new File(articlesRoot + userName,articleTitle + ".json");
+
+        System.out.println("storing data");
+
+        JSONObject articleJSON = new JSONObject();
+        JSONObject commentJSON = new JSONObject();
+
+
+        articleJSON.put("article-title",articleTitle);
+        articleJSON.put("article-content",articleContent);
+
+//        for (String key: keys) {
+//            String value = request.getParameterValues(key)[0];
+//            if (!value.isEmpty()) {
+//                articleJSON.put(key, value);
+//                count++;
+//            }
+//        }
+
+        if (saveJSONObject(jsonFile, articleJSON)); // "<p>JSON file successfully saved to location = " + jsonFile + "</p>"
+        // "<p><a href=\"Register\">Try again</a></p>"
+
+        return 0;
+    }
+
+    private boolean saveJSONObject(File file, JSONObject jsonRecord) {
+        boolean statusOK = true;
+
+        String json_string = JSONObject.toJSONString(jsonRecord);
+
+        BufferedWriter writer = null;
+
+        try {
+            writer = new BufferedWriter(new FileWriter(file));
+            writer.write(json_string);
+        }
+        catch (IOException e) {
+            statusOK = false;
+            // "<p>Write error.</p>"
+        }
+        finally {
+            try {if (writer != null) writer.close();}
+            catch (IOException e) {
+                // "<p>Write error.</p>"
+                statusOK = false;}
+        }
+        return statusOK;
     }
 }
 
 
 /*
-* Input: Login.jsp
-* Parameter:
-* loginUsername
-* loginPassword
+* doPost:
+* Receive new articles in servlet request.
+* Receive new comments in servlet request.
+* Save to JSON
 *
-* steps:
-* 1. checkLogginStatus -> content page.
-* 2. check Username exist
-* 3. Authentificate password
-* 4. setSession LogginStatus = true, username = username.
-* 5. redirect to Content page.
-* 6. or redirect to login page if authentification fail.
+* doGet:
+* For contents page - get user articles list from servlet and send to JSP.
+* For article page - get article and comments from servlet and send to JSP.
 *
-*
-* Output:
-* Cookie (loginAttempt: unsuccessful) to Login.jsp
-*
-*
-*
-*
+* Same for comments, but load comments asynchronously with AJAX?
 *
 * */

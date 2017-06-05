@@ -3,10 +3,9 @@ package User;
 import Article.Article;
 
 import java.awt.*;
-import java.io.File;
 import java.io.Serializable;
-import java.util.List;
 import java.sql.Date;
+import java.util.List;
 
 public class User implements Serializable {
 
