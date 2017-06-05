@@ -27,3 +27,28 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_UserSecurity (
   PRIMARY KEY (userID),
   FOREIGN KEY (username) REFERENCES inFoJaxs_User(username)
 );
+
+
+DROP TABLE IF EXISTS inFoJaxs_Profile;
+CREATE TABLE IF NOT EXISTS inFoJaxs_Profile (
+  username VARCHAR(50) NOT NULL,
+  date_Of_Birth CHAR(10),
+  gender VARCHAR(6),
+  occupation VARCHAR (20),
+  education_level VARCHAR (30),
+  political_Orientation VARCHAR (30),
+  things_Loved VARCHAR (100),
+  short_intro TEXT,
+  CHECK (date_Of_Birth Like '__/__/____' ),
+  PRIMARY KEY (username),
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username)
+);
+
+DROP TABLE IF EXISTS inFoJaxs_IssuesCared;
+CREATE TABLE IF NOT EXISTS inFoJaxs_IssuesCared (
+  ID INT AUTO_INCREMENT,
+  username VARCHAR(50) NOT NULL,
+  issues_Cared VARCHAR (50) NOT NULL ,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username)
+);
