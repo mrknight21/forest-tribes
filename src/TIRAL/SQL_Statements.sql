@@ -4,14 +4,21 @@
  the suffix, inFoJaxs. */
 
 -- Statements to create the table which will store the User information.
-DROP TABLE IF EXISTS inFoJaxs_User;
 
+
+
+
+
+
+
+
+
+DROP TABLE IF EXISTS inFoJaxs_User;
 CREATE TABLE IF NOT EXISTS inFoJaxs_User (
   username VARCHAR(50) NOT NULL UNIQUE,
   first_name VARCHAR(25) NOT NULL,
   last_name VARCHAR(25) NOT NULL,
   email VARCHAR(50) NOT NULL,
-  date_of_birth DATE,
   PRIMARY KEY (username)
 );
 
@@ -52,3 +59,12 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_IssuesCared (
   PRIMARY KEY (ID),
   FOREIGN KEY (username) REFERENCES inFoJaxs_User(username)
 );
+
+INSERT INTO inFoJaxs_User (username, first_name, last_name, email) VALUES
+('programmer1', 'Bill', 'Gates','bill@microsoft.com'),
+('programmer2', 'Mark', 'Zuckerburg', 'mark@facebook.com');
+
+INSERT INTO inFoJaxs_Profile (username) VALUES
+('programmer1');
+
+DELETE FROM inFoJaxs_UserSecurity WHERE username=bryanchen

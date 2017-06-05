@@ -19,7 +19,8 @@
         <p>User: ${username}</p>
         <p></p>
         <p>Password: <form action="" method="post"><input type="submit" value="Change pass word"></form></p>
-
+        <label for="dateOfBirthID">Your date of birth:</label>
+        <input type="text" id="dateOfBirthID" name="DateOfBirth" placeholder="DD/MM/YYYY"/>
         <p></p>
         <label for="emailID">Email: </label>
         <input type="email" id="emailID" name="email" placeholder="Email" value="${email}"/>
@@ -29,9 +30,6 @@
     </fieldset>
     <fieldset>
         <legend>Personal profile</legend>
-        <p></p>
-        <label for="dateOfBirthID">Your date of birth:</label>
-        <input type="text" id="dateOfBirthID" name="dateOfBirth" placeholder="DD/MM/YYYY"/>
         <p></p>
         <p>Gender: </p>
         <label for="gender1">Male</label>
@@ -82,67 +80,67 @@
     <fieldset>
         <legend>The issues you care:  </legend>
         <input type="checkbox" name="issuesCared" value="poverty" id="poverty">
-        <label for="poverty"><img src="images_material/E Icons_WEB/E Inverted Icons_RGB/E_INVERTED SDG goals_icons-individual-RGB-01.png" width="100" height="100"></label>
+        <label for="poverty"><img src="../images_material/E%20Icons_WEB/E%20Inverted%20Icons_RGB/E_INVERTED%20SDG%20goals_icons-individual-RGB-01.png" width="100" height="100"></label>
 
 
 
         <input type="checkbox" name="issuesCared" value="hunger" id="hunger">
-        <label for="hunger"><img src="images_material/E Icons_WEB/E Inverted Icons_RGB/E_INVERTED SDG goals_icons-individual-RGB-02.png" width="120" height="120"></label>
+        <label for="hunger"><img src="../images_material/E%20Icons_WEB/E%20Inverted%20Icons_RGB/E_INVERTED%20SDG%20goals_icons-individual-RGB-02.png" width="120" height="120"></label>
 
 
         <input type="checkbox" name="issuesCared" value="health And wellbeing" id="health and wellbeing">
-        <label for="health and wellbeing"><img src="images_material/E Icons_WEB/E Inverted Icons_RGB/E_INVERTED SDG goals_icons-individual-RGB-03.png" width="120" height="120"></label>
+        <label for="health and wellbeing"><img src="../images_material/E%20Icons_WEB/E%20Inverted%20Icons_RGB/E_INVERTED%20SDG%20goals_icons-individual-RGB-03.png" width="120" height="120"></label>
 
 
         <input type="checkbox" name="issuesCared" value="education" id="education">
-        <label for="education"><img src="images_material/E Icons_WEB/E Inverted Icons_RGB/E_INVERTED SDG goals_icons-individual-RGB-04.png" width="120" height="120"></label>
+        <label for="education"><img src="../images_material/E%20Icons_WEB/E%20Inverted%20Icons_RGB/E_INVERTED%20SDG%20goals_icons-individual-RGB-04.png" width="120" height="120"></label>
 
 
         <input type="checkbox" name="issuesCared" value="gender equality" id="gender equality">
-        <label for="gender equality"><img src="images_material/E Icons_WEB/E Inverted Icons_RGB/E_INVERTED SDG goals_icons-individual-RGB-05.png" width="120" height="120"></label>
+        <label for="gender equality"><img src="../images_material/E%20Icons_WEB/E%20Inverted%20Icons_RGB/E_INVERTED%20SDG%20goals_icons-individual-RGB-05.png" width="120" height="120"></label>
 
 
         <input type="checkbox" name="issuesCared" value="clean water" id="water">
-        <label for="water"><img src="images_material/E Icons_WEB/E Inverted Icons_RGB/E_INVERTED SDG goals_icons-individual-RGB-06.png" width="120" height="120"></label>
+        <label for="water"><img src="../images_material/E%20Icons_WEB/E%20Inverted%20Icons_RGB/E_INVERTED%20SDG%20goals_icons-individual-RGB-06.png" width="120" height="120"></label>
 
 
         <input type="checkbox" name="issuesCared" value="sustainable energy" id="sustainable energy">
-        <label for="sustainable energy"><img src="images_material/E Icons_WEB/E Inverted Icons_RGB/E_INVERTED SDG goals_icons-individual-RGB-07.png" width="120" height="120"></label>
+        <label for="sustainable energy"><img src="../images_material/E%20Icons_WEB/E%20Inverted%20Icons_RGB/E_INVERTED%20SDG%20goals_icons-individual-RGB-07.png" width="120" height="120"></label>
 
 
         <input type="checkbox" name="issuesCared" value="word And Economy" id="word And Economy">
-        <label for="word And Economy"><img src="images_material/E Icons_WEB/E Inverted Icons_RGB/E_INVERTED SDG goals_icons-individual-RGB-08.png" width="120" height="120"></label>
-        <br>
+        <label for="word And Economy"><img src="../images_material/E%20Icons_WEB/E%20Inverted%20Icons_RGB/E_INVERTED%20SDG%20goals_icons-individual-RGB-08.png" width="120" height="120"></label>
+
 
         <input type="checkbox" name="issuesCared" value="Innovation and Infrastructure" id="Innovation and Infrastructure">
-        <label for="Innovation and Infrastructure"><img src="images_material/E Icons_WEB/E Inverted Icons_RGB/E_INVERTED SDG goals_icons-individual-RGB-09.png" width="120" height="120"></label>
+        <label for="Innovation and Infrastructure"><img src="../images_material/E%20Icons_WEB/E%20Inverted%20Icons_RGB/E_INVERTED%20SDG%20goals_icons-individual-RGB-09.png" width="120" height="120"></label>
 
         <input type="checkbox" name="issuesCared" value="reduce inequality" id="reduce inequality">
-        <label for="reduce inequality"><img src="images_material/E Icons_WEB/E Inverted Icons_RGB/E_INVERTED SDG goals_icons-individual-RGB-10.png" width="120" height="120"></label>
+        <label for="reduce inequality"><img src="../images_material/E%20Icons_WEB/E%20Inverted%20Icons_RGB/E_INVERTED%20SDG%20goals_icons-individual-RGB-10.png" width="120" height="120"></label>
 
         <input type="checkbox" name="issuesCared" value="community development" id="community development">
-        <label for="community development"><img src="images_material/E Icons_WEB/E Inverted Icons_RGB/E_INVERTED SDG goals_icons-individual-RGB-11.png" width="120" height="120"></label>
+        <label for="community development"><img src="../images_material/E%20Icons_WEB/E%20Inverted%20Icons_RGB/E_INVERTED%20SDG%20goals_icons-individual-RGB-11.png" width="120" height="120"></label>
 
         <input type="checkbox" name="issuesCared" value="consumption and production" id="consumption and production">
-        <label for="consumption and production"><img src="images_material/E Icons_WEB/E Inverted Icons_RGB/E_INVERTED SDG goals_icons-individual-RGB-12.png" width="120" height="120"></label>
+        <label for="consumption and production"><img src="../images_material/E%20Icons_WEB/E%20Inverted%20Icons_RGB/E_INVERTED%20SDG%20goals_icons-individual-RGB-12.png" width="120" height="120"></label>
 
         <input type="checkbox" name="issuesCared" value="climate" id="climate">
-        <label for="climate"><img src="images_material/E Icons_WEB/E Inverted Icons_RGB/E_INVERTED SDG goals_icons-individual-RGB-13.png" width="120" height="120"></label>
+        <label for="climate"><img src="../images_material/E%20Icons_WEB/E%20Inverted%20Icons_RGB/E_INVERTED%20SDG%20goals_icons-individual-RGB-13.png" width="120" height="120"></label>
 
         <input type="checkbox" name="issuesCared" value="water life" id="water life">
-        <label for="water life"><img src="images_material/E Icons_WEB/E Inverted Icons_RGB/E_INVERTED SDG goals_icons-individual-RGB-14.png" width="120" height="120"></label>
+        <label for="water life"><img src="../images_material/E%20Icons_WEB/E%20Inverted%20Icons_RGB/E_INVERTED%20SDG%20goals_icons-individual-RGB-14.png" width="120" height="120"></label>
 
         <input type="checkbox" name="issuesCared" value="life on land" id="life on land">
-        <label for="life on land"><img src="images_material/E Icons_WEB/E Inverted Icons_RGB/E_INVERTED SDG goals_icons-individual-RGB-15.png" width="120" height="120"></label>
+        <label for="life on land"><img src="../images_material/E%20Icons_WEB/E%20Inverted%20Icons_RGB/E_INVERTED%20SDG%20goals_icons-individual-RGB-15.png" width="120" height="120"></label>
 
         <input type="checkbox" name="issuesCared" value="peace and justice" id="peace and justice">
-        <label for="peace and justice"><img src="images_material/E Icons_WEB/E Inverted Icons_RGB/E_INVERTED SDG goals_icons-individual-RGB-16.png" width="120" height="120"></label>
+        <label for="peace and justice"><img src="../images_material/E%20Icons_WEB/E%20Inverted%20Icons_RGB/E_INVERTED%20SDG%20goals_icons-individual-RGB-16.png" width="120" height="120"></label>
 
         <input type="checkbox" name="issuesCared" value="cooperation" id="cooperation">
-        <label for="cooperation"><img src="images_material/E Icons_WEB/E Inverted Icons_RGB/E_INVERTED SDG goals_icons-individual-RGB-17.png" width="120" height="120"></label>
+        <label for="cooperation"><img src="../images_material/E%20Icons_WEB/E%20Inverted%20Icons_RGB/E_INVERTED%20SDG%20goals_icons-individual-RGB-17.png" width="120" height="120"></label>
 
         <input type="checkbox" name="issuesCared" value="else" id="else">
-        <label for="else"><img src="images_material/Default/question-mark_318-52837.jpg" width="120" height="120"></label>
+        <label for="else"><img src="../images_material/Default/question-mark_318-52837.jpg" width="120" height="120"></label>
 
     </fieldset>
     <p></p>

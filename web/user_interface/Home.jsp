@@ -5,8 +5,9 @@
   Time: 9:45 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="ictgradschool.ex05.Server_Utility" %>
-<%@ page import="ictgradschool.ex05.MySQL" %>
+
+<%@ page import="User.UserSecurity" %>
+<%@ page import="Utility.SecurityUtility" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -14,13 +15,13 @@
 </head>
 <body>
 
-<%  if(!Server_Utility.loggingStatusChecker(request)) response.sendRedirect("/ex05/Login.jsp");
+<%  if(!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/ex05/Login.jsp");
     HttpSession session1 = request.getSession();
     String username = (String) session1.getAttribute("username");
 %>
 
 <p>Hi <%= username%></p>
-<p>${Welcome}</p>
+<p>${message}</p>
 
 <a href="/ex05/changePassword.jsp"><button>Change Password</button></a>
 
