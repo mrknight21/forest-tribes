@@ -61,6 +61,7 @@ public class ArticlesServlet extends HttpServlet {
 
         articleJSON.put("article-title",articleTitle);
         articleJSON.put("article-content",articleContent);
+        articleJSON.put("comments", commentJSON);
 
 //        for (String key: keys) {
 //            String value = request.getParameterValues(key)[0];

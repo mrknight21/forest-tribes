@@ -75,47 +75,8 @@
     </div>
 
     <!--Article panel-->
-<c:forEach var="fileData" items="${fileDataList}">
-    <div class="col-sm-12 col-md-9 panel panel-default" id="article-container">
-        <div class="panel panel-default" id="article">
-            <div class="panel-heading">
-                <h3 class="panel-title">On futurism:</h3>
-            </div>
-            <div class="panel-body">
-                <p>
-                    My big data brings all the users to the yard!
-                    Dam right. It's better than yours. Dam right. It's better than yours.
-                    You could have some, but I'd have to charge.
-                    A freemium plan.
-                    Wake up in the morning feeling like PHP.
-                    Poppin code in the box, like a wizard.
-                    When we revolt we do it right social data getting slizzard.
-                    Now n-n-n-n-now I'm feeling so fly like a GGG thing. Like a GGG thing, like a GGG thing.
-                    Yeah oh yeah make you put your hands up make you put your hands up pu-put your put your hands up.
-                    Now make dat web semantic like a 3.0!
-                    Break some, shake some, work some, tweak some.
-                    Break some, shake some, work some, tweak some.
-                    Break it shake it work it tweak it.
-                    Break it shake it work it tweak it.
-                    Bounce bounce bounce bounce bounce bounce bounce!
-                    Now drop it drop it to the floor.
-                    Spin it like some stop and go.
-                    Drop it drop it to the floor.
-                    Spin it like some stop and go.
-                    Now let me see you make dat web semantic like a 3.0!
-                </p>
-            </div>
-        </div>
-    </div>
-</c:forEach>
-</div>
+    <%@include file="articles-list.jsp"%>
 
-<script type="text/javascript">
-    var articleContainer = document.getElementById("article-container");
-    for (var i = 0; i < 9; i++){
-        var articleClone = document.getElementById("article").cloneNode(true);
-        articleContainer.appendChild(articleClone);
-    }
-</script>
+</div>
 </body>
 </html>
