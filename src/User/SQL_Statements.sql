@@ -97,3 +97,6 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_Likes (
   likes INT,
   PRIMARY KEY (ID)
 );
+
+DELETE FROM inFoJaxs_User
+WHERE username = 'BarnsNZ';
