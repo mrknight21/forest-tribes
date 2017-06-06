@@ -4,12 +4,14 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
+
+
     <servlet>
-        <servlet-name>Authentication</servlet-name>
+        <servlet-name>Authentification</servlet-name>
         <servlet-class>User.Serve_Authentication</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Authentication</servlet-name>
+        <servlet-name>Authentification</servlet-name>
         <url-pattern>/Serve_Authentication</url-pattern>
     </servlet-mapping>
 
@@ -22,5 +24,25 @@
         <url-pattern>/Serve_Registration</url-pattern>
     </servlet-mapping>
 
-</web-app>
 
+    <servlet>
+        <servlet-name>Serve_Logout</servlet-name>
+        <servlet-class>User.Serve_Logout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Serve_Logout</servlet-name>
+        <url-pattern>/Serve_Logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Serve_Changepassword</servlet-name>
+        <servlet-class>User.Serve_Changepassword</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Serve_Changepassword</servlet-name>
+        <url-pattern>/Serve_Changepassword</url-pattern>
+    </servlet-mapping>
+
+
+
+</web-app>
