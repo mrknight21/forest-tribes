@@ -1,3 +1,5 @@
+<%@ page import="Utility.SecurityUtility"%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en" class="full">
@@ -10,8 +12,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
-    <script src="/Frameworks/jquery.min.js"></script>
-    <script src="/Frameworks/jquery-ui.min.js"></script>
+    <script src="Frameworks/jquery.min.js"></script>
+    <script src="Frameworks/jquery-ui.min.js"></script>
     <style>
         .full {
             background: url('login_interface/lake-baikal-9.jpg') no-repeat center center fixed;
@@ -102,6 +104,12 @@
     </style>
 </head>
 <body>
+<%  if(!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/login_interface/Login.jsp");
+
+    HttpSession httpSession = request.getSession();
+    String username = (String) httpSession.getAttribute("username");
+    String email = (String) httpSession.getAttribute("email");
+%>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -117,18 +125,13 @@
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                         <input type="text" name="profileUsername" id="profileUsernameID" tabindex="1"
-                                               value="${Username}" class="form-control" readonly>
+                                               value="<%= username%>" class="form-control" readonly>
                                     </div>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i
                                                 class="glyphicon glyphicon-envelope"></i></span>
                                         <input type="email" name="profileEmail" id="profileEmailID" tabindex="1"
-                                               class="form-control" value="${Email}" readonly>
-                                    </div>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-bell"></i></span>
-                                        <input type="date" name="profileDOB" id="profileDOBID" tabindex="1"
-                                               class="form-control" value="">
+                                               class="form-control" value="<%= email%>" readonly>
                                     </div>
                                     <form action="" method="post"><input type="submit" value="Change Password"
                                                                          class="form-control btn btn-register"></form>
