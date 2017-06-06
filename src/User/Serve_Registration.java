@@ -36,7 +36,7 @@ public class Serve_Registration extends HttpServlet {
 
         try {
             if (SecurityUtility.loggingStatusChecker(request)){
-                response.sendRedirect("/Home.jsp");
+                response.sendRedirect("/user_interface/Home.jsp");
                 return;
             } else {
                 HttpSession session = request.getSession();
@@ -50,9 +50,15 @@ public class Serve_Registration extends HttpServlet {
 
                 //get path for creating files
                 ServletContext servletContext = getServletContext();
-                String  UserfilePath = servletContext.getRealPath("/"+username);
+                String  UserfilePath = servletContext.getRealPath("/WEB-INF/"+username);
                 File userFolder = new File(UserfilePath);
                 MicellaneousUntility.DirCeation(userFolder);
+
+                if(!password.equals(confirmPassword)){
+                    request.setAttribute("message", "Your password does not match with your confirmed password. Please try again.");
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login_interface/Login.jsp");
+                    dispatcher.forward(request, response);
+                }
 
 
 
@@ -76,13 +82,14 @@ public class Serve_Registration extends HttpServlet {
 
 
                     //auto set-up user profile photo
-                    File defaultImage = new File("/images_material/Default/Userdefault.jpg");
+                    String  DefaultImagePathway = servletContext.getRealPath("/WEB-INF/images_material/Default/Userdefault.jpg");
+                    File defaultImage = new File(DefaultImagePathway);
                     BufferedImage sourceImage = ImageIO.read(defaultImage);
 
 
                     try {
                         // retrieve image
-                        File outputfile = new File(UserfilePath+"/User_Profile_Image.jpg");
+                        File outputfile = new File(UserfilePath+"/User_profile_picture.jpg");
                         ImageIO.write(sourceImage, "jpg", outputfile);
                     } catch (IOException e) {
                         System.out.println(e.getMessage());
@@ -93,13 +100,13 @@ public class Serve_Registration extends HttpServlet {
                     session.setAttribute("loggingStatus", true);
                     session.setAttribute("username", username);
                     request.setAttribute("message", "Welcome logging!!");
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Home.jsp");
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user_interface/Home.jsp");
                     System.out.println("registered");
                     dispatcher.forward(request, response);
                 }
                 else {
                     request.setAttribute("message", "The username you have registered already exists");
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Login.jsp");
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login_interface/Login.jsp");
                     dispatcher.forward(request, response);
                 }
             }
