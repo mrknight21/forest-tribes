@@ -111,7 +111,7 @@
                         <div class="col-lg-12">
                             <h1 style="text-align: center">Forest Tribes</h1>
                             <h4 id="subtitle" style="text-align: center">The Beauty of Interconnectedness</h4>
-                            <form id="profileFormID" action="" method="post" role="form" style="display: block">
+                            <form id="profileFormID" action="/Serve_Profile" method="post" role="form" style="display: block">
                                 <fieldset class="span4">
                                     <legend>Membership Information:</legend>
                                     <div class="input-group">

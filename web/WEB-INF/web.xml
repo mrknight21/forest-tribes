@@ -34,6 +34,17 @@
         <url-pattern>/Serve_Logout</url-pattern>
     </servlet-mapping>
 
+
+    <servlet>
+        <servlet-name>Serve_Profile</servlet-name>
+        <servlet-class>User.ProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Serve_Profile</servlet-name>
+        <url-pattern>/Serve_Profile</url-pattern>
+    </servlet-mapping>
+
+
     <servlet>
         <servlet-name>Serve_Changepassword</servlet-name>
         <servlet-class>User.Serve_Changepassword</servlet-class>

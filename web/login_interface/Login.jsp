@@ -1,7 +1,7 @@
 <%@ page import="Utility.SecurityUtility" %>
 <!DOCTYPE html>
-< lang="en" class="full">
-<>
+<html lang="en" class="full">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Login</title>
@@ -151,7 +151,7 @@
                                     </div>
                                 </div>
                             </form>
-                            <form id="registrationFormID" action="" method="post" role="form" style="display: none;">
+                            <form id="registrationFormID" action="/Serve_Registration" method="post" role="form" style="display: none;">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                     <input type="text" name="registrationUsername" id="registrationUsernameID"
