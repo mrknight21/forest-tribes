@@ -90,7 +90,7 @@
         margin-bottom: 10px;
     }
 
-    #message {
+    #messageLogin {
         color: red;
     }
 </style>
@@ -131,7 +131,7 @@
                                     <input type="password" name="loginPassword" id="loginPasswordID" tabindex="2"
                                            class="form-control" placeholder="Password">
                                 </div>
-                                <p id="message" style="text-align: center">${message}</p>
+                                <p id="messageLogin" style="text-align: center">${message}</p>
                                 <div class="form-group text-center">
                                     <input type="checkbox" tabindex="3" class="" name="loginRemember"
                                            id="loginRememberID">
@@ -187,6 +187,7 @@
                                            id="registrationConfirmPasswordID" tabindex="6" class="form-control"
                                            placeholder="Confirm Password">
                                 </div>
+                                <p id="messageRegistration" style="text-align: center"></p>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-lg-12">
