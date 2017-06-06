@@ -52,3 +52,48 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_IssuesCared (
   PRIMARY KEY (ID),
   FOREIGN KEY (username) REFERENCES inFoJaxs_User(username)
 );
+
+DROP TABLE IF EXISTS inFoJaxs_Articles;
+CREATE TABLE IF NOT EXISTS inFoJaxs_Articles (
+  ID INT AUTO_INCREMENT,
+  username VARCHAR(50) NOT NULL,
+  title VARCHAR(80) NOT NULL,
+  article VARCHAR (8000) NOT NULL,
+#   created TIMESTAMP,
+#   lastEdit TIMESTAMP,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username)
+);
+
+DROP TABLE IF EXISTS inFoJaxs_Comments;
+CREATE TABLE IF NOT EXISTS inFoJaxs_Comments (
+  ID INT AUTO_INCREMENT,
+  article_ID INT,
+  username VARCHAR(50),
+  comment VARCHAR (8000) NOT NULL,
+#   created TIMESTAMP,
+#   lastEdit TIMESTAMP,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username),
+  FOREIGN KEY (article_ID) REFERENCES inFoJaxs_Articles(ID)
+);
+
+DROP TABLE IF EXISTS inFoJaxs_Replies;
+CREATE TABLE IF NOT EXISTS inFoJaxs_Replies (
+  ID INT AUTO_INCREMENT,
+  comment_ID INT,
+  username VARCHAR(50) NOT NULL,
+  reply VARCHAR (8000) NOT NULL,
+#   created TIMESTAMP,
+#   lastEdit TIMESTAMP,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username),
+  FOREIGN KEY (comment_ID) REFERENCES inFoJaxs_Comments(ID)
+);
+
+DROP TABLE IF EXISTS inFoJaxs_Likes;
+CREATE TABLE IF NOT EXISTS inFoJaxs_Likes (
+  ID VARCHAR(8000) NOT NULL,
+  likes INT,
+  PRIMARY KEY (ID)
+);
