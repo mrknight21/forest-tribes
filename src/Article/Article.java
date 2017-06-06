@@ -13,17 +13,24 @@ import java.util.List;
  */
 public class Article extends Text implements Serializable{
     private String title;
-    private String recap;
     private List<Comment> comments;
     private int commentCount;
 
     public Article() {}
 
-    public Article(String title, List<Comment> comments, int id, String author, String dateCreated, String dateLastEdited, int likes, String text) {
-        super(id, author, dateCreated, dateLastEdited, likes, text);
-
+    public Article(String author, String title, String text) {
+        super(author, text);
         this.title = title;
-//        this.recap = recap;
+    }
+
+    public Article(int id, String author, String title, String text) {
+        super(id, author, text);
+        this.title = title;
+    }
+
+    public Article(int id, String author, String title, String text, List<Comment> comments, String dateCreated, String dateLastEdited, int likes) {
+        super(id, author, text, dateCreated, dateLastEdited, likes);
+        this.title = title;
         this.comments = comments;
 
         int count = 0;
@@ -40,18 +47,7 @@ public class Article extends Text implements Serializable{
         this.title = title;
     }
 
-    public String getRecap() {
-        return recap;
-    }
-
-    public void setRecap(String recap) {
-        this.recap = recap;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-
-    }
+    public List<Comment> getComments() {return comments;}
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;

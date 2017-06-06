@@ -10,8 +10,18 @@ import java.util.List;
 public class Comment extends Text {
     protected List<Reply> replies;
 
-    public Comment(int id, String author, List<Reply> replies, String dateCreated, String dateLastEdited, int likes, String text) {
-        super(id, author, dateCreated, dateLastEdited, likes, text);
+
+    public Comment(String author, String text) {
+        super(author, text);
+    }
+
+    public Comment(int id, String author, String text) {
+        super(id, author, text);
+    }
+
+    public Comment(int id, String author, String text, List<Reply> replies, String dateCreated, String dateLastEdited, int likes) {
+        super(id, author, text, dateCreated, dateLastEdited, likes);
+        this.replies = replies;
     }
 
     public List<Reply> getReplies() {
