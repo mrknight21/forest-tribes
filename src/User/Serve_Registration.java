@@ -50,7 +50,10 @@ public class Serve_Registration extends HttpServlet {
 
                 //get path for creating files
                 ServletContext servletContext = getServletContext();
-                String  UserfilePath = servletContext.getRealPath("/WEB-INF/"+username);
+                String UsersFolder = servletContext.getRealPath("/User");
+                File UsersFolderfile = new File(UsersFolder);
+                MicellaneousUntility.DirCeation(UsersFolderfile);
+                String  UserfilePath = servletContext.getRealPath("/User/"+username);
                 File userFolder = new File(UserfilePath);
                 MicellaneousUntility.DirCeation(userFolder);
 
@@ -77,7 +80,7 @@ public class Serve_Registration extends HttpServlet {
 
                     User newUser = new User(username, registrationFirstName, registrationLastName, registrationEmail);
                     UserSecurity newSecurity = new UserSecurity(username, salt, ITERATIONS, encodedPW);
-                    UserDAO.RegisterUser(DB, newUser);
+                    UserDAO.registerUser(DB, newUser);
                     UserSecurityDAO.insertUser(DB, newSecurity);
 
 
