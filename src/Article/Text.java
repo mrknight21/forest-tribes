@@ -15,21 +15,32 @@ public abstract class Text {
     String dateLastEdited;
     int likes;
     protected String text;
-    protected File image;
+//    protected File image;
 //    protected String filePath;
 
-    public Text(int id, String author, String dateCreated, String dateLastEdited, int likes, String text) {
+    public Text() {}
+
+    public Text(String author, String text) {
+        this.author = author;
+        this.text = text;
+    }
+
+    public Text(int id, String author, String text) {
         this.id = id;
         this.author = author;
+        this.text = text;
+    }
+
+    public Text(int id, String author, String text, String dateCreated, String dateLastEdited, int likes) {
+        this.id = id;
+        this.author = author;
+        this.text = text;
         this.dateCreated = dateCreated;
         this.dateLastEdited = dateLastEdited;
         this.likes = likes;
-        this.text = text;
 //        this.image = image;
 //        this.filePath = filePath;
     }
-
-    public Text() {}
 
     public int getId() {
         return id;
