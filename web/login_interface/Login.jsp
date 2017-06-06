@@ -1,94 +1,96 @@
 <%@ page import="Utility.SecurityUtility" %>
 <!DOCTYPE html>
-<html lang="en" class="full">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <style>
-        .full {
-            background: url('/login_interface/lake-baikal-9.jpg') no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            background-size: cover;
-            -o-background-size: cover;
-        }
+< lang="en" class="full">
+<>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<script src="/Frameworks/jquery.min.js"></script>
+<script src="/Frameworks/jquery-ui.min.js"></script>
 
-        body {
-            background-color: transparent;
-        }
+<style>
+    .full {
+        background: url('/login_interface/lake-baikal-9.jpg') no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        -o-background-size: cover;
+    }
 
-        .panel {
-            margin-top: 50%;
-        }
+    body {
+        background-color: transparent;
+    }
 
-        h1 {
-            margin-top: 0px;
-            margin-bottom: 10px;
-            font-family: 'Plump';
-            color: #029f5b;
-        }
+    .panel {
+        margin-top: 50%;
+    }
 
-        h4 {
-            margin-bottom: 10px;
-            font-family: 'Amperzand';
-        }
+    h1 {
+        margin-top: 0px;
+        margin-bottom: 10px;
+        font-family: 'Plump';
+        color: #029f5b;
+    }
 
-        .panel-body {
-            padding-top: 0px;
-        }
+    h4 {
+        margin-bottom: 10px;
+        font-family: 'Amperzand';
+    }
 
-        .panel-heading {
-            padding-bottom: 0px;
-        }
+    .panel-body {
+        padding-top: 0px;
+    }
 
-        .btn-login, .btn-register {
-            background-color: #029f5b;
-            outline: none;
-            color: #fff;
-            font-size: 14px;
-            height: auto;
-            font-weight: normal;
-            padding: 14px 0;
-            text-transform: uppercase;
-            border-color: #029f5b;
-        }
+    .panel-heading {
+        padding-bottom: 0px;
+    }
 
-        .panel-login > .panel-heading a {
-            text-decoration: none;
-            color: #029f5b;
-            font-weight: bold;
-            font-size: 15px;
-            -webkit-transition: all 0.1s linear;
-            -moz-transition: all 0.1s linear;
-            transition: all 0.1s linear;
-        }
+    .btn-login, .btn-register {
+        background-color: #029f5b;
+        outline: none;
+        color: #fff;
+        font-size: 14px;
+        height: auto;
+        font-weight: normal;
+        padding: 14px 0;
+        text-transform: uppercase;
+        border-color: #029f5b;
+    }
 
-        .panel-login > .panel-heading a.active {
-            color: #029f5b;
-            font-size: 18px;
-        }
+    .panel-login > .panel-heading a {
+        text-decoration: none;
+        color: #029f5b;
+        font-weight: bold;
+        font-size: 15px;
+        -webkit-transition: all 0.1s linear;
+        -moz-transition: all 0.1s linear;
+        transition: all 0.1s linear;
+    }
 
-        @font-face {
-            font-family: Plump;
-            src: url('../Fonts/Plumpfull.ttf');
-        }
+    .panel-login > .panel-heading a.active {
+        color: #029f5b;
+        font-size: 18px;
+    }
 
-        @font-face {
-            font-family: Amperzand;
-            src: url('../Fonts/Amperzand.ttf');
-        }
+    @font-face {
+        font-family: Plump;
+        src: url('../Fonts/Plumpfull.ttf');
+    }
 
-        .input-group {
-            margin-bottom: 10px;
-        }
-    </style>
+    @font-face {
+        font-family: Amperzand;
+        src: url('../Fonts/Amperzand.ttf');
+    }
+
+    .input-group {
+        margin-bottom: 10px;
+    }
+</style>
 </head>
 <body>
 

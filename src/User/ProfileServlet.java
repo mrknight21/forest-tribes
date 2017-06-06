@@ -44,7 +44,7 @@ public class ProfileServlet extends HttpServlet {
                 String politicalOri = request.getParameter("politicalOri");
                 String thingsLoves = request.getParameter("thingsLoves");
                 String short_intro = request.getParameter("short_intro");
-                String[] issues = request.getParameter("");
+                //String[] issues = request.getParameter("");
 
             }
         } catch (IOException e) {
