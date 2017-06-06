@@ -38,11 +38,11 @@ public class Serve_Authentication extends HttpServlet {
                 String password = request.getParameter("loginPassword");
 
                 if(UserDAO.getUser(DB, username) != null){
+                    System.out.println("reach line 41");
                     if(SecurityUtility.passwordAuthentication(username, password)){
                         session.setAttribute("loggingStatus", true);
                         session.setAttribute("username", username);
-                        request.setAttribute("Welcome", "Welcome logging!!");
-
+                        request.setAttribute("message", "Welcome logging!!");
                         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user_interface/Home.jsp");
                         System.out.println("logged in");
                         dispatcher.forward(request, response);
@@ -52,7 +52,7 @@ public class Serve_Authentication extends HttpServlet {
                         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login_interface/Login.jsp");
                         dispatcher.forward(request, response);
                     }
-                }else {
+                }else if(UserDAO.getUser(DB, username) == null){
                     request.setAttribute("message", "The combination of username and password you have entered is incorrect");
                     System.out.println("Password was wrong");
                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login_interface/Login.jsp");
