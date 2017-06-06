@@ -4,7 +4,6 @@ import Article.Article;
 
 import java.awt.*;
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.List;
 
 public class User implements Serializable {
@@ -13,7 +12,6 @@ public class User implements Serializable {
     private String first_name;
     private String last_name;
     private String email;
-    private Date date_of_birth;
     private List<Article> collectionList;
     private Image profileImage;
 
@@ -21,21 +19,18 @@ public class User implements Serializable {
 
     }
 
-    public User(String username, String first_name, String last_name, String email, Date date_of_birth) {
+    public User(String username, String first_name, String last_name, String email) {
         this.username = username;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
-        this.date_of_birth = date_of_birth;
     }
 
-    public User(String username, String first_name, String last_name, String email, Date date_of_birth, List<Article> collectionList, Image profileImage) {
+    public User(String username, String first_name, String last_name, String email,  Image profileImage) {
         this.username = username;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
-        this.date_of_birth = date_of_birth;
-        this.collectionList = collectionList;
         this.profileImage = profileImage;
     }
 
@@ -69,14 +64,6 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Date getDate_of_birth() {
-        return date_of_birth;
-    }
-
-    public void setDate_of_birth(Date date_of_birth) {
-        this.date_of_birth = date_of_birth;
     }
 
     public List<Article> getCollectionList() {
