@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -78,7 +79,7 @@ public class Serve_Registration extends HttpServlet {
                     //UserDAO.RegisterUser(DB, new User(username,salt,ITERATIONS,encodedPW));
 
 
-                    User newUser = new User(username, registrationFirstName, registrationLastName, registrationEmail);
+                    User newUser = new User(username, registrationFirstName, registrationLastName, registrationEmail, UserfilePath+"/Userdefault.jpg", UserfilePath);
                     UserSecurity newSecurity = new UserSecurity(username, salt, ITERATIONS, encodedPW);
                     UserDAO.registerUser(DB, newUser);
                     UserSecurityDAO.insertUser(DB, newSecurity);
@@ -89,7 +90,6 @@ public class Serve_Registration extends HttpServlet {
                     File defaultImage = new File(DefaultImagePathway);
                     BufferedImage sourceImage = ImageIO.read(defaultImage);
 
-
                     try {
                         // retrieve image
                         File outputfile = new File(UserfilePath+"/User_profile_picture.jpg");
@@ -98,6 +98,16 @@ public class Serve_Registration extends HttpServlet {
                         System.out.println(e.getMessage());
                     }
 
+
+
+                    //generate thumbnail images
+                    BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+                    img.createGraphics().drawImage(ImageIO.read(new File(UserfilePath+"/User_profile_picture.jpg")).getScaledInstance(100, 100, Image.SCALE_SMOOTH),0,0,null);
+                    ImageIO.write(img, "jpg", new File(UserfilePath+"/User_profile_picture_thumb.jpg"));
+
+
+                    //create a row in profile with username
+                    UserDAO.createProfile(DB, username);
 
 
                     session.setAttribute("loggingStatus", true);

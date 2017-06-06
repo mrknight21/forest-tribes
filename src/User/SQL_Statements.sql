@@ -53,14 +53,21 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_IssuesCared (
   FOREIGN KEY (username) REFERENCES inFoJaxs_User(username)
 );
 
+ALTER TABLE inFoJaxs_User
+ADD UserFolderPath VARCHAR (400) NULL ;
+Update inFoJaxs_User set ProfileImagePath = NULL
+
+
+
+
 DROP TABLE IF EXISTS inFoJaxs_Articles;
 CREATE TABLE IF NOT EXISTS inFoJaxs_Articles (
   ID INT AUTO_INCREMENT,
   username VARCHAR(50) NOT NULL,
   title VARCHAR(80) NOT NULL,
-  article VARCHAR (8000) NOT NULL,
-#   created TIMESTAMP,
-#   lastEdit TIMESTAMP,
+  content VARCHAR (8000) NOT NULL,
+  creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),
   FOREIGN KEY (username) REFERENCES inFoJaxs_User(username)
 );
@@ -68,11 +75,11 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_Articles (
 DROP TABLE IF EXISTS inFoJaxs_Comments;
 CREATE TABLE IF NOT EXISTS inFoJaxs_Comments (
   ID INT AUTO_INCREMENT,
-  article_ID INT,
-  username VARCHAR(50),
-  comment VARCHAR (8000) NOT NULL,
-#   created TIMESTAMP,
-#   lastEdit TIMESTAMP,
+  parent_ID INT NOT NULL,
+  username VARCHAR(50) NOT NULL ,
+  content VARCHAR (8000) NOT NULL,
+  creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),
   FOREIGN KEY (username) REFERENCES inFoJaxs_User(username),
   FOREIGN KEY (article_ID) REFERENCES inFoJaxs_Articles(ID)
@@ -81,22 +88,36 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_Comments (
 DROP TABLE IF EXISTS inFoJaxs_Replies;
 CREATE TABLE IF NOT EXISTS inFoJaxs_Replies (
   ID INT AUTO_INCREMENT,
-  comment_ID INT,
+  parent_ID INT NOT NULL ,
   username VARCHAR(50) NOT NULL,
-  reply VARCHAR (8000) NOT NULL,
-#   created TIMESTAMP,
-#   lastEdit TIMESTAMP,
+  content VARCHAR (8000) NOT NULL,
+  creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),
   FOREIGN KEY (username) REFERENCES inFoJaxs_User(username),
   FOREIGN KEY (comment_ID) REFERENCES inFoJaxs_Comments(ID)
 );
 
-DROP TABLE IF EXISTS inFoJaxs_Likes;
-CREATE TABLE IF NOT EXISTS inFoJaxs_Likes (
-  ID VARCHAR(8000) NOT NULL,
-  likes INT,
-  PRIMARY KEY (ID)
+DROP TABLE IF EXISTS inFoJaxs_ArticleLikes;
+CREATE TABLE IF NOT EXISTS inFoJaxs_ArticleLikes (
+  ID INT,
+  likes INT DEFAULT 0,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (ID) REFERENCES inFoJaxs_Articles(ID)
 );
 
-DELETE FROM inFoJaxs_User
-WHERE username = 'BarnsNZ';
+DROP TABLE IF EXISTS inFoJaxs_CommentLikes;
+CREATE TABLE IF NOT EXISTS inFoJaxs_CommentLikes (
+  ID INT,
+  likes INT DEFAULT 0,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (ID) REFERENCES inFoJaxs_Comments(ID)
+);
+
+DROP TABLE IF EXISTS inFoJaxs_ReplyLikes;
+CREATE TABLE IF NOT EXISTS inFoJaxs_ReplyLikes (
+  ID INT,
+  likes INT DEFAULT 0,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (ID) REFERENCES inFoJaxs_Replies(ID)
+);

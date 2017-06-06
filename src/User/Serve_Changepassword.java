@@ -28,7 +28,7 @@ public class Serve_Changepassword extends HttpServlet{
 
         try {
             if (!SecurityUtility.loggingStatusChecker(request)){
-                response.sendRedirect("ex05/Login.jsp");
+                response.sendRedirect("/login_interface/Login.jsp");
                 return;
             }else{
                 String currpassword = request.getParameter("CurrentPassword");
@@ -38,20 +38,20 @@ public class Serve_Changepassword extends HttpServlet{
 
                 if(!newPassword.equals(confirmpassword)){
                     request.setAttribute("passwordStatus","New password and confirm password does not match");
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ex05/changePassword.jsp");
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user_interface/changePassword.jsp");
                     dispatcher.forward(request, response);
                 }else
                 {
                     String username = (String)session.getAttribute("username");
                 if(!SecurityUtility.passwordAuthentication(username, currpassword)){
                     request.setAttribute("passwordStatus","The password was wrong. Try again!");
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ex05/changePassword.jsp");
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user_interface/changePassword.jsp");
                     dispatcher.forward(request, response);
                 }
                 else {
                     UserDAO.updatePassword(DB, username, newPassword);
                     request.setAttribute("Welcome","Your password has been successfully changed");
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ex05/Content.jsp");
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user_interface/Content.jsp");
                     dispatcher.forward(request, response);
                 }
                 }

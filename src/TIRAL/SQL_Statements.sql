@@ -19,12 +19,12 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_User (
   first_name VARCHAR(25) NOT NULL,
   last_name VARCHAR(25) NOT NULL,
   email VARCHAR(50) NOT NULL,
+  profileImage VARCHAR(300) NOT NULL,
   PRIMARY KEY (username)
 );
 
 -- Statements to create the table which will the UserSecurity information.
 DROP TABLE IF EXISTS inFoJaxs_UserSecurity;
-
 CREATE TABLE IF NOT EXISTS inFoJaxs_UserSecurity (
   userID INT AUTO_INCREMENT,
   username VARCHAR(50),
@@ -68,3 +68,6 @@ INSERT INTO inFoJaxs_Profile (username) VALUES
 ('programmer1');
 
 DELETE FROM inFoJaxs_UserSecurity WHERE username=bryanchen
+
+ALTER TABLE table_name
+ADD column_name datatype;

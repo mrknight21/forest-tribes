@@ -15,7 +15,7 @@
 <body>
 <%
     if(!SecurityUtility.loggingStatusChecker(request)){
-        response.sendRedirect("/ex05/Login.jsp");
+        response.sendRedirect("/login_interface/Login.jsp");
     }
 %>
 <form action="/Serve_Changepassword" method="post">
@@ -31,7 +31,7 @@
     <input type="password" id="confirmPasswordID" name="ConfirmPassword" placeholder="Password"/>
     <input type="submit" value="Submit">
 </form>
-<a href="/ex05/Content.jsp" ><button>Cancel</button></a>
+<a href="/user_interface/Home.jsp" ><button>Cancel</button></a>
 
 </body>
 </html>
