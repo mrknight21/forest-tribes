@@ -10,7 +10,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="/Frameworks/jquery.min.js"></script>
+    <script src="/Frameworks/jquery-ui.min.js"></script>
     <style>
         .full {
             background: url('login_interface/lake-baikal-9.jpg') no-repeat center center fixed;
@@ -192,6 +193,16 @@
                                         </div>
                                         <input type="hidden" name="profilePolitical" id="profilePoliticalID">
                                     </div>
+                                    <input data-slider-id="ex19" type="text"
+                                           data-provide="slider"
+                                           data-slider-ticks="[1, 2, 3]"
+                                           data-slider-ticks-labels='["short", "medium", "long"]'
+                                           data-slider-min="1"
+                                           data-slider-max="3"
+                                           data-slider-step="1"
+                                           data-slider-value="3"
+                                           data-slider-tooltip="hide">
+
                                 </fieldset>
                                 <br>
                                 <div class="form-group">
