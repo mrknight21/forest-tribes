@@ -36,7 +36,7 @@ public class Serve_Registration extends HttpServlet {
 
         try {
             if (SecurityUtility.loggingStatusChecker(request)){
-                response.sendRedirect("/Home.jsp");
+                response.sendRedirect("/user_interface/Home.jsp");
                 return;
             } else {
                 HttpSession session = request.getSession();
@@ -47,59 +47,46 @@ public class Serve_Registration extends HttpServlet {
                 String password = request.getParameter("registrationPassword");
                 String confirmPassword = request.getParameter("registrationConfirmPassword");
 
-
                 //get path for creating files
                 ServletContext servletContext = getServletContext();
-                String  UserfilePath = servletContext.getRealPath("/"+username);
-                File userFolder = new File(UserfilePath);
+                String userFilePath = servletContext.getRealPath("/"+username);
+                File userFolder = new File(userFilePath);
                 MicellaneousUntility.DirCeation(userFolder);
 
-
-
-
                 if (UserDAO.getUser(DB, username) == null){
-
-
-
 
                     byte[] salt = SecurityUtility.getNextSalt();
 
                     byte[] encodedPW = SecurityUtility.hash(password.toCharArray(), salt, ITERATIONS);
 
-                    //UserDAO.RegisterUser(DB, new User(username,salt,ITERATIONS,encodedPW));
-
-
                     User newUser = new User(username, registrationFirstName, registrationLastName, registrationEmail);
                     UserSecurity newSecurity = new UserSecurity(username, salt, ITERATIONS, encodedPW);
-                    UserDAO.RegisterUser(DB, newUser);
-                    UserSecurityDAO.insertUser(DB, newSecurity);
 
+                    UserDAO.registerUser(DB, newUser);
+                    UserSecurityDAO.insertUser(DB, newSecurity);
 
                     //auto set-up user profile photo
                     File defaultImage = new File("/images_material/Default/Userdefault.jpg");
                     BufferedImage sourceImage = ImageIO.read(defaultImage);
 
-
                     try {
                         // retrieve image
-                        File outputfile = new File(UserfilePath+"/User_Profile_Image.jpg");
+                        File outputfile = new File(userFilePath+"/User_Profile_Image.jpg");
                         ImageIO.write(sourceImage, "jpg", outputfile);
                     } catch (IOException e) {
                         System.out.println(e.getMessage());
                     }
 
-
-
                     session.setAttribute("loggingStatus", true);
                     session.setAttribute("username", username);
                     request.setAttribute("message", "Welcome logging!!");
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Home.jsp");
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user_interface/Home.jsp");
                     System.out.println("registered");
                     dispatcher.forward(request, response);
                 }
                 else {
                     request.setAttribute("message", "The username you have registered already exists");
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Login.jsp");
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login_interface/Login.jsp");
                     dispatcher.forward(request, response);
                 }
             }

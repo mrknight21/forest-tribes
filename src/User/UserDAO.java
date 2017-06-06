@@ -53,7 +53,7 @@ public class UserDAO {
     }
 
     // Method to insert a parsed-in User into the database.
-    public static boolean RegisterUser(AbstractDB db, User newUser) {
+    public static boolean registerUser(AbstractDB db, User newUser) {
 
         boolean status;
 
@@ -151,7 +151,9 @@ public class UserDAO {
     }
 
     public static boolean updateProfile(AbstractDB db, String username, Profile profile){
+
         boolean status;
+
         String dateOfBirth = profile.getDateOfBirth();
         String gender = profile.getGender();
         String occupation = profile.getOccupation();
@@ -160,7 +162,6 @@ public class UserDAO {
         String thingsLoves= profile.getThingsLoves();
         String short_intro= profile.getShort_intro();
         String[] issues = profile.getIssues();
-
 
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_Profile SET date_Of_Birth = ?, gender = ?, occupation = ?, education_level = ?, political_Orientation = ?, things_Loved = ?, short_intro = ? WHERE username = ?")) {
@@ -188,19 +189,12 @@ public class UserDAO {
                 }
             }
 
-
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             status = false;
         }
         return status;
-
     }
-
-
-
-
-
 
     // Method to create a new User object from the information stored in the ResultSet.
     private static User userFromResultSet(ResultSet r) throws SQLException {

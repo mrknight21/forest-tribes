@@ -18,7 +18,7 @@ import java.io.IOException;
 public class Serve_Authentication extends HttpServlet {
 
     private static final MySQL DB = new MySQL();
-    private static final int ITERATIONS = 50000;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -30,7 +30,7 @@ public class Serve_Authentication extends HttpServlet {
 
         try {
             if (SecurityUtility.loggingStatusChecker(request)){
-            response.sendRedirect("/ex05/Content.jsp");
+            response.sendRedirect("/user_interface/Home.jsp");
             return;
             }else {
                 HttpSession session = request.getSession();
@@ -42,24 +42,21 @@ public class Serve_Authentication extends HttpServlet {
                         session.setAttribute("loggingStatus", true);
                         session.setAttribute("username", username);
                         request.setAttribute("Welcome", "Welcome logging!!");
-                        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ex05/Content.jsp");
+                        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user_interface/Home.jsp");
                         System.out.println("logged in");
                         dispatcher.forward(request, response);
                     }else {
-
-                        request.setAttribute("loginProb", "The combination of username and password you have entered is incorrect");
+                        request.setAttribute("message", "The combination of username and password you have entered is incorrect");
                         System.out.println("Password was wrong");
-                        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ex05/Login.jsp");
+                        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login_interface/Login.jsp");
                         dispatcher.forward(request, response);
                     }
                 }else {
-
-                    request.setAttribute("loginProb", "The combination of username and password you have entered is incorrect");
+                    request.setAttribute("message", "The combination of username and password you have entered is incorrect");
                     System.out.println("Password was wrong");
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ex05/Login.jsp");
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login_interface/Login.jsp");
                     dispatcher.forward(request, response);
                 }
-
             }
         } catch (IOException e) {
             e.printStackTrace();
