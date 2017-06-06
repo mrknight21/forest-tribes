@@ -6,5 +6,43 @@
 
 
 
-    
+    <servlet>
+        <servlet-name>Authentification</servlet-name>
+        <servlet-class>User.Serve_Authentication</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Authentification</servlet-name>
+        <url-pattern>/Serve_Authentication</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Registration</servlet-name>
+        <servlet-class>User.Serve_Registration</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Registration</servlet-name>
+        <url-pattern>/Serve_Registration</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>Serve_Logout</servlet-name>
+        <servlet-class>User.Serve_Logout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Serve_Logout</servlet-name>
+        <url-pattern>/Serve_Logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Serve_Changepassword</servlet-name>
+        <servlet-class>User.Serve_Changepassword</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Serve_Changepassword</servlet-name>
+        <url-pattern>/Serve_Changepassword</url-pattern>
+    </servlet-mapping>
+
+
+
 </web-app>
