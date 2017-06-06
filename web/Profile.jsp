@@ -21,7 +21,7 @@
     <script>
         $(function () {
             $("input[type='radio']").checkboxradio();
-            $("#test").controlgroup();
+            $(".form-group").controlgroup();
         });
     </script>
     <style>
@@ -102,14 +102,32 @@
             margin-bottom: 10px;
         }
 
-        #profileGenderButtons .btn-primary.notActive {
-            background-color: #029f5b;
-            border-color: #0C9636;
+        #profileRadioExConID {
+            color: darkred;
         }
 
-        #profileGenderButtons .btn-primary.active {
-            background-color: #1B7F3A;
-            border-color: #176E32;
+        #profileRadioConID {
+            color: red;
+        }
+
+        #profileRadioSliConID {
+            color: orangered;
+        }
+
+        #profileRadioCentID {
+            color: gray;
+        }
+
+        #profileRadioSliLibID {
+            color: lightblue;
+        }
+
+        #profileRadioLibID {
+            color: blue;
+        }
+
+        #profileRadioExLibID {
+            color: darkblue;
         }
     </style>
 </head>
@@ -157,102 +175,58 @@
                                     <legend>Personal Information</legend>
                                     <fieldset>
                                         <legend>Gender:</legend>
-                                        <label for="profileRadioMale">Male</label>
-                                        <input type="radio" name="radioGender" id="profileRadioMale">
-                                        <label for="profileRadioFemale">Female</label>
-                                        <input type="radio" name="radioGender" id="profileRadioFemale">
-                                        <label for="profileRadioOther">Other</label>
-                                        <input type="radio" name="radioGender" id="profileRadioOther">
+                                        <div class="form-group">
+                                            <label for="profileRadioMaleID">Male</label>
+                                            <input type="radio" name="male" id="profileRadioMaleID">
+                                            <label for="profileRadioFemaleID">Female</label>
+                                            <input type="radio" name="female" id="profileRadioFemaleID">
+                                            <label for="profileRadioOtherID">Other</label>
+                                            <input type="radio" name="other" id="profileRadioOtherID">
+                                        </div>
                                     </fieldset>
-
-                                    <%--<div class="input-group">--%>
-                                    <%--<span class="input-group-addon"><i--%>
-                                    <%--class="glyphicon glyphicon-user"></i></span>--%>
-                                    <%--<div id="profileGenderButtons" class="btn-group-justified btn-group-md">--%>
-                                    <%--<a class="btn btn-primary btn-md active" data-toggle="profileGender"--%>
-                                    <%--data-title="Male">Male</a>--%>
-                                    <%--<a class="btn btn-primary btn-md notActive" data-toggle="profileGender"--%>
-                                    <%--data-title="Female">Female</a>--%>
-                                    <%--<a class="btn btn-primary btn-md notActive" data-toggle="profileGender"--%>
-                                    <%--data-title="Other">Other</a>--%>
-                                    <%--</div>--%>
-                                    <%--<input type="hidden" name="profileGender" id="profileGenderID">--%>
-                                    <%--</div>--%>
                                     <fieldset>
                                         <legend>Occupation:</legend>
                                         <div class="input-group">
                                         <span class="input-group-addon"><i
                                                 class="glyphicon glyphicon-pencil"></i></span>
-                                            <input type="text" name="profileOccupation" id="profileOccupationID"
+                                            <input type="text" name="occupation" id="profileOccupationID"
                                                    tabindex="1" class="form-control" placeholder="Occupation" value="">
                                         </div>
                                     </fieldset>
                                     <fieldset>
                                         <legend>Education:</legend>
-                                        <label for="profileRadioPrimary">Primary</label>
-                                        <input type="radio" name="radioEducation" id="profileRadioPrimary">
-                                        <label for="profileRadioSecondary">Secondary</label>
-                                        <input type="radio" name="radioEducation" id="profileRadioSecondary">
-                                        <label for="profileRadioTertiary">Tertiary</label>
-                                        <input type="radio" name="radioEducation" id="profileRadioTertiary">
-                                        <label for="profileRadioPostgraduate">Postgraduate</label>
-                                        <input type="radio" name="radioEducation" id="profileRadioPostgraduate">
-                                        <label for="profileRadioDoctorate">Doctorate</label>
-                                        <input type="radio" name="radioEducation" id="profileRadioDoctorate">
+                                        <div class="form-group">
+                                            <label for="profileRadioPrimaryID">Primary</label>
+                                            <input type="radio" name="primary" id="profileRadioPrimaryID">
+                                            <label for="profileRadioSecondaryID">Secondary</label>
+                                            <input type="radio" name="secondary" id="profileRadioSecondaryID">
+                                            <label for="profileRadioTertiaryID">Tertiary</label>
+                                            <input type="radio" name="tertiary" id="profileRadioTertiaryID">
+                                            <label for="profileRadioPostgraduateID">Postgraduate</label>
+                                            <input type="radio" name="postgraduate" id="profileRadioPostgraduateID">
+                                            <label for="profileRadioDoctorateID">Doctorate</label>
+                                            <input type="radio" name="doctorate" id="profileRadioDoctorateID">
+                                        </div>
                                     </fieldset>
                                     <fieldset>
                                         <legend>Political Orientation:</legend>
-                                        <label for="profileRadioExCon">Extremely Conservative</label>
-                                        <input type="radio" name="radioEducation" id="profileRadioExCon">
-                                        <label for="profileRadioCon">Conservative</label>
-                                        <input type="radio" name="radioEducation" id="profileRadioCon">
-                                        <label for="profileRadioSliCon">Slightly Conservative</label>
-                                        <input type="radio" name="radioEducation" id="profileRadioSliCon">
-                                        <label for="profileRadioCent">Centrist</label>
-                                        <input type="radio" name="radioEducation" id="profileRadioCent">
-                                        <label for="profileRadioDoctorate">Doctorate</label>
-                                        <input type="radio" name="radioEducation" id="profileRadioDoctorate">
+                                        <div class="form-group">
+                                            <label for="profileRadioExLibID">Extremely Liberal</label>
+                                            <input type="radio" name="extremely_liberal" id="profileRadioExLibID">
+                                            <label for="profileRadioLibID">Liberal</label>
+                                            <input type="radio" name="liberal" id="profileRadioLibID">
+                                            <label for="profileRadioSliLibID">Slightly Liberal</label>
+                                            <input type="radio" name="slightly_liberal" id="profileRadioSliLibID">
+                                            <label for="profileRadioCentID">Centrist</label>
+                                            <input type="radio" name="centrist" id="profileRadioCentID">
+                                            <label for="profileRadioSliConID">Slightly Conservative</label>
+                                            <input type="radio" name="slightly_conservative" id="profileRadioSliConID">
+                                            <label for="profileRadioConID">Conservative</label>
+                                            <input type="radio" name="conservative" id="profileRadioConID">
+                                            <label for="profileRadioExConID">Extremely Conservative</label>
+                                            <input type="radio" name="extremely_conservative" id="profileRadioExConID">
+                                        </div>
                                     </fieldset>
-
-                                    <%--<div class="input-group">--%>
-                                        <%--<span class="input-group-addon"><i--%>
-                                                <%--class="glyphicon glyphicon-user"></i></span>--%>
-                                        <%--<div id="profileEducationButtons" class="btn-group-justified btn-group-md">--%>
-                                            <%--<a class="btn btn-primary btn-md active" data-toggle="profileEducation"--%>
-                                               <%--data-title="primary">Primary</a>--%>
-                                            <%--<a class="btn btn-primary btn-md notActive" data-toggle="profileEducation"--%>
-                                               <%--data-title="secondary">Secondary</a>--%>
-                                            <%--<a class="btn btn-primary btn-md notActive" data-toggle="profileEducation"--%>
-                                               <%--data-title="tertiary">Tertiary</a>--%>
-                                            <%--<a class="btn btn-primary btn-md notActive" data-toggle="profileEducation"--%>
-                                               <%--data-title="postgraduate">Postgraduate</a>--%>
-                                            <%--<a class="btn btn-primary btn-md notActive" data-toggle="profileEducation"--%>
-                                               <%--data-title="doctorate">Doctorate</a>--%>
-                                        <%--</div>--%>
-                                        <%--<input type="hidden" name="profileGender" id="profileEducationID">--%>
-                                    <%--</div>--%>
-
-                                    <%--<div class="input-group">--%>
-                                        <%--<span class="input-group-addon"><i--%>
-                                                <%--class="glyphicon glyphicon-user"></i></span>--%>
-                                        <%--<div class="btn-group-md">--%>
-                                            <%--<a class="btn btn-primary btn-md active" data-toggle="profilePolitical"--%>
-                                               <%--data-title="extremely_liberal">Extremely Liberal</a>--%>
-                                            <%--<a class="btn btn-primary btn-md notActive" data-toggle="profilePolitical"--%>
-                                               <%--data-title="liberal">Liberal</a>--%>
-                                            <%--<a class="btn btn-primary btn-md notActive" data-toggle="profilePolitical"--%>
-                                               <%--data-title="slightly_liberal">Slightly Liberal</a>--%>
-                                            <%--<a class="btn btn-primary btn-md notActive" data-toggle="profilePolitical"--%>
-                                               <%--data-title="neutral">Neutral</a>--%>
-                                            <%--<a class="btn btn-primary btn-md notActive" data-toggle="profilePolitical"--%>
-                                               <%--data-title="slightly_conservative">Slightly Conservative</a>--%>
-                                            <%--<a class="btn btn-primary btn-md notActive" data-toggle="profilePolitical"--%>
-                                               <%--data-title="conservative">Conservative</a>--%>
-                                            <%--<a class="btn btn-primary btn-md notActive" data-toggle="profilePolitical"--%>
-                                               <%--data-title="extremely_conservative">Extremely Conservative</a>--%>
-                                        <%--</div>--%>
-                                        <%--<input type="hidden" name="profilePolitical" id="profilePoliticalID">--%>
-                                    <%--</div>--%>
                                 </fieldset>
                                 <br>
                                 <div class="form-group">
@@ -292,3 +266,58 @@
 </script>
 </body>
 </html>
+
+
+<%--<div class="input-group">--%>
+<%--<span class="input-group-addon"><i--%>
+<%--class="glyphicon glyphicon-user"></i></span>--%>
+<%--<div id="profileGenderButtons" class="btn-group-justified btn-group-md">--%>
+<%--<a class="btn btn-primary btn-md active" data-toggle="profileGender"--%>
+<%--data-title="Male">Male</a>--%>
+<%--<a class="btn btn-primary btn-md notActive" data-toggle="profileGender"--%>
+<%--data-title="Female">Female</a>--%>
+<%--<a class="btn btn-primary btn-md notActive" data-toggle="profileGender"--%>
+<%--data-title="Other">Other</a>--%>
+<%--</div>--%>
+<%--<input type="hidden" name="profileGender" id="profileGenderID">--%>
+<%--</div>--%>
+
+<%--<div class="input-group">--%>
+<%--<span class="input-group-addon"><i--%>
+<%--class="glyphicon glyphicon-user"></i></span>--%>
+<%--<div id="profileEducationButtons" class="btn-group-justified btn-group-md">--%>
+<%--<a class="btn btn-primary btn-md active" data-toggle="profileEducation"--%>
+<%--data-title="primary">Primary</a>--%>
+<%--<a class="btn btn-primary btn-md notActive" data-toggle="profileEducation"--%>
+<%--data-title="secondary">Secondary</a>--%>
+<%--<a class="btn btn-primary btn-md notActive" data-toggle="profileEducation"--%>
+<%--data-title="tertiary">Tertiary</a>--%>
+<%--<a class="btn btn-primary btn-md notActive" data-toggle="profileEducation"--%>
+<%--data-title="postgraduate">Postgraduate</a>--%>
+<%--<a class="btn btn-primary btn-md notActive" data-toggle="profileEducation"--%>
+<%--data-title="doctorate">Doctorate</a>--%>
+<%--</div>--%>
+<%--<input type="hidden" name="profileGender" id="profileEducationID">--%>
+<%--</div>--%>
+
+<%--<div class="input-group">--%>
+<%--<span class="input-group-addon"><i--%>
+<%--class="glyphicon glyphicon-user"></i></span>--%>
+<%--<div class="btn-group-md">--%>
+<%--<a class="btn btn-primary btn-md active" data-toggle="profilePolitical"--%>
+<%--data-title="extremely_liberal">Extremely Liberal</a>--%>
+<%--<a class="btn btn-primary btn-md notActive" data-toggle="profilePolitical"--%>
+<%--data-title="liberal">Liberal</a>--%>
+<%--<a class="btn btn-primary btn-md notActive" data-toggle="profilePolitical"--%>
+<%--data-title="slightly_liberal">Slightly Liberal</a>--%>
+<%--<a class="btn btn-primary btn-md notActive" data-toggle="profilePolitical"--%>
+<%--data-title="neutral">Neutral</a>--%>
+<%--<a class="btn btn-primary btn-md notActive" data-toggle="profilePolitical"--%>
+<%--data-title="slightly_conservative">Slightly Conservative</a>--%>
+<%--<a class="btn btn-primary btn-md notActive" data-toggle="profilePolitical"--%>
+<%--data-title="conservative">Conservative</a>--%>
+<%--<a class="btn btn-primary btn-md notActive" data-toggle="profilePolitical"--%>
+<%--data-title="extremely_conservative">Extremely Conservative</a>--%>
+<%--</div>--%>
+<%--<input type="hidden" name="profilePolitical" id="profilePoliticalID">--%>
+<%--</div>--%>
