@@ -3,6 +3,7 @@ package User;
 import Article.Article;
 
 import java.awt.*;
+import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,7 +14,9 @@ public class User implements Serializable {
     private String last_name;
     private String email;
     private List<Article> collectionList;
-    private Image profileImage;
+    private String profileImagePath;
+    private String userFolderPath;
+
 
     public User() {
 
@@ -26,12 +29,13 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public User(String username, String first_name, String last_name, String email,  Image profileImage) {
+    public User(String username, String first_name, String last_name, String email,  String profileImagePath, String userFolderPath) {
         this.username = username;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
-        this.profileImage = profileImage;
+        this.profileImagePath = profileImagePath;
+        this.userFolderPath = userFolderPath;
     }
 
     public String getUsername() {
@@ -74,11 +78,19 @@ public class User implements Serializable {
         this.collectionList = collectionList;
     }
 
-    public Image getProfileImage() {
-        return profileImage;
+    public String getProfileImagePath() {
+        return profileImagePath;
     }
 
-    public void setProfileImage(Image profileImage) {
-        this.profileImage = profileImage;
+    public void setProfileImagePath(String profileImagePath) {
+        this.profileImagePath = profileImagePath;
+    }
+
+    public String getUserFolderPath() {
+        return userFolderPath;
+    }
+
+    public void setUserFolderPath(String userFolderPath) {
+        this.userFolderPath = userFolderPath;
     }
 }

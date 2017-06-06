@@ -53,6 +53,13 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_IssuesCared (
   FOREIGN KEY (username) REFERENCES inFoJaxs_User(username)
 );
 
+ALTER TABLE inFoJaxs_User
+ADD UserFolderPath VARCHAR (400) NULL ;
+Update inFoJaxs_User set ProfileImagePath = NULL
+
+
+
+
 DROP TABLE IF EXISTS inFoJaxs_Articles;
 CREATE TABLE IF NOT EXISTS inFoJaxs_Articles (
   ID INT AUTO_INCREMENT,

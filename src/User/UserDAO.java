@@ -58,11 +58,13 @@ public class UserDAO {
         boolean status;
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_User (username, first_name, last_name, email) VALUE (?, ?, ?, ?)")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_User (username, first_name, last_name, email, ProfileImagePath, UserFolderPath) VALUE (?, ?, ?, ?, ?, ?)")) {
                 p.setString(1, newUser.getUsername());
                 p.setString(2, newUser.getFirst_name());
                 p.setString(3, newUser.getLast_name());
                 p.setString(4, newUser.getEmail());
+                p.setString(5, newUser.getProfileImagePath());
+                p.setString(6, newUser.getUserFolderPath());
 
                 p.executeUpdate();
                 status = true;
@@ -101,8 +103,9 @@ public class UserDAO {
 
         boolean status;
 
+
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE web_lab_19 SET salt = ?, iterations = ?, hash = ? WHERE username = ?")) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_UserSecurity SET salt = ?, iterations = ?, hash = ? WHERE username = ?")) {
 
                 char[] passwordArray = password.toCharArray();
 
@@ -150,6 +153,40 @@ public class UserDAO {
         return status;
     }
 
+
+
+
+    public static boolean createProfile (AbstractDB db, String username){
+        boolean status = false;
+
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT username FROM inFoJaxs_Profile WHERE username = ?")) {
+                p.setString(1, username);
+                try (ResultSet r = p.executeQuery()) {
+                    if(r.next()) {
+                        if (username.equals(r.getString("username"))){
+                            status = false;
+                        }
+                    } else {
+                        try (PreparedStatement b = c.prepareStatement("INSERT INTO inFoJaxs_Profile (username) VALUE (?);")) {
+                            b.setString(1, username);
+                            b.executeUpdate();
+                            status = true;
+                            System.out.println("profile created");
+                        }
+                    }
+                }
+            }
+        }
+        catch (SQLException | ClassNotFoundException e) {
+        e.printStackTrace();
+            status = false;
+    }
+    return status;
+    }
+
+
+
     public static boolean updateProfile(AbstractDB db, String username, Profile profile){
 
         boolean status;
@@ -196,13 +233,32 @@ public class UserDAO {
         return status;
     }
 
+    public static boolean updateProfileImagePath(AbstractDB db, String path, String username){
+        boolean status;
+
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_User SET ProfileImagePath = ? WHERE username = ?;")) {
+                //p.setString(1, colunm);
+                p.setString(1, path);
+                p.setString(2, username);
+                p.executeUpdate();
+                status = true;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            status = false;
+        }
+        return status;
+    }
     // Method to create a new User object from the information stored in the ResultSet.
     private static User userFromResultSet(ResultSet r) throws SQLException {
         return new User(
                 r.getString("username"),
                 r.getString("first_name"),
                 r.getString("last_name"),
-                r.getString("email")
+                r.getString("email"),
+                r.getString("ProfileImagePath"),
+                r.getString("UserFolderPath")
         );
     }
 }

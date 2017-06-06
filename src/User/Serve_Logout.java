@@ -25,10 +25,10 @@ public class Serve_Logout extends HttpServlet {
             session.removeAttribute("username");
             session.removeAttribute("loggingStatus");
             req.setAttribute("message","Log out successfully! Hope to see you again");
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("Login.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login_interface/Login.jsp");
             dispatcher.forward(req, resp);
         }
-        resp.sendRedirect("/ex05/Login.jsp");
+        resp.sendRedirect("/login_interface/Login.jsp");
     }
 }
 
