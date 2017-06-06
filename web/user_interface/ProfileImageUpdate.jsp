@@ -27,7 +27,7 @@
     String username = (String) session1.getAttribute("username");
 
 
-    String method = request.getMethod();
+    /*String method = request.getMethod();
     ServletContext servletContext = request.getServletContext();
     MySQL DB = new MySQL();
     User user = UserDAO.getUser(DB, username);
@@ -67,7 +67,7 @@
     }
     else if (method.equals("METHOD_POST")){
 
-    }
+    }*/
 
 
 %>

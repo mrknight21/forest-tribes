@@ -10,20 +10,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
     <title>Profile</title>
+
+    <%--JQuery JavaScript--%>
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.js"
+            integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+            crossorigin="anonymous"></script>
+
+    <%--Bootstrap CSS--%>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <%--Bootstrap JavaScript--%>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <%--JQuery UI CSS--%>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <%--JQuery UI JavaScript--%>
+    <script
+            src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+            integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+            crossorigin="anonymous"></script>
+
+    <%--Function to enable JQuery UI elements--%>
     <script>
         $(function () {
             $("input[type='radio']").checkboxradio();
             $(".form-group").controlgroup();
         });
     </script>
+
     <style>
         .full {
             background: url('login_interface/lake-baikal-9.jpg') no-repeat center center fixed;
@@ -113,7 +132,11 @@
         }
 
         #profileImage {
-            width:;
+            width: 50%;
+        }
+
+        .thumbnail {
+            border-color: transparent;
         }
     </style>
 </head>
@@ -140,6 +163,18 @@
                             <form id="profileFormID" action="/Serve_Profile" method="post" role="form"
                                   style="display: block">
                                 <fieldset class="span4">
+                                    <legend>Profile Picture</legend>
+                                    <div id="profileImageDiv" class="col-lg-10 col-lg-offset-1">
+                                        <div class="thumbnail">
+                                            <img id="profileImage" src="/User/<%= username%>/User_profile_picture.jpg"
+                                                 class="img-responsive" alt="User Profile Picture">
+                                        </div>
+                                    </div>
+                                    <form action="" method="post"><input type="submit" value="Change Profile Picture"
+                                                                         class="form-control btn btn-register"></form>
+                                </fieldset>
+                                <br>
+                                <fieldset class="span4">
                                     <legend>Membership Information</legend>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -154,12 +189,6 @@
                                     </div>
                                     <form action="" method="post"><input type="submit" value="Change Password"
                                                                          class="form-control btn btn-register"></form>
-                                    <div class="col-lg-10 col-lg-offset-1">
-                                        <div class="thumbnail">
-                                            <img id="profileImage" src="/User/<%= username%>/User_profile_picture.jpg"
-                                                 class="img-responsive" alt="User Profile Picture">
-                                        </div>
-                                    </div>
                                 </fieldset>
                                 <br>
                                 <fieldset>
