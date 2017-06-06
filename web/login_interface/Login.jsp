@@ -1,7 +1,6 @@
 <%@ page import="Utility.SecurityUtility" %>
 <!DOCTYPE html>
 <html lang="en" class="full">
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Login</title>
@@ -90,11 +89,15 @@
     .input-group {
         margin-bottom: 10px;
     }
+
+    #messageLogin {
+        color: red;
+    }
 </style>
 </head>
 <body>
 
-<% if (SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/ex05/Home.jsp"); %>
+<% if (SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/user_interface/Home.jsp"); %>
 
 
 <div class="container" style="background-color: transparent">
@@ -117,7 +120,7 @@
                         <div class="col-lg-12">
                             <h1 style="text-align: center">Forest Tribes</h1>
                             <h4 style="text-align: center">The Beauty of Interconnectedness</h4>
-                            <form id="loginFormID" action="" method="post" role="form" style="display: block;">
+                            <form id="loginFormID" action="/Serve_Authentication" method="post" role="form" style="display: block;">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                     <input type="text" name="loginUsername" id="loginUsernameID" tabindex="1"
@@ -128,6 +131,7 @@
                                     <input type="password" name="loginPassword" id="loginPasswordID" tabindex="2"
                                            class="form-control" placeholder="Password">
                                 </div>
+                                <p id="messageLogin" style="text-align: center">${message}</p>
                                 <div class="form-group text-center">
                                     <input type="checkbox" tabindex="3" class="" name="loginRemember"
                                            id="loginRememberID">
@@ -183,6 +187,7 @@
                                            id="registrationConfirmPasswordID" tabindex="6" class="form-control"
                                            placeholder="Confirm Password">
                                 </div>
+                                <p id="messageRegistration" style="text-align: center"></p>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-lg-12">
