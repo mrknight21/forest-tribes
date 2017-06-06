@@ -1,5 +1,6 @@
 package Article;
 
+import Utility.MySQL;
 import org.json.simple.JSONObject;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,8 @@ import java.io.IOException;
 import java.util.Enumeration;
 
 public class ArticlesServlet extends HttpServlet {
+
+    private static final MySQL DB = new MySQL();
 
     protected String articlesRoot;
 
@@ -105,6 +108,10 @@ public class ArticlesServlet extends HttpServlet {
 
 /*
 * doPost:
+*
+* Articles || Comments || replies
+*
+*
 * Receive new articles in servlet request.
 * Receive new comments in servlet request.
 * Save to JSON

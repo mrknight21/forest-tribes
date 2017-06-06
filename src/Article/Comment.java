@@ -1,5 +1,7 @@
 package Article;
 
+import User.User;
+
 import java.util.List;
 
 /**
@@ -8,7 +10,8 @@ import java.util.List;
 public class Comment extends Text {
     protected List<Reply> replies;
 
-    public Comment() {
+    public Comment(int id, String author, List<Reply> replies, String dateCreated, String dateLastEdited, int likes, String text) {
+        super(id, author, dateCreated, dateLastEdited, likes, text);
     }
 
     public List<Reply> getReplies() {

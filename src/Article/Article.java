@@ -1,11 +1,17 @@
 package Article;
 
+import User.User;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by wasia on 3/06/2017.
+ *
+ * Article and inner classes Comment and Reply extend abstract Text class and will be used as Java beans
+ *
  */
-public class Article extends Text {
+public class Article extends Text implements Serializable{
     private String title;
     private String recap;
     private List<Comment> comments;
@@ -13,9 +19,11 @@ public class Article extends Text {
 
     public Article() {}
 
-    public Article(String title, String recap, List<Comment> comments) {
+    public Article(String title, List<Comment> comments, int id, String author, String dateCreated, String dateLastEdited, int likes, String text) {
+        super(id, author, dateCreated, dateLastEdited, likes, text);
+
         this.title = title;
-        this.recap = recap;
+//        this.recap = recap;
         this.comments = comments;
 
         int count = 0;
