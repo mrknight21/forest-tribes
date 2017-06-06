@@ -1,5 +1,4 @@
-<%@ page import="ictgradschool.ex05.Server_Utility" %>
-<%@ page import="ictgradschool.ex05.MySQL" %>
+
 <%@ page import="Utility.SecurityUtility" %>
 <!DOCTYPE html>
 <html lang="en">

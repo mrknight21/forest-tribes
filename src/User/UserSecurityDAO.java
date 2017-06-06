@@ -1,14 +1,14 @@
 package User;
 
-import Utility.SecurityUtility;
 import Utility.AbstractDB;
-
-import static Utility.BlobConverter.getBlob;
-import static Utility.BlobConverter.getByteArray;
+import Utility.SecurityUtility;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static Utility.BlobConverter.getBlob;
+import static Utility.BlobConverter.getByteArray;
 
 public class UserSecurityDAO {
 
