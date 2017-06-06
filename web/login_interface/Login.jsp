@@ -187,7 +187,7 @@
                                            id="registrationConfirmPasswordID" tabindex="6" class="form-control"
                                            placeholder="Confirm Password">
                                 </div>
-                                <p id="messageRegistration" style="text-align: center"></p>
+                                <p id="messageRegistration" style="text-align: center">${messageRegistration}</p>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-lg-12">
@@ -207,7 +207,6 @@
 </div>
 <script>
     $(function () {
-
         $('#loginFormLink').click(function (e) {
             $("#loginFormID").delay(100).fadeIn(100);
             $("#registrationFormID").fadeOut(100);
@@ -222,7 +221,6 @@
             $(this).addClass('active');
             e.preventDefault();
         });
-
     });
 </script>
 </body>

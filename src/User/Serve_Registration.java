@@ -50,18 +50,15 @@ public class Serve_Registration extends HttpServlet {
 
                 //get path for creating files
                 ServletContext servletContext = getServletContext();
-                String  UserfilePath = servletContext.getRealPath("/WEB-INF/"+username);
+                String UserfilePath = servletContext.getRealPath("/WEB-INF/"+username);
                 File userFolder = new File(UserfilePath);
                 MicellaneousUntility.DirCeation(userFolder);
 
                 if(!password.equals(confirmPassword)){
-                    request.setAttribute("message", "Your password does not match with your confirmed password. Please try again.");
+                    request.setAttribute("messageRegistration", "Your password does not match with your confirmed password. Please try again.");
                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login_interface/Login.jsp");
                     dispatcher.forward(request, response);
                 }
-
-
-
 
                 if (UserDAO.getUser(DB, username) == null){
 
@@ -77,7 +74,7 @@ public class Serve_Registration extends HttpServlet {
 
                     User newUser = new User(username, registrationFirstName, registrationLastName, registrationEmail);
                     UserSecurity newSecurity = new UserSecurity(username, salt, ITERATIONS, encodedPW);
-                    UserDAO.RegisterUser(DB, newUser);
+                    UserDAO.registerUser(DB, newUser);
                     UserSecurityDAO.insertUser(DB, newSecurity);
 
 

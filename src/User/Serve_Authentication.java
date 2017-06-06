@@ -42,6 +42,7 @@ public class Serve_Authentication extends HttpServlet {
                         session.setAttribute("loggingStatus", true);
                         session.setAttribute("username", username);
                         request.setAttribute("Welcome", "Welcome logging!!");
+
                         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user_interface/Home.jsp");
                         System.out.println("logged in");
                         dispatcher.forward(request, response);
