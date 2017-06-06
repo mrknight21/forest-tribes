@@ -58,7 +58,7 @@ public class Serve_Registration extends HttpServlet {
                 MicellaneousUntility.DirCeation(userFolder);
 
                 if(!password.equals(confirmPassword)){
-                    request.setAttribute("message", "Your password does not match with your confirmed password. Please try again.");
+                    request.setAttribute("messageRegistration", "Your password does not match with your confirmed password. Please try again.");
                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login_interface/Login.jsp");
                     dispatcher.forward(request, response);
                 }

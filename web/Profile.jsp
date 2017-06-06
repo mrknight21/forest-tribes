@@ -1,3 +1,8 @@
+<%@ page import="Utility.SecurityUtility" %>
+<%@ page import="User.UserDAO" %>
+<%@ page import="User.User" %>
+<%@ page import="Utility.MySQL" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en" class="full">
@@ -7,11 +12,18 @@
     <title>Profile</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="Frameworks/jquery-ui-smoothness.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
-    <script src="/Frameworks/jquery.min.js"></script>
-    <script src="/Frameworks/jquery-ui.min.js"></script>
+    <script src="Frameworks/jquery.min.js"></script>
+    <script src="Frameworks/jquery-ui.min.js"></script>
+    <script>
+        $(function() {
+            $(":radio").checkboxradio();
+            $("#test").controlgroup();
+        });
+    </script>
     <style>
         .full {
             background: url('login_interface/lake-baikal-9.jpg') no-repeat center center fixed;
@@ -102,6 +114,16 @@
     </style>
 </head>
 <body>
+<%--<% if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/login_interface/Login.jsp");--%>
+
+    <%--final MySQL DB = new MySQL();--%>
+
+    <%--HttpSession httpSession = request.getSession();--%>
+    <%--String username = (String) httpSession.getAttribute("username");--%>
+
+    <%--User user = UserDAO.getUser(DB, username);--%>
+    <%--String email = user.getEmail();--%>
+%>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -111,24 +133,20 @@
                         <div class="col-lg-12">
                             <h1 style="text-align: center">Forest Tribes</h1>
                             <h4 id="subtitle" style="text-align: center">The Beauty of Interconnectedness</h4>
-                            <form id="profileFormID" action="/Serve_Profile" method="post" role="form" style="display: block">
+                            <form id="profileFormID" action="/Serve_Profile" method="post" role="form"
+                                  style="display: block">
                                 <fieldset class="span4">
                                     <legend>Membership Information:</legend>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                         <input type="text" name="profileUsername" id="profileUsernameID" tabindex="1"
-                                               value="${Username}" class="form-control" readonly>
+                                               value="" class="form-control" readonly>
                                     </div>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i
                                                 class="glyphicon glyphicon-envelope"></i></span>
                                         <input type="email" name="profileEmail" id="profileEmailID" tabindex="1"
-                                               class="form-control" value="${Email}" readonly>
-                                    </div>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-bell"></i></span>
-                                        <input type="date" name="profileDOB" id="profileDOBID" tabindex="1"
-                                               class="form-control" value="">
+                                               class="form-control" value="" readonly>
                                     </div>
                                     <form action="" method="post"><input type="submit" value="Change Password"
                                                                          class="form-control btn btn-register"></form>
@@ -193,16 +211,16 @@
                                         </div>
                                         <input type="hidden" name="profilePolitical" id="profilePoliticalID">
                                     </div>
-                                    <input data-slider-id="ex19" type="text"
-                                           data-provide="slider"
-                                           data-slider-ticks="[1, 2, 3]"
-                                           data-slider-ticks-labels='["short", "medium", "long"]'
-                                           data-slider-min="1"
-                                           data-slider-max="3"
-                                           data-slider-step="1"
-                                           data-slider-value="3"
-                                           data-slider-tooltip="hide">
-
+                                    <div id="test" class="input-group">
+                                          <span class="input-group-addon"><i
+                                                  class="glyphicon glyphicon-pencil"></i></span>
+                                        <label for="radio-1">New York</label>
+                                        <input type="radio" name="radio-1" id="radio-1">
+                                        <label for="radio-2">Paris</label>
+                                        <input type="radio" name="radio-1" id="radio-2">
+                                        <label for="radio-3">London</label>
+                                        <input type="radio" name="radio-1" id="radio-3">
+                                    </div>
                                 </fieldset>
                                 <br>
                                 <div class="form-group">
