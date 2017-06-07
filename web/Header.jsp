@@ -31,6 +31,19 @@
             crossorigin="anonymous"></script>
 
     <style>
+        @font-face {
+            font-family: Plump;
+            src: url('Fonts/Plumpfull.ttf');
+        }
+
+        #headerUser, #headerHome, #headerCollection {
+            font-family: Plump;
+            color: white;
+        }
+
+        .container-fluid {
+            background-color: #029f5b;
+        }
     </style>
 </head>
 <body>
@@ -43,54 +56,48 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    data-target="#headerNavBar" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
             <img id="headerThumbnail" src="/User/<%= username%>/User_profile_picture_thumb.jpg"
-                 class="img-responsive" alt="User Profile Picture">
-            <a class="navbar-brand"><%= username%></a>
+                 class="img-thumbnail" alt="User Profile Picture">
         </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="headerNavBar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Link</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <a href="#" id="headerUser" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><%= username%> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
+                        <li><a href="#">Update your account</a></li>
+                        <li><a href="#">Change profile picture</a></li>
+                        <li><a href="#">Change password</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a id="headerHome" href="" role="button">Home</a>
+                </li>
+                <li>
+                    <a href="#" id="headerCollection" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Collection Display<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">To be UPDATED</a></li>
+                        <li><a href="#">To be UPDATED</a></li>
+                        <li><a href="#">To be UPDATED</a></li>
+                        <li><a href="#">To be UPDATED</a></li>
                     </ul>
                 </li>
             </ul>
-            <form class="navbar-form navbar-left">
-                <div class="form-group">
+            <form class="navbar-form navbar-right">
+                <div id="headerSearch" class="form-group">
                     <input type="text" class="form-control" placeholder="Search">
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Link</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </li>
-            </ul>
         </div>
     </div>
 </nav>
