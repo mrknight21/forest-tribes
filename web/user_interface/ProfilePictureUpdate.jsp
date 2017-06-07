@@ -22,63 +22,23 @@
 
 
 <%
+
     if(!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/login_interface/Login.jsp");
     HttpSession session1 = request.getSession();
     String username = (String) session1.getAttribute("username");
-
-
-    String method = request.getMethod();
-    ServletContext servletContext = request.getServletContext();
     MySQL DB = new MySQL();
     User user = UserDAO.getUser(DB, username);
-
-    if (method.equals("METHOD_GET")) {
-        String newProfileImagePath = request.getParameter("DP_option");
-        String  DefaultImagePathway = servletContext.getRealPath(newProfileImagePath);
-
-        File profileImage = new File(DefaultImagePathway);
-        BufferedImage sourceImage = ImageIO.read(profileImage);
-
-
-        String extension = "";
-        int i = DefaultImagePathway.lastIndexOf('.');
-        int p = Math.max(DefaultImagePathway.lastIndexOf('/'), DefaultImagePathway.lastIndexOf('\\'));
-
-        if (i > p) {
-            extension = DefaultImagePathway.substring(i+1);
-        }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        try {
-            // retrieve image
-            File outputfile = new File("../User/"+username+"/User_profile_picture."+extension);
-            ImageIO.write(sourceImage, extension, outputfile);
-            UserDAO.updateProfileImagePath()
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        //generate thumbnail images
-        BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
-        img.createGraphics().drawImage(ImageIO.read(new File(UserfilePath+"/User_profile_picture.jpg")).getScaledInstance(100, 100, Image.SCALE_SMOOTH),0,0,null);
-        ImageIO.write(img, "jpg", new File(UserfilePath+"/User_profile_picture_thumb.jpg"));
-    }
-    else if (method.equals("METHOD_POST")){
-
-    }
-
+    String imagePaTH = user.getProfileImagePath();
 
 %>
 
 <h1><%=username%></h1>
 <div id="curret_Image">
-    <a href="/User/<%=username%>/User_profile_picture.jpg"><img src="/User/<%=username%>/User_profile_picture.jpg" width="400" height="400"></a>
+    <a href="<%=imagePaTH%>"><img src=<%=imagePaTH%> width="400" height="400"></a>
 </div>
 <p>Free options</p>
 <div id="defaultOpions">
-    <form id="select_default_options" action="" method="GET">
+    <form id="select_default_options" action="/Serve_UpdateProfilePicture" method="GET">
         <label for="option1"><a href="../default_options/default_options_1.jpg"><img src="../default_options/default_options_1.jpg" width="250" height="250"></a></label>
         <input id="option1" type="radio"  class= "default_DP_Options" name="DP_option" value="default_options/default_options_1.jpg"/>
         <label for="option2"> <a href="../default_options/default_options_2.jpg"><img src="../default_options/default_options_2.jpg" width="250" height="250"></a></label>
@@ -108,7 +68,7 @@
     </form>
     <p></p>
     <p></p>
-    <form id="upload_own_photo" action="" method="get" enctype="multipart/form-data">
+    <form id="upload_own_photo" action="/Serve_UpdateProfilePicture" method="post" enctype="multipart/form-data">
         <input type="file" name="pic" accept="image/*">
         <input type="submit">
     </form>

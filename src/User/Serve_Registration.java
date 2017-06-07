@@ -79,7 +79,7 @@ public class Serve_Registration extends HttpServlet {
                     //UserDAO.RegisterUser(DB, new User(username,salt,ITERATIONS,encodedPW));
 
 
-                    User newUser = new User(username, registrationFirstName, registrationLastName, registrationEmail, UserfilePath+"/Userdefault.jpg", UserfilePath);
+                    User newUser = new User(username, registrationFirstName, registrationLastName, registrationEmail, "/User/"+username+"/User_profile_picture.jpg", "/User/"+username);
                     UserSecurity newSecurity = new UserSecurity(username, salt, ITERATIONS, encodedPW);
                     UserDAO.registerUser(DB, newUser);
                     UserSecurityDAO.insertUser(DB, newSecurity);
