@@ -41,7 +41,6 @@ public class Serve_Authentication extends HttpServlet {
                 String password = request.getParameter("loginPassword");
 
                 if(UserDAO.getUser(DB, username) != null){
-                    System.out.println("reach line 41");
                     if(SecurityUtility.passwordAuthentication(username, password)){
                         session.setAttribute("loggingStatus", true);
                         session.setAttribute("username", username);
