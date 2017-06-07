@@ -141,6 +141,16 @@
         .thumbnail {
             border-color: transparent;
         }
+
+        #profileIssuesFieldset img {
+            padding-right: 0;
+            padding-left: 0;
+        }
+
+        #profileIssuesFieldset .btn-primary {
+            padding-right: 24px;
+            padding-left: 24px;
+        }
     </style>
 </head>
 <body>
@@ -248,6 +258,183 @@
                                             <input type="radio" name="profilePolitical" id="profileRadioConID">
                                             <label for="profileRadioExConID">Extremely Conservative</label>
                                             <input type="radio" name="profilePolitical" id="profileRadioExConID">
+                                        </div>
+                                    </fieldset>
+                                    <fieldset id="profileIssuesFieldset">
+                                        <legend><i class="fa">&#xf0a1;</i> The issues you care about:</legend>
+                                        <div class="form-group">
+                                            <div class="col-lg-3"><label class="btn btn-primary"><img
+                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-01.png"
+                                                    class="img-thumbnail img-check" alt="No Poverty"><input type="checkbox"
+                                                                                                         name="profileIssuesPoverty"
+                                                                                                         id="profileIssuesPovertyID"
+                                                                                                         value="no poverty"
+                                                                                                         class="hidden"
+                                                                                                         autocomplete="off"></label>
+                                            </div>
+                                            <div class="col-lg-3"><label class="btn btn-primary"><img
+                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-02.png"
+                                                    class="img-thumbnail img-check" alt="Zero Hunger"><input type="checkbox"
+                                                                                                        name="profileIssuesHunger"
+                                                                                                        id="profileIssuesHungerID"
+                                                                                                        value="zero hunger"
+                                                                                                        class="hidden"
+                                                                                                        autocomplete="off"></label>
+                                            </div>
+                                            <div class="col-lg-3"><label class="btn btn-primary"><img
+                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-03.png"
+                                                    class="img-thumbnail img-check" alt="Good Health and Well-Being"><input
+                                                    type="checkbox"
+                                                    name="profileIssuesHealth"
+                                                    id="profileIssuesHealthID"
+                                                    value="good health and well-being"
+                                                    class="hidden"
+                                                    autocomplete="off"></label>
+                                            </div>
+                                            <div class="col-lg-3"><label class="btn btn-primary"><img
+                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-04.png"
+                                                    class="img-thumbnail img-check" alt="Quality Education"><input
+                                                    type="checkbox"
+                                                    name="profileIssuesEducation"
+                                                    id="profileIssuesEducationID"
+                                                    value="quality education"
+                                                    class="hidden"
+                                                    autocomplete="off"></label>
+                                            </div>
+                                            <div class="col-lg-3"><label class="btn btn-primary"><img
+                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-05.png"
+                                                    class="img-thumbnail img-check" alt="Gender Equality"><input
+                                                    type="checkbox"
+                                                    name="profileIssuesGender"
+                                                    id="profileIssuesGenderID"
+                                                    value="gender equality"
+                                                    class="hidden"
+                                                    autocomplete="off"></label>
+                                            </div>
+                                            <div class="col-lg-3"><label class="btn btn-primary"><img
+                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-06.png"
+                                                    class="img-thumbnail img-check" alt="Clean Water and Sanitation"><input
+                                                    type="checkbox"
+                                                    name="profileIssuesWater"
+                                                    id="profileIssuesWaterID"
+                                                    value="clean water and sanitation"
+                                                    class="hidden"
+                                                    autocomplete="off"></label>
+                                            </div>
+                                            <div class="col-lg-3"><label class="btn btn-primary"><img
+                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-07.png"
+                                                    class="img-thumbnail img-check" alt="Affordable and Clean Energy"><input
+                                                    type="checkbox"
+                                                    name="profileIssuesEnergy"
+                                                    id="profileIssuesEnergyID"
+                                                    value="affordable and clean energy"
+                                                    class="hidden"
+                                                    autocomplete="off"></label>
+                                            </div>
+                                            <div class="col-lg-3"><label class="btn btn-primary"><img
+                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-08.png"
+                                                    class="img-thumbnail img-check"
+                                                    alt="Decent Work and Economic Growth"><input
+                                                    type="checkbox"
+                                                    name="profileIssuesEconomic"
+                                                    id="profileIssuesEconomicID"
+                                                    value="decent work and economic growth"
+                                                    class="hidden"
+                                                    autocomplete="off"></label>
+                                            </div>
+                                            <div class="col-lg-3"><label class="btn btn-primary"><img
+                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-09.png"
+                                                    class="img-thumbnail img-check" alt="Industry, Innovation and Infrastructure"><input
+                                                    type="checkbox"
+                                                    name="profileIssuesInnovation"
+                                                    id="profileIssuesInnovationID"
+                                                    value="industry, innovation and infrastructure"
+                                                    class="hidden"
+                                                    autocomplete="off"></label>
+                                            </div>
+                                            <div class="col-lg-3"><label class="btn btn-primary"><img
+                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-10.png"
+                                                    class="img-thumbnail img-check" alt="Reduced Inequality"><input
+                                                    type="checkbox"
+                                                    name="profileIssuesInequality"
+                                                    id="profileIssuesInequalityID"
+                                                    value="reduced equality"
+                                                    class="hidden"
+                                                    autocomplete="off"></label>
+                                            </div>
+                                            <div class="col-lg-3"><label class="btn btn-primary"><img
+                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-11.png"
+                                                    class="img-thumbnail img-check" alt="Sustainable Cities and Communities"><input
+                                                    type="checkbox"
+                                                    name="profileIssuesCommunity"
+                                                    id="profileIssuesCommunityID"
+                                                    value="sustainable cities and communities"
+                                                    class="hidden"
+                                                    autocomplete="off"></label>
+                                            </div>
+                                            <div class="col-lg-3"><label class="btn btn-primary"><img
+                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-12.png"
+                                                    class="img-thumbnail img-check"
+                                                    alt="Responsible Consumption and Production"><input
+                                                    type="checkbox"
+                                                    name="profileIssuesConsumption"
+                                                    id="profileIssuesConsumptionID"
+                                                    value="responsible consumption and production"
+                                                    class="hidden"
+                                                    autocomplete="off"></label>
+                                            </div>
+                                            <div class="col-lg-3"><label class="btn btn-primary"><img
+                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-13.png"
+                                                    class="img-thumbnail img-check" alt="Climate Action"><input
+                                                    type="checkbox"
+                                                    name="profileIssuesClimate"
+                                                    id="profileIssuesClimateID"
+                                                    value="climate action"
+                                                    class="hidden"
+                                                    autocomplete="off"></label>
+                                            </div>
+                                            <div class="col-lg-3"><label class="btn btn-primary"><img
+                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-14.png"
+                                                    class="img-thumbnail img-check" alt="Life below Water"><input
+                                                    type="checkbox"
+                                                    name="profileIssuesWaterLife"
+                                                    id="profileIssuesWaterLifeID"
+                                                    value="life below water"
+                                                    class="hidden"
+                                                    autocomplete="off"></label>
+                                            </div>
+                                            <div class="col-lg-3"><label class="btn btn-primary"><img
+                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-15.png"
+                                                    class="img-thumbnail img-check" alt="Life on Land"><input
+                                                    type="checkbox"
+                                                    name="profileIssuesLandLife"
+                                                    id="profileIssuesLandLife"
+                                                    value="life on land"
+                                                    class="hidden"
+                                                    autocomplete="off"></label>
+                                            </div>
+                                            <div class="col-lg-3"><label class="btn btn-primary"><img
+                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-16.png"
+                                                    class="img-thumbnail img-check"
+                                                    alt="Peace, Justice and Strong Institutions"><input
+                                                    type="checkbox"
+                                                    name="profileIssuesPeace"
+                                                    id="profileIssuesConsumptionPeaceID"
+                                                    value="peace, justice and strong institutions"
+                                                    class="hidden"
+                                                    autocomplete="off"></label>
+                                            </div>
+                                            <div class="col-lg-3"><label class="btn btn-primary"><img
+                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-17.png"
+                                                    class="img-thumbnail img-check"
+                                                    alt="Partnerships for the Goals"><input
+                                                    type="checkbox"
+                                                    name="profileIssuesPartnerships"
+                                                    id="profileIssuesConsumptionPartnershipsID"
+                                                    value="partnerships for the goals"
+                                                    class="hidden"
+                                                    autocomplete="off"></label>
+                                            </div>
                                         </div>
                                     </fieldset>
                                 </fieldset>
