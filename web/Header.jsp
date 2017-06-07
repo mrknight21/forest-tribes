@@ -44,6 +44,28 @@
         .container-fluid {
             background-color: #029f5b;
         }
+
+        .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
+            background-color: #029f5b;
+        }
+
+        .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+            background-color: white;
+        }
+
+        .navbar-default .navbar-toggle {
+            border-color: white;
+            background-color: white;
+        }
+
+        .navbar-default .navbar-toggle .icon-bar {
+            background-color: #029f5b;
+        }
+
+        #headerSearchSubmit {
+            font-family: Plump;
+            color: #029f5b;
+        }
     </style>
 </head>
 <body>
@@ -68,7 +90,8 @@
         <div class="collapse navbar-collapse" id="headerNavBar">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a href="#" id="headerUser" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    <a href="#" id="headerUser" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true"
                        aria-expanded="false"><%= username%> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Update your account</a></li>
@@ -82,7 +105,8 @@
                     <a id="headerHome" href="" role="button">Home</a>
                 </li>
                 <li>
-                    <a href="#" id="headerCollection" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    <a href="#" id="headerCollection" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true"
                        aria-expanded="false">Collection Display<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">To be UPDATED</a></li>
@@ -96,7 +120,7 @@
                 <div id="headerSearch" class="form-group">
                     <input type="text" class="form-control" placeholder="Search">
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button id="headerSearchSubmit" type="submit" class="btn btn-default">Submit</button>
             </form>
         </div>
     </div>
