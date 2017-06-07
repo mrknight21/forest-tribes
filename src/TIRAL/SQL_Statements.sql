@@ -71,3 +71,38 @@ DELETE * FROM inFoJaxs_User;
 
 ALTER TABLE table_name
 ADD column_name datatype;
+
+INSERT INTO inFoJaxs_Articles (username, title, content) VALUES
+('will', 'Big Data', 'My big data brings all the users to the yard!
+Dam right. It''s better than yours. Dam right. It''s better than yours.
+You could have some, but I''d have to charge.
+A freemium plan.
+Wake up in the morning feeling like PHP.
+Poppin code in the box, like a wizard.
+When we revolt we do it right social data getting slizzard.
+Now n-n-n-n-now I''m feeling so fly like a GGG thing. Like a GGG thing, like a GGG thing.
+Yeah oh yeah make you put your hands up make you put your hands up pu-put your put your hands up.
+Now make dat web semantic like a 3.0!
+Break some, shake some, work some, tweak some.
+Break some, shake some, work some, tweak some.
+Break it shake it work it tweak it.
+Break it shake it work it tweak it.
+Bounce bounce bounce bounce bounce bounce bounce!
+Now drop it drop it to the floor.
+Spin it like some stop and go.
+Drop it drop it to the floor.
+Spin it like some stop and go.
+Now let me see you make dat web semantic like a 3.0!');
+
+INSERT INTO inFoJaxs_Comments (username, content, parent_ID) VALUES
+('will', 'Hello world', 1);
+
+INSERT INTO inFoJaxs_Replies (username, content, parent_ID) VALUES
+('will', 'Hello universe', 1);
+
+INSERT INTO inFoJaxs_ArticleLikes (ID, likes) VALUES
+(1, 100);
+INSERT INTO inFoJaxs_CommentLikes (ID, likes) VALUES
+(1, 10);
+INSERT INTO inFoJaxs_ReplyLikes (ID, likes) VALUES
+(1, 1);

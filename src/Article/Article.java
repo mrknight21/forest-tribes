@@ -11,7 +11,7 @@ import java.util.List;
  * Article and inner classes Comment and Reply extend abstract Text class and will be used as Java beans
  *
  */
-public class Article extends Text implements Serializable{
+public class Article extends Text {
     private String title;
     private List<Comment> comments;
     private int commentCount;
@@ -35,7 +35,7 @@ public class Article extends Text implements Serializable{
 
         int count = 0;
         count += comments.size();
-        for (Comment comment: comments) count += comment.getReplies().size();
+        for (Comment comment: comments) count += comment.getReplyCount();
         this.commentCount = count;
     }
 

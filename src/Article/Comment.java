@@ -9,7 +9,9 @@ import java.util.List;
  */
 public class Comment extends Text {
     protected List<Reply> replies;
+    private int replyCount;
 
+    public Comment() {}
 
     public Comment(String author, String text) {
         super(author, text);
@@ -22,13 +24,14 @@ public class Comment extends Text {
     public Comment(int id, String author, String text, List<Reply> replies, String dateCreated, String dateLastEdited, int likes) {
         super(id, author, text, dateCreated, dateLastEdited, likes);
         this.replies = replies;
+        this.replyCount = replies.size();
     }
 
     public List<Reply> getReplies() {
         return replies;
     }
 
-    public void setReplies(List<Reply> replies) {
-        this.replies = replies;
+    public int getReplyCount() {
+        return replyCount;
     }
 }
