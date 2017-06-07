@@ -66,6 +66,15 @@
             font-family: Plump;
             color: #029f5b;
         }
+
+        #headerThumbnail {
+            margin: 3px;
+            height: 44px;
+        }
+
+        #headerSearchIcon {
+            color: #029f5b;
+        }
     </style>
 </head>
 <body>
@@ -92,7 +101,7 @@
                 <li class="dropdown">
                     <a href="#" id="headerUser" class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true"
-                       aria-expanded="false"><%= username%> <span class="caret"></span></a>
+                       aria-expanded="false"><i class="glyphicon glyphicon-user"></i> <%= username%><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Update your account</a></li>
                         <li><a href="#">Change profile picture</a></li>
@@ -102,12 +111,9 @@
                     </ul>
                 </li>
                 <li>
-                    <a id="headerHome" href="" role="button">Home</a>
-                </li>
-                <li>
                     <a href="#" id="headerCollection" class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true"
-                       aria-expanded="false">Collection Display<span class="caret"></span></a>
+                       aria-expanded="false"><i class="glyphicon glyphicon-picture"></i> Collection Display<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">To be UPDATED</a></li>
                         <li><a href="#">To be UPDATED</a></li>
@@ -115,12 +121,15 @@
                         <li><a href="#">To be UPDATED</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a id="headerHome" href="" role="button"><i class="glyphicon glyphicon-tree-conifer"></i> Home</a>
+                </li>
             </ul>
             <form class="navbar-form navbar-right">
                 <div id="headerSearch" class="form-group">
                     <input type="text" class="form-control" placeholder="Search">
                 </div>
-                <button id="headerSearchSubmit" type="submit" class="btn btn-default">Submit</button>
+                <button id="headerSearchSubmit" type="submit" class="btn btn-default"><i id="headerSearchIcon" class="glyphicon glyphicon-search"></i> Search</button>
             </form>
         </div>
     </div>

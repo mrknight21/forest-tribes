@@ -35,6 +35,9 @@
             integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
             crossorigin="anonymous"></script>
 
+    <%--Icons CSS--%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <%--Function to enable JQuery UI elements--%>
     <script>
         $(function () {
@@ -158,12 +161,12 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 style="text-align: center">Forest Tribes</h1>
+                            <h1 style="text-align: center"><i class="fa">&#xf1bb;</i> Forest Tribes</h1>
                             <h4 id="subtitle" style="text-align: center">The Beauty of Interconnectedness</h4>
                             <form id="profileFormID" action="/Serve_Profile" method="post" role="form"
                                   style="display: block">
                                 <fieldset class="span4">
-                                    <legend>Profile Picture</legend>
+                                    <legend><i class="fa">&#xf083;</i> Profile Picture</legend>
                                     <div id="profileImageDiv" class="col-lg-10 col-lg-offset-1">
                                         <div class="thumbnail">
                                             <img id="profileImage" src="/User/<%= username%>/User_profile_picture.jpg"
@@ -175,7 +178,7 @@
                                 </fieldset>
                                 <br>
                                 <fieldset class="span4">
-                                    <legend>Membership Information</legend>
+                                    <legend><i class="fa">&#xf2ba;</i> Membership Information</legend>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                         <input type="text" name="profileUsername" id="profileUsernameID" tabindex="1"
@@ -192,9 +195,9 @@
                                 </fieldset>
                                 <br>
                                 <fieldset>
-                                    <legend>Personal Information</legend>
+                                    <legend><i class="fa">&#xf2b9;</i> Personal Information</legend>
                                     <fieldset>
-                                        <legend>Gender:</legend>
+                                        <legend><i class="fa">&#xf224;</i> Gender:</legend>
                                         <div class="form-group">
                                             <label for="profileRadioMaleID">Male</label>
                                             <input type="radio" name="profileGender" id="profileRadioMaleID">
@@ -205,7 +208,7 @@
                                         </div>
                                     </fieldset>
                                     <fieldset>
-                                        <legend>Occupation:</legend>
+                                        <legend><i class="fa">&#xf0b1;</i> Occupation:</legend>
                                         <div class="input-group">
                                         <span class="input-group-addon"><i
                                                 class="glyphicon glyphicon-pencil"></i></span>
@@ -214,7 +217,7 @@
                                         </div>
                                     </fieldset>
                                     <fieldset>
-                                        <legend>Education:</legend>
+                                        <legend><i class="fa">&#xf19d;</i> Education:</legend>
                                         <div class="form-group">
                                             <label for="profileRadioPrimaryID">Primary</label>
                                             <input type="radio" name="profileEducation" id="profileRadioPrimaryID">
@@ -229,7 +232,7 @@
                                         </div>
                                     </fieldset>
                                     <fieldset>
-                                        <legend>Political Orientation:</legend>
+                                        <legend><i class="fa">&#xf19c;</i> Political Orientation:</legend>
                                         <div class="form-group">
                                             <label for="profileRadioExLibID">Extremely Liberal</label>
                                             <input type="radio" name="profilePolitical" id="profileRadioExLibID">

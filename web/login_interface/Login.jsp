@@ -29,6 +29,9 @@
         integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
         crossorigin="anonymous"></script>
 
+<%--Icons CSS--%>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
     .full {
         background: url('/login_interface/lake-baikal-9.jpg') no-repeat center center fixed;
@@ -124,10 +127,10 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-6">
-                            <a href="#" class="active" id="loginFormLink">Login</a>
+                            <a href="#" class="active" id="loginFormLink"><i class="fa">&#xf015;</i> Login</a>
                         </div>
                         <div class="col-xs-6">
-                            <a href="#" id="registrationFormLink">Register</a>
+                            <a href="#" id="registrationFormLink"><i class="fa">&#xf044;</i> Register</a>
                         </div>
                     </div>
                     <hr>
@@ -135,7 +138,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 style="text-align: center">Forest Tribes</h1>
+                            <h1 style="text-align: center"><i class="fa">&#xf1bb;</i> Forest Tribes</h1>
                             <h4 style="text-align: center">The Beauty of Interconnectedness</h4>
                             <form id="loginFormID" action="/Serve_Authentication" method="post" role="form" style="display: block;">
                                 <div class="input-group">
