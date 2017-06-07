@@ -28,7 +28,7 @@ public class ArticleDAO {
     }
 
     // Method to return all Articles by Author as an ArrayList from the database.
-    public static List<Article> getArticlesByUser(String username, AbstractDB db) {
+    public static List<Article> getArticlesByUser(AbstractDB db, String username) {
 
         List<Article> articles = new ArrayList<>();
 
@@ -65,28 +65,28 @@ public class ArticleDAO {
     }
 
     // Method to insert a parsed-in Article, Comment & Reply into the database.
-    public static boolean createNewText(AbstractDB db, Article newArticle) {
-        return createNewText(db, newArticle, -1);
-    }
-
     public static boolean createNewText(AbstractDB db, Text newText, int parentId) {
+        String statement = "INSERT INTO $1 ($2, username, content) VALUE (?, ?, ?)";
+        if (parentId == -1) {
+            statement.replaceFirst("$1", "inFoJaxs_Articles");
+            statement.replaceFirst("$2", "title");
+        } else {
+            if (newText instanceof Comment)
+                statement.replaceFirst("$1","inFoJaxs_Comments");
+            else if (newText instanceof Reply)
+                statement.replaceFirst("$1","inFoJaxs_Replies");
+            statement.replaceFirst("$2","parent_ID");
+        }
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO ? (?, username, content) VALUE (?, ?, ?)")) {
-
+            try (PreparedStatement p = c.prepareStatement(statement)) {
                 if (parentId == -1) {
-                    p.setString(1,"inFoJaxs_Articles");
-                    p.setString(2, "title");
-                    p.setString(3, ((Article) newText).getTitle());
+                    p.setString(1, ((Article) newText).getTitle());
                 } else {
-                    if (newText instanceof Comment) p.setString(1,"inFoJaxs_Comments");
-                    else if (newText instanceof Reply) p.setString(1,"inFoJaxs_Replies");
-                    p.setString(2,"parent_ID");
-                    p.setInt(3,parentId);
+                    p.setInt(1, parentId);
                 }
-
-                p.setString(4, newText.getAuthor());
-                p.setString(5, newText.getText());
+                p.setString(2, newText.getAuthor());
+                p.setString(3, newText.getText());
                 p.executeUpdate();
                 return true;
             }
@@ -98,39 +98,22 @@ public class ArticleDAO {
 
     // Methods to update the parsed-in Article, Comment, Reply in the database.
     public static boolean updateText(AbstractDB db, Text text) {
-        try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE ? SET ? content = ? WHERE ID = ?")) {
-                if (text instanceof  Article) {
-                    p.setString(1,"inFoJaxs_Articles");
-                    p.setString(2,"title = " + ((Article) text).getTitle() + ",");
-                } else if (text instanceof Comment)
-                    p.setString(1,"inFoJaxs_Comments");
-                else if (text instanceof Reply)
-                    p.setString(1,"inFoJaxs_Replies");
-                p.setString(3, text.getText());
-                p.setInt(4, text.getId());
-                p.executeUpdate();
-                return true;
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return false;
+        String statement = "UPDATE $1 SET $2content = ? WHERE ID = ?";
+        if (text instanceof  Article) {
+            statement.replaceFirst("$1", "inFoJaxs_Articles");
+            statement.replaceFirst("$2", "title = " + ((Article) text).getTitle() + ", ");
+        } else {
+            statement.replaceFirst("$2","");
+            if (text instanceof Comment)
+                statement.replaceFirst("$1","inFoJaxs_Comments");
+            else if (text instanceof Reply)
+                statement.replaceFirst("$1","inFoJaxs_Replies");
         }
-    }
 
-    // Method to delete the Article, Comment, Reply in the database.
-    public static boolean deleteText(AbstractDB db, String textClassName, int textId) {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("DELETE FROM ? WHERE ID = ?")) {
-                switch (textClassName){
-                    case "Article":
-                        p.setString(1,"inFoJaxs_Articles");
-                    case "Comment":
-                        p.setString(1,"inFoJaxs_Comments");
-                    case "Reply":
-                        p.setString(1,"inFoJaxs_Replies");
-                }
-                p.setInt(2, textId);
+            try (PreparedStatement p = c.prepareStatement(statement)) {
+                p.setString(1, text.getText());
+                p.setInt(2, text.getId());
                 p.executeUpdate();
                 return true;
             }
@@ -210,7 +193,10 @@ public class ArticleDAO {
 
 
     private static int getTextLikes( Connection c, int textId, String textClassName) throws SQLException {
-        try (PreparedStatement p = c.prepareStatement("SELECT likes FROM inFoJaxs_"+ textClassName+"Likes WHERE ID = ?")) {
+        String statement = "SELECT likes FROM $1 WHERE ID = ?";
+        statement.replaceFirst("$1", likesTableSelector(textClassName));
+
+        try (PreparedStatement p = c.prepareStatement(statement)) {
             p.setInt(1, textId);
             try (ResultSet r = p.executeQuery()) {
                 while (r.next()) {
@@ -221,10 +207,96 @@ public class ArticleDAO {
         }
     }
 
-    public static boolean updateTextLikes(AbstractDB db, int articleId, String textClassName) {
+    // Methods to update or delete the Article, Comment, Reply in the database.
+    private static boolean deleteLikes(AbstractDB db, int textId, String textClassName) {
+        String statement = "DELETE FROM $1 WHERE ID = ?";
+        return executeLikesUpdate(db, textId, textClassName, statement);
+    }
+
+    public static boolean updateLikes(AbstractDB db, int textId, String textClassName) {
+        String statement = "UPDATE $1 SET likes = likes + 1 WHERE ID = ?";
+        return executeLikesUpdate(db, textId, textClassName, statement);
+    }
+
+    private static boolean executeLikesUpdate(AbstractDB db, int textId, String textClassName, String statement) {
+        statement.replaceFirst("$1", likesTableSelector(textClassName));
+
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_" + textClassName + "Likes SET likes = likes + 1 WHERE ID = ?")) {
-                p.setInt(1, articleId);
+            try (PreparedStatement p = c.prepareStatement(statement)) {
+                p.setInt(1, textId);
+                p.executeUpdate();
+                return true;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private static String likesTableSelector(String textClassName) {
+        switch (textClassName){
+            case "Article":
+                return "inFoJaxs_ArticleLikes";
+            case "Comment":
+                return "inFoJaxs_CommentLikes";
+            case "Reply":
+                return "inFoJaxs_ReplyLikes";
+        }
+        return null;
+    }
+
+    // Method to delete the Article, Comment, Reply in the database.
+    public static boolean deleteText(AbstractDB db, int textId, String textClassName) {
+
+        String statement = "DELETE FROM $1 WHERE $2 = ?";
+
+        switch (textClassName){
+            case "Article":
+                statement.replaceFirst("$1", "inFoJaxs_Articles");
+                statement.replaceFirst("$2", "ID");
+                deleteText(db, textId, "ArticleChildren");
+                break;
+
+            case "ArticleChildren":
+                statement.replaceFirst("$1","inFoJaxs_Comments");
+                statement.replaceFirst("$2","article_ID");
+                try {
+                    for (Comment comment : getArticleComments(textId, db.connection())) {
+                        deleteText(db, comment.getId(), "Comment");
+                    }
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            case "Comment":
+                statement.replaceFirst("$1","inFoJaxs_Comments");
+                statement.replaceFirst("$2","ID");
+                deleteText(db, textId, "CommentChildren");
+                break;
+
+            case "CommentChildren":
+                statement.replaceFirst("$1","inFoJaxs_Replies");
+                statement.replaceFirst("$2","comment_ID");
+                try {
+                    for (Reply reply : getCommentReplies(textId, db.connection())) {
+                        deleteText(db, reply.getId(), "Reply");
+                    }
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            case "Reply":
+                statement.replaceFirst("$1","inFoJaxs_Replies");
+                statement.replaceFirst("$2","ID");
+                break;
+        }
+
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement(statement)) {
+                deleteLikes(db, textId, textClassName);
+                p.setInt(1, textId);
                 p.executeUpdate();
                 return true;
             }
