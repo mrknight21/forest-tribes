@@ -85,10 +85,6 @@
             src: url('Fonts/Amperzand.ttf');
         }
 
-        .radio-inline {
-            margin-top: 0px;
-        }
-
         legend {
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
             font-size: 14px;
@@ -168,12 +164,23 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-login">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="#" class="active" id="profileUpdateLink"><i class="fa">&#xf044;</i> Login</a>
+                        </div>
+                        <div class="col-xs-6">
+                            <a href="#" id="profileDeleteLink"> Register</a>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 style="text-align: center"><i class="fa">&#xf1bb;</i> Forest Tribes</h1>
                             <h4 id="subtitle" style="text-align: center">The Beauty of Interconnectedness</h4>
-                            <form id="profileFormID" action="/Serve_Profile" method="post" role="form"
+                            <form id="profileUpdateFormID" action="/Serve_Profile" method="post" role="form"
                                   style="display: block">
                                 <fieldset class="span4">
                                     <legend><i class="fa">&#xf083;</i> Profile Picture</legend>
@@ -191,7 +198,8 @@
                                     <legend><i class="fa">&#xf2ba;</i> Membership Information</legend>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input type="text" name="profileUsername" id="profileUsernameID" tabindex="1"
+                                        <input type="text" name="profileUpdateUsername" id="profileUpdateUsernameID"
+                                               tabindex="1"
                                                value="<%= username%>" class="form-control" readonly>
                                     </div>
                                     <div class="input-group">
@@ -265,25 +273,28 @@
                                         <div class="form-group">
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
                                                     src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-01.png"
-                                                    class="img-thumbnail img-check" alt="No Poverty"><input type="checkbox"
-                                                                                                         name="profileIssuesPoverty"
-                                                                                                         id="profileIssuesPovertyID"
-                                                                                                         value="no poverty"
-                                                                                                         class="hidden"
-                                                                                                         autocomplete="off"></label>
+                                                    class="img-thumbnail img-check" alt="No Poverty"><input
+                                                    type="checkbox"
+                                                    name="profileIssuesPoverty"
+                                                    id="profileIssuesPovertyID"
+                                                    value="no poverty"
+                                                    class="hidden"
+                                                    autocomplete="off"></label>
                                             </div>
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
                                                     src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-02.png"
-                                                    class="img-thumbnail img-check" alt="Zero Hunger"><input type="checkbox"
-                                                                                                        name="profileIssuesHunger"
-                                                                                                        id="profileIssuesHungerID"
-                                                                                                        value="zero hunger"
-                                                                                                        class="hidden"
-                                                                                                        autocomplete="off"></label>
+                                                    class="img-thumbnail img-check" alt="Zero Hunger"><input
+                                                    type="checkbox"
+                                                    name="profileIssuesHunger"
+                                                    id="profileIssuesHungerID"
+                                                    value="zero hunger"
+                                                    class="hidden"
+                                                    autocomplete="off"></label>
                                             </div>
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
                                                     src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-03.png"
-                                                    class="img-thumbnail img-check" alt="Good Health and Well-Being"><input
+                                                    class="img-thumbnail img-check"
+                                                    alt="Good Health and Well-Being"><input
                                                     type="checkbox"
                                                     name="profileIssuesHealth"
                                                     id="profileIssuesHealthID"
@@ -313,7 +324,8 @@
                                             </div>
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
                                                     src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-06.png"
-                                                    class="img-thumbnail img-check" alt="Clean Water and Sanitation"><input
+                                                    class="img-thumbnail img-check"
+                                                    alt="Clean Water and Sanitation"><input
                                                     type="checkbox"
                                                     name="profileIssuesWater"
                                                     id="profileIssuesWaterID"
@@ -323,7 +335,8 @@
                                             </div>
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
                                                     src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-07.png"
-                                                    class="img-thumbnail img-check" alt="Affordable and Clean Energy"><input
+                                                    class="img-thumbnail img-check"
+                                                    alt="Affordable and Clean Energy"><input
                                                     type="checkbox"
                                                     name="profileIssuesEnergy"
                                                     id="profileIssuesEnergyID"
@@ -344,7 +357,8 @@
                                             </div>
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
                                                     src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-09.png"
-                                                    class="img-thumbnail img-check" alt="Industry, Innovation and Infrastructure"><input
+                                                    class="img-thumbnail img-check"
+                                                    alt="Industry, Innovation and Infrastructure"><input
                                                     type="checkbox"
                                                     name="profileIssuesInnovation"
                                                     id="profileIssuesInnovationID"
@@ -364,7 +378,8 @@
                                             </div>
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
                                                     src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-11.png"
-                                                    class="img-thumbnail img-check" alt="Sustainable Cities and Communities"><input
+                                                    class="img-thumbnail img-check"
+                                                    alt="Sustainable Cities and Communities"><input
                                                     type="checkbox"
                                                     name="profileIssuesCommunity"
                                                     id="profileIssuesCommunityID"
@@ -441,9 +456,37 @@
                                 <br>
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <input type="submit" name="profileSubmit" id="profileSubmitID"
+                                        <input type="submit" name="profileUpdateSubmit" id="profileUpdateSubmitID"
                                                class="form-control btn btn-register"
                                                value="Update your Profile">
+                                    </div>
+                                </div>
+                            </form>
+                            <form id="profileDeleteFormID" action="/Serve_Authentication" method="post" role="form"
+                                  style="display: none;">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input type="text" name="profileDeleteUsername" id="profileDeleteUsernameID"
+                                           tabindex="1"
+                                           class="form-control" placeholder="Username" value="<%= username%>" readonly>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <input type="password" name="profileDeletePassword" id="profileDeletePasswordID"
+                                           tabindex="2"
+                                           class="form-control" placeholder="Password">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <input type="password" name="profileDeleteConfirmPassword"
+                                           id="profileDeleteConfirmPasswordID" tabindex="3"
+                                           class="form-control" placeholder="Confirm Password">
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <input type="submit" name="profileDeleteSubmit" id="profileDeleteSubmitID"
+                                               class="form-control btn btn-register"
+                                               value="Delete your account">
                                     </div>
                                 </div>
                             </form>
@@ -455,22 +498,22 @@
     </div>
 </div>
 <script>
-    function toggleEnabler(element) {
-        element.on('click', function () {
-            var sel = $(this).data('title');
-            var tog = $(this).data('toggle');
-            $('#' + tog).prop('value', sel);
-
-            $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
-            $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
+    $(function () {
+        $('#profileUpdateLink').click(function (e) {
+            $("#profileUpdateFormID").delay(100).fadeIn(100);
+            $("#profileDeleteFormID").fadeOut(100);
+            $('#profileDeleteLink').removeClass('active');
+            $(this).addClass('active');
+            e.preventDefault();
         });
-    }
-
-    var gender = $("#profileGenderButtons a");
-    toggleEnabler(gender);
-
-    var education = $("#profileEducationButtons a");
-    toggleEnabler(education);
+        $('#profileDeleteLink').click(function (e) {
+            $("#profileDeleteFormID").delay(100).fadeIn(100);
+            $("#profileUpdateFormID").fadeOut(100);
+            $('#profileUpdateLink').removeClass('active');
+            $(this).addClass('active');
+            e.preventDefault();
+        });
+    });
 </script>
 </body>
 </html>
@@ -529,3 +572,20 @@
 <%--</div>--%>
 <%--<input type="hidden" name="profilePolitical" id="profilePoliticalID">--%>
 <%--</div>--%>
+
+<%--function toggleEnabler(element) {--%>
+<%--element.on('click', function () {--%>
+<%--var sel = $(this).data('title');--%>
+<%--var tog = $(this).data('toggle');--%>
+<%--$('#' + tog).prop('value', sel);--%>
+
+<%--$('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');--%>
+<%--$('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');--%>
+<%--});--%>
+<%--}--%>
+
+<%--var gender = $("#profileGenderButtons a");--%>
+<%--toggleEnabler(gender);--%>
+
+<%--var education = $("#profileEducationButtons a");--%>
+<%--toggleEnabler(education);--%>
