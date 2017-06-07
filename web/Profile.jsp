@@ -477,7 +477,7 @@
                                     </div>
                                 </div>
                             </form>
-                            <form id="profileDeleteFormID" action="/Serve_Authentication" method="post" role="form"
+                            <form id="profileDeleteFormID" action="/Serve_DeleteUser" method="GET" role="form"
                                   style="display: none;">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>

@@ -48,80 +48,78 @@
 
         /* Smartphones (landscape) ----------- */
         @media only screen
-        and (min-width : 321px) {
+        and (min-width: 321px) {
             .panel {
-                margin-top: 5%;
                 margin-right: 0;
-                margin-left: 10%;
-                width: 80%;
+                margin-left: 17%;
+                width: 70%;
             }
+
             .container {
                 padding: 0;
+            }
+
+            #loginHidePanelLink {
+                padding-left: 2%;
             }
         }
 
         /* Smartphones (portrait) ----------- */
         @media only screen
-        and (max-width : 320px) {
+        and (max-width: 320px) {
             .panel {
                 margin-top: 10%;
             }
+
+            .col-lg-4 {
+                padding-right: 2%;
+            }
+
+            #loginHidePanelLink {
+                padding-left: 2%;
+            }
         }
 
-        /* iPads (portrait and landscape) ----------- */
         @media only screen
-        and (min-device-width : 768px)
-        and (max-device-width : 1024px) {
-
+        and (min-device-width: 321px)
+        and (max-device-width: 420px)
+        and (orientation: portrait) {
+            .panel {
+                margin-top: 30%;
+                margin-left: 19%;
+            }
         }
 
         /* iPads (landscape) ----------- */
         @media only screen
-        and (min-device-width : 768px)
-        and (max-device-width : 1024px)
-        and (orientation : landscape) {
-
+        and (min-device-width: 768px)
+        and (max-device-width: 1024px)
+        and (orientation: landscape) {
+            .panel {
+                margin-top: 12%;
+            }
         }
 
         /* iPads (portrait) ----------- */
         @media only screen
-        and (min-device-width : 768px)
-        and (max-device-width : 1024px)
-        and (orientation : portrait) {
-
+        and (min-device-width: 768px)
+        and (max-device-width: 1024px)
+        and (orientation: portrait) {
+            .panel {
+                margin-top: 30%;
+            }
         }
 
         /* Desktops and laptops ----------- */
         @media only screen
-        and (min-width : 1224px) {
+        and (min-width: 1224px) {
 
         }
 
         /* Large screens ----------- */
         @media only screen
-        and (min-width : 1824px) {
+        and (min-width: 1824px) {
 
-        }
-
-        /* iPhone 4 - 5s ----------- */
-        @media
-        only screen and (-webkit-min-device-pixel-ratio : 1.5),
-        only screen and (min-device-pixel-ratio : 1.5) {
-
-        }
-
-        /* iPhone 6 ----------- */
-        @media
-        only screen and (max-device-width: 667px),
-        only screen and (-webkit-device-pixel-ratio: 2) {
-
-        }
-
-        /* iPhone 6+ ----------- */
-        @media
-        only screen and (min-device-width : 414px),
-        only screen and (-webkit-device-pixel-ratio: 3) {
-            
         }
 
         h1 {
@@ -230,7 +228,7 @@
         <a href="#" class="active btn-primary" id="loginHidePanelLink"><i class="fa">&#xf03e;</i> Hide login panel</a>
     </div>
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col-lg-4 col-lg-offset-4">
             <div id="loginMainPanel" class="panel panel-login">
                 <div class="panel-heading">
                     <div class="row">

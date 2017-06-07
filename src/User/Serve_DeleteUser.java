@@ -34,7 +34,7 @@ public class Serve_DeleteUser extends HttpServlet {
 
                 HttpSession session = request.getSession();
                 String username = (String) session.getAttribute("username");
-                String password = request.getParameter("password");
+                String password = request.getParameter("profileDeletePassword");
                 if(UserDAO.deleteUser(DB, username, password)){
 
                     int random = (int)(Math.random()*9+1);
