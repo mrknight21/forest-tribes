@@ -22,10 +22,10 @@
 
 
 <%
-
     if(!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/login_interface/Login.jsp");
     HttpSession session1 = request.getSession();
     String username = (String) session1.getAttribute("username");
+
     MySQL DB = new MySQL();
     User user = UserDAO.getUser(DB, username);
     String imagePaTH = user.getProfileImagePath();
