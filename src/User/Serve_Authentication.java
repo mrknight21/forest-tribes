@@ -22,6 +22,9 @@ public class Serve_Authentication extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+
+
+
     }
 
     @Override
@@ -38,7 +41,6 @@ public class Serve_Authentication extends HttpServlet {
                 String password = request.getParameter("loginPassword");
 
                 if(UserDAO.getUser(DB, username) != null){
-                    System.out.println("reach line 41");
                     if(SecurityUtility.passwordAuthentication(username, password)){
                         session.setAttribute("loggingStatus", true);
                         session.setAttribute("username", username);

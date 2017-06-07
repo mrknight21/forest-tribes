@@ -1,8 +1,4 @@
-<%@ page import="Utility.SecurityUtility" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <head>
     <title>Header</title>
 
@@ -78,11 +74,6 @@
     </style>
 </head>
 <body>
-<% if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/login_interface/Login.jsp");
-
-    HttpSession httpSession = request.getSession();
-    String username = (String) httpSession.getAttribute("username");
-%>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -135,4 +126,4 @@
     </div>
 </nav>
 </body>
-</html>
+

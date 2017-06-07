@@ -7,7 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="Utility.SecurityUtility" %>
-<%@ page import="Utility.MySQL" %>
 <html>
 <head>
     <title>Title</title>
@@ -17,8 +16,10 @@
     if(!SecurityUtility.loggingStatusChecker(request)){
         response.sendRedirect("/login_interface/Login.jsp");
     }
+    String username = (String)session.getAttribute("username");
 %>
-<form action="/Serve_Changepassword" method="post">
+<%@include file="../Header.jsp"%>
+<form action="../Serve_Changepassword" method="post">
     <legend>Change your password</legend>
     <p>${passwordStatus}</p>
     <label for="loginUsernameID">Current Passwod: </label>

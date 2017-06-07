@@ -21,10 +21,10 @@ public class ArticlesServlet extends HttpServlet {
                 request.setAttribute("article", ArticleDAO.getArticleById(db, Integer.parseInt(request.getParameter("articleId"))));
                 break;
             case "userArticles":
-                request.setAttribute("author-articles", ArticleDAO.getArticlesByUser(db, request.getParameter("author")));
+                request.setAttribute("articles", ArticleDAO.getArticlesByUser(db, request.getParameter("author")));
                 break;
             case "allArticles":
-                request.setAttribute("all-articles", ArticleDAO.getAllArticles(db));
+                request.setAttribute("articles", ArticleDAO.getAllArticles(db));
         }
 
         dispatchToJSP(request, response);

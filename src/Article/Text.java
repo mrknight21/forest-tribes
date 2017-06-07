@@ -8,13 +8,13 @@ import java.io.Serializable;
 /**
  * Created by wasia on 3/06/2017.
  */
-public abstract class Text {
+public abstract class Text implements Serializable {
     int id;
     String author;
     String dateCreated;
     String dateLastEdited;
     int likes;
-    protected String text;
+    String text;
 //    protected File image;
 //    protected String filePath;
 

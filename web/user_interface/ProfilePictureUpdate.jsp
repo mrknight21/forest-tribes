@@ -32,6 +32,8 @@
 
 %>
 
+<%@include file="../Header.jsp"%>
+
 <h1><%=username%></h1>
 <div id="curret_Image">
     <a href="<%=imagePaTH%>"><img src=<%=imagePaTH%> width="400" height="400"></a>

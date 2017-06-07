@@ -58,8 +58,11 @@ ADD UserFolderPath VARCHAR (400) NULL ;
 Update inFoJaxs_User set ProfileImagePath = NULL
 
 
-
-
+DROP TABLE IF EXISTS inFoJaxs_ReplyLikes;
+DROP TABLE IF EXISTS inFoJaxs_CommentLikes;
+DROP TABLE IF EXISTS inFoJaxs_ArticleLikes;
+DROP TABLE IF EXISTS inFoJaxs_Replies;
+DROP TABLE IF EXISTS inFoJaxs_Comments;
 DROP TABLE IF EXISTS inFoJaxs_Articles;
 CREATE TABLE IF NOT EXISTS inFoJaxs_Articles (
   ID INT AUTO_INCREMENT,
@@ -72,7 +75,6 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_Articles (
   FOREIGN KEY (username) REFERENCES inFoJaxs_User(username)
 );
 
-DROP TABLE IF EXISTS inFoJaxs_Comments;
 CREATE TABLE IF NOT EXISTS inFoJaxs_Comments (
   ID INT AUTO_INCREMENT,
   parent_ID INT NOT NULL,
@@ -82,10 +84,9 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_Comments (
   lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),
   FOREIGN KEY (username) REFERENCES inFoJaxs_User(username),
-  FOREIGN KEY (article_ID) REFERENCES inFoJaxs_Articles(ID)
+  FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Articles(ID)
 );
 
-DROP TABLE IF EXISTS inFoJaxs_Replies;
 CREATE TABLE IF NOT EXISTS inFoJaxs_Replies (
   ID INT AUTO_INCREMENT,
   parent_ID INT NOT NULL ,
@@ -95,10 +96,9 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_Replies (
   lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),
   FOREIGN KEY (username) REFERENCES inFoJaxs_User(username),
-  FOREIGN KEY (comment_ID) REFERENCES inFoJaxs_Comments(ID)
+  FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Comments(ID)
 );
 
-DROP TABLE IF EXISTS inFoJaxs_ArticleLikes;
 CREATE TABLE IF NOT EXISTS inFoJaxs_ArticleLikes (
   ID INT,
   likes INT DEFAULT 0,
@@ -106,7 +106,6 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_ArticleLikes (
   FOREIGN KEY (ID) REFERENCES inFoJaxs_Articles(ID)
 );
 
-DROP TABLE IF EXISTS inFoJaxs_CommentLikes;
 CREATE TABLE IF NOT EXISTS inFoJaxs_CommentLikes (
   ID INT,
   likes INT DEFAULT 0,
@@ -114,7 +113,6 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_CommentLikes (
   FOREIGN KEY (ID) REFERENCES inFoJaxs_Comments(ID)
 );
 
-DROP TABLE IF EXISTS inFoJaxs_ReplyLikes;
 CREATE TABLE IF NOT EXISTS inFoJaxs_ReplyLikes (
   ID INT,
   likes INT DEFAULT 0,
