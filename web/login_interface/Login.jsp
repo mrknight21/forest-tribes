@@ -3,117 +3,222 @@
 <html lang="en" class="full">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Login</title>
+<head>
+    <title>Login</title>
 
-<%--JQuery JavaScript--%>
-<script
-        src="https://code.jquery.com/jquery-3.2.1.js"
-        integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-        crossorigin="anonymous"></script>
+    <%--JQuery JavaScript--%>
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.js"
+            integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+            crossorigin="anonymous"></script>
 
-<%--Bootstrap CSS--%>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <%--Bootstrap CSS--%>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-<%--Bootstrap JavaScript--%>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
+    <%--Bootstrap JavaScript--%>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
 
-<%--JQuery UI CSS--%>
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <%--JQuery UI CSS--%>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<%--JQuery UI JavaScript--%>
-<script
-        src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
-        integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
-        crossorigin="anonymous"></script>
+    <%--JQuery UI JavaScript--%>
+    <script
+            src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+            integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+            crossorigin="anonymous"></script>
 
-<%--Icons CSS--%>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <%--Icons CSS--%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<style>
-    .full {
-        background: url('/login_interface/lake-baikal-9.jpg') no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        background-size: cover;
-        -o-background-size: cover;
-    }
+    <style>
+        .full {
+            background: url('/login_interface/lake-baikal-9.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            -o-background-size: cover;
+        }
 
-    body {
-        background-color: transparent;
-    }
+        body {
+            background-color: transparent;
+        }
 
-    .panel {
-        margin-top: 50%;
-    }
+        /* Smartphones (landscape) ----------- */
+        @media only screen
+        and (min-width : 321px) {
+            .panel {
+                margin-top: 5%;
+                margin-right: 0;
+                margin-left: 10%;
+                width: 80%;
+            }
+            .container {
+                padding: 0;
+            }
+        }
 
-    h1 {
-        margin-top: 0px;
-        margin-bottom: 10px;
-        font-family: 'Plump';
-        color: #029f5b;
-    }
+        /* Smartphones (portrait) ----------- */
+        @media only screen
+        and (max-width : 320px) {
+            .panel {
+                margin-top: 10%;
+            }
+        }
 
-    h4 {
-        margin-bottom: 10px;
-        font-family: 'Amperzand';
-    }
+        /* iPads (portrait and landscape) ----------- */
+        @media only screen
+        and (min-device-width : 768px)
+        and (max-device-width : 1024px) {
 
-    .panel-body {
-        padding-top: 0px;
-    }
+        }
 
-    .panel-heading {
-        padding-bottom: 0px;
-    }
+        /* iPads (landscape) ----------- */
+        @media only screen
+        and (min-device-width : 768px)
+        and (max-device-width : 1024px)
+        and (orientation : landscape) {
 
-    .btn-login, .btn-register {
-        background-color: #029f5b;
-        outline: none;
-        color: #fff;
-        font-size: 14px;
-        height: auto;
-        font-weight: normal;
-        padding: 14px 0;
-        text-transform: uppercase;
-        border-color: #029f5b;
-    }
+        }
 
-    .panel-login > .panel-heading a {
-        text-decoration: none;
-        color: #029f5b;
-        font-weight: bold;
-        font-size: 15px;
-        -webkit-transition: all 0.1s linear;
-        -moz-transition: all 0.1s linear;
-        transition: all 0.1s linear;
-    }
+        /* iPads (portrait) ----------- */
+        @media only screen
+        and (min-device-width : 768px)
+        and (max-device-width : 1024px)
+        and (orientation : portrait) {
 
-    .panel-login > .panel-heading a.active {
-        color: #029f5b;
-        font-size: 18px;
-    }
+        }
 
-    @font-face {
-        font-family: Plump;
-        src: url('../Fonts/Plumpfull.ttf');
-    }
+        /* Desktops and laptops ----------- */
+        @media only screen
+        and (min-width : 1224px) {
 
-    @font-face {
-        font-family: Amperzand;
-        src: url('../Fonts/Amperzand.ttf');
-    }
+        }
 
-    .input-group {
-        margin-bottom: 10px;
-    }
+        /* Large screens ----------- */
+        @media only screen
+        and (min-width : 1824px) {
 
-    #messageLogin {
-        color: red;
-    }
-</style>
+        }
+
+        /* iPhone 4 - 5s ----------- */
+        @media
+        only screen and (-webkit-min-device-pixel-ratio : 1.5),
+        only screen and (min-device-pixel-ratio : 1.5) {
+
+        }
+
+        /* iPhone 6 ----------- */
+        @media
+        only screen and (max-device-width: 667px),
+        only screen and (-webkit-device-pixel-ratio: 2) {
+
+        }
+
+        /* iPhone 6+ ----------- */
+        @media
+        only screen and (min-device-width : 414px),
+        only screen and (-webkit-device-pixel-ratio: 3) {
+            
+        }
+
+        h1 {
+            margin-top: 0px;
+            margin-bottom: 10px;
+            font-family: 'Plump';
+            color: #029f5b;
+        }
+
+        h4 {
+            margin-bottom: 10px;
+            font-family: 'Amperzand';
+        }
+
+        .panel-body {
+            padding-top: 0px;
+        }
+
+        .panel-heading {
+            padding-bottom: 0px;
+        }
+
+        .btn-login, .btn-register {
+            background-color: #029f5b;
+            outline: none;
+            color: white;
+            font-size: 14px;
+            height: auto;
+            font-weight: normal;
+            padding: 14px 0;
+            text-transform: uppercase;
+            border-color: #029f5b;
+        }
+
+        .btn-primary.active, .btn-primary.active:hover, .btn-primary.active:focus {
+            background-color: transparent;
+            border-color: transparent;
+            outline: none;
+            color: white;
+            height: auto;
+            font-weight: normal;
+            text-decoration: none;
+
+        }
+
+        .btn-primary, .btn-primary:hover, .btn-primary:focus {
+            background-color: transparent;
+            border-color: transparent;
+            outline: none;
+            color: white;
+            height: auto;
+            font-weight: normal;
+            text-decoration: none;
+        }
+
+        .panel-login > .panel-heading a {
+            text-decoration: none;
+            color: #029f5b;
+            font-weight: bold;
+            font-size: 15px;
+            -webkit-transition: all 0.1s linear;
+            -moz-transition: all 0.1s linear;
+            transition: all 0.1s linear;
+        }
+
+        .panel-login > .panel-heading a.active {
+            color: #029f5b;
+            font-size: 18px;
+        }
+
+        @font-face {
+            font-family: Plump;
+            src: url('../Fonts/Plumpfull.ttf');
+        }
+
+        @font-face {
+            font-family: Amperzand;
+            src: url('../Fonts/Amperzand.ttf');
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        #messageLogin {
+            color: red;
+        }
+
+        .container {
+            width: 100%
+        }
+
+        #loginHideRow {
+            padding-left: 2%;
+            padding-top: 2%;
+        }
+    </style>
 </head>
 <body>
 
@@ -121,9 +226,12 @@
 
 
 <div class="container" style="background-color: transparent">
+    <div id="loginHideRow" class="row">
+        <a href="#" class="active btn-primary" id="loginHidePanelLink"><i class="fa">&#xf03e;</i> Hide login panel</a>
+    </div>
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <div class="panel panel-login">
+            <div id="loginMainPanel" class="panel panel-login">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-6">
@@ -140,7 +248,8 @@
                         <div class="col-lg-12">
                             <h1 style="text-align: center"><i class="fa">&#xf1bb;</i> Forest Tribes</h1>
                             <h4 style="text-align: center">The Beauty of Interconnectedness</h4>
-                            <form id="loginFormID" action="/Serve_Authentication" method="post" role="form" style="display: block;">
+                            <form id="loginFormID" action="/Serve_Authentication" method="post" role="form"
+                                  style="display: block;">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                     <input type="text" name="loginUsername" id="loginUsernameID" tabindex="1"
@@ -175,7 +284,8 @@
                                     </div>
                                 </div>
                             </form>
-                            <form id="registrationFormID" action="/Serve_Registration" method="post" role="form" style="display: none;">
+                            <form id="registrationFormID" action="/Serve_Registration" method="post" role="form"
+                                  style="display: none;">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                     <input type="text" name="registrationUsername" id="registrationUsernameID"
@@ -240,6 +350,10 @@
             $('#loginFormLink').removeClass('active');
             $(this).addClass('active');
             e.preventDefault();
+        });
+        $('#loginHidePanelLink').click(function (e) {
+            $("#loginMainPanel").fadeToggle(500);
+            $("#loginHidePanelLink").toggleClass("active");
         });
     });
 </script>

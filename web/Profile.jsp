@@ -143,9 +143,19 @@
             padding-left: 0;
         }
 
-        #profileIssuesFieldset .btn-primary {
+        .btn-primary {
             padding-right: 24px;
             padding-left: 24px;
+        }
+
+        .panel-login > .panel-heading a {
+            text-decoration: none;
+            color: #029f5b;
+            font-weight: bold;
+            font-size: 15px;
+            -webkit-transition: all 0.1s linear;
+            -moz-transition: all 0.1s linear;
+            transition: all 0.1s linear;
         }
     </style>
 </head>
@@ -167,10 +177,11 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-6">
-                            <a href="#" class="active" id="profileUpdateLink"><i class="fa">&#xf044;</i> Login</a>
+                            <a href="#" class="active" id="profileUpdateLink"><i class="fa">&#xf044;</i> Update your
+                                Profile</a>
                         </div>
                         <div class="col-xs-6">
-                            <a href="#" id="profileDeleteLink"> Register</a>
+                            <a href="#" id="profileDeleteLink"><i class="fa">&#xf085;</i> Delete your Profile</a>
                         </div>
                     </div>
                     <hr>
@@ -190,11 +201,13 @@
                                                  class="img-responsive" alt="User Profile Picture">
                                         </div>
                                     </div>
-                                    <form action="" method="post"><input type="submit" value="Change Profile Picture"
-                                                                         class="form-control btn btn-register"></form>
+                                    <form id="profileChangePPFormID" action="" method="post"><input type="submit"
+                                                                                                    value="Change Profile Picture"
+                                                                                                    class="form-control btn btn-register">
+                                    </form>
                                 </fieldset>
                                 <br>
-                                <fieldset class="span4">
+                                <fieldset id="profileMembershipFieldsetID" class="span4">
                                     <legend><i class="fa">&#xf2ba;</i> Membership Information</legend>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -208,13 +221,15 @@
                                         <input type="email" name="profileEmail" id="profileEmailID" tabindex="1"
                                                class="form-control" value="<%= email%>" readonly>
                                     </div>
-                                    <form action="" method="post"><input type="submit" value="Change Password"
-                                                                         class="form-control btn btn-register"></form>
+                                    <form id="profileChangePWFormID" action="" method="post"><input type="submit"
+                                                                                                    value="Change Password"
+                                                                                                    class="form-control btn btn-register">
+                                    </form>
                                 </fieldset>
                                 <br>
-                                <fieldset>
+                                <fieldset id="profilePersonalFieldsetID">
                                     <legend><i class="fa">&#xf2b9;</i> Personal Information</legend>
-                                    <fieldset>
+                                    <fieldset id="profileGenderFieldsetID">
                                         <legend><i class="fa">&#xf224;</i> Gender:</legend>
                                         <div class="form-group">
                                             <label for="profileRadioMaleID">Male</label>
@@ -225,7 +240,7 @@
                                             <input type="radio" name="profileGender" id="profileRadioOtherID">
                                         </div>
                                     </fieldset>
-                                    <fieldset>
+                                    <fieldset id="profileOccupationFieldsetID">
                                         <legend><i class="fa">&#xf0b1;</i> Occupation:</legend>
                                         <div class="input-group">
                                         <span class="input-group-addon"><i
@@ -234,7 +249,7 @@
                                                    tabindex="1" class="form-control" placeholder="Occupation" value="">
                                         </div>
                                     </fieldset>
-                                    <fieldset>
+                                    <fieldset id="profileEducationFieldsetID">
                                         <legend><i class="fa">&#xf19d;</i> Education:</legend>
                                         <div class="form-group">
                                             <label for="profileRadioPrimaryID">Primary</label>
@@ -249,7 +264,7 @@
                                             <input type="radio" name="profileEducation" id="profileRadioDoctorateID">
                                         </div>
                                     </fieldset>
-                                    <fieldset>
+                                    <fieldset id="profilePoliticalFieldsetID">
                                         <legend><i class="fa">&#xf19c;</i> Political Orientation:</legend>
                                         <div class="form-group">
                                             <label for="profileRadioExLibID">Extremely Liberal</label>
@@ -268,9 +283,9 @@
                                             <input type="radio" name="profilePolitical" id="profileRadioExConID">
                                         </div>
                                     </fieldset>
-                                    <fieldset id="profileIssuesFieldset">
+                                    <fieldset id="profileIssuesFieldsetID">
                                         <legend><i class="fa">&#xf0a1;</i> The issues you care about:</legend>
-                                        <div class="form-group">
+                                        <div id="profileIssuesID" class="form-group">
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
                                                     src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-01.png"
                                                     class="img-thumbnail img-check" alt="No Poverty"><input
@@ -501,6 +516,16 @@
     $(function () {
         $('#profileUpdateLink').click(function (e) {
             $("#profileUpdateFormID").delay(100).fadeIn(100);
+            $("#profileChangePPFormID").delay(100).fadeIn(100);
+            $("#profileChangePWFormID").delay(100).fadeIn(100);
+            $("#profileMembershipFieldsetID").delay(100).fadeIn(100);
+            $("#profilePersonalFieldsetID").delay(100).fadeIn(100);
+            $("#profileGenderFieldsetID").delay(100).fadeIn(100);
+            $("#profileOccupationFieldsetID").delay(100).fadeIn(100);
+            $("#profileEducationFieldsetID").delay(100).fadeIn(100);
+            $("#profilePoliticalFieldsetID").delay(100).fadeIn(100);
+            $("#profileIssuesFieldsetID").delay(100).fadeIn(100);
+            $("#profileUpdateSubmitID").delay(100).fadeIn(100);
             $("#profileDeleteFormID").fadeOut(100);
             $('#profileDeleteLink').removeClass('active');
             $(this).addClass('active');
@@ -509,6 +534,16 @@
         $('#profileDeleteLink').click(function (e) {
             $("#profileDeleteFormID").delay(100).fadeIn(100);
             $("#profileUpdateFormID").fadeOut(100);
+            $("#profileChangePPFormID").fadeOut(100);
+            $("#profileChangePWFormID").fadeOut(100);
+            $("#profileMembershipFieldsetID").fadeOut(100);
+            $("#profilePersonalFieldsetID").fadeOut(100);
+            $("#profileGenderFieldsetID").fadeOut(100);
+            $("#profileOccupationFieldsetID").fadeOut(100);
+            $("#profileEducationFieldsetID").fadeOut(100);
+            $("#profilePoliticalFieldsetID").fadeOut(100);
+            $("#profileIssuesFieldsetID").fadeOut(100);
+            $("#profileUpdateSubmitID").fadeOut(100);
             $('#profileUpdateLink').removeClass('active');
             $(this).addClass('active');
             e.preventDefault();
