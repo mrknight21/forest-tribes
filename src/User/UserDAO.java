@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static Utility.BlobConverter.getBlob;
+import static Utility.BlobConverter.getByteArray;
 
 public class UserDAO {
 
@@ -260,5 +261,52 @@ public class UserDAO {
                 r.getString("ProfileImagePath"),
                 r.getString("UserFolderPath")
         );
+    }
+
+
+    public static boolean deleteUser(AbstractDB db, String username, String password){
+        boolean success = false;
+        UserSecurity user = null;
+
+
+        char[] passwordArray = password.toCharArray();
+
+        // Get the user relating to the parsed-in username from the database.
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_UserSecurity WHERE username = ?")) {
+                p.setString(1, username);
+
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                         user = new UserSecurity(
+                                r.getString("username"),
+                                getByteArray(r.getBlob("salt")),
+                                r.getInt("iterations"),
+                                getByteArray(r.getBlob("hash")));
+                    }
+                }
+            }
+
+            // Get the salt byte array assigned to the user.
+            byte[] salt = user.getSalt();
+
+            // Get the hash byte array assigned to the user.
+            byte[] hash = user.getHash();
+
+            // Get the iterations, assigned to the user.
+            int iterations = user.getIterations();
+
+            // Call SecurityUtility method, isExpectedPassword to determine whether the user-parsed password matches the password stored in the database. The the result is returned.
+            if (SecurityUtility.isExpectedPassword(passwordArray, salt, iterations, hash)){
+                try(PreparedStatement p = c.prepareStatement("DELETE FROM inFoJaxs_User WHERE username = ?;")){
+                    p.setString(1, username);
+                    p.executeUpdate();
+                    success = true;
+                }
+            };
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return success;
     }
 }

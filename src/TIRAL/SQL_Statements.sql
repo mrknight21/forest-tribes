@@ -67,7 +67,7 @@ INSERT INTO inFoJaxs_User (username, first_name, last_name, email) VALUES
 INSERT INTO inFoJaxs_Profile (username) VALUES
 ('programmer1');
 
-DELETE FROM inFoJaxs_UserSecurity WHERE username=bryanchen
+DELETE * FROM inFoJaxs_User;
 
 ALTER TABLE table_name
 ADD column_name datatype;

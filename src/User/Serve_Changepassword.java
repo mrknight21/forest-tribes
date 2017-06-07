@@ -51,8 +51,8 @@ public class Serve_Changepassword extends HttpServlet{
                 }
                 else {
                     UserDAO.updatePassword(DB, username, newPassword);
-                    request.setAttribute("Welcome","Your password has been successfully changed");
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user_interface/Content.jsp");
+                    request.setAttribute("message","Your password has been successfully changed");
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user_interface/Home.jsp");
                     dispatcher.forward(request, response);
                 }
                 }

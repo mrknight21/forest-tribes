@@ -15,15 +15,15 @@
 </head>
 <body>
 
-<%  if(!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/ex05/Login.jsp");
+<%  if(!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/login_interface/Login.jsp");
     HttpSession session1 = request.getSession();
     String username = (String) session1.getAttribute("username");
 %>
-
+<%@include file="../Header.jsp"%>
 <p>Hi <%= username%></p>
 <p>${message}</p>
 
-<a href="/ex05/changePassword.jsp"><button>Change Password</button></a>
+<a href="/user_interface/changePassword.jsp"><button>Change Password</button></a>
 
 <a href="/Serve_Logout"><button>Log Out</button></a>
 

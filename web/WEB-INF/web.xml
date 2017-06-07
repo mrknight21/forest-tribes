@@ -65,5 +65,14 @@
     </servlet-mapping>
 
 
+    <servlet>
+        <servlet-name>Serve_DeleteUser</servlet-name>
+        <servlet-class>User.Serve_DeleteUser</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Serve_DeleteUser</servlet-name>
+        <url-pattern>/Serve_DeleteUser</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>
