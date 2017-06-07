@@ -238,7 +238,7 @@ public class SecurityUtility {
 
         // Get the user relating to the parsed-in username from the database.
         UserSecurity user = UserSecurityDAO.getUser(DB, username);
-
+        
         // Get the salt byte array assigned to the user.
         byte[] salt = user.getSalt();
 

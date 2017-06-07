@@ -65,11 +65,11 @@ public class ArticleDAO {
     }
 
     // Method to insert a parsed-in Article, Comment & Reply into the database.
-    public static boolean createNewResponse(AbstractDB db, Article newArticle) {
-        return createNewResponse(db, newArticle, -1);
+    public static boolean createNewText(AbstractDB db, Article newArticle) {
+        return createNewText(db, newArticle, -1);
     }
 
-    public static boolean createNewResponse(AbstractDB db, Text newText, int parentId) {
+    public static boolean createNewText(AbstractDB db, Text newText, int parentId) {
 
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("INSERT INTO ? (?, username, content) VALUE (?, ?, ?)")) {
@@ -118,6 +118,28 @@ public class ArticleDAO {
         }
     }
 
+    // Method to delete the Article, Comment, Reply in the database.
+    public static boolean deleteText(AbstractDB db, String textClassName, int textId) {
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM ? WHERE ID = ?")) {
+                switch (textClassName){
+                    case "Article":
+                        p.setString(1,"inFoJaxs_Articles");
+                    case "Comment":
+                        p.setString(1,"inFoJaxs_Comments");
+                    case "Reply":
+                        p.setString(1,"inFoJaxs_Replies");
+                }
+                p.setInt(2, textId);
+                p.executeUpdate();
+                return true;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     private static List<Comment> getArticleComments(int articleId, Connection c) throws SQLException {
         List<Comment> comments = new ArrayList<>();
 
@@ -151,14 +173,14 @@ public class ArticleDAO {
         int articleId = r.getInt("ID");
 
         return new Article(
-                r.getString("title"),
-                getArticleComments(articleId, c),
                 articleId,
                 r.getString("username"),
+                r.getString("title"),
+                r.getString("content"),
+                getArticleComments(articleId, c),
                 r.getString("creationDate"),
                 r.getString("lastEdited"),
-                getTextLikes(c, articleId,"Article"),
-                r.getString("article"));
+                getTextLikes(c, articleId,"Article"));
     }
 
     private static Comment commentFromResultSet(ResultSet r, Connection c) throws SQLException {
@@ -167,11 +189,11 @@ public class ArticleDAO {
         return new Comment(
                 commentId,
                 r.getString("username"),
+                r.getString("content"),
                 getCommentReplies(commentId, c),
                 r.getString("creationDate"),
                 r.getString("lastEdited"),
-                getTextLikes(c, commentId,"Comment"),
-                r.getString("comment"));
+                getTextLikes(c, commentId,"Comment"));
     }
 
     private static Reply replyFromResultSet(ResultSet r, Connection c) throws SQLException {
@@ -180,10 +202,10 @@ public class ArticleDAO {
         return new Reply(
                 replyId,
                 r.getString("username"),
+                r.getString("content"),
                 r.getString("creationDate"),
                 r.getString("lastEdited"),
-                getTextLikes(c, replyId,"Reply"),
-                r.getString("reply"));
+                getTextLikes(c, replyId,"Reply"));
     }
 
 
@@ -199,7 +221,7 @@ public class ArticleDAO {
         }
     }
 
-    private static boolean updateTextLikes(AbstractDB db, int articleId, String textClassName) {
+    public static boolean updateTextLikes(AbstractDB db, int articleId, String textClassName) {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_" + textClassName + "Likes SET likes = likes + 1 WHERE ID = ?")) {
                 p.setInt(1, articleId);

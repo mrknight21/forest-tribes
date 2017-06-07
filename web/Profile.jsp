@@ -10,20 +10,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
     <title>Profile</title>
+
+    <%--JQuery JavaScript--%>
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.js"
+            integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+            crossorigin="anonymous"></script>
+
+    <%--Bootstrap CSS--%>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <%--Bootstrap JavaScript--%>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <%--JQuery UI CSS--%>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <%--JQuery UI JavaScript--%>
+    <script
+            src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+            integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+            crossorigin="anonymous"></script>
+
+    <%--Function to enable JQuery UI elements--%>
     <script>
         $(function () {
             $("input[type='radio']").checkboxradio();
             $(".form-group").controlgroup();
         });
     </script>
+
     <style>
         .full {
             background: url('login_interface/lake-baikal-9.jpg') no-repeat center center fixed;
@@ -102,45 +121,35 @@
             margin-bottom: 10px;
         }
 
-        #profileRadioExConID {
-            color: darkred;
+        .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+            background-color: #029f5b;
+            border-color: #1A9B42;
         }
 
-        #profileRadioConID {
-            color: red;
+        .ui-icon-background, .ui-state-active .ui-icon-background {
+            border: white;
+            background-color: #ffffff;
         }
 
-        #profileRadioSliConID {
-            color: orangered;
+        #profileImage {
+            width: 50%;
         }
 
-        #profileRadioCentID {
-            color: gray;
-        }
-
-        #profileRadioSliLibID {
-            color: lightblue;
-        }
-
-        #profileRadioLibID {
-            color: blue;
-        }
-
-        #profileRadioExLibID {
-            color: darkblue;
+        .thumbnail {
+            border-color: transparent;
         }
     </style>
 </head>
 <body>
-<%--<% if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/login_interface/Login.jsp");--%>
+<% if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/login_interface/Login.jsp");
 
-<%--final MySQL DB = new MySQL();--%>
+    final MySQL DB = new MySQL();
 
-<%--HttpSession httpSession = request.getSession();--%>
-<%--String username = (String) httpSession.getAttribute("username");--%>
+    HttpSession httpSession = request.getSession();
+    String username = (String) httpSession.getAttribute("username");
 
-<%--User user = UserDAO.getUser(DB, username);--%>
-<%--String email = user.getEmail();--%>
+    User user = UserDAO.getUser(DB, username);
+    String email = user.getEmail();
 %>
 <div class="container">
     <div class="row">
@@ -154,21 +163,32 @@
                             <form id="profileFormID" action="/Serve_Profile" method="post" role="form"
                                   style="display: block">
                                 <fieldset class="span4">
+                                    <legend>Profile Picture</legend>
+                                    <div id="profileImageDiv" class="col-lg-10 col-lg-offset-1">
+                                        <div class="thumbnail">
+                                            <img id="profileImage" src="/User/<%= username%>/User_profile_picture.jpg"
+                                                 class="img-responsive" alt="User Profile Picture">
+                                        </div>
+                                    </div>
+                                    <form action="" method="post"><input type="submit" value="Change Profile Picture"
+                                                                         class="form-control btn btn-register"></form>
+                                </fieldset>
+                                <br>
+                                <fieldset class="span4">
                                     <legend>Membership Information</legend>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                         <input type="text" name="profileUsername" id="profileUsernameID" tabindex="1"
-                                               value="" class="form-control" readonly>
+                                               value="<%= username%>" class="form-control" readonly>
                                     </div>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i
                                                 class="glyphicon glyphicon-envelope"></i></span>
                                         <input type="email" name="profileEmail" id="profileEmailID" tabindex="1"
-                                               class="form-control" value="" readonly>
+                                               class="form-control" value="<%= email%>" readonly>
                                     </div>
                                     <form action="" method="post"><input type="submit" value="Change Password"
                                                                          class="form-control btn btn-register"></form>
-                                    <%--<img src="/User/<%= username%>/User_profile_picture.jpg">--%>
                                 </fieldset>
                                 <br>
                                 <fieldset>
@@ -177,11 +197,11 @@
                                         <legend>Gender:</legend>
                                         <div class="form-group">
                                             <label for="profileRadioMaleID">Male</label>
-                                            <input type="radio" name="male" id="profileRadioMaleID">
+                                            <input type="radio" name="profileGender" id="profileRadioMaleID">
                                             <label for="profileRadioFemaleID">Female</label>
-                                            <input type="radio" name="female" id="profileRadioFemaleID">
+                                            <input type="radio" name="profileGender" id="profileRadioFemaleID">
                                             <label for="profileRadioOtherID">Other</label>
-                                            <input type="radio" name="other" id="profileRadioOtherID">
+                                            <input type="radio" name="profileGender" id="profileRadioOtherID">
                                         </div>
                                     </fieldset>
                                     <fieldset>
@@ -197,45 +217,43 @@
                                         <legend>Education:</legend>
                                         <div class="form-group">
                                             <label for="profileRadioPrimaryID">Primary</label>
-                                            <input type="radio" name="primary" id="profileRadioPrimaryID">
+                                            <input type="radio" name="profileEducation" id="profileRadioPrimaryID">
                                             <label for="profileRadioSecondaryID">Secondary</label>
-                                            <input type="radio" name="secondary" id="profileRadioSecondaryID">
+                                            <input type="radio" name="profileEducation" id="profileRadioSecondaryID">
                                             <label for="profileRadioTertiaryID">Tertiary</label>
-                                            <input type="radio" name="tertiary" id="profileRadioTertiaryID">
+                                            <input type="radio" name="profileEducation" id="profileRadioTertiaryID">
                                             <label for="profileRadioPostgraduateID">Postgraduate</label>
-                                            <input type="radio" name="postgraduate" id="profileRadioPostgraduateID">
+                                            <input type="radio" name="profileEducation" id="profileRadioPostgraduateID">
                                             <label for="profileRadioDoctorateID">Doctorate</label>
-                                            <input type="radio" name="doctorate" id="profileRadioDoctorateID">
+                                            <input type="radio" name="profileEducation" id="profileRadioDoctorateID">
                                         </div>
                                     </fieldset>
                                     <fieldset>
                                         <legend>Political Orientation:</legend>
                                         <div class="form-group">
                                             <label for="profileRadioExLibID">Extremely Liberal</label>
-                                            <input type="radio" name="extremely_liberal" id="profileRadioExLibID">
+                                            <input type="radio" name="profilePolitical" id="profileRadioExLibID">
                                             <label for="profileRadioLibID">Liberal</label>
-                                            <input type="radio" name="liberal" id="profileRadioLibID">
+                                            <input type="radio" name="profilePolitical" id="profileRadioLibID">
                                             <label for="profileRadioSliLibID">Slightly Liberal</label>
-                                            <input type="radio" name="slightly_liberal" id="profileRadioSliLibID">
+                                            <input type="radio" name="profilePolitical" id="profileRadioSliLibID">
                                             <label for="profileRadioCentID">Centrist</label>
-                                            <input type="radio" name="centrist" id="profileRadioCentID">
+                                            <input type="radio" name="profilePolitical" id="profileRadioCentID">
                                             <label for="profileRadioSliConID">Slightly Conservative</label>
-                                            <input type="radio" name="slightly_conservative" id="profileRadioSliConID">
+                                            <input type="radio" name="profilePolitical" id="profileRadioSliConID">
                                             <label for="profileRadioConID">Conservative</label>
-                                            <input type="radio" name="conservative" id="profileRadioConID">
+                                            <input type="radio" name="profilePolitical" id="profileRadioConID">
                                             <label for="profileRadioExConID">Extremely Conservative</label>
-                                            <input type="radio" name="extremely_conservative" id="profileRadioExConID">
+                                            <input type="radio" name="profilePolitical" id="profileRadioExConID">
                                         </div>
                                     </fieldset>
                                 </fieldset>
                                 <br>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <input type="submit" name="profileSubmit" id="profileSubmitID"
-                                                   tabindex="7" class="form-control btn btn-register"
-                                                   value="Update your Profile">
-                                        </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <input type="submit" name="profileSubmit" id="profileSubmitID"
+                                               class="form-control btn btn-register"
+                                               value="Update your Profile">
                                     </div>
                                 </div>
                             </form>
