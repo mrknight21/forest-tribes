@@ -33,6 +33,25 @@
     <%--Icons CSS--%>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <script>
+        function checkPasswordMatch() {
+            var password = $("#registrationPasswordID").val();
+            var passwordConfirm = $("#registrationConfirmPasswordID").val();
+
+            if (password !== passwordConfirm) {
+                $("#registrationSubmitID").prop('disabled', true);
+                $("#registrationMessageID").show();
+            } else {
+                $("#registrationSubmitID").prop('disabled', false);
+                $("#registrationMessageID").hide();
+            }
+        }
+
+        $(document).ready(function (){
+            $("#registrationConfirmPasswordID").keyup(checkPasswordMatch);
+        });
+    </script>
+
     <style>
         .full {
             background: url('lake-baikal-9.jpg') no-repeat center center fixed;
@@ -204,8 +223,14 @@
             margin-bottom: 10px;
         }
 
-        #messageLogin {
+        #messageLogin, #registrationMessageID {
             color: red;
+            font-family: Plump;
+        }
+
+        .form-control[disabled] {
+            background-color: #029f5b;
+            opacity: 1;
         }
 
         .container {
@@ -408,9 +433,9 @@
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                     <input type="password" name="registrationConfirmPassword"
                                            id="registrationConfirmPasswordID" tabindex="6" class="form-control"
-                                           placeholder="Confirm Password">
+                                           placeholder="Confirm Password" onchange="checkPasswordMatch();">
                                 </div>
-                                <p id="messageRegistration" style="text-align: center">${messageRegistration}</p>
+                                <p id="registrationMessageID" style="text-align: center; display: none;">The entered-in passwords do not match. Please try again.</p>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-lg-12">
