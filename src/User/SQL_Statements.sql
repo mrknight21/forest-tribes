@@ -64,13 +64,19 @@ DROP TABLE IF EXISTS inFoJaxs_ArticleLikes;
 DROP TABLE IF EXISTS inFoJaxs_Replies;
 DROP TABLE IF EXISTS inFoJaxs_Comments;
 DROP TABLE IF EXISTS inFoJaxs_Articles;
+
+
 CREATE TABLE IF NOT EXISTS inFoJaxs_Articles (
   ID INT AUTO_INCREMENT,
   username VARCHAR(50) NOT NULL,
   title VARCHAR(80) NOT NULL,
-  content VARCHAR (8000) NOT NULL,
+  content TEXT NOT NULL,
+  likes INT,
+  views INT,
+  commentCount INT,
+  shortIntro VARCHAR(120),
   creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),
   FOREIGN KEY (username) REFERENCES inFoJaxs_User(username)
 );
@@ -80,8 +86,11 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_Comments (
   parent_ID INT NOT NULL,
   username VARCHAR(50) NOT NULL ,
   content VARCHAR (8000) NOT NULL,
+  likes INT,
+  views INT,
+  repliesCount INT,
   creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),
   FOREIGN KEY (username) REFERENCES inFoJaxs_User(username),
   FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Articles(ID)
@@ -92,14 +101,15 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_Replies (
   parent_ID INT NOT NULL ,
   username VARCHAR(50) NOT NULL,
   content VARCHAR (8000) NOT NULL,
+  likes INT,
+  views INT,
   creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),
   FOREIGN KEY (username) REFERENCES inFoJaxs_User(username),
   FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Comments(ID)
 );
-
-CREATE TABLE IF NOT EXISTS inFoJaxs_ArticleLikes (
+/*CREATE TABLE IF NOT EXISTS inFoJaxs_ArticleLikes (
   ID INT,
   likes INT DEFAULT 0,
   PRIMARY KEY (ID),
@@ -118,4 +128,27 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_ReplyLikes (
   likes INT DEFAULT 0,
   PRIMARY KEY (ID),
   FOREIGN KEY (ID) REFERENCES inFoJaxs_Replies(ID)
-);
+);*/
+
+
+INSERT INTO inFoJaxs_Articles (username, title, content, ) VALUES
+  ('will', 'Big Data', 'My big data brings all the users to the yard!
+Dam right. It''s better than yours. Dam right. It''s better than yours.
+You could have some, but I''d have to charge.
+A freemium plan.
+Wake up in the morning feeling like PHP.
+Poppin code in the box, like a wizard.
+When we revolt we do it right social data getting slizzard.
+Now n-n-n-n-now I''m feeling so fly like a GGG thing. Like a GGG thing, like a GGG thing.
+Yeah oh yeah make you put your hands up make you put your hands up pu-put your put your hands up.
+Now make dat web semantic like a 3.0!
+Break some, shake some, work some, tweak some.
+Break some, shake some, work some, tweak some.
+Break it shake it work it tweak it.
+Break it shake it work it tweak it.
+Bounce bounce bounce bounce bounce bounce bounce!
+Now drop it drop it to the floor.
+Spin it like some stop and go.
+Drop it drop it to the floor.
+Spin it like some stop and go.
+Now let me see you make dat web semantic like a 3.0!');

@@ -72,8 +72,8 @@ DELETE * FROM inFoJaxs_User;
 ALTER TABLE table_name
 ADD column_name datatype;
 
-INSERT INTO inFoJaxs_Articles (username, title, content) VALUES
-('will', 'Big Data', 'My big data brings all the users to the yard!
+INSERT INTO inFoJaxs_Articles (username, title, content, likes, views, commentCount, shortIntro) VALUES
+('qwer', 'Big Data', 'My big data brings all the users to the yard!
 Dam right. It''s better than yours. Dam right. It''s better than yours.
 You could have some, but I''d have to charge.
 A freemium plan.
@@ -92,7 +92,7 @@ Now drop it drop it to the floor.
 Spin it like some stop and go.
 Drop it drop it to the floor.
 Spin it like some stop and go.
-Now let me see you make dat web semantic like a 3.0!');
+Now let me see you make dat web semantic like a 3.0!', 500, 500, 100, 'lalalalalalalallalaal');
 
 INSERT INTO inFoJaxs_Comments (username, content, parent_ID) VALUES
 ('will', 'Hello world', 1);
@@ -106,3 +106,5 @@ INSERT INTO inFoJaxs_CommentLikes (ID, likes) VALUES
 (1, 10);
 INSERT INTO inFoJaxs_ReplyLikes (ID, likes) VALUES
 (1, 1);
+
+UPDATE inFoJaxs_Articles SET content = 'Hello! Wordl! Hope it will update' WHERE ID = 1;
