@@ -123,7 +123,7 @@
         }
 
         h1 {
-            margin-top: 0px;
+            margin-top: 0;
             margin-bottom: 10px;
             font-family: 'Plump';
             color: #029f5b;

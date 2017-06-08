@@ -157,6 +157,11 @@
             -moz-transition: all 0.1s linear;
             transition: all 0.1s linear;
         }
+
+        #profileDeleteWarningID {
+            font-family: Plump;
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -479,31 +484,38 @@
                             </form>
                             <form id="profileDeleteFormID" action="/Serve_DeleteUser" method="GET" role="form"
                                   style="display: none;">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <input type="text" name="profileDeleteUsername" id="profileDeleteUsernameID"
-                                           tabindex="1"
-                                           class="form-control" placeholder="Username" value="<%= username%>" readonly>
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                    <input type="password" name="profileDeletePassword" id="profileDeletePasswordID"
-                                           tabindex="2"
-                                           class="form-control" placeholder="Password">
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                    <input type="password" name="profileDeleteConfirmPassword"
-                                           id="profileDeleteConfirmPasswordID" tabindex="3"
-                                           class="form-control" placeholder="Confirm Password">
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <input type="submit" name="profileDeleteSubmit" id="profileDeleteSubmitID"
-                                               class="form-control btn btn-register"
-                                               value="Delete your account">
+                                <p id="profileDeleteWarningID" style="text-align: center">Warning: This action can not
+                                    be undone.</p>
+                                <br>
+                                <fieldset>
+                                    <legend>Delete your profile:</legend>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input type="text" name="profileDeleteUsername" id="profileDeleteUsernameID"
+                                               tabindex="1"
+                                               class="form-control" placeholder="Username" value="<%= username%>"
+                                               readonly>
                                     </div>
-                                </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        <input type="password" name="profileDeletePassword" id="profileDeletePasswordID"
+                                               tabindex="2"
+                                               class="form-control" placeholder="Password">
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        <input type="password" name="profileDeleteConfirmPassword"
+                                               id="profileDeleteConfirmPasswordID" tabindex="3"
+                                               class="form-control" placeholder="Confirm Password">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <input type="submit" name="profileDeleteSubmit" id="profileDeleteSubmitID"
+                                                   class="form-control btn btn-register"
+                                                   value="Delete your profile">
+                                        </div>
+                                    </div>
+                                </fieldset>
                             </form>
                         </div>
                     </div>

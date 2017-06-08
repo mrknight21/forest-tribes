@@ -49,6 +49,10 @@
             background-color: white;
         }
 
+        .navbar-default {
+            margin-bottom: 0;
+        }
+
         .navbar-default .navbar-toggle {
             border-color: white;
             background-color: white;
