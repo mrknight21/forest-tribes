@@ -35,6 +35,25 @@
     <%--Icons CSS--%>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <script>
+        function checkPasswordMatch() {
+            var password = $("#changePasswordNewID").val();
+            var passwordConfirm = $("#changePasswordConfirmID").val();
+
+            if (password !== passwordConfirm) {
+                $("#changePasswordSubmitID").prop('disabled', true);
+                $("#changePasswordMessageID").show();
+            } else {
+                $("#changePasswordSubmitID").prop('disabled', false);
+                $("#changePasswordMessageID").hide();
+            }
+        }
+
+        $(document).ready(function (){
+           $("#changePasswordConfirmID").keyup(checkPasswordMatch);
+        });
+    </script>
+
     <style>
         .full {
             background: url('/login_interface/lake-baikal-9.jpg') no-repeat center center fixed;
@@ -147,6 +166,16 @@
             color: #333;
             font-weight: 700;
         }
+
+        #changePasswordMessageID {
+            font-family: Plump;
+            color: red;
+        }
+
+        .form-control[disabled] {
+            background-color: #029f5b;
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -240,12 +269,15 @@
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                     <input type="password" id="changePasswordConfirmID" name="changePasswordConfirm"
                                            class="form-control"
-                                           placeholder="Confirm password" tabindex="3" value=""/>
+                                           placeholder="Confirm password" tabindex="3" value="" onchange="checkPasswordMatch();"/>
                                 </div>
+                                <p id="changePasswordMessageID" style="text-align: center; display: none;">The entered-in
+                                    passwords do not match. Please try again.</p>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <input type="submit" name="changeSubmit" id="changeSubmitID" tabindex="4"
+                                            <input type="submit" name="changeSubmit" id="changePasswordSubmitID"
+                                                   tabindex="4"
                                                    class="form-control btn btn-login" value="Change your password">
                                         </div>
                                     </div>

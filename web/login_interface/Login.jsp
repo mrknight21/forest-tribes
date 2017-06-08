@@ -247,7 +247,6 @@
 
 <% if (SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/user_interface/Home.jsp"); %>
 
-
 <div class="container" style="background-color: transparent">
     <div id="loginHideRow" class="row">
         <a href="#" class="active btn-primary" id="loginHidePanelLink"><i class="fa">&#xf03e;</i> Hide login panel</a>

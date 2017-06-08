@@ -187,6 +187,7 @@
     </style>
 </head>
 <body>
+
 <% if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/login_interface/Login.jsp");
 
     final MySQL DB = new MySQL();
@@ -197,6 +198,7 @@
     User user = UserDAO.getUser(DB, username);
     String email = user.getEmail();
 %>
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
