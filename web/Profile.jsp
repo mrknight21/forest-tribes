@@ -44,6 +44,23 @@
             $("input[type='radio']").checkboxradio();
             $(".form-group").controlgroup();
         });
+
+        function checkPasswordMatch() {
+            var password = $("#profileDeletePasswordID").val();
+            var confirmPassword = $("#profileDeleteConfirmPasswordID").val();
+
+            if (password !== confirmPassword) {
+                $("#profileDeleteSubmitID").prop('disabled', true);
+                $("#profileMessageID").show();
+            } else {
+                $("#profileDeleteSubmitID").prop('disabled', false);
+                $("#profileMessageID").hide();
+            }
+        }
+
+        $(document).ready(function () {
+            $("#profileDeleteConfirmPasswordID").keyup(checkPasswordMatch);
+        });
     </script>
 
     <style>
@@ -158,9 +175,14 @@
             transition: all 0.1s linear;
         }
 
-        #profileDeleteWarningID {
+        #profileDeleteWarningID, #profileMessageID {
             font-family: Plump;
             color: red;
+        }
+
+        .form-control[disabled] {
+            background-color: #029f5b;
+            opacity: 1;
         }
     </style>
 </head>
@@ -506,8 +528,9 @@
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                         <input type="password" name="profileDeleteConfirmPassword"
                                                id="profileDeleteConfirmPasswordID" tabindex="3"
-                                               class="form-control" placeholder="Confirm Password">
+                                               class="form-control" placeholder="Confirm Password" onchange="checkPasswordMatch();">
                                     </div>
+                                    <p id="profileMessageID" style="text-align: center; display: none">The entered-in passwords do not match. Please try again.</p>
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <input type="submit" name="profileDeleteSubmit" id="profileDeleteSubmitID"
