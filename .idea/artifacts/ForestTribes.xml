@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ForestTribes">
+    <output-path>$PROJECT_DIR$/out/artifacts/ForestTribes</output-path>
+    <root id="archive" name="ForestTribes.war">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Final Project" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="lib" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="Final Project/web/Web" />
+    </root>
+  </artifact>
+</component>
