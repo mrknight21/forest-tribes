@@ -6,6 +6,10 @@
 <head>
     <title>Login</title>
 
+    <%--Google Library--%>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="528062179592-r23sffi9bm4tnntec1e6eei3s1oot0k9.apps.googleusercontent.com">
+
     <%--JQuery JavaScript--%>
     <script
             src="https://code.jquery.com/jquery-3.2.1.js"
@@ -340,7 +344,8 @@
 </div>
 <%--//////////////////////////////////////////////////////////////--%>
 
-
+<%--Google signin button--%>
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
 
 
 <div class="container" style="background-color: transparent">
