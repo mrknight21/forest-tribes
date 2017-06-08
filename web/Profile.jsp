@@ -44,6 +44,23 @@
             $("input[type='radio']").checkboxradio();
             $(".form-group").controlgroup();
         });
+
+        function checkPasswordMatch() {
+            var password = $("#profileDeletePasswordID").val();
+            var confirmPassword = $("#profileDeleteConfirmPasswordID").val();
+
+            if (password !== confirmPassword) {
+                $("#profileDeleteSubmitID").prop('disabled', true);
+                $("#profileMessageID").show();
+            } else {
+                $("#profileDeleteSubmitID").prop('disabled', false);
+                $("#profileMessageID").hide();
+            }
+        }
+
+        $(document).ready(function () {
+            $("#profileDeleteConfirmPasswordID").keyup(checkPasswordMatch);
+        });
     </script>
 
     <style>
@@ -156,6 +173,16 @@
             -webkit-transition: all 0.1s linear;
             -moz-transition: all 0.1s linear;
             transition: all 0.1s linear;
+        }
+
+        #profileDeleteWarningID, #profileMessageID {
+            font-family: Plump;
+            color: red;
+        }
+
+        .form-control[disabled] {
+            background-color: #029f5b;
+            opacity: 1;
         }
     </style>
 </head>
@@ -479,31 +506,39 @@
                             </form>
                             <form id="profileDeleteFormID" action="/Serve_DeleteUser" method="GET" role="form"
                                   style="display: none;">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <input type="text" name="profileDeleteUsername" id="profileDeleteUsernameID"
-                                           tabindex="1"
-                                           class="form-control" placeholder="Username" value="<%= username%>" readonly>
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                    <input type="password" name="profileDeletePassword" id="profileDeletePasswordID"
-                                           tabindex="2"
-                                           class="form-control" placeholder="Password">
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                    <input type="password" name="profileDeleteConfirmPassword"
-                                           id="profileDeleteConfirmPasswordID" tabindex="3"
-                                           class="form-control" placeholder="Confirm Password">
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <input type="submit" name="profileDeleteSubmit" id="profileDeleteSubmitID"
-                                               class="form-control btn btn-register"
-                                               value="Delete your account">
+                                <p id="profileDeleteWarningID" style="text-align: center">Warning: This action can not
+                                    be undone.</p>
+                                <br>
+                                <fieldset>
+                                    <legend>Delete your profile:</legend>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input type="text" name="profileDeleteUsername" id="profileDeleteUsernameID"
+                                               tabindex="1"
+                                               class="form-control" placeholder="Username" value="<%= username%>"
+                                               readonly>
                                     </div>
-                                </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        <input type="password" name="profileDeletePassword" id="profileDeletePasswordID"
+                                               tabindex="2"
+                                               class="form-control" placeholder="Password">
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        <input type="password" name="profileDeleteConfirmPassword"
+                                               id="profileDeleteConfirmPasswordID" tabindex="3"
+                                               class="form-control" placeholder="Confirm Password" onchange="checkPasswordMatch();">
+                                    </div>
+                                    <p id="profileMessageID" style="text-align: center; display: none">The entered-in passwords do not match. Please try again.</p>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <input type="submit" name="profileDeleteSubmit" id="profileDeleteSubmitID"
+                                                   class="form-control btn btn-register"
+                                                   value="Delete your profile">
+                                        </div>
+                                    </div>
+                                </fieldset>
                             </form>
                         </div>
                     </div>
