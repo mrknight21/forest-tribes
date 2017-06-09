@@ -176,16 +176,16 @@ public class ArticleDAO {
 
 
     private static Article fullArticleFromResultSet(ResultSet r) throws SQLException {
-
+        int id = r.getInt("ID");
         //(int id, String author, String title, String text,int likes, int view, int commentsCount,  String shortIntro, String dateCreated, String dateLastEdited)//
         return new Article(
-                r.getInt("ID"),
+                id,
                 r.getString("username"),
                 r.getString("title"),
                 r.getString("content"),
                 r.getInt("likes"),
                 r.getInt("views"),
-                getArticleComments()
+                r.getInt("commentCount"),
                 r.getString("shortIntro"),
                 r.getTimestamp("creationDate").toString(),
                 r.getTimestamp("lastEdit").toString());
@@ -209,29 +209,30 @@ public class ArticleDAO {
 
     private static Comment commentFromResultSet(ResultSet r, Connection c) throws SQLException {
         int commentId = r.getInt("ID");
-//(int id, String author, String text, List<Reply> replies, String dateCreated, String dateLastEdited, int likes, int views)//
+//        (int id, String author, String text, List<Reply> replies, int likes, int views,  String dateCreated, String dateLastEdited)
         return new Comment(
                 commentId,
                 r.getString("username"),
                 r.getString("content"),
-                r.getInt("likes"),
-
                 getCommentReplies(commentId, c),
+                r.getInt("likes"),
+                r.getInt("views"),
                 r.getString("creationDate"),
-                r.getString("lastEdited"),
-
+                r.getString("lastEdited"));
     }
 
     private static Reply replyFromResultSet(ResultSet r, Connection c) throws SQLException {
         int replyId = r.getInt("ID");
-
+//        (int id, String author, String text,  int likes, int views, String dateCreated, String dateLastEdited)
         return new Reply(
                 replyId,
                 r.getString("username"),
                 r.getString("content"),
+                r.getInt("likes"),
+                // getTextLikes(c, replyId,"Reply")),
+                r.getInt("views"),
                 r.getString("creationDate"),
-                r.getString("lastEdited"),
-                getTextLikes(c, replyId,"Reply"));
+                r.getString("lastEdited"));
     }
 
 
@@ -347,5 +348,5 @@ public class ArticleDAO {
             e.printStackTrace();
             return false;
         }
-    }*/
+    }
 }

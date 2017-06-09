@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="bcar289@mysql1.sporadic.co.nz">
-  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.2">
     <root id="1"/>
     <schema id="2" parent="1" name="bcar289">
       <Current>1</Current>
@@ -94,6 +94,7 @@
       <DataType>varchar(8000)|0</DataType>
     </column>
     <key id="53" parent="8" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -115,6 +116,7 @@
       <DataType>varchar(64)|0</DataType>
     </column>
     <key id="58" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <Primary>1</Primary>
     </key>
@@ -140,6 +142,7 @@
       <DataType>double|0</DataType>
     </column>
     <key id="64" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>bar_code</ColNames>
       <Primary>1</Primary>
     </key>
@@ -162,6 +165,7 @@
       <ColNames>article_id</ColNames>
     </index>
     <key id="69" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -202,6 +206,7 @@
       <ColNames>movie</ColNames>
     </index>
     <key id="78" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -244,6 +249,7 @@
       <Unique>1</Unique>
     </index>
     <key id="87" parent="13" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>name</ColNames>
       <Primary>1</Primary>
     </key>
@@ -278,6 +284,7 @@
       <Unique>1</Unique>
     </index>
     <key id="95" parent="14" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>name</ColNames>
       <Primary>1</Primary>
     </key>
@@ -323,6 +330,7 @@
       <Unique>1</Unique>
     </index>
     <key id="106" parent="15" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>movie_name</ColNames>
       <Primary>1</Primary>
     </key>
@@ -377,6 +385,7 @@
       <DataType>text|0</DataType>
     </column>
     <key id="118" parent="17" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -402,6 +411,7 @@
       <DefaultExpression>&apos;1&apos;</DefaultExpression>
     </column>
     <key id="123" parent="18" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -440,6 +450,7 @@
       <ColNames>teamID</ColNames>
     </index>
     <key id="131" parent="20" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>playerID
 playerName</ColNames>
       <Primary>1</Primary>
@@ -498,6 +509,7 @@ playerName</RefColNames>
       <DataType>int(11)|0</DataType>
     </column>
     <key id="142" parent="22" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>teamID
 teamName</ColNames>
       <Primary>1</Primary>
@@ -577,6 +589,7 @@ teamName</RefColNames>
       <ColNames>username</ColNames>
     </index>
     <key id="158" parent="24" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
@@ -638,6 +651,7 @@ teamName</RefColNames>
       <ColNames>username</ColNames>
     </index>
     <key id="171" parent="25" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
@@ -673,6 +687,7 @@ teamName</RefColNames>
       <ColNames>username</ColNames>
     </index>
     <key id="178" parent="26" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
@@ -681,7 +696,7 @@ teamName</RefColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_User</RefTableName>
       <RefColNames>username</RefColNames>
-      <OnDelete>delete</OnDelete>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <column id="180" parent="27" name="username">
       <Position>1</Position>
@@ -717,6 +732,7 @@ teamName</RefColNames>
       <DataType>text|0</DataType>
     </column>
     <key id="188" parent="27" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <Primary>1</Primary>
     </key>
@@ -725,7 +741,7 @@ teamName</RefColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_User</RefTableName>
       <RefColNames>username</RefColNames>
-      <OnDelete>delete</OnDelete>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <column id="190" parent="28" name="ID">
       <Position>1</Position>
@@ -775,6 +791,7 @@ teamName</RefColNames>
       <ColNames>username</ColNames>
     </index>
     <key id="200" parent="28" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
@@ -825,6 +842,7 @@ teamName</RefColNames>
       <Unique>1</Unique>
     </index>
     <key id="210" parent="29" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <Primary>1</Primary>
     </key>
@@ -861,6 +879,7 @@ teamName</RefColNames>
       <ColNames>username</ColNames>
     </index>
     <key id="218" parent="30" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>userID</ColNames>
       <Primary>1</Primary>
     </key>
@@ -869,7 +888,7 @@ teamName</RefColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_User</RefTableName>
       <RefColNames>username</RefColNames>
-      <OnDelete>delete</OnDelete>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <column id="220" parent="31" name="game_id">
       <Position>1</Position>
@@ -913,6 +932,7 @@ teamName</RefColNames>
       <ColNames>team2_name</ColNames>
     </index>
     <key id="229" parent="31" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>game_id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -977,6 +997,7 @@ teamName</RefColNames>
       <ColNames>team_name</ColNames>
     </index>
     <key id="242" parent="32" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>player_id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -1032,6 +1053,7 @@ teamName</RefColNames>
       <NotNull>1</NotNull>
     </column>
     <key id="253" parent="33" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>team_name</ColNames>
       <Primary>1</Primary>
     </key>
@@ -1049,6 +1071,7 @@ teamName</RefColNames>
       <DataType>text|0</DataType>
     </column>
     <key id="257" parent="34" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>artid</ColNames>
       <Primary>1</Primary>
     </key>
@@ -1080,6 +1103,7 @@ teamName</RefColNames>
 num</ColNames>
     </index>
     <key id="264" parent="35" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>id
 dept
 num</ColNames>
@@ -1130,6 +1154,7 @@ num</RefColNames>
       <ColNames>rep_id</ColNames>
     </index>
     <key id="274" parent="36" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>dept
 num</ColNames>
       <Primary>1</Primary>
@@ -1166,6 +1191,7 @@ num</ColNames>
       <DataType>char(8)|0</DataType>
     </column>
     <key id="281" parent="37" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>staff_no</ColNames>
       <Primary>1</Primary>
     </key>
@@ -1194,6 +1220,7 @@ num</ColNames>
       <NotNull>1</NotNull>
     </column>
     <key id="287" parent="38" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -1216,6 +1243,7 @@ num</ColNames>
       <ColNames>staff_no</ColNames>
     </index>
     <key id="292" parent="39" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>dept
 num
 staff_no</ColNames>
@@ -1260,6 +1288,7 @@ num</RefColNames>
       <Unique>1</Unique>
     </index>
     <key id="300" parent="40" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <Primary>1</Primary>
     </key>
