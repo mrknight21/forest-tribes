@@ -5,6 +5,8 @@ import Utility.MicellaneousUntility;
 import com.sun.xml.internal.fastinfoset.util.CharArray;
 
 import java.io.Serializable;
+import java.security.Timestamp;
+import java.sql.Time;
 import java.util.List;
 
 /**
@@ -27,7 +29,6 @@ public class Article extends Text {
         this.title = title;
         comments = null;
         commentCount = 0;
-
         this.shortIntro = extractShortIntro(this.text);
     }
 
@@ -36,9 +37,10 @@ public class Article extends Text {
         super( id, text, dateLastEdited);
         this.title = title;
         this.shortIntro = extractShortIntro(this.text);
+
     }
 
-    public Article(int id, String author, String title, String text, List<Comment> comments, String dateCreated, String dateLastEdited, int likes, int view, String shortIntro) {
+    public Article(int id, String author, String title, String text, String shortIntro, List<Comment> comments,  int likes, int view, String dateCreated, String dateLastEdited) {
         super( id,  author,  text, dateCreated,dateLastEdited,likes, view);
         this.title = title;
         this.comments = comments;

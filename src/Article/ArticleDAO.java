@@ -51,13 +51,13 @@ public class ArticleDAO {
     }
 
     // Method to return an article relating to the parsed-in article ID, from the database.
-    /*public static Article getArticleById(AbstractDB db, int articleId) {
+    public static Article getArticleById(AbstractDB db, int articleId) {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Articles WHERE ID = ?")) {
                 p.setInt(1, articleId);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
-                        return articleFromResultSet(r);
+                        return fullArticleFromResultSet(r);
                     }
                 }
             }
@@ -66,7 +66,7 @@ public class ArticleDAO {
         }
         return null;
     }
-*/
+
     // Method to insert a parsed-in Article, Comment & Reply into the database.
     public static boolean createNewText(AbstractDB db, Text newText, int parentId) {
         String statement = "INSERT INTO $1 ($2, username, content) VALUE (?, ?, ?)";
@@ -126,7 +126,7 @@ public class ArticleDAO {
         }
     }
 
-   /* private static List<Comment> getArticleComments(int articleId, Connection c) throws SQLException {
+    private static List<Comment> getArticleComments(int articleId, Connection c) throws SQLException {
         List<Comment> comments = new ArrayList<>();
 
         try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Comments WHERE article_ID = ?")) {
@@ -153,7 +153,7 @@ public class ArticleDAO {
         }
         return comments;
     }
-*/
+
 
 
     // Methods to create a new Article/Comment/Reply objects from the information stored in the ResultSet.
@@ -168,6 +168,24 @@ public class ArticleDAO {
                 r.getInt("likes"),
                 r.getInt("views"),
                 r.getInt("commentCount"),
+                r.getString("shortIntro"),
+                r.getTimestamp("creationDate").toString(),
+                r.getTimestamp("lastEdit").toString());
+    }
+
+
+
+    private static Article fullArticleFromResultSet(ResultSet r) throws SQLException {
+
+        //(int id, String author, String title, String text,int likes, int view, int commentsCount,  String shortIntro, String dateCreated, String dateLastEdited)//
+        return new Article(
+                r.getInt("ID"),
+                r.getString("username"),
+                r.getString("title"),
+                r.getString("content"),
+                r.getInt("likes"),
+                r.getInt("views"),
+                getArticleComments()
                 r.getString("shortIntro"),
                 r.getTimestamp("creationDate").toString(),
                 r.getTimestamp("lastEdit").toString());
@@ -189,17 +207,19 @@ public class ArticleDAO {
 
 
 
-   /* private static Comment commentFromResultSet(ResultSet r, Connection c) throws SQLException {
+    private static Comment commentFromResultSet(ResultSet r, Connection c) throws SQLException {
         int commentId = r.getInt("ID");
-
+//(int id, String author, String text, List<Reply> replies, String dateCreated, String dateLastEdited, int likes, int views)//
         return new Comment(
                 commentId,
                 r.getString("username"),
                 r.getString("content"),
+                r.getInt("likes"),
+
                 getCommentReplies(commentId, c),
                 r.getString("creationDate"),
                 r.getString("lastEdited"),
-                getTextLikes(c, commentId,"Comment"));
+
     }
 
     private static Reply replyFromResultSet(ResultSet r, Connection c) throws SQLException {
@@ -212,7 +232,7 @@ public class ArticleDAO {
                 r.getString("creationDate"),
                 r.getString("lastEdited"),
                 getTextLikes(c, replyId,"Reply"));
-    }*/
+    }
 
 
     private static int getTextLikes( Connection c, int textId, String textClassName) throws SQLException {
@@ -269,7 +289,7 @@ public class ArticleDAO {
     }
 
     // Method to delete the Article, Comment, Reply in the database.
- /*   public static boolean deleteText(AbstractDB db, int textId, String textClassName) {
+    public static boolean deleteText(AbstractDB db, int textId, String textClassName) {
 
         String statement = "DELETE FROM $1 WHERE $2 = ?";
 

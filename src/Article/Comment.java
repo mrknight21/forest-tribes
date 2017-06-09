@@ -24,7 +24,7 @@ public class Comment extends Text {
         super(id, text, lasteditedTime);
     }
 
-    public Comment(int id, String author, String text, List<Reply> replies, String dateCreated, String dateLastEdited, int likes, int views) {
+    public Comment(int id, String author, String text, List<Reply> replies, int likes, int views,  String dateCreated, String dateLastEdited) {
         super(id,  author, text,  dateCreated,  dateLastEdited, likes, views);
         this.replies = replies;
         this.replyCount = replies.size();

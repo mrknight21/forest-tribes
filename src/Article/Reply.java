@@ -24,7 +24,7 @@ public class Reply extends Text {
         super(id, text, dateLastEdited);
     }
     //retrieve
-    public Reply(int id, String author, String text, String dateCreated, String dateLastEdited, int likes, int views) {
+    public Reply(int id, String author, String text,  int likes, int views, String dateCreated, String dateLastEdited) {
         super(id, author, text, dateCreated, dateLastEdited, likes, views);
     }
 }
