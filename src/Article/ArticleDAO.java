@@ -51,7 +51,7 @@ public class ArticleDAO {
     }
 
     // Method to return an article relating to the parsed-in article ID, from the database.
-    public static Article getArticleById(AbstractDB db, int articleId) {
+    /*public static Article getArticleById(AbstractDB db, int articleId) {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Articles WHERE ID = ?")) {
                 p.setInt(1, articleId);
@@ -66,7 +66,7 @@ public class ArticleDAO {
         }
         return null;
     }
-
+*/
     // Method to insert a parsed-in Article, Comment & Reply into the database.
     public static boolean createNewText(AbstractDB db, Text newText, int parentId) {
         String statement = "INSERT INTO $1 ($2, username, content) VALUE (?, ?, ?)";
