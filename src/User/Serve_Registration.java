@@ -86,7 +86,7 @@ public class Serve_Registration extends HttpServlet {
 
 
                     //auto set-up user profile photo
-                    String  DefaultImagePathway = servletContext.getRealPath("/WEB-INF/images_material/Default/Userdefault.jpg");
+                    String  DefaultImagePathway = servletContext.getRealPath("/images_material/Default/Userdefault.jpg");
                     File defaultImage = new File(DefaultImagePathway);
                     BufferedImage sourceImage = ImageIO.read(defaultImage);
 

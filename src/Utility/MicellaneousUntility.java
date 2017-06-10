@@ -1,5 +1,7 @@
 package Utility;
 
+import org.jsoup.Jsoup;
+
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -51,6 +53,9 @@ public class MicellaneousUntility {
             }
         }
         return result;
+    }
+    public static String htmlToStringParser (String html) {
+        return Jsoup.parse(html).text();
     }
 
 

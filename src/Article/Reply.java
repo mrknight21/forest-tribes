@@ -2,21 +2,29 @@ package Article;
 
 import User.User;
 
+import java.sql.Timestamp;
+
 /**
  * Created by wasia on 3/06/2017.
  */
 public class Reply extends Text {
+
+    private int commentId;
+
     public Reply() {}
 
-    public Reply(String author, String text) {
+    //initial
+    public Reply(String text, String author, int commentId) {
         super(author, text);
+        this.commentId = commentId;
     }
 
-    public Reply(int id, String author, String text) {
-        super(id, author, text);
+    //update
+    public Reply(int id, String text, String dateLastEdited) {
+        super(id, text, dateLastEdited);
     }
-
-    public Reply(int id, String author, String text, String dateCreated, String dateLastEdited, int likes) {
-        super(id, author, text, dateCreated, dateLastEdited, likes);
+    //retrieve
+    public Reply(int id, String author, String text,  int likes, int views, String dateCreated, String dateLastEdited) {
+        super(id, author, text, dateCreated, dateLastEdited, likes, views);
     }
 }

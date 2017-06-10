@@ -1,3 +1,5 @@
+<%--todo connect TPA login with servlet login & registration--%>
+
 <%@ page import="Utility.SecurityUtility" %>
 <!DOCTYPE html>
 <html lang="en" class="full">
@@ -5,6 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
     <title>Login</title>
+
+    <%--Google Library--%>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="528062179592-r23sffi9bm4tnntec1e6eei3s1oot0k9.apps.googleusercontent.com">
 
     <%--JQuery JavaScript--%>
     <script
@@ -331,17 +337,18 @@
   the FB.login() function when clicked.
 -->
 
-<%--<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">--%>
-<%--</fb:login-button>--%>
-
-<%--<div id="status">--%>
-<%--</div>--%>
+<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button>
 
 
 <%--FB Login button:--%>
-<%--<div id="status">--%>
-<%--</div>--%>
+<div id="status">
+</div>
 <%--//////////////////////////////////////////////////////////////--%>
+
+<%--Google signin button--%>
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
+
 
 <div class="container" style="background-color: transparent">
     <div id="loginHideRow" class="row">
@@ -391,10 +398,6 @@
                                                    class="form-control btn btn-login" value="Log In">
                                         </div>
                                     </div>
-                                </div>
-                                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-                                </fb:login-button>
-                                <div id="status">
                                 </div>
                                 <div class="form-group">
                                     <div class="row">

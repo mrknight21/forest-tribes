@@ -1,5 +1,8 @@
-package Article;
+package TIRAL;
 
+import Article.Article;
+import Article.ArticleDAO;
+import Article.Text;
 import Utility.MySQL;
 
 import javax.servlet.RequestDispatcher;
@@ -52,10 +55,10 @@ public class ArticlesServlet extends HttpServlet {
                     parentId = -1;
                     break;
                 case "comment":
-                    text = new Comment(username, content);
+                    text = new Article.Comment(username, content);
                     break;
                 case "reply":
-                    text = new Reply(username, content);
+                    text = new Article.Reply(username, content);
                     break;
             }
             ArticleDAO.createNewText(db, text, parentId);
@@ -68,10 +71,10 @@ public class ArticlesServlet extends HttpServlet {
                         text = new Article(textId, username, title, content);
                         break;
                     case "comment":
-                        text = new Comment(textId, username, content);
+                        text = new Article.Comment(textId, username, content);
                         break;
                     case "reply":
-                        text = new Reply(textId, username, content);
+                        text = new Article.Reply(textId, username, content);
                 }
                 ArticleDAO.updateText(db, text);
             }

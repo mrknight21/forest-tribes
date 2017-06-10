@@ -1,43 +1,48 @@
 package Article;
 
-import User.User;
-
-import java.io.File;
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 /**
  * Created by wasia on 3/06/2017.
  */
 public abstract class Text implements Serializable {
-    int id;
-    String author;
-    String dateCreated;
-    String dateLastEdited;
-    int likes;
-    String text;
+    protected int id;
+    protected String author;
+    protected String dateCreated;
+    protected String dateLastEdited;
+    protected int likes;
+    protected String text;
+    protected int views;
 //    protected File image;
 //    protected String filePath;
 
     public Text() {}
 
-    public Text(String author, String text) {
+    //initialised
+    public Text(String text, String author) {
         this.author = author;
         this.text = text;
+        likes = 0;
+        views = 0;
     }
 
-    public Text(int id, String author, String text) {
+    //update
+    public Text(int id, String text, String dateLastEdited) {
         this.id = id;
-        this.author = author;
         this.text = text;
+        this.dateLastEdited = dateLastEdited;
     }
 
-    public Text(int id, String author, String text, String dateCreated, String dateLastEdited, int likes) {
+    //retrieve
+    public Text(int id, String author, String text, String dateCreated, String dateLastEdited, int likes, int views) {
         this.id = id;
         this.author = author;
         this.text = text;
         this.dateCreated = dateCreated;
         this.dateLastEdited = dateLastEdited;
         this.likes = likes;
+        this.views = views;
 //        this.image = image;
 //        this.filePath = filePath;
     }
@@ -88,6 +93,15 @@ public abstract class Text implements Serializable {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.likes = views;
     }
 
 //    public File getImage() {

@@ -6,6 +6,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+//http://alvinalexander.com/java/java-timestamp-example-current-time-now
+
 public class ArticleDAO {
 
     // Method to return all Articles as an ArrayList from the database.
@@ -17,7 +20,7 @@ public class ArticleDAO {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Articles")) {
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
-                        articles.add(articleFromResultSet(r, c));
+                        articles.add(articleSummaryFromResultSet(r));
                     }
                 }
             }
@@ -28,7 +31,7 @@ public class ArticleDAO {
     }
 
     // Method to return all Articles by Author as an ArrayList from the database.
-    public static List<Article> getArticlesByUser(AbstractDB db, String username) {
+   public static List<Article> getArticlesByUser(AbstractDB db, String username) {
 
         List<Article> articles = new ArrayList<>();
 
@@ -37,7 +40,7 @@ public class ArticleDAO {
                 p.setString(1, username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
-                        articles.add(articleFromResultSet(r, c));
+                        articles.add(articleSummaryFromResultSet(r));
                     }
                 }
             }
@@ -54,7 +57,7 @@ public class ArticleDAO {
                 p.setInt(1, articleId);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
-                        return articleFromResultSet(r, c);
+                        return fullArticleFromResultSet(r);
                     }
                 }
             }
@@ -130,7 +133,7 @@ public class ArticleDAO {
             p.setInt(1, articleId);
             try (ResultSet r = p.executeQuery()) {
                 while (r.next()) {
-                    comments.add(commentFromResultSet(r,c));
+                    comments.add(commentFromResultSet(r, c));
                 }
             }
         }
@@ -151,44 +154,85 @@ public class ArticleDAO {
         return comments;
     }
 
-    // Methods to create a new Article/Comment/Reply objects from the information stored in the ResultSet.
-    private static Article articleFromResultSet(ResultSet r, Connection c) throws SQLException {
-        int articleId = r.getInt("ID");
 
+
+    // Methods to create a new Article/Comment/Reply objects from the information stored in the ResultSet.
+    private static Article articleSummaryFromResultSet(ResultSet r) throws SQLException {
+
+        //(int id, String author, String title, String text,int likes, int view, int commentsCount,  String shortIntro, String dateCreated, String dateLastEdited)//
         return new Article(
-                articleId,
+                r.getInt("ID"),
                 r.getString("username"),
                 r.getString("title"),
                 r.getString("content"),
-                getArticleComments(articleId, c),
-                r.getString("creationDate"),
-                r.getString("lastEdited"),
-                getTextLikes(c, articleId,"Article"));
+                r.getInt("likes"),
+                r.getInt("views"),
+                r.getInt("commentCount"),
+                r.getString("shortIntro"),
+                r.getTimestamp("creationDate").toString(),
+                r.getTimestamp("lastEdit").toString());
     }
+
+
+
+    private static Article fullArticleFromResultSet(ResultSet r) throws SQLException {
+        int id = r.getInt("ID");
+        //(int id, String author, String title, String text,int likes, int view, int commentsCount,  String shortIntro, String dateCreated, String dateLastEdited)//
+        return new Article(
+                id,
+                r.getString("username"),
+                r.getString("title"),
+                r.getString("content"),
+                r.getInt("likes"),
+                r.getInt("views"),
+                r.getInt("commentCount"),
+                r.getString("shortIntro"),
+                r.getTimestamp("creationDate").toString(),
+                r.getTimestamp("lastEdit").toString());
+    }
+
+    /*
+
+    ID INT AUTO_INCREMENT,
+  username VARCHAR(50) NOT NULL,
+  title VARCHAR(80) NOT NULL,
+  content VARCHAR (8000) NOT NULL,
+  likes INT,
+  views INT,
+  commentCount INT,
+  shortIntro VARCHAR(120),
+  creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     */
+
+
 
     private static Comment commentFromResultSet(ResultSet r, Connection c) throws SQLException {
         int commentId = r.getInt("ID");
-
+//        (int id, String author, String text, List<Reply> replies, int likes, int views,  String dateCreated, String dateLastEdited)
         return new Comment(
                 commentId,
                 r.getString("username"),
                 r.getString("content"),
                 getCommentReplies(commentId, c),
+                r.getInt("likes"),
+                r.getInt("views"),
                 r.getString("creationDate"),
-                r.getString("lastEdited"),
-                getTextLikes(c, commentId,"Comment"));
+                r.getString("lastEdited"));
     }
 
     private static Reply replyFromResultSet(ResultSet r, Connection c) throws SQLException {
         int replyId = r.getInt("ID");
-
+//        (int id, String author, String text,  int likes, int views, String dateCreated, String dateLastEdited)
         return new Reply(
                 replyId,
                 r.getString("username"),
                 r.getString("content"),
+                r.getInt("likes"),
+                // getTextLikes(c, replyId,"Reply")),
+                r.getInt("views"),
                 r.getString("creationDate"),
-                r.getString("lastEdited"),
-                getTextLikes(c, replyId,"Reply"));
+                r.getString("lastEdited"));
     }
 
 

@@ -2,6 +2,7 @@ package Article;
 
 import User.User;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -10,19 +11,21 @@ import java.util.List;
 public class Comment extends Text {
     protected List<Reply> replies;
     private int replyCount;
+    private int articleID;
 
     public Comment() {}
 
-    public Comment(String author, String text) {
+    public Comment(String author, String text, int articleID) {
         super(author, text);
+        this.articleID = articleID;
     }
 
-    public Comment(int id, String author, String text) {
-        super(id, author, text);
+    public Comment(int id, String text,  String lasteditedTime) {
+        super(id, text, lasteditedTime);
     }
 
-    public Comment(int id, String author, String text, List<Reply> replies, String dateCreated, String dateLastEdited, int likes) {
-        super(id, author, text, dateCreated, dateLastEdited, likes);
+    public Comment(int id, String author, String text, List<Reply> replies, int likes, int views,  String dateCreated, String dateLastEdited) {
+        super(id,  author, text,  dateCreated,  dateLastEdited, likes, views);
         this.replies = replies;
         this.replyCount = replies.size();
     }
