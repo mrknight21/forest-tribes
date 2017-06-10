@@ -108,3 +108,5 @@ INSERT INTO inFoJaxs_ReplyLikes (ID, likes) VALUES
 (1, 1);
 
 UPDATE inFoJaxs_Articles SET content = 'Hello! Wordl! Hope it will update' WHERE ID = 1;
+
+DELETE FROM inFoJaxs_Articles WHERE ID = 6 OR ID =7;

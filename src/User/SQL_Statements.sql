@@ -152,3 +152,10 @@ Spin it like some stop and go.
 Drop it drop it to the floor.
 Spin it like some stop and go.
 Now let me see you make dat web semantic like a 3.0!');
+
+
+INSERT INTO inFoJaxs_Comments (parent_ID, username, content, likes, views, repliesCount ) VALUES
+  (3, 'will', 'yo! yo! yo! yo! yo! yo!', 1000, 1000, 0);
+
+INSERT INTO inFoJaxs_Replies (parent_ID, username, content, likes, views) VALUES
+(2, 'zxcv', 'aahahhahahhahahahahahahahahahahahhahaahahahah!', 1000, 1000);

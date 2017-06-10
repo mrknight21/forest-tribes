@@ -29,6 +29,8 @@ public class Article extends Text {
         this.title = title;
         comments = null;
         commentCount = 0;
+        likes = 0;
+        views = 0;
         this.shortIntro = extractShortIntro(this.text);
     }
 
@@ -40,6 +42,7 @@ public class Article extends Text {
 
     }
 
+    //retrieve a complete article including comment and replies.
     public Article(int id, String author, String title, String text, String shortIntro, List<Comment> comments,  int likes, int view, String dateCreated, String dateLastEdited) {
         super( id,  author,  text, dateCreated,dateLastEdited,likes, view);
         this.title = title;
@@ -53,6 +56,7 @@ public class Article extends Text {
     }
 
 
+    //retrieve articles brief info
     public Article(int id, String author, String title, String text,int likes, int view, int commentsCount,  String shortIntro, String dateCreated, String dateLastEdited) {
         super( id,  author,  text, dateCreated,dateLastEdited,likes, view);
         this.title = title;
@@ -70,13 +74,15 @@ public class Article extends Text {
                 shortIntro = this.text;
                 break;
             }
-            if(indexNum >=119){
+            if(indexNum >=110){
+                shortIntro = this.text.substring(0,indexNum)+"......";
                     break;
                 }
             if(pureText.charAt(indexNum)!= ' '){
                 indexNum++;
             }
             else {
+                shortIntro = this.text.substring(0,indexNum)+"......";
                 break;
             }
         }

@@ -20,7 +20,7 @@ public abstract class Text implements Serializable {
     public Text() {}
 
     //initialised
-    public Text(String text, String author) {
+    public Text(String author, String text) {
         this.author = author;
         this.text = text;
         likes = 0;
