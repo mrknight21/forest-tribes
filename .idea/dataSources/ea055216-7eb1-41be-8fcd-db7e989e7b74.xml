@@ -585,6 +585,7 @@ teamName</RefColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_User</RefTableName>
       <RefColNames>username</RefColNames>
+      <OnDelete>delete</OnDelete>
     </foreign-key>
     <column id="160" parent="25" name="ID">
       <Position>1</Position>
@@ -646,12 +647,14 @@ teamName</RefColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_Articles</RefTableName>
       <RefColNames>ID</RefColNames>
+      <OnDelete>delete</OnDelete>
     </foreign-key>
     <foreign-key id="173" parent="25" name="inFoJaxs_Comments_ibfk_1">
       <ColNames>username</ColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_User</RefTableName>
       <RefColNames>username</RefColNames>
+      <OnDelete>delete</OnDelete>
     </foreign-key>
     <column id="174" parent="26" name="ID">
       <Position>1</Position>
@@ -783,12 +786,14 @@ teamName</RefColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_Comments</RefTableName>
       <RefColNames>ID</RefColNames>
+      <OnDelete>delete</OnDelete>
     </foreign-key>
     <foreign-key id="202" parent="28" name="inFoJaxs_Replies_ibfk_1">
       <ColNames>username</ColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_User</RefTableName>
       <RefColNames>username</RefColNames>
+      <OnDelete>delete</OnDelete>
     </foreign-key>
     <column id="203" parent="29" name="username">
       <Position>1</Position>

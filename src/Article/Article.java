@@ -35,8 +35,8 @@ public class Article extends Text {
     }
 
     //author, created time,
-    public Article(int id, String text, String dateLastEdited, String title) {
-        super( id, text, dateLastEdited);
+    public Article(int id, String text, String title) {
+        super( id, text);
         this.title = title;
         this.shortIntro = extractShortIntro(this.text);
 

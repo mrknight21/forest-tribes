@@ -77,8 +77,27 @@ public class trial {
                 "19-for-30 from the floor – including 10-of-18 from long-range – over the past\n" +
                 "two contests.");
 
-        System.out.println(article.getAuthor()+", "+article.getTitle()+", "+article.getShortIntro());
-        ArticleDAO.createNewArticle(DB, article);
+
+
+
+      /* Comment newcomment = new Comment("zxcv", "Lebron won today!!", 1);
+        Comment newcomment2 = new Comment("will", "Come on!! Warrior will finalise it at home", 1);
+        ArticleDAO.createNewComment(DB,newcomment);
+        ArticleDAO.createNewComment(DB, newcomment2);
+        Reply newreply = new Reply("will", "warrior will come back", 1);
+        Reply newreply2 = new Reply("qwer", "fuck no", 1);
+        ArticleDAO.createNewReply(DB, newreply);
+        ArticleDAO.createNewReply(DB, newreply2);*/
+
+
+
+      /* Comment updatecomment = new Comment(1, "Lebron the kinggggggggggg!!!!");
+       ArticleDAO.updateComment(DB, updatecomment);*/
+
+      ArticleDAO.deleteComment(DB, 1);
+
+
+
 
     }
 }

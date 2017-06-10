@@ -28,10 +28,9 @@ public abstract class Text implements Serializable {
     }
 
     //update
-    public Text(int id, String text, String dateLastEdited) {
+    public Text(int id, String text) {
         this.id = id;
         this.text = text;
-        this.dateLastEdited = dateLastEdited;
     }
 
     //retrieve

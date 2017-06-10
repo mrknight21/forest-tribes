@@ -1,10 +1,14 @@
 package Article;
 
+import User.UserSecurity;
 import Utility.AbstractDB;
+import Utility.SecurityUtility;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static Utility.BlobConverter.getByteArray;
 
 
 //http://alvinalexander.com/java/java-timestamp-example-current-time-now
@@ -68,6 +72,8 @@ public class ArticleDAO {
     }
 
 
+    ///////////Create new Text ///////////////////////////////////////////////////////////////////
+
     public static boolean createNewArticle( AbstractDB db, Article article){
         boolean success;
 
@@ -91,6 +97,190 @@ public class ArticleDAO {
         return success;
 
     }
+
+
+
+
+    public static boolean createNewComment( AbstractDB db, Comment comment){
+        boolean success;
+        //Comment(String author, String text, int articleID)//
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_Comments (parent_ID, username,content, likes, views, repliesCount) VALUE ( ?, ?, ?, ?, ?, ?)")) {
+                p.setInt(1, comment.getArticleID());
+                p.setString(2, comment.getAuthor());
+                p.setString(3, comment.getText());
+                p.setInt(4, comment.getLikes());
+                p.setInt(5, comment.getViews());
+                p.setInt(6, comment.getReplyCount());
+
+                p.executeUpdate();
+                success = true;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            success = false;
+        }
+        return success;
+
+    }
+
+
+
+
+
+    public static boolean createNewReply( AbstractDB db, Reply reply){
+        boolean success;
+        //Comment(String author, String text, int articleID)//
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_Replies (parent_ID, username,content, likes, views) VALUE (?, ?, ?, ?, ?)")) {
+                p.setInt(1, reply.getCommentId());
+                p.setString(2, reply.getAuthor());
+                p.setString(3, reply.getText());
+                p.setInt(4, reply.getLikes());
+                p.setInt(5, reply.getViews());
+                p.executeUpdate();
+                success = true;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            success = false;
+        }
+        return success;
+
+    }
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    /////////////////////Update texts///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    //new Timestamp(System.currentTimeMillis() for current timeStamp//
+
+    public static boolean updateArticle(AbstractDB db, Article article){
+        boolean status;
+
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_Articles SET title = ?, content = ?, shortIntro = ?, lastEdit = ? WHERE ID = ?;")) {
+                //p.setString(1, colunm);
+                p.setString(1, article.getTitle());
+                p.setString(2, article.getText());
+                p.setString(3, article.getShortIntro());
+                p.setString(4, new Timestamp(System.currentTimeMillis()).toString());
+                p.setInt(5, article.getId() );
+                p.executeUpdate();
+                status = true;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            status = false;
+        }
+        return status;
+    }
+
+
+
+    public static boolean updateComment(AbstractDB db, Comment comment){
+        boolean status;
+
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_Comments SET content = ?,lastEdit = ? WHERE ID = ?;")) {
+                //p.setString(1, colunm);
+                p.setString(1, comment.getText());
+                p.setString(2, new Timestamp(System.currentTimeMillis()).toString());
+                p.setInt(3, comment.getId() );
+                p.executeUpdate();
+                status = true;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            status = false;
+        }
+        return status;
+    }
+
+
+    public static boolean updateReply(AbstractDB db, Reply reply){
+        boolean status;
+
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_Replies SET content = ?,lastEdit = ? WHERE ID = ?;")) {
+                //p.setString(1, colunm);
+                p.setString(1, reply.getText());
+                p.setString(2, new Timestamp(System.currentTimeMillis()).toString());
+                p.setInt(3, reply.getId() );
+                p.executeUpdate();
+                status = true;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            status = false;
+        }
+        return status;
+    }
+
+
+
+
+
+///////////////////////////////////////////////////////Deleting text/////////////////////////////////////////////////////////////////
+
+
+    public static boolean deleteArticle(AbstractDB db, int articleID){
+        boolean success = false;
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM inFoJaxs_Articles WHERE ID = ?;")) {
+                //p.setString(1, colunm);
+                p.setInt(1, articleID);
+                p.executeUpdate();
+                success = true;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            success = false;
+        }
+        return success;
+    }
+
+
+    public static boolean deleteComment(AbstractDB db, int commentID){
+        boolean success = false;
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM inFoJaxs_Comments WHERE ID = ?;")) {
+                //p.setString(1, colunm);
+                p.setInt(1, commentID);
+                p.executeUpdate();
+                success = true;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            success = false;
+        }
+        return success;
+    }
+
+
+
+    public static boolean deleteReply(AbstractDB db, int replyID){
+        boolean success = false;
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM inFoJaxs_Replies WHERE ID = ?;")) {
+                //p.setString(1, colunm);
+                p.setInt(1, replyID);
+                p.executeUpdate();
+                success = true;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            success = false;
+        }
+        return success;
+    }
+
+
 
 
 
@@ -127,7 +317,7 @@ public class ArticleDAO {
     }*/
 
     // Methods to update the parsed-in Article, Comment, Reply in the database.
-    public static boolean updateText(AbstractDB db, Text text) {
+    /*public static boolean updateText(AbstractDB db, Text text) {
         String statement = "UPDATE $1 SET $2content = ? WHERE ID = ?";
         if (text instanceof  Article) {
             statement.replaceFirst("$1", "inFoJaxs_Articles");
@@ -151,7 +341,7 @@ public class ArticleDAO {
             e.printStackTrace();
             return false;
         }
-    }
+    }*/
 
     private static List<Comment> getArticleComments(int articleId, Connection c) throws SQLException {
         List<Comment> comments = new ArrayList<>();
