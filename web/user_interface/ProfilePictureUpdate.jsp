@@ -6,15 +6,13 @@
 <%@ page import="java.awt.*" %>
 <%@ page import="User.UserDAO" %>
 <%@ page import="User.User" %>
-<%@ page import="Utility.MySQL" %><%--
-  Created by IntelliJ IDEA.
-  User: mche618
-  Date: 6/06/2017
-  Time: 4:59 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="Utility.MySQL" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="en" class="full">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
     <title>Profile_Image Update</title>
 
@@ -46,6 +44,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
+        .full {
+            background: url('/login_interface/lake-baikal-9.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            -o-background-size: cover;
+        }
+
+        body {
+            background-color: transparent;
+        }
+
         @font-face {
             font-family: Plump;
             src: url('../Fonts/Plumpfull.ttf');
@@ -94,6 +104,36 @@
         #headerSearchIcon {
             color: #029f5b;
         }
+
+        legend {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #333;
+            font-weight: 700;
+        }
+
+        #userImageID {
+            display: block;
+            margin: auto;
+        }
+
+        .img-thumbnail {
+            height: 140px;
+            width: 140px;
+        }
+
+        .btn-register {
+            background-color: #029f5b;
+            outline: none;
+            color: white;
+            font-size: 14px;
+            height: auto;
+            font-weight: normal;
+            padding: 14px 0;
+            text-transform: uppercase;
+            border-color: #029f5b;
+        }
     </style>
 </head>
 <body>
@@ -127,7 +167,8 @@
                 <li class="dropdown">
                     <a href="#" id="headerUser" class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true"
-                       aria-expanded="false"><i class="glyphicon glyphicon-user"></i> <%= username%><span class="caret"></span></a>
+                       aria-expanded="false"><i class="glyphicon glyphicon-user"></i> <%= username%><span
+                            class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Update your account</a></li>
                         <li><a href="#">Change profile picture</a></li>
@@ -139,7 +180,8 @@
                 <li>
                     <a href="#" id="headerCollection" class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true"
-                       aria-expanded="false"><i class="glyphicon glyphicon-picture"></i> Collection Display<span class="caret"></span></a>
+                       aria-expanded="false"><i class="glyphicon glyphicon-picture"></i> Collection Display<span
+                            class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">To be UPDATED</a></li>
                         <li><a href="#">To be UPDATED</a></li>
@@ -155,75 +197,171 @@
                 <div id="headerSearch" class="form-group">
                     <input type="text" class="form-control" placeholder="Search">
                 </div>
-                <button id="headerSearchSubmit" type="submit" class="btn btn-default"><i id="headerSearchIcon" class="glyphicon glyphicon-search"></i> Search</button>
+                <button id="headerSearchSubmit" type="submit" class="btn btn-default"><i id="headerSearchIcon"
+                                                                                         class="glyphicon glyphicon-search"></i>
+                    Search
+                </button>
             </form>
         </div>
     </div>
 </nav>
-
-<h1><%=username%>
-</h1>
-<div id="curret_Image">
-    <a href="<%=imagePath%>"><img src=<%=imagePath%> width="400" height="400"></a>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <div class="panel panel-login">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-lg-10 col-lg-offset-1">
+                            <fieldset>
+                                <legend><i style="font-size:24px" class="fa">&#xf03e;</i> Your Current Profile Picture:
+                                </legend>
+                                <a href="<%=imagePath%>"><img id="userImageID" src="<%=imagePath%>"
+                                                              class="img-rounded"
+                                                              alt="User Profile Picture" height="400"></a>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-10 col-lg-offset-1">
+                            <form id="select_default_options" action="/Serve_UpdateProfilePicture" method="GET">
+                                <fieldset>
+                                    <legend><i style="font-size:24px" class="fa">&#xf046;</i> Default Choices:</legend>
+                                    <div class="form-group">
+                                        <div class="col-lg-4">
+                                            <label class="btn btn-primary"><a
+                                                    href="../default_options/default_options_1.jpg"><img
+                                                    src="../default_options/default_options_1.jpg"
+                                                    class="img-thumbnail"><input id="option1" type="radio"
+                                                                                 class="default_DP_Options"
+                                                                                 name="DP_option"
+                                                                                 value="default_options/default_options_1.jpg"/></a></label>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label class="btn btn-primary"><a
+                                                    href="../default_options/default_options_2.jpg"><img
+                                                    src="../default_options/default_options_2.jpg"
+                                                    class="img-thumbnail"><input id="option2" type="radio"
+                                                                                 class="default_DP_Options"
+                                                                                 name="DP_option"
+                                                                                 value="default_options/default_options_2.jpg"/></a></label>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label class="btn btn-primary"> <a
+                                                    href="../default_options/default_options_3.jpg"><img
+                                                    src="../default_options/default_options_3.jpg"
+                                                    class="img-thumbnail"><input id="option3" type="radio"
+                                                                                 class="default_DP_Options"
+                                                                                 name="DP_option"
+                                                                                 value="default_options/default_options_3.jpg"/></a></label>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label class="btn btn-primary"> <a
+                                                    href="../default_options/default_options_4.jpg"><img
+                                                    src="../default_options/default_options_4.jpg"
+                                                    class="img-thumbnail"><input id="option4" type="radio"
+                                                                                 class="default_DP_Options"
+                                                                                 name="DP_option"
+                                                                                 value="default_options/default_options_4.jpg"/></a></label>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label class="btn btn-primary"><a
+                                                    href="../default_options/default_options_5.gif"><img
+                                                    src="../default_options/default_options_5.gif"
+                                                    class="img-thumbnail"><input id="option5" type="radio"
+                                                                                 class="default_DP_Options"
+                                                                                 name="DP_option"
+                                                                                 value="default_options/default_options_5.gif"/></a></label>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label class="btn btn-primary"><a
+                                                    href="../default_options/default_options_6.jpg"><img
+                                                    src="../default_options/default_options_6.jpg"
+                                                    class="img-thumbnail"><input id="option6"
+                                                                                 type="radio"
+                                                                                 class="default_DP_Options"
+                                                                                 name="DP_option"
+                                                                                 value="default_options/default_options_6.jpg"/></a></label>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label class="btn btn-primary"> <a
+                                                    href="../default_options/default_options_7.jpg"><img
+                                                    src="../default_options/default_options_7.jpg"
+                                                    class="img-thumbnail"><input id="option7" type="radio"
+                                                                                 class="default_DP_Options"
+                                                                                 name="DP_option"
+                                                                                 value="default_options/default_options_7.jpg"/></a></label>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label class="btn btn-primary"><a
+                                                    href="../default_options/default_options_8.jpg"><img
+                                                    src="../default_options/default_options_8.jpg"
+                                                    class="img-thumbnail"><input id="option8" type="radio"
+                                                                                 class="default_DP_Options"
+                                                                                 name="DP_option"
+                                                                                 value="default_options/default_options_8.jpg"/></a></label>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label class="btn btn-primary"><a
+                                                    href="../default_options/default_options_9.jpg"><img
+                                                    src="../default_options/default_options_9.jpg"
+                                                    class="img-thumbnail"><input id="option9" type="radio"
+                                                                                 class="default_DP_Options"
+                                                                                 name="DP_option"
+                                                                                 value="default_options/default_options_9.jpg"/></a></label>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label class="btn btn-primary"><a
+                                                    href="../default_options/default_options_10.jpg"><img
+                                                    src="../default_options/default_options_10.jpg"
+                                                    class="img-thumbnail"><input id="option10" type="radio"
+                                                                                 class="default_DP_Options"
+                                                                                 name="DP_option"
+                                                                                 value="default_options/default_options_10.jpg"/></a></label>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label class="btn btn-primary"><a href="../default_options/Userdefault.jpg"><img
+                                                    src="../default_options/Userdefault.jpg"
+                                                    class="img-thumbnail"> <input id="default" type="radio"
+                                                                                  class="default_DP_Options"
+                                                                                  name="DP_option"
+                                                                                  value="default_options/Userdefault.jpg"
+                                                                                  checked/></a></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <input type="submit" name="changePictureDefault" id="changePictureDefaultID"
+                                               class="form-control btn btn-register"
+                                               value="Change profile picture to selected photo">
+                                    </div>
+                                </fieldset>
+                            </form>
+                            <br>
+                            <form id="upload_own_photo" action="/Serve_UpdateProfilePicture" method="post"
+                                  enctype="multipart/form-data">
+                                <fieldset>
+                                    <legend><i style="font-size:24px" class="fa">&#xf0ee;</i> Upload your own Photo:
+                                    </legend>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input class="btn btn-primary btn-file" type="file" name="pic" accept="image/*">
+                                    </div>
+                                </fieldset>
+                                <br>
+                                <input type="submit" name="changePictureUpload" id="changePictureUploadID"
+                                       class="form-control btn btn-register"
+                                       value="Change profile picture to uploaded photo">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>Free options</p>
-<div id="defaultOpions">
-    <form id="select_default_options" action="/Serve_UpdateProfilePicture" method="GET">
-        <label for="option1"><a href="../default_options/default_options_1.jpg"><img
-                src="../default_options/default_options_1.jpg" width="250" height="250"></a></label>
-        <input id="option1" type="radio" class="default_DP_Options" name="DP_option"
-               value="default_options/default_options_1.jpg"/>
-        <label for="option2"> <a href="../default_options/default_options_2.jpg"><img
-                src="../default_options/default_options_2.jpg" width="250" height="250"></a></label>
-        <input id="option2" type="radio" class="default_DP_Options" name="DP_option"
-               value="default_options/default_options_2.jpg"/>
-        <label for="option3"> <a href="../default_options/default_options_3.jpg"><img
-                src="../default_options/default_options_3.jpg" width="250" height="250"></a></label>
-        <input id="option3" type="radio" class="default_DP_Options" name="DP_option"
-               value="default_options/default_options_3.jpg"/>
-        <label for="option4"> <a href="../default_options/default_options_4.jpg"><img
-                src="../default_options/default_options_4.jpg" width="250" height="250"></a></label>
-        <input id="option4" type="radio" class="default_DP_Options" name="DP_option"
-               value="default_options/default_options_4.jpg"/>
-        <label for="option5"><a href="../default_options/default_options_5.gif"><img
-                src="../default_options/default_options_5.gif" width="250" height="250"></a></label>
-        <input id="option5" type="radio" class="default_DP_Options" name="DP_option"
-               value="default_options/default_options_5.gif"/>
-        <p></p>
-        <label for="option6"><a href="../default_options/default_options_6.jpg"><img
-                src="../default_options/default_options_6.jpg" width="250" height="250"></a></label>
-        <input id="option6" type="radio" class="default_DP_Options" name="DP_option"
-               value="default_options/default_options_6.jpg"/>
-        <label for="option7"> <a href="../default_options/default_options_7.jpg"><img
-                src="../default_options/default_options_7.jpg" width="250" height="250"></a></label>
-        <input id="option7" type="radio" class="default_DP_Options" name="DP_option"
-               value="default_options/default_options_7.jpg"/>
-        <label for="option8"> <a href="../default_options/default_options_8.jpg"><img
-                src="../default_options/default_options_8.jpg" width="250" height="250"></a></label>
-        <input id="option8" type="radio" class="default_DP_Options" name="DP_option"
-               value="default_options/default_options_8.jpg"/>
-        <label for="option9"><a href="../default_options/default_options_9.jpg"><img
-                src="../default_options/default_options_9.jpg" width="250" height="250"></a></label>
-        <input id="option9" type="radio" class="default_DP_Options" name="DP_option"
-               value="default_options/default_options_9.jpg"/>
-        <label for="option10"><a href="../default_options/default_options_10.jpg"><img
-                src="../default_options/default_options_10.jpg" width="250" height="250"></a></label>
-        <input id="option10" type="radio" class="default_DP_Options" name="DP_option"
-               value="default_options/default_options_10.jpg"/>
-        <p></p>
-        <label for="default"><a href="../default_options/Userdefault.jpg"><img src="../default_options/Userdefault.jpg"
-                                                                               width="250" height="250"></a></label>
-        <input id="default" type="radio" class="default_DP_Options" name="DP_option"
-               value="default_options/Userdefault.jpg" checked/>
-        <p></p>
-        <input type="submit" value="Change the profile picture to selected photo!">
-    </form>
-    <p></p>
-    <p></p>
-    <form id="upload_own_photo" action="/Serve_UpdateProfilePicture" method="post" enctype="multipart/form-data">
-        <input type="file" name="pic" accept="image/*">
-        <input type="submit">
-    </form>
+</div>
+</div>
 </div>
 </body>
 </html>

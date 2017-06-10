@@ -331,17 +331,17 @@
   the FB.login() function when clicked.
 -->
 
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
+<%--<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">--%>
+<%--</fb:login-button>--%>
+
+<%--<div id="status">--%>
+<%--</div>--%>
 
 
 <%--FB Login button:--%>
-<div id="status">
-</div>
+<%--<div id="status">--%>
+<%--</div>--%>
 <%--//////////////////////////////////////////////////////////////--%>
-
-
-
 
 <div class="container" style="background-color: transparent">
     <div id="loginHideRow" class="row">
@@ -391,6 +391,10 @@
                                                    class="form-control btn btn-login" value="Log In">
                                         </div>
                                     </div>
+                                </div>
+                                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+                                </fb:login-button>
+                                <div id="status">
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
