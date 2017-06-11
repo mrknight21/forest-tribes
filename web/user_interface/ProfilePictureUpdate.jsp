@@ -17,8 +17,7 @@
     <title>Profile_Image Update</title>
 
     <%--JQuery JavaScript--%>
-    <script
-            src="https://code.jquery.com/jquery-3.2.1.js"
+    <script src="https://code.jquery.com/jquery-3.2.1.js"
             integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
             crossorigin="anonymous"></script>
 
@@ -35,13 +34,19 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <%--JQuery UI JavaScript--%>
-    <script
-            src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
             integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
             crossorigin="anonymous"></script>
 
     <%--Icons CSS--%>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <%--Function to enable JQuery UI elements--%>
+    <script>
+        $(function () {
+            $("input[type='radio']").checkboxradio();
+        });
+    </script>
 
     <style>
         .full {
@@ -80,6 +85,7 @@
 
         .navbar-default {
             margin-bottom: 0;
+            border-color: #029f5b;
         }
 
         .navbar-default .navbar-toggle {
@@ -99,6 +105,7 @@
         #headerThumbnail {
             margin: 3px;
             height: 44px;
+            width: 44px;
         }
 
         #headerSearchIcon {
@@ -116,23 +123,95 @@
         #userImageID {
             display: block;
             margin: auto;
+            width: 250px;
         }
 
         .img-thumbnail {
             height: 140px;
             width: 140px;
+            border-color: transparent;
         }
 
         .btn-register {
             background-color: #029f5b;
             outline: none;
             color: white;
-            font-size: 14px;
             height: auto;
             font-weight: normal;
             padding: 14px 0;
             text-transform: uppercase;
             border-color: #029f5b;
+        }
+
+        .form-control[disabled] {
+            background-color: #029f5b;
+            opacity: 1;
+        }
+
+        #pictureChoiceDefaultID {
+            padding-right: 0;
+            padding-left: 0;
+        }
+
+        label.btn.btn-primary {
+            width: 180px;
+            height: 160px;
+        }
+
+        input.btn.btn-primary {
+            max-width: 190px;
+        }
+
+        label {
+            max-width: none;
+        }
+
+        .btn-primary {
+            color: black;
+            background-color: #f6f6f6;
+            border: 1px solid #c5c5c5;
+        }
+
+        .btn-primary:hover {
+            background-color: #ccc;
+            border: 1px solid #c5c5c5;;
+        }
+
+        .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+            background-color: #029f5b;
+            border-color: #1A9B42;
+        }
+
+        .ui-icon-background, .ui-state-active .ui-icon-background {
+            border: white;
+            background-color: #ffffff;
+        }
+
+        .ui-visual-focus {
+            box-shadow: none;
+        }
+
+        .ui-checkboxradio-radio-label.ui-checkboxradio-checked .ui-icon, .ui-checkboxradio-radio-label.ui-checkboxradio-checked:hover .ui-icon {
+            width: 16px;
+            height: 16px;
+            box-shadow: none;
+            background-color: #ccc;
+        }
+
+        .panel-login {
+            margin-top: 5%;
+        }
+
+        .form-group {
+            margin-bottom: 0;
+        }
+
+        #changePictureUploadDivID {
+            padding-left: 15px;
+        }
+
+        #changePictureDefaultDivID {
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -227,113 +306,128 @@
                         <div class="col-lg-10 col-lg-offset-1">
                             <form id="select_default_options" action="/Serve_UpdateProfilePicture" method="GET">
                                 <fieldset>
-                                    <legend><i style="font-size:24px" class="fa">&#xf046;</i> Default Choices:</legend>
+                                    <legend id="pictureChoiceDefaultID"><i style="font-size:24px"
+                                                                           class="fa">&#xf046;</i> Default Choices:
+                                    </legend>
                                     <div class="form-group">
                                         <div class="col-lg-4">
                                             <label class="btn btn-primary"><a
-                                                    href="../default_options/default_options_1.jpg"><img
+                                                    href="../default_options/default_options_1.jpg"><input id="option1"
+                                                                                                           type="radio"
+                                                                                                           name="DP_option"
+                                                                                                           value="default_options/default_options_1.jpg"
+                                                                                                           autocomplete="off"/><img
                                                     src="../default_options/default_options_1.jpg"
-                                                    class="img-thumbnail"><input id="option1" type="radio"
-                                                                                 class="default_DP_Options"
-                                                                                 name="DP_option"
-                                                                                 value="default_options/default_options_1.jpg"/></a></label>
+                                                    class="img-thumbnail"></a></label>
                                         </div>
                                         <div class="col-lg-4">
                                             <label class="btn btn-primary"><a
-                                                    href="../default_options/default_options_2.jpg"><img
+                                                    href="../default_options/default_options_2.jpg"><input id="option2"
+                                                                                                           type="radio"
+                                                                                                           class="default_DP_Options"
+                                                                                                           name="DP_option"
+                                                                                                           value="default_options/default_options_2.jpg"/><img
                                                     src="../default_options/default_options_2.jpg"
-                                                    class="img-thumbnail"><input id="option2" type="radio"
-                                                                                 class="default_DP_Options"
-                                                                                 name="DP_option"
-                                                                                 value="default_options/default_options_2.jpg"/></a></label>
+                                                    class="img-thumbnail"></a></label>
                                         </div>
                                         <div class="col-lg-4">
                                             <label class="btn btn-primary"> <a
-                                                    href="../default_options/default_options_3.jpg"><img
+                                                    href="../default_options/default_options_3.jpg"><input id="option3"
+                                                                                                           type="radio"
+                                                                                                           class="default_DP_Options"
+                                                                                                           name="DP_option"
+                                                                                                           value="default_options/default_options_3.jpg"/><img
                                                     src="../default_options/default_options_3.jpg"
-                                                    class="img-thumbnail"><input id="option3" type="radio"
-                                                                                 class="default_DP_Options"
-                                                                                 name="DP_option"
-                                                                                 value="default_options/default_options_3.jpg"/></a></label>
+                                                    class="img-thumbnail"></a></label>
                                         </div>
                                         <div class="col-lg-4">
                                             <label class="btn btn-primary"> <a
-                                                    href="../default_options/default_options_4.jpg"><img
+                                                    href="../default_options/default_options_4.jpg"><input id="option4"
+                                                                                                           type="radio"
+                                                                                                           class="default_DP_Options"
+                                                                                                           name="DP_option"
+                                                                                                           value="default_options/default_options_4.jpg"/><img
                                                     src="../default_options/default_options_4.jpg"
-                                                    class="img-thumbnail"><input id="option4" type="radio"
-                                                                                 class="default_DP_Options"
-                                                                                 name="DP_option"
-                                                                                 value="default_options/default_options_4.jpg"/></a></label>
+                                                    class="img-thumbnail"></a></label>
                                         </div>
                                         <div class="col-lg-4">
                                             <label class="btn btn-primary"><a
-                                                    href="../default_options/default_options_5.gif"><img
+                                                    href="../default_options/default_options_5.gif"><input id="option5"
+                                                                                                           type="radio"
+                                                                                                           class="default_DP_Options"
+                                                                                                           name="DP_option"
+                                                                                                           value="default_options/default_options_5.gif"/><img
                                                     src="../default_options/default_options_5.gif"
-                                                    class="img-thumbnail"><input id="option5" type="radio"
-                                                                                 class="default_DP_Options"
-                                                                                 name="DP_option"
-                                                                                 value="default_options/default_options_5.gif"/></a></label>
+                                                    class="img-thumbnail"></a></label>
                                         </div>
                                         <div class="col-lg-4">
                                             <label class="btn btn-primary"><a
-                                                    href="../default_options/default_options_6.jpg"><img
+                                                    href="../default_options/default_options_6.jpg"><input id="option6"
+                                                                                                           type="radio"
+                                                                                                           class="default_DP_Options"
+                                                                                                           name="DP_option"
+                                                                                                           value="default_options/default_options_6.jpg"/><img
                                                     src="../default_options/default_options_6.jpg"
-                                                    class="img-thumbnail"><input id="option6"
-                                                                                 type="radio"
-                                                                                 class="default_DP_Options"
-                                                                                 name="DP_option"
-                                                                                 value="default_options/default_options_6.jpg"/></a></label>
+                                                    class="img-thumbnail"></a></label>
                                         </div>
                                         <div class="col-lg-4">
                                             <label class="btn btn-primary"> <a
-                                                    href="../default_options/default_options_7.jpg"><img
+                                                    href="../default_options/default_options_7.jpg"><input id="option7"
+                                                                                                           type="radio"
+                                                                                                           class="default_DP_Options"
+                                                                                                           name="DP_option"
+                                                                                                           value="default_options/default_options_7.jpg"/><img
                                                     src="../default_options/default_options_7.jpg"
-                                                    class="img-thumbnail"><input id="option7" type="radio"
-                                                                                 class="default_DP_Options"
-                                                                                 name="DP_option"
-                                                                                 value="default_options/default_options_7.jpg"/></a></label>
+                                                    class="img-thumbnail"></a></label>
                                         </div>
                                         <div class="col-lg-4">
                                             <label class="btn btn-primary"><a
-                                                    href="../default_options/default_options_8.jpg"><img
+                                                    href="../default_options/default_options_8.jpg"><input id="option8"
+                                                                                                           type="radio"
+                                                                                                           class="default_DP_Options"
+                                                                                                           name="DP_option"
+                                                                                                           value="default_options/default_options_8.jpg"/><img
                                                     src="../default_options/default_options_8.jpg"
-                                                    class="img-thumbnail"><input id="option8" type="radio"
-                                                                                 class="default_DP_Options"
-                                                                                 name="DP_option"
-                                                                                 value="default_options/default_options_8.jpg"/></a></label>
+                                                    class="img-thumbnail"></a></label>
                                         </div>
                                         <div class="col-lg-4">
                                             <label class="btn btn-primary"><a
-                                                    href="../default_options/default_options_9.jpg"><img
+                                                    href="../default_options/default_options_9.jpg"><input id="option9"
+                                                                                                           type="radio"
+                                                                                                           class="default_DP_Options"
+                                                                                                           name="DP_option"
+                                                                                                           value="default_options/default_options_9.jpg"/><img
                                                     src="../default_options/default_options_9.jpg"
-                                                    class="img-thumbnail"><input id="option9" type="radio"
-                                                                                 class="default_DP_Options"
-                                                                                 name="DP_option"
-                                                                                 value="default_options/default_options_9.jpg"/></a></label>
+                                                    class="img-thumbnail"></a></label>
                                         </div>
                                         <div class="col-lg-4">
                                             <label class="btn btn-primary"><a
-                                                    href="../default_options/default_options_10.jpg"><img
+                                                    href="../default_options/default_options_10.jpg"><input
+                                                    id="option10"
+                                                    type="radio"
+                                                    class="default_DP_Options"
+                                                    name="DP_option"
+                                                    value="default_options/default_options_10.jpg"/><img
                                                     src="../default_options/default_options_10.jpg"
-                                                    class="img-thumbnail"><input id="option10" type="radio"
-                                                                                 class="default_DP_Options"
-                                                                                 name="DP_option"
-                                                                                 value="default_options/default_options_10.jpg"/></a></label>
+                                                    class="img-thumbnail"></a></label>
                                         </div>
                                         <div class="col-lg-4">
-                                            <label class="btn btn-primary"><a href="../default_options/Userdefault.jpg"><img
+                                            <label class="btn btn-primary"><a href="../default_options/Userdefault.jpg"><input
+                                                    id="default"
+                                                    type="radio"
+                                                    class="default_DP_Options"
+                                                    name="DP_option"
+                                                    value="default_options/Userdefault.jpg"
+                                                    checked/><img
                                                     src="../default_options/Userdefault.jpg"
-                                                    class="img-thumbnail"> <input id="default" type="radio"
-                                                                                  class="default_DP_Options"
-                                                                                  name="DP_option"
-                                                                                  value="default_options/Userdefault.jpg"
-                                                                                  checked/></a></label>
+                                                    class="img-thumbnail"></a></label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
-                                        <input type="submit" name="changePictureDefault" id="changePictureDefaultID"
+                                    <div id="changePictureDefaultDivID" class="col-lg-12">
+                                        <input type="submit" name="changePictureDefault"
+                                               id="changePictureDefaultSubmitID"
                                                class="form-control btn btn-register"
-                                               value="Change profile picture to selected photo">
+                                               value="Change profile picture">
                                     </div>
                                 </fieldset>
                             </form>
@@ -341,17 +435,22 @@
                             <form id="upload_own_photo" action="/Serve_UpdateProfilePicture" method="post"
                                   enctype="multipart/form-data">
                                 <fieldset>
-                                    <legend><i style="font-size:24px" class="fa">&#xf0ee;</i> Upload your own Photo:
+                                    <legend><i style="font-size:24px" class="fa">&#xf0ee;</i> Upload your own
+                                        Photo:
                                     </legend>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input class="btn btn-primary btn-file" type="file" name="pic" accept="image/*">
+                                    <div id="changePictureUploadDivID" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-file"></i></span>
+                                        <input class="btn btn-primary" type="file" name="pic"
+                                               accept="image/*">
+                                    </div>
+                                    <br>
+                                    <div class="col-lg-12">
+                                        <input type="submit" name="changePictureUpload" id="changePictureUploadSubmitID"
+                                               class="form-control btn btn-register"
+                                               value="Change profile picture">
                                     </div>
                                 </fieldset>
                                 <br>
-                                <input type="submit" name="changePictureUpload" id="changePictureUploadID"
-                                       class="form-control btn btn-register"
-                                       value="Change profile picture to uploaded photo">
                             </form>
                         </div>
                     </div>
@@ -359,9 +458,6 @@
             </div>
         </div>
     </div>
-</div>
-</div>
-</div>
 </div>
 </body>
 </html>
