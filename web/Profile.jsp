@@ -22,7 +22,7 @@
 <head>
     <title>Profile</title>
 
-    <%@include file="WEB-INF/head-scripts.jsp" %>
+    <%@include file="WEB-INF/Head_Scripts.jsp" %>
 
     <script>
         <%--Function to enable JQuery UI elements--%>
@@ -50,11 +50,11 @@
         });
     </script>
 
-    <tags:profile-style/>
+    <tags:Style_Profile/>
 </head>
 <body>
 
-<%@ include file="WEB-INF/header-navbar.jsp" %>
+<%@ include file="WEB-INF/Header_Navbar.jsp" %>
 
 <div class="container">
     <div class="row">

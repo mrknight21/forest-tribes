@@ -29,7 +29,7 @@
     <title>Profile_Image Update</title>
 
     <%--Importing all necessary libraries, frameworks etc.--%>
-    <%@include file="../WEB-INF/head-scripts.jsp"%>
+    <%@include file="../WEB-INF/Head_Scripts.jsp"%>
 
     <%--Function to enable JQuery UI elements--%>
     <script>
@@ -38,11 +38,11 @@
         });
     </script>
 
-    <tags:DPUpdate-Style/>
+    <tags:Style_Change-Profile-Picture/>
 </head>
 <body>
 
-<%@ include file="../WEB-INF/header-navbar.jsp" %>
+<%@ include file="../WEB-INF/Header_Navbar.jsp" %>
 
 <div class="container">
     <div class="row">

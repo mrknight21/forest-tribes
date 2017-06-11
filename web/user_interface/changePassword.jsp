@@ -14,7 +14,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
     <title>Change password</title>
-    <%@include file="../WEB-INF/head-scripts.jsp"%>
+    <%@include file="../WEB-INF/Head_Scripts.jsp"%>
 
     <script>
         function checkPasswordMatch() {
@@ -35,11 +35,11 @@
         });
     </script>
 
-    <tags:change-password-style/>
+    <tags:Style_Change-Password/>
 </head>
 <body>
 
-<%@ include file="../WEB-INF/header-navbar.jsp" %>
+<%@ include file="../WEB-INF/Header_Navbar.jsp" %>
 
 <div id="mainContainerID" class="container">
     <div class="row">

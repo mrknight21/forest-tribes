@@ -17,10 +17,10 @@
 <html>
 <head>
     <title>Home</title>
-    <%@include file="../WEB-INF/head-scripts.jsp"%>
+    <%@include file="../WEB-INF/Head_Scripts.jsp"%>
 </head>
 <body>
-<%@ include file="../WEB-INF/header-navbar.jsp" %>
+<%@ include file="../WEB-INF/Header_Navbar.jsp" %>
 
 <p>Hi <%= username%></p>
 <p>${message}</p>

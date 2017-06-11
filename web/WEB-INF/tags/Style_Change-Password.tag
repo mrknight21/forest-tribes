@@ -1,4 +1,4 @@
-<%@include file="../rootpath_toggle.jsp"%>
+<%@include file="../Rootpath_Toggle.jsp"%>
 <style>
         .full {
             background: url('<%=sitePath%>login_interface/lake-baikal-9.jpg') no-repeat center center fixed;

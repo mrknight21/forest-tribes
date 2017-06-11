@@ -1,4 +1,4 @@
-<%@include file="../rootpath_toggle.jsp"%>
+<%@include file="../Rootpath_Toggle.jsp"%>
 
 <style>
         .full {

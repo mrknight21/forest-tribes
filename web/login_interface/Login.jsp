@@ -9,7 +9,7 @@
     <title>Login</title>
 
     <%--Importing all necessary libraries, frameworks etc.--%>
-    <%@include file="../WEB-INF/head-scripts.jsp" %>
+    <%@include file="../WEB-INF/Head_Scripts.jsp" %>
 
     <%--Google Library--%>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -17,7 +17,7 @@
           content="528062179592-r23sffi9bm4tnntec1e6eei3s1oot0k9.apps.googleusercontent.com">
 
     <%--Page Specific CSS--%>
-    <link rel="stylesheet" href="Login.css">
+    <tags:Style_Login/>
 
     <script>
         function checkPasswordMatch() {

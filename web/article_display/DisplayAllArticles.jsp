@@ -17,10 +17,10 @@
 <html>
 <head>
     <title>Display all articles</title>
-    <%@include file="../WEB-INF/head-scripts.jsp" %>
+    <%@include file="../WEB-INF/Head_Scripts.jsp" %>
 </head>
 <body>
-<%@ include file="../WEB-INF/header-navbar.jsp" %>
+<%@ include file="../WEB-INF/Header_Navbar.jsp" %>
 
 <%
     final MySQL DB = new MySQL();
