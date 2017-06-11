@@ -1,3 +1,4 @@
+<%@ page import="Utility.SecurityUtility" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -19,11 +20,17 @@
 
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
+    String username = (String) session.getAttribute("username");%>
 <html>
 <head>
     <title>display Full article</title>
+    <%@include file="../WEB-INF/head-scripts.jsp"%>
 </head>
 <body>
+<%@ include file="../WEB-INF/header-navbar.jsp" %>
+
 <div class="article container">
 <h1>${article.title}</h1>
 <h2>Author: ${article.author}                                      likes:${article.likes}  views:${article.views} replies:${article.commentCount}   last edited: ${article.dateLastEdited}</h2>

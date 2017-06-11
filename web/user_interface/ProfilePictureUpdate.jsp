@@ -1,3 +1,4 @@
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ page import="Utility.SecurityUtility" %>
 <%@ page import="java.io.File" %>
 <%@ page import="java.awt.image.BufferedImage" %>
@@ -9,37 +10,24 @@
 <%@ page import="Utility.MySQL" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+    if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
+    String username = (String) session.getAttribute("username");
+
+    MySQL DB = new MySQL();
+    User user = UserDAO.getUser(DB, username);
+    String imagePath = user.getProfileImagePath();
+
+%>
+
 <!DOCTYPE html>
 <html lang="en" class="full">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
     <title>Profile_Image Update</title>
-
-    <%--JQuery JavaScript--%>
-    <script src="https://code.jquery.com/jquery-3.2.1.js"
-            integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-            crossorigin="anonymous"></script>
-
-    <%--Bootstrap CSS--%>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <%--Bootstrap JavaScript--%>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
-
-    <%--JQuery UI CSS--%>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-    <%--JQuery UI JavaScript--%>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
-            integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
-            crossorigin="anonymous"></script>
-
-    <%--Icons CSS--%>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <%@include file="../WEB-INF/head-scripts.jsp"%>
 
     <%--Function to enable JQuery UI elements--%>
     <script>
@@ -48,242 +36,12 @@
         });
     </script>
 
-    <style>
-        .full {
-            background: url('../login_interface/lake-baikal-9.jpg') no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            background-size: cover;
-            -o-background-size: cover;
-        }
-
-        body {
-            background-color: transparent;
-        }
-
-        @font-face {
-            font-family: Plump;
-            src: url('../Fonts/Plumpfull.ttf');
-        }
-
-        #headerUser, #headerHome, #headerCollection {
-            font-family: Plump;
-            color: white;
-        }
-
-        .container-fluid {
-            background-color: #029f5b;
-        }
-
-        .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
-            background-color: #029f5b;
-        }
-
-        .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
-            background-color: white;
-        }
-
-        .navbar-default {
-            margin-bottom: 0;
-            border-color: #029f5b;
-        }
-
-        .navbar-default .navbar-toggle {
-            border-color: white;
-            background-color: white;
-        }
-
-        .navbar-default .navbar-toggle .icon-bar {
-            background-color: #029f5b;
-        }
-
-        #headerSearchSubmit {
-            font-family: Plump;
-            color: #029f5b;
-        }
-
-        #headerThumbnail {
-            margin: 3px;
-            height: 44px;
-            width: 44px;
-        }
-
-        #headerSearchIcon {
-            color: #029f5b;
-        }
-
-        legend {
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            font-size: 14px;
-            line-height: 1.42857143;
-            color: #333;
-            font-weight: 700;
-        }
-
-        #userImageID {
-            display: block;
-            margin: auto;
-            width: 250px;
-        }
-
-        .img-thumbnail {
-            height: 140px;
-            width: 140px;
-            border-color: transparent;
-        }
-
-        .btn-register {
-            background-color: #029f5b;
-            outline: none;
-            color: white;
-            height: auto;
-            font-weight: normal;
-            padding: 14px 0;
-            text-transform: uppercase;
-            border-color: #029f5b;
-        }
-
-        .form-control[disabled] {
-            background-color: #029f5b;
-            opacity: 1;
-        }
-
-        #pictureChoiceDefaultID {
-            padding-right: 0;
-            padding-left: 0;
-        }
-
-        label.btn.btn-primary {
-            width: 180px;
-            height: 160px;
-        }
-
-        input.btn.btn-primary {
-            max-width: 190px;
-        }
-
-        label {
-            max-width: none;
-        }
-
-        .btn-primary {
-            color: black;
-            background-color: #f6f6f6;
-            border: 1px solid #c5c5c5;
-        }
-
-        .btn-primary:hover {
-            background-color: #ccc;
-            border: 1px solid #c5c5c5;;
-        }
-
-        .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
-            background-color: #029f5b;
-            border-color: #1A9B42;
-        }
-
-        .ui-icon-background, .ui-state-active .ui-icon-background {
-            border: white;
-            background-color: #ffffff;
-        }
-
-        .ui-visual-focus {
-            box-shadow: none;
-        }
-
-        .ui-checkboxradio-radio-label.ui-checkboxradio-checked .ui-icon, .ui-checkboxradio-radio-label.ui-checkboxradio-checked:hover .ui-icon {
-            width: 16px;
-            height: 16px;
-            box-shadow: none;
-            background-color: #ccc;
-        }
-
-        .panel-login {
-            margin-top: 5%;
-        }
-
-        .form-group {
-            margin-bottom: 0;
-        }
-
-        #changePictureUploadDivID {
-            padding-left: 15px;
-        }
-
-        #changePictureDefaultDivID {
-            margin-top: 20px;
-        }
-    </style>
+    <tags:DPUpdate-Style/>
 </head>
 <body>
 
-<%
-    if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
-    HttpSession session1 = request.getSession();
-    String username = (String) session1.getAttribute("username");
+<%@ include file="../WEB-INF/header-navbar.jsp" %>
 
-    MySQL DB = new MySQL();
-    User user = UserDAO.getUser(DB, username);
-    String imagePath = user.getProfileImagePath();
-
-%>
-
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#headerNavBar" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <img id="headerThumbnail" src="/User/<%= username%>/User_profile_picture_thumb.jpg"
-                 class="img-thumbnail" alt="User Profile Picture">
-        </div>
-        <div class="collapse navbar-collapse" id="headerNavBar">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" id="headerUser" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                       aria-haspopup="true"
-                       aria-expanded="false"><i class="glyphicon glyphicon-user"></i> <%= username%><span
-                            class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Update your account</a></li>
-                        <li><a href="#">Change profile picture</a></li>
-                        <li><a href="#">Change password</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Logout</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" id="headerCollection" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                       aria-haspopup="true"
-                       aria-expanded="false"><i class="glyphicon glyphicon-picture"></i> Collection Display<span
-                            class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">To be UPDATED</a></li>
-                        <li><a href="#">To be UPDATED</a></li>
-                        <li><a href="#">To be UPDATED</a></li>
-                        <li><a href="#">To be UPDATED</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a id="headerHome" href="" role="button"><i class="glyphicon glyphicon-tree-conifer"></i> Home</a>
-                </li>
-            </ul>
-            <form class="navbar-form navbar-right">
-                <div id="headerSearch" class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button id="headerSearchSubmit" type="submit" class="btn btn-default"><i id="headerSearchIcon"
-                                                                                         class="glyphicon glyphicon-search"></i>
-                    Search
-                </button>
-            </form>
-        </div>
-    </div>
-</nav>
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2">

@@ -9,23 +9,25 @@
 <%@ page import="User.UserSecurity" %>
 <%@ page import="Utility.SecurityUtility" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
 
 <%  if(!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
-    HttpSession session1 = request.getSession();
-    String username = (String) session1.getAttribute("username");
+    String username = (String) session.getAttribute("username");
 %>
-<%@include file="../WEB-INF/Header.jsp"%>
+
+<html>
+<head>
+    <title>Home</title>
+    <%@include file="../WEB-INF/head-scripts.jsp"%>
+</head>
+<body>
+<%@ include file="../WEB-INF/header-navbar.jsp" %>
+
 <p>Hi <%= username%></p>
 <p>${message}</p>
 <a href="../user_interface/changePassword.jsp"><button>Change Password</button></a>
 <a href="../Serve_Logout"><button>Log Out</button></a>
 
-<iframe src="../tree TRIAL/trial.jsp"frameborder=0 height="750px" width="1000px" scrolling="auto">
+<iframe src="../tree_TRIAL/trial.jsp"frameborder=0 height="750px" width="1000px" scrolling="auto">
     <p>Your browser does not support iframes.</p>
 </iframe>
 

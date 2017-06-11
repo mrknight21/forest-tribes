@@ -1,9 +1,20 @@
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ page import="Utility.SecurityUtility" %>
 <%@ page import="User.UserDAO" %>
 <%@ page import="User.User" %>
 <%@ page import="Utility.MySQL" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<% if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("login_interface/Login.jsp");
+    String username = (String) session.getAttribute("username");
+
+    final MySQL DB = new MySQL();
+
+    User user = UserDAO.getUser(DB, username);
+    String email = user.getEmail();
+%>
+
 <!DOCTYPE html>
 <html lang="en" class="full">
 <meta charset="UTF-8">
@@ -11,30 +22,7 @@
 <head>
     <title>Profile</title>
 
-    <%--JQuery JavaScript--%>
-    <script src="https://code.jquery.com/jquery-3.2.1.js"
-            integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-            crossorigin="anonymous"></script>
-
-    <%--Bootstrap CSS--%>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <%--Bootstrap JavaScript--%>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
-
-    <%--JQuery UI CSS--%>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-    <%--JQuery UI JavaScript--%>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
-            integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
-            crossorigin="anonymous"></script>
-
-    <%--Icons CSS--%>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <%@include file="WEB-INF/head-scripts.jsp"%>
 
     <%--Function to enable JQuery UI elements--%>
     <script>
@@ -61,145 +49,11 @@
         });
     </script>
 
-    <style>
-        .full {
-            background: url('login_interface/lake-baikal-9.jpg') no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            background-size: cover;
-            -o-background-size: cover;
-        }
-
-        body {
-            background-color: transparent;
-        }
-
-        .panel {
-            margin-top: 25%;
-        }
-
-        h1 {
-            margin-top: 0px;
-            margin-bottom: 10px;
-            font-family: 'Plump';
-            color: #029f5b;
-        }
-
-        h4 {
-            margin-bottom: 10px;
-            font-family: 'Amperzand';
-        }
-
-        @font-face {
-            font-family: Plump;
-            src: url('Fonts/Plumpfull.ttf');
-        }
-
-        @font-face {
-            font-family: Amperzand;
-            src: url('Fonts/Amperzand.ttf');
-        }
-
-        legend {
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            font-size: 14px;
-            line-height: 1.42857143;
-            color: #333;
-            font-weight: 700;
-        }
-
-        h5 {
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            line-height: 1.42857143;
-            color: #333;
-            font-weight: 700;
-        }
-
-        .btn-register {
-            background-color: #029f5b;
-            outline: none;
-            color: #fff;
-            font-size: 14px;
-            height: auto;
-            font-weight: normal;
-            padding: 14px 0;
-            text-transform: uppercase;
-            border-color: #029f5b;
-        }
-
-        .control-label {
-            margin-bottom: 0px;
-        }
-
-        .input-group {
-            margin-bottom: 10px;
-        }
-
-        .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
-            background-color: #029f5b;
-            border-color: #1A9B42;
-        }
-
-        .ui-icon-background, .ui-state-active .ui-icon-background {
-            border: white;
-            background-color: #ffffff;
-        }
-
-        .ui-visual-focus {
-            box-shadow: none;
-        }
-
-        #profileImage {
-            width: 50%;
-        }
-
-        .thumbnail {
-            border-color: transparent;
-        }
-
-        #profileIssuesFieldset img {
-            padding-right: 0;
-            padding-left: 0;
-        }
-
-        .btn-primary {
-            padding-right: 24px;
-            padding-left: 24px;
-        }
-
-        .panel-login > .panel-heading a {
-            text-decoration: none;
-            color: #029f5b;
-            font-weight: bold;
-            font-size: 15px;
-            -webkit-transition: all 0.1s linear;
-            -moz-transition: all 0.1s linear;
-            transition: all 0.1s linear;
-        }
-
-        #profileDeleteWarningID, #profileMessageID {
-            font-family: Plump;
-            color: red;
-        }
-
-        .form-control[disabled] {
-            background-color: #029f5b;
-            opacity: 1;
-        }
-    </style>
+    <tags:profile-style/>
 </head>
 <body>
 
-<% if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("login_interface/Login.jsp");
-
-    final MySQL DB = new MySQL();
-
-    HttpSession httpSession = request.getSession();
-    String username = (String) httpSession.getAttribute("username");
-
-    User user = UserDAO.getUser(DB, username);
-    String email = user.getEmail();
-%>
+<%@ include file="../WEB-INF/header-navbar.jsp" %>
 
 <div class="container">
     <div class="row">
