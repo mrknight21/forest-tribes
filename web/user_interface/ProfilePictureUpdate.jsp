@@ -50,7 +50,7 @@
 
     <style>
         .full {
-            background: url('/login_interface/lake-baikal-9.jpg') no-repeat center center fixed;
+            background: url('../login_interface/lake-baikal-9.jpg') no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             background-size: cover;
@@ -218,7 +218,7 @@
 <body>
 
 <%
-    if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/login_interface/Login.jsp");
+    if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
     HttpSession session1 = request.getSession();
     String username = (String) session1.getAttribute("username");
 
@@ -304,7 +304,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-10 col-lg-offset-1">
-                            <form id="select_default_options" action="/Serve_UpdateProfilePicture" method="GET">
+                            <form id="select_default_options" action="../Serve_UpdateProfilePicture" method="GET">
                                 <fieldset>
                                     <legend id="pictureChoiceDefaultID"><i style="font-size:24px"
                                                                            class="fa">&#xf046;</i> Default Choices:
@@ -432,7 +432,7 @@
                                 </fieldset>
                             </form>
                             <br>
-                            <form id="upload_own_photo" action="/Serve_UpdateProfilePicture" method="post"
+                            <form id="upload_own_photo" action="../Serve_UpdateProfilePicture" method="post"
                                   enctype="multipart/form-data">
                                 <fieldset>
                                     <legend><i style="font-size:24px" class="fa">&#xf0ee;</i> Upload your own

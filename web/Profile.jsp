@@ -190,7 +190,7 @@
 </head>
 <body>
 
-<% if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/login_interface/Login.jsp");
+<% if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("login_interface/Login.jsp");
 
     final MySQL DB = new MySQL();
 
@@ -222,7 +222,7 @@
                         <div class="col-lg-12">
                             <h1 style="text-align: center"><i class="fa">&#xf1bb;</i> Forest Tribes</h1>
                             <h4 id="subtitle" style="text-align: center">The Beauty of Interconnectedness</h4>
-                            <form id="profileUpdateFormID" action="/Serve_Profile" method="post" role="form"
+                            <form id="profileUpdateFormID" action="Serve_Profile" method="post" role="form"
                                   style="display: block">
                                 <fieldset class="span4">
                                     <legend><i class="fa">&#xf083;</i> Profile Picture</legend>
@@ -508,7 +508,7 @@
                                     </div>
                                 </div>
                             </form>
-                            <form id="profileDeleteFormID" action="/Serve_DeleteUser" method="GET" role="form"
+                            <form id="profileDeleteFormID" action="Serve_DeleteUser" method="GET" role="form"
                                   style="display: none;">
                                 <p id="profileDeleteWarningID" style="text-align: center">Warning: This action can not
                                     be undone.</p>

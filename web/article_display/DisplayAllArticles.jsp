@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<% if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/login_interface/Login.jsp");
+<% if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
 
     final MySQL DB = new MySQL();
 

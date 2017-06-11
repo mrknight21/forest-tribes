@@ -15,17 +15,17 @@
 </head>
 <body>
 
-<%  if(!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/login_interface/Login.jsp");
+<%  if(!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
     HttpSession session1 = request.getSession();
     String username = (String) session1.getAttribute("username");
 %>
-<%@include file="../Header.jsp"%>
+<%@include file="../WEB-INF/Header.jsp"%>
 <p>Hi <%= username%></p>
 <p>${message}</p>
-<a href="/user_interface/changePassword.jsp"><button>Change Password</button></a>
-<a href="/Serve_Logout"><button>Log Out</button></a>
+<a href="../user_interface/changePassword.jsp"><button>Change Password</button></a>
+<a href="../Serve_Logout"><button>Log Out</button></a>
 
-<iframe src="/tree TRIAL/trial.jsp"frameborder=0 height="750px" width="1000px" scrolling="auto">
+<iframe src="../tree TRIAL/trial.jsp"frameborder=0 height="750px" width="1000px" scrolling="auto">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
