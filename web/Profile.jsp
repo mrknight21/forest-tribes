@@ -24,13 +24,14 @@
 
     <%@include file="WEB-INF/head-scripts.jsp" %>
 
-    <%--Function to enable JQuery UI elements--%>
     <script>
+        <%--Function to enable JQuery UI elements--%>
         $(function () {
             $("input[type='radio']").checkboxradio();
             $(".form-group").controlgroup();
         });
 
+        <%--Function to check inputted passwords match each other--%>
         function checkPasswordMatch() {
             var password = $("#profileDeletePasswordID").val();
             var confirmPassword = $("#profileDeleteConfirmPasswordID").val();

@@ -22,14 +22,10 @@ public class Serve_Authentication extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
-
-
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-
 
         try {
             if (SecurityUtility.loggingStatusChecker(request)){
@@ -64,8 +60,6 @@ public class Serve_Authentication extends HttpServlet {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 }
 

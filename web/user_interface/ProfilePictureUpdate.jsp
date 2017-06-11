@@ -27,6 +27,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
     <title>Profile_Image Update</title>
+
+    <%--Importing all necessary libraries, frameworks etc.--%>
     <%@include file="../WEB-INF/head-scripts.jsp"%>
 
     <%--Function to enable JQuery UI elements--%>
