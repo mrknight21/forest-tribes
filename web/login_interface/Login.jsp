@@ -10,7 +10,8 @@
 
     <%--Google Library--%>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="528062179592-r23sffi9bm4tnntec1e6eei3s1oot0k9.apps.googleusercontent.com">
+    <meta name="google-signin-client_id"
+          content="528062179592-r23sffi9bm4tnntec1e6eei3s1oot0k9.apps.googleusercontent.com">
 
     <%--JQuery JavaScript--%>
     <script
@@ -39,6 +40,9 @@
     <%--Icons CSS--%>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <%--Page Specific CSS--%>
+    <link rel="stylesheet" href="Login.css">
+
     <script>
         function checkPasswordMatch() {
             var password = $("#registrationPasswordID").val();
@@ -53,201 +57,10 @@
             }
         }
 
-        $(document).ready(function (){
+        $(document).ready(function () {
             $("#registrationConfirmPasswordID").keyup(checkPasswordMatch);
         });
     </script>
-
-    <style>
-        .full {
-            background: url('lake-baikal-9.jpg') no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            background-size: cover;
-            -o-background-size: cover;
-        }
-
-        body {
-            background-color: transparent;
-        }
-
-        /* Smartphones (landscape) ----------- */
-        @media only screen
-        and (min-width: 321px) {
-            .panel {
-                margin-right: 0;
-                margin-left: 17%;
-                width: 70%;
-            }
-
-            .container {
-                padding: 0;
-            }
-
-            #loginHidePanelLink {
-                padding-left: 2%;
-            }
-        }
-
-        /* Smartphones (portrait) ----------- */
-        @media only screen
-        and (max-width: 320px) {
-            .panel {
-                margin-top: 10%;
-            }
-
-            .col-lg-4 {
-                padding-right: 2%;
-            }
-
-            #loginHidePanelLink {
-                padding-left: 2%;
-            }
-        }
-
-        @media only screen
-        and (min-device-width: 321px)
-        and (max-device-width: 420px)
-        and (orientation: portrait) {
-            .panel {
-                margin-top: 30%;
-                margin-left: 19%;
-            }
-        }
-
-        /* iPads (landscape) ----------- */
-        @media only screen
-        and (min-device-width: 768px)
-        and (max-device-width: 1024px)
-        and (orientation: landscape) {
-            .panel {
-                margin-top: 12%;
-            }
-        }
-
-        /* iPads (portrait) ----------- */
-        @media only screen
-        and (min-device-width: 768px)
-        and (max-device-width: 1024px)
-        and (orientation: portrait) {
-            .panel {
-                margin-top: 30%;
-            }
-        }
-
-        /* Desktops and laptops ----------- */
-        @media only screen
-        and (min-width: 1224px) {
-
-        }
-
-        /* Large screens ----------- */
-        @media only screen
-        and (min-width: 1824px) {
-
-        }
-
-        h1 {
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-family: 'Plump';
-            color: #029f5b;
-        }
-
-        h4 {
-            margin-bottom: 10px;
-            font-family: 'Amperzand';
-        }
-
-        .panel-body {
-            padding-top: 0px;
-        }
-
-        .panel-heading {
-            padding-bottom: 0px;
-        }
-
-        .btn-login, .btn-register {
-            background-color: #029f5b;
-            outline: none;
-            color: white;
-            font-size: 14px;
-            height: auto;
-            font-weight: normal;
-            padding: 14px 0;
-            text-transform: uppercase;
-            border-color: #029f5b;
-        }
-
-        .btn-primary.active, .btn-primary.active:hover, .btn-primary.active:focus {
-            background-color: transparent;
-            border-color: transparent;
-            outline: none;
-            color: white;
-            height: auto;
-            font-weight: normal;
-            text-decoration: none;
-
-        }
-
-        .btn-primary, .btn-primary:hover, .btn-primary:focus {
-            background-color: transparent;
-            border-color: transparent;
-            outline: none;
-            color: white;
-            height: auto;
-            font-weight: normal;
-            text-decoration: none;
-        }
-
-        .panel-login > .panel-heading a {
-            text-decoration: none;
-            color: #029f5b;
-            font-weight: bold;
-            font-size: 15px;
-            -webkit-transition: all 0.1s linear;
-            -moz-transition: all 0.1s linear;
-            transition: all 0.1s linear;
-        }
-
-        .panel-login > .panel-heading a.active {
-            color: #029f5b;
-            font-size: 18px;
-        }
-
-        @font-face {
-            font-family: Plump;
-            src: url('../Fonts/Plumpfull.ttf');
-        }
-
-        @font-face {
-            font-family: Amperzand;
-            src: url('../Fonts/Amperzand.ttf');
-        }
-
-        .input-group {
-            margin-bottom: 10px;
-        }
-
-        #messageLogin, #registrationMessageID {
-            color: red;
-            font-family: Plump;
-        }
-
-        .form-control[disabled] {
-            background-color: #029f5b;
-            opacity: 1;
-        }
-
-        .container {
-            width: 100%
-        }
-
-        #loginHideRow {
-            padding-left: 2%;
-            padding-top: 2%;
-        }
-    </style>
 </head>
 <body>
 
@@ -278,18 +91,18 @@
     // Button.  See the onlogin handler attached to it in the sample
     // code below.
     function checkLoginState() {
-        FB.getLoginStatus(function(response) {
+        FB.getLoginStatus(function (response) {
             statusChangeCallback(response);
         });
     }
 
-    window.fbAsyncInit = function() {
+    window.fbAsyncInit = function () {
         FB.init({
-            appId      : '1228095957317856',
-            cookie     : true,  // enable cookies to allow the server to access
-                                // the session
-            xfbml      : true,  // parse social plugins on this page
-            version    : 'v2.8' // use graph api version 2.8
+            appId: '1228095957317856',
+            cookie: true,  // enable cookies to allow the server to access
+                           // the session
+            xfbml: true,  // parse social plugins on this page
+            version: 'v2.8' // use graph api version 2.8
         });
 
         // Now that we've initialized the JavaScript SDK, we call
@@ -304,17 +117,18 @@
         //
         // These three cases are handled in the callback function.
 
-        FB.getLoginStatus(function(response) {
+        FB.getLoginStatus(function (response) {
             statusChangeCallback(response);
         });
 
     };
 
     // Load the SDK asynchronously
-    (function(d, s, id) {
+    (function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
+        js = d.createElement(s);
+        js.id = id;
         js.src = "//connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
@@ -323,7 +137,7 @@
     // successful.  See statusChangeCallback() for when this call is made.
     function testAPI() {
         console.log('Welcome!  Fetching your information.... ');
-        FB.api('/me', function(response) {
+        FB.api('/me', function (response) {
             console.log('Successful login for: ' + response.name);
             document.getElementById('status').innerHTML =
                 'Thanks for logging in, ' + response.name + '!';
@@ -337,17 +151,7 @@
   the FB.login() function when clicked.
 -->
 
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
-
-
-<%--FB Login button:--%>
-<div id="status">
-</div>
 <%--//////////////////////////////////////////////////////////////--%>
-
-<%--Google signin button--%>
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
 
 
 <div class="container" style="background-color: transparent">
@@ -399,6 +203,23 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div id="thirdPartyLoginDivID" class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="text-center">
+                                                <div id="status">
+                                                    <%--FB Login button:--%>
+                                                    <fb:login-button scope="public_profile,email"
+                                                                     onlogin="checkLoginState();">
+                                                    </fb:login-button>
+                                                </div>
+                                                <%--Google signin button--%>
+                                                <div id="loginGoogle" class="g-signin2" data-onsuccess="onSignIn"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-lg-12">
@@ -442,7 +263,8 @@
                                            id="registrationConfirmPasswordID" tabindex="6" class="form-control"
                                            placeholder="Confirm Password" onchange="checkPasswordMatch();">
                                 </div>
-                                <p id="registrationMessageID" style="text-align: center; display: none;">The entered-in passwords do not match. Please try again.</p>
+                                <p id="registrationMessageID" style="text-align: center; display: none;">The entered-in
+                                    passwords do not match. Please try again.</p>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-lg-12">
