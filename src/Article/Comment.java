@@ -18,10 +18,14 @@ public class Comment extends Text {
     public Comment(String author, String text, int articleID) {
         super(author, text);
         this.articleID = articleID;
+        likes = 0;
+        views = 0;
+        this.replies =null;
+        this.replyCount =0;
     }
 
-    public Comment(int id, String text,  String lasteditedTime) {
-        super(id, text, lasteditedTime);
+    public Comment(int id, String text) {
+        super(id, text);
     }
 
     public Comment(int id, String author, String text, List<Reply> replies, int likes, int views,  String dateCreated, String dateLastEdited) {
@@ -37,4 +41,15 @@ public class Comment extends Text {
     public int getReplyCount() {
         return replyCount;
     }
+
+
+
+    public int getArticleID(){
+        return articleID;
+    }
+
+    public void setArticleID(int parent_id){
+        this.articleID = parent_id;
+    }
+
 }

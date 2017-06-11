@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_Articles (
   creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),
-  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username)
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS inFoJaxs_Comments (
@@ -92,8 +92,8 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_Comments (
   creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),
-  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username),
-  FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Articles(ID)
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username) ON DELETE CASCADE,
+  FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Articles(ID) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS inFoJaxs_Replies (
@@ -106,8 +106,8 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_Replies (
   creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),
-  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username),
-  FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Comments(ID)
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username) ON DELETE CASCADE,
+  FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Comments(ID)ON DELETE CASCADE
 );
 /*CREATE TABLE IF NOT EXISTS inFoJaxs_ArticleLikes (
   ID INT,
@@ -152,3 +152,12 @@ Spin it like some stop and go.
 Drop it drop it to the floor.
 Spin it like some stop and go.
 Now let me see you make dat web semantic like a 3.0!');
+
+
+INSERT INTO inFoJaxs_Comments (parent_ID, username, content, likes, views, repliesCount ) VALUES
+  (3, 'will', 'yo! yo! yo! yo! yo! yo!', 1000, 1000, 0);
+
+INSERT INTO inFoJaxs_Replies (parent_ID, username, content, likes, views) VALUES
+(2, 'zxcv', 'aahahhahahhahahahahahahahahahahahhahaahahahah!', 1000, 1000);
+
+

@@ -75,4 +75,14 @@
     </servlet-mapping>
 
 
+    <servlet>
+        <servlet-name>Serve_fullArticlecontent</servlet-name>
+        <servlet-class>Article.Serve_fullArticlecontent</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Serve_fullArticlecontent</servlet-name>
+        <url-pattern>/Serve_fullArticlecontent</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>

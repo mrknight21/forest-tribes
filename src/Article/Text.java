@@ -20,7 +20,7 @@ public abstract class Text implements Serializable {
     public Text() {}
 
     //initialised
-    public Text(String text, String author) {
+    public Text(String author, String text) {
         this.author = author;
         this.text = text;
         likes = 0;
@@ -28,10 +28,9 @@ public abstract class Text implements Serializable {
     }
 
     //update
-    public Text(int id, String text, String dateLastEdited) {
+    public Text(int id, String text) {
         this.id = id;
         this.text = text;
-        this.dateLastEdited = dateLastEdited;
     }
 
     //retrieve

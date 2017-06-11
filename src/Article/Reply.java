@@ -14,17 +14,25 @@ public class Reply extends Text {
     public Reply() {}
 
     //initial
-    public Reply(String text, String author, int commentId) {
+    public Reply(String author, String text, int commentId) {
         super(author, text);
         this.commentId = commentId;
     }
 
     //update
-    public Reply(int id, String text, String dateLastEdited) {
-        super(id, text, dateLastEdited);
+    public Reply(int id, String text) {
+        super(id, text);
     }
     //retrieve
     public Reply(int id, String author, String text,  int likes, int views, String dateCreated, String dateLastEdited) {
         super(id, author, text, dateCreated, dateLastEdited, likes, views);
+    }
+
+    public int getCommentId(){
+        return this.commentId;
+    }
+
+    public void setCommentId(int commentId){
+        this.commentId = commentId;
     }
 }

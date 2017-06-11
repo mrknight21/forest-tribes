@@ -225,10 +225,12 @@ public class SecurityUtility {
 
         String username = (String) session.getAttribute("username");
 
-        if (username != null) {
+       /* if (username != null) {
             List<UserSecurity> users = UserSecurityDAO.getAllUsers(DB);
             for (UserSecurity user : users) if ((user.getUsername()).equals(username)) return true;
-        }
+        }*/
+
+       if ((Boolean)(session.getAttribute("loggingStatus"))) {return  true;}
         return false;
     }
 
