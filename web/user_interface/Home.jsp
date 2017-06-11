@@ -9,23 +9,25 @@
 <%@ page import="User.UserSecurity" %>
 <%@ page import="Utility.SecurityUtility" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%  if(!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
+    String username = (String) session.getAttribute("username");
+%>
+
 <html>
 <head>
-    <title>Title</title>
+    <title>Home</title>
+    <%@include file="../WEB-INF/head-scripts.jsp"%>
 </head>
 <body>
+<%@ include file="../WEB-INF/header-navbar.jsp" %>
 
-<%  if(!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/login_interface/Login.jsp");
-    HttpSession session1 = request.getSession();
-    String username = (String) session1.getAttribute("username");
-%>
-<%@include file="../Header.jsp"%>
 <p>Hi <%= username%></p>
 <p>${message}</p>
-<a href="/user_interface/changePassword.jsp"><button>Change Password</button></a>
-<a href="/Serve_Logout"><button>Log Out</button></a>
+<a href="<%=sitePath%>user_interface/changePassword.jsp"><button>Change Password</button></a>
+<a href="<%=sitePath%>Serve_Logout"><button>Log Out</button></a>
 
-<iframe src="/tree TRIAL/trial.jsp"frameborder=0 height="750px" width="1000px" scrolling="auto">
+<iframe src="<%=sitePath%>tree_TRIAL/trial.jsp"frameborder=0 height="750px" width="1000px" scrolling="auto">
     <p>Your browser does not support iframes.</p>
 </iframe>
 

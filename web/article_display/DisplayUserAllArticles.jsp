@@ -10,22 +10,21 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
+    String username = (String) session.getAttribute("username");%>
 <html>
 <head>
     <title>Display all articles</title>
+    <%@include file="../WEB-INF/head-scripts.jsp"%>
 </head>
 <body>
+<%@ include file="../WEB-INF/header-navbar.jsp" %>
 
-<% if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/login_interface/Login.jsp");
-
+<%
     final MySQL DB = new MySQL();
-
-    HttpSession httpSession = request.getSession();
-    String username = (String) httpSession.getAttribute("username");
-
     List<Article> articles = ArticleDAO.getArticlesByUser(DB, username);
-
-
+    request.setAttribute("articles", articles);
 
     /*ID INT AUTO_INCREMENT,
   username VARCHAR(50) NOT NULL,
@@ -41,28 +40,29 @@
 
 <h1>ALL ARTICLES!!!!!</h1>
 
+<div class="container">
+    <c:forEach items="${articles}" var="article">
+        <!--Article panel-->
+        <div class="col-sm-12 col-md-9 panel panel-default" id="article-container">
+            <div class="panel panel-default" id="article">
+                <div class="panel-heading">
+                    <h2>${article.title}</h2>
+                </div>
+                <div class="panel-body">
+                    <h3>${article.shortIntro}</h3>
 
-<%
-
-    for (Article arcticle: articles){
-    int id = arcticle.getId();
-    String author = arcticle.getAuthor();
-    String title = arcticle.getTitle();
-    String content = arcticle.getText();
-    int likes = arcticle.getLikes();
-    int views = arcticle.getViews();
-    int replieNum = arcticle.getCommentCount();
-    String intro = arcticle.getShortIntro();
-    String lastedit = arcticle.getDateLastEdited();
-%>
-<div class="articleContainers">
-    <h2><%=title%></h2>
-    <h3>Author: <%=author%>  article id: <%=id%>  likes: <%=likes%>  views: <%=views%> Replies: <%=replieNum%>  last time edited: <%=lastedit%></h3>
-    <div class="article_content">
-        <p><%=intro%></p>
-    </div>
+                    <div class="article_content">
+                        <p>
+                            Author: ${article.author} article id: ${article.id} likes: ${article.likes}
+                            views: ${article.views}
+                            Replies: ${article.commentCount} last time edited: ${article.dateLastEdited}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </c:forEach>
 </div>
-<%}%>
 
 </body>
 </html>
