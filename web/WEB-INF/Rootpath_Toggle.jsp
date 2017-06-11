@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%!
-//    public String sitePath = "/ForestTribes/";
-    public String sitePath = "/";
+    // Server upload pathway:
+    public String sitePath = "/ForestTribes/";
+
+    // Local host pathway:
+//    public String sitePath = "/";
 %>

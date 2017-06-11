@@ -152,7 +152,7 @@
                         <div class="col-lg-12">
                             <h1 style="text-align: center"><i class="fa">&#xf1bb;</i> Forest Tribes</h1>
                             <h4 style="text-align: center">The Beauty of Interconnectedness</h4>
-                            <form id="loginFormID" action="/Serve_Authentication" method="post" role="form"
+                            <form id="loginFormID" action="<%=sitePath%>Serve_Authentication" method="post" role="form"
                                   style="display: block;">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -205,7 +205,7 @@
                                     </div>
                                 </div>
                             </form>
-                            <form id="registrationFormID" action="/Serve_Registration" method="post" role="form"
+                            <form id="registrationFormID" action="<%=sitePath%>Serve_Registration" method="post" role="form"
                                   style="display: none;">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
