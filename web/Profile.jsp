@@ -22,7 +22,7 @@
 <head>
     <title>Profile</title>
 
-    <%@include file="WEB-INF/head-scripts.jsp"%>
+    <%@include file="WEB-INF/head-scripts.jsp" %>
 
     <%--Function to enable JQuery UI elements--%>
     <script>
@@ -53,7 +53,7 @@
 </head>
 <body>
 
-<%@ include file="../WEB-INF/header-navbar.jsp" %>
+<%@ include file="WEB-INF/header-navbar.jsp" %>
 
 <div class="container">
     <div class="row">
@@ -62,11 +62,13 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-6">
-                            <a href="#" class="active" id="profileUpdateLink"><i class="fa">&#xf044;</i> Update your
+                            <a href="<%=sitePath%>Serve_Profile" class="active" id="profileUpdateLink"><i class="fa">&#xf044;</i>
+                                Update your
                                 Profile</a>
                         </div>
                         <div class="col-xs-6">
-                            <a href="#" id="profileDeleteLink"><i class="fa">&#xf085;</i> Delete your Profile</a>
+                            <a href="<%=sitePath%>Serve_DeleteUser" id="profileDeleteLink"><i class="fa">&#xf085;</i>
+                                Delete your Profile</a>
                         </div>
                     </div>
                     <hr>
@@ -76,44 +78,52 @@
                         <div class="col-lg-12">
                             <h1 style="text-align: center"><i class="fa">&#xf1bb;</i> Forest Tribes</h1>
                             <h4 id="subtitle" style="text-align: center">The Beauty of Interconnectedness</h4>
-                            <form id="profileUpdateFormID" action="Serve_Profile" method="post" role="form"
-                                  style="display: block">
-                                <fieldset class="span4">
-                                    <legend><i class="fa">&#xf083;</i> Profile Picture</legend>
-                                    <div id="profileImageDiv" class="col-lg-10 col-lg-offset-1">
-                                        <div class="thumbnail">
-                                            <img id="profileImage" src="/User/<%= username%>/User_profile_picture.jpg"
-                                                 class="img-responsive" alt="User Profile Picture">
-                                        </div>
+
+                            <fieldset class="span4">
+                                <legend><i class="fa">&#xf083;</i> Profile Picture</legend>
+                                <div id="profileImageDiv" class="col-lg-10 col-lg-offset-1">
+                                    <div class="thumbnail">
+                                        <img id="profileImage"
+                                             src="<%=sitePath%>User/<%= username%>/User_profile_picture.jpg"
+                                             class="img-responsive" alt="User Profile Picture">
                                     </div>
-                                    <form id="profileChangePPFormID" action="" method="post"><input type="submit"
-                                                                                                    value="Change Profile Picture"
-                                                                                                    class="form-control btn btn-register">
-                                    </form>
-                                </fieldset>
-                                <br>
-                                <fieldset id="profileMembershipFieldsetID" class="span4">
-                                    <legend><i class="fa">&#xf2ba;</i> Membership Information</legend>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input type="text" name="profileUpdateUsername" id="profileUpdateUsernameID"
-                                               tabindex="1"
-                                               value="<%= username%>" class="form-control" readonly>
-                                    </div>
-                                    <div class="input-group">
+                                </div>
+                                <form id="profileChangePPFormID" action="<%=sitePath%>Serve_UpdateProfilePicture"
+                                      method="post"><input type="submit"
+                                                           value="Change Profile Picture"
+                                                           class="form-control btn btn-register">
+                                </form>
+                            </fieldset>
+                            <br>
+
+                            <fieldset id="profileMembershipFieldsetID" class="span4">
+                                <legend><i class="fa">&#xf2ba;</i> Membership Information</legend>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input type="text" name="profileUpdateUsername" id="profileUpdateUsernameID"
+                                           tabindex="1"
+                                           value="<%=username%>" class="form-control" readonly>
+                                </div>
+                                <div class="input-group">
                                         <span class="input-group-addon"><i
                                                 class="glyphicon glyphicon-envelope"></i></span>
-                                        <input type="email" name="profileEmail" id="profileEmailID" tabindex="1"
-                                               class="form-control" value="<%= email%>" readonly>
-                                    </div>
-                                    <form id="profileChangePWFormID" action="" method="post"><input type="submit"
-                                                                                                    value="Change Password"
-                                                                                                    class="form-control btn btn-register">
-                                    </form>
-                                </fieldset>
-                                <br>
+                                    <input type="email" name="profileEmail" id="profileEmailID" tabindex="1"
+                                           class="form-control" value="<%= email%>" readonly>
+                                </div>
+                                <form id="profileChangePWFormID" action="<%=sitePath%>Serve_Changepassword"
+                                      method="post"><input type="submit"
+                                                           value="Change Password"
+                                                           class="form-control btn btn-register">
+                                </form>
+                            </fieldset>
+                            <br>
+
+                            <form id="profileUpdateFormID" action="<%=sitePath%>Serve_Profile" method="post" role="form"
+                                  style="display: block">
+
                                 <fieldset id="profilePersonalFieldsetID">
                                     <legend><i class="fa">&#xf2b9;</i> Personal Information</legend>
+
                                     <fieldset id="profileGenderFieldsetID">
                                         <legend><i class="fa">&#xf224;</i> Gender:</legend>
                                         <div class="form-group">
@@ -172,7 +182,7 @@
                                         <legend><i class="fa">&#xf0a1;</i> The issues you care about:</legend>
                                         <div id="profileIssuesID" class="form-group">
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
-                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-01.png"
+                                                    src="<%=sitePath%>images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-01.png"
                                                     class="img-thumbnail img-check" alt="No Poverty"><input
                                                     type="checkbox"
                                                     name="profileIssuesPoverty"
@@ -182,7 +192,7 @@
                                                     autocomplete="off"></label>
                                             </div>
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
-                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-02.png"
+                                                    src="<%=sitePath%>images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-02.png"
                                                     class="img-thumbnail img-check" alt="Zero Hunger"><input
                                                     type="checkbox"
                                                     name="profileIssuesHunger"
@@ -192,7 +202,7 @@
                                                     autocomplete="off"></label>
                                             </div>
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
-                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-03.png"
+                                                    src="<%=sitePath%>images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-03.png"
                                                     class="img-thumbnail img-check"
                                                     alt="Good Health and Well-Being"><input
                                                     type="checkbox"
@@ -203,7 +213,7 @@
                                                     autocomplete="off"></label>
                                             </div>
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
-                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-04.png"
+                                                    src="<%=sitePath%>images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-04.png"
                                                     class="img-thumbnail img-check" alt="Quality Education"><input
                                                     type="checkbox"
                                                     name="profileIssuesEducation"
@@ -213,7 +223,7 @@
                                                     autocomplete="off"></label>
                                             </div>
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
-                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-05.png"
+                                                    src="<%=sitePath%>images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-05.png"
                                                     class="img-thumbnail img-check" alt="Gender Equality"><input
                                                     type="checkbox"
                                                     name="profileIssuesGender"
@@ -223,7 +233,7 @@
                                                     autocomplete="off"></label>
                                             </div>
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
-                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-06.png"
+                                                    src="<%=sitePath%>images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-06.png"
                                                     class="img-thumbnail img-check"
                                                     alt="Clean Water and Sanitation"><input
                                                     type="checkbox"
@@ -234,7 +244,7 @@
                                                     autocomplete="off"></label>
                                             </div>
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
-                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-07.png"
+                                                    src="<%=sitePath%>images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-07.png"
                                                     class="img-thumbnail img-check"
                                                     alt="Affordable and Clean Energy"><input
                                                     type="checkbox"
@@ -245,7 +255,7 @@
                                                     autocomplete="off"></label>
                                             </div>
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
-                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-08.png"
+                                                    src="<%=sitePath%>images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-08.png"
                                                     class="img-thumbnail img-check"
                                                     alt="Decent Work and Economic Growth"><input
                                                     type="checkbox"
@@ -256,7 +266,7 @@
                                                     autocomplete="off"></label>
                                             </div>
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
-                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-09.png"
+                                                    src="<%=sitePath%>images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-09.png"
                                                     class="img-thumbnail img-check"
                                                     alt="Industry, Innovation and Infrastructure"><input
                                                     type="checkbox"
@@ -267,7 +277,7 @@
                                                     autocomplete="off"></label>
                                             </div>
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
-                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-10.png"
+                                                    src="<%=sitePath%>images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-10.png"
                                                     class="img-thumbnail img-check" alt="Reduced Inequality"><input
                                                     type="checkbox"
                                                     name="profileIssuesInequality"
@@ -277,7 +287,7 @@
                                                     autocomplete="off"></label>
                                             </div>
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
-                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-11.png"
+                                                    src="<%=sitePath%>images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-11.png"
                                                     class="img-thumbnail img-check"
                                                     alt="Sustainable Cities and Communities"><input
                                                     type="checkbox"
@@ -288,7 +298,7 @@
                                                     autocomplete="off"></label>
                                             </div>
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
-                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-12.png"
+                                                    src="<%=sitePath%>images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-12.png"
                                                     class="img-thumbnail img-check"
                                                     alt="Responsible Consumption and Production"><input
                                                     type="checkbox"
@@ -299,7 +309,7 @@
                                                     autocomplete="off"></label>
                                             </div>
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
-                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-13.png"
+                                                    src="<%=sitePath%>images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-13.png"
                                                     class="img-thumbnail img-check" alt="Climate Action"><input
                                                     type="checkbox"
                                                     name="profileIssuesClimate"
@@ -309,7 +319,7 @@
                                                     autocomplete="off"></label>
                                             </div>
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
-                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-14.png"
+                                                    src="<%=sitePath%>images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-14.png"
                                                     class="img-thumbnail img-check" alt="Life below Water"><input
                                                     type="checkbox"
                                                     name="profileIssuesWaterLife"
@@ -319,7 +329,7 @@
                                                     autocomplete="off"></label>
                                             </div>
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
-                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-15.png"
+                                                    src="<%=sitePath%>images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-15.png"
                                                     class="img-thumbnail img-check" alt="Life on Land"><input
                                                     type="checkbox"
                                                     name="profileIssuesLandLife"
@@ -329,7 +339,7 @@
                                                     autocomplete="off"></label>
                                             </div>
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
-                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-16.png"
+                                                    src="<%=sitePath%>images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-16.png"
                                                     class="img-thumbnail img-check"
                                                     alt="Peace, Justice and Strong Institutions"><input
                                                     type="checkbox"
@@ -340,7 +350,7 @@
                                                     autocomplete="off"></label>
                                             </div>
                                             <div class="col-lg-3"><label class="btn btn-primary"><img
-                                                    src="images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-17.png"
+                                                    src="<%=sitePath%>images_material/E Icons_WEB/Square_RGB/E_SDG goals_icons-individual-rgb-17.png"
                                                     class="img-thumbnail img-check"
                                                     alt="Partnerships for the Goals"><input
                                                     type="checkbox"
@@ -352,8 +362,10 @@
                                             </div>
                                         </div>
                                     </fieldset>
+
                                 </fieldset>
                                 <br>
+
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <input type="submit" name="profileUpdateSubmit" id="profileUpdateSubmitID"
@@ -361,8 +373,11 @@
                                                value="Update your Profile">
                                     </div>
                                 </div>
+
                             </form>
-                            <form id="profileDeleteFormID" action="Serve_DeleteUser" method="GET" role="form"
+
+                            <form id="profileDeleteFormID" action="<%=sitePath%>Serve_DeleteUser" method="GET"
+                                  role="form"
                                   style="display: none;">
                                 <p id="profileDeleteWarningID" style="text-align: center">Warning: This action can not
                                     be undone.</p>
@@ -386,9 +401,11 @@
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                         <input type="password" name="profileDeleteConfirmPassword"
                                                id="profileDeleteConfirmPasswordID" tabindex="3"
-                                               class="form-control" placeholder="Confirm Password" onchange="checkPasswordMatch();">
+                                               class="form-control" placeholder="Confirm Password"
+                                               onchange="checkPasswordMatch();">
                                     </div>
-                                    <p id="profileMessageID" style="text-align: center; display: none">The entered-in passwords do not match. Please try again.</p>
+                                    <p id="profileMessageID" style="text-align: center; display: none">The entered-in
+                                        passwords do not match. Please try again.</p>
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <input type="submit" name="profileDeleteSubmit" id="profileDeleteSubmitID"

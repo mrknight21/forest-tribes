@@ -1,7 +1,8 @@
+<%@include file="../rootpath_toggle.jsp"%>
 <style>
         @font-face {
             font-family: Plump;
-            src: url('../Fonts/Plumpfull.ttf');
+            src: url('<%=sitePath%>Fonts/Plumpfull.ttf');
         }
 
         #headerUser, #headerHome, #headerCollection {

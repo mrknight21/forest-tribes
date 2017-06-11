@@ -62,7 +62,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-10 col-lg-offset-1">
-                            <form id="select_default_options" action="../Serve_UpdateProfilePicture" method="GET">
+                            <form id="select_default_options" action="<%=sitePath%>Serve_UpdateProfilePicture" method="GET">
                                 <fieldset>
                                     <legend id="pictureChoiceDefaultID"><i style="font-size:24px"
                                                                            class="fa">&#xf046;</i> Default Choices:
@@ -70,114 +70,114 @@
                                     <div class="form-group">
                                         <div class="col-lg-4">
                                             <label class="btn btn-primary"><a
-                                                    href="../default_options/default_options_1.jpg"><input id="option1"
+                                                    href="<%=sitePath%>default_options/default_options_1.jpg"><input id="option1"
                                                                                                            type="radio"
                                                                                                            name="DP_option"
                                                                                                            value="default_options/default_options_1.jpg"
                                                                                                            autocomplete="off"/><img
-                                                    src="../default_options/default_options_1.jpg"
+                                                    src="<%=sitePath%>default_options/default_options_1.jpg"
                                                     class="img-thumbnail"></a></label>
                                         </div>
                                         <div class="col-lg-4">
                                             <label class="btn btn-primary"><a
-                                                    href="../default_options/default_options_2.jpg"><input id="option2"
+                                                    href="<%=sitePath%>default_options/default_options_2.jpg"><input id="option2"
                                                                                                            type="radio"
                                                                                                            class="default_DP_Options"
                                                                                                            name="DP_option"
                                                                                                            value="default_options/default_options_2.jpg"/><img
-                                                    src="../default_options/default_options_2.jpg"
+                                                    src="<%=sitePath%>default_options/default_options_2.jpg"
                                                     class="img-thumbnail"></a></label>
                                         </div>
                                         <div class="col-lg-4">
                                             <label class="btn btn-primary"> <a
-                                                    href="../default_options/default_options_3.jpg"><input id="option3"
+                                                    href="<%=sitePath%>default_options/default_options_3.jpg"><input id="option3"
                                                                                                            type="radio"
                                                                                                            class="default_DP_Options"
                                                                                                            name="DP_option"
                                                                                                            value="default_options/default_options_3.jpg"/><img
-                                                    src="../default_options/default_options_3.jpg"
+                                                    src="<%=sitePath%>default_options/default_options_3.jpg"
                                                     class="img-thumbnail"></a></label>
                                         </div>
                                         <div class="col-lg-4">
                                             <label class="btn btn-primary"> <a
-                                                    href="../default_options/default_options_4.jpg"><input id="option4"
+                                                    href="<%=sitePath%>default_options/default_options_4.jpg"><input id="option4"
                                                                                                            type="radio"
                                                                                                            class="default_DP_Options"
                                                                                                            name="DP_option"
                                                                                                            value="default_options/default_options_4.jpg"/><img
-                                                    src="../default_options/default_options_4.jpg"
+                                                    src="<%=sitePath%>default_options/default_options_4.jpg"
                                                     class="img-thumbnail"></a></label>
                                         </div>
                                         <div class="col-lg-4">
                                             <label class="btn btn-primary"><a
-                                                    href="../default_options/default_options_5.gif"><input id="option5"
+                                                    href="<%=sitePath%>default_options/default_options_5.gif"><input id="option5"
                                                                                                            type="radio"
                                                                                                            class="default_DP_Options"
                                                                                                            name="DP_option"
                                                                                                            value="default_options/default_options_5.gif"/><img
-                                                    src="../default_options/default_options_5.gif"
+                                                    src="<%=sitePath%>default_options/default_options_5.gif"
                                                     class="img-thumbnail"></a></label>
                                         </div>
                                         <div class="col-lg-4">
                                             <label class="btn btn-primary"><a
-                                                    href="../default_options/default_options_6.jpg"><input id="option6"
+                                                    href="<%=sitePath%>default_options/default_options_6.jpg"><input id="option6"
                                                                                                            type="radio"
                                                                                                            class="default_DP_Options"
                                                                                                            name="DP_option"
                                                                                                            value="default_options/default_options_6.jpg"/><img
-                                                    src="../default_options/default_options_6.jpg"
+                                                    src="<%=sitePath%>default_options/default_options_6.jpg"
                                                     class="img-thumbnail"></a></label>
                                         </div>
                                         <div class="col-lg-4">
                                             <label class="btn btn-primary"> <a
-                                                    href="../default_options/default_options_7.jpg"><input id="option7"
+                                                    href="<%=sitePath%>default_options/default_options_7.jpg"><input id="option7"
                                                                                                            type="radio"
                                                                                                            class="default_DP_Options"
                                                                                                            name="DP_option"
                                                                                                            value="default_options/default_options_7.jpg"/><img
-                                                    src="../default_options/default_options_7.jpg"
+                                                    src="<%=sitePath%>default_options/default_options_7.jpg"
                                                     class="img-thumbnail"></a></label>
                                         </div>
                                         <div class="col-lg-4">
                                             <label class="btn btn-primary"><a
-                                                    href="../default_options/default_options_8.jpg"><input id="option8"
+                                                    href="<%=sitePath%>default_options/default_options_8.jpg"><input id="option8"
                                                                                                            type="radio"
                                                                                                            class="default_DP_Options"
                                                                                                            name="DP_option"
                                                                                                            value="default_options/default_options_8.jpg"/><img
-                                                    src="../default_options/default_options_8.jpg"
+                                                    src="<%=sitePath%>default_options/default_options_8.jpg"
                                                     class="img-thumbnail"></a></label>
                                         </div>
                                         <div class="col-lg-4">
                                             <label class="btn btn-primary"><a
-                                                    href="../default_options/default_options_9.jpg"><input id="option9"
+                                                    href="<%=sitePath%>default_options/default_options_9.jpg"><input id="option9"
                                                                                                            type="radio"
                                                                                                            class="default_DP_Options"
                                                                                                            name="DP_option"
                                                                                                            value="default_options/default_options_9.jpg"/><img
-                                                    src="../default_options/default_options_9.jpg"
+                                                    src="<%=sitePath%>default_options/default_options_9.jpg"
                                                     class="img-thumbnail"></a></label>
                                         </div>
                                         <div class="col-lg-4">
                                             <label class="btn btn-primary"><a
-                                                    href="../default_options/default_options_10.jpg"><input
+                                                    href="<%=sitePath%>default_options/default_options_10.jpg"><input
                                                     id="option10"
                                                     type="radio"
                                                     class="default_DP_Options"
                                                     name="DP_option"
                                                     value="default_options/default_options_10.jpg"/><img
-                                                    src="../default_options/default_options_10.jpg"
+                                                    src="<%=sitePath%>default_options/default_options_10.jpg"
                                                     class="img-thumbnail"></a></label>
                                         </div>
                                         <div class="col-lg-4">
-                                            <label class="btn btn-primary"><a href="../default_options/Userdefault.jpg"><input
+                                            <label class="btn btn-primary"><a href="<%=sitePath%>default_options/Userdefault.jpg"><input
                                                     id="default"
                                                     type="radio"
                                                     class="default_DP_Options"
                                                     name="DP_option"
                                                     value="default_options/Userdefault.jpg"
                                                     checked/><img
-                                                    src="../default_options/Userdefault.jpg"
+                                                    src="<%=sitePath%>default_options/Userdefault.jpg"
                                                     class="img-thumbnail"></a></label>
                                         </div>
                                     </div>
@@ -190,7 +190,7 @@
                                 </fieldset>
                             </form>
                             <br>
-                            <form id="upload_own_photo" action="../Serve_UpdateProfilePicture" method="post"
+                            <form id="upload_own_photo" action="<%=sitePath%>Serve_UpdateProfilePicture" method="post"
                                   enctype="multipart/form-data">
                                 <fieldset>
                                     <legend><i style="font-size:24px" class="fa">&#xf0ee;</i> Upload your own

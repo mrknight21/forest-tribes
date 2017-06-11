@@ -1,3 +1,5 @@
+<%@include file="rootpath_toggle.jsp"%>
+
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
 <%--JQuery JavaScript--%>

@@ -24,10 +24,10 @@
 
 <p>Hi <%= username%></p>
 <p>${message}</p>
-<a href="../user_interface/changePassword.jsp"><button>Change Password</button></a>
-<a href="../Serve_Logout"><button>Log Out</button></a>
+<a href="<%=sitePath%>user_interface/changePassword.jsp"><button>Change Password</button></a>
+<a href="<%=sitePath%>Serve_Logout"><button>Log Out</button></a>
 
-<iframe src="../tree_TRIAL/trial.jsp"frameborder=0 height="750px" width="1000px" scrolling="auto">
+<iframe src="<%=sitePath%>tree_TRIAL/trial.jsp"frameborder=0 height="750px" width="1000px" scrolling="auto">
     <p>Your browser does not support iframes.</p>
 </iframe>
 

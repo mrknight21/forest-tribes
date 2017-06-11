@@ -46,6 +46,10 @@ public class Serve_UpdateProfilePicture extends HttpServlet {
         String DefaultImagePathway = getServletContext().getRealPath(newProfileImagePath);
         String pathToUserFolder = getServletContext().getRealPath(user.getUserFolderPath());
 
+        // Ensure user folder exists
+        File userFolder = new File(pathToUserFolder);
+        if (!userFolder.isDirectory()) userFolder.mkdirs();
+
         File profileImage = new File(DefaultImagePathway);
         BufferedImage sourceImage = ImageIO.read(profileImage);
 

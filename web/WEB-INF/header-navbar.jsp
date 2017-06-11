@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <img id="headerThumbnail" src="../User/<%= username%>/User_profile_picture_thumb.jpg"
+            <img id="headerThumbnail" src="<%=sitePath%>User/<%= username%>/User_profile_picture_thumb.jpg"
                  class="img-thumbnail" alt="User Profile Picture">
         </div>
         <div class="collapse navbar-collapse" id="headerNavBar">
@@ -18,11 +18,11 @@
                        aria-haspopup="true"
                        aria-expanded="false"><i class="glyphicon glyphicon-user"></i> <%= username%><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="../Profile.jsp">Update your account</a></li>
-                        <li><a href="../user_interface/ProfilePictureUpdate.jsp">Change profile picture</a></li>
-                        <li><a href="../user_interface/changePassword.jsp">Change password</a></li>
+                        <li><a href="<%=sitePath%>Profile.jsp">Update your account</a></li>
+                        <li><a href="<%=sitePath%>user_interface/ProfilePictureUpdate.jsp">Change profile picture</a></li>
+                        <li><a href="<%=sitePath%>user_interface/changePassword.jsp">Change password</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="../Serve_Logout">Logout</a></li>
+                        <li><a href="<%=sitePath%>Serve_Logout">Logout</a></li>
                     </ul>
                 </li>
                 <li>
@@ -30,14 +30,14 @@
                        aria-haspopup="true"
                        aria-expanded="false"><i class="glyphicon glyphicon-picture"></i> Collection Display<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="../article_display/DisplayAllArticles.jsp">All articles</a></li>
-                        <li><a href="../article_display/DisplayUserAllArticles.jsp">Your articles</a></li>
+                        <li><a href="<%=sitePath%>article_display/DisplayAllArticles.jsp">All articles</a></li>
+                        <li><a href="<%=sitePath%>article_display/DisplayUserAllArticles.jsp">Your articles</a></li>
                         <li><a href="#">To be UPDATED</a></li>
                         <li><a href="#">To be UPDATED</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a id="headerHome" href="../user_interface/Home.jsp" role="button"><i class="glyphicon glyphicon-tree-conifer"></i> Home</a>
+                    <a id="headerHome" href="<%=sitePath%>user_interface/Home.jsp" role="button"><i class="glyphicon glyphicon-tree-conifer"></i> Home</a>
                 </li>
             </ul>
             <form class="navbar-form navbar-right">

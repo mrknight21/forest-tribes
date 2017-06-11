@@ -50,7 +50,7 @@
                         <div class="col-lg-12">
                             <h1 style="text-align: center"><i class="fa">&#xf1bb;</i> Forest Tribes</h1>
                             <h4 style="text-align: center">The Beauty of Interconnectedness</h4>
-                            <form action="Serve_Changepassword" method="post" role="form" style="display: block">
+                            <form action="<%=sitePath%>Serve_Changepassword" method="post" role="form" style="display: block">
                                 <legend>Change your password:</legend>
                                 <p>${passwordStatus}</p>
                                 <div class="input-group">
@@ -85,7 +85,7 @@
                             </form>
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <a id="cancelLink" href="Home.jsp"><p style="text-align: center"><i
+                                    <a id="cancelLink" href="<%=sitePath%>Home.jsp"><p style="text-align: center"><i
                                             class="fa">&#xf00d;</i> Cancel</p></a>
                                 </div>
                             </div>
