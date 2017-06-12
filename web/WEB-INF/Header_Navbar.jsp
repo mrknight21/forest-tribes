@@ -30,8 +30,8 @@
                        aria-haspopup="true"
                        aria-expanded="false"><i class="glyphicon glyphicon-picture"></i> Collection Display<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<%=sitePath%>article_display/DisplayAllArticles.jsp">All articles</a></li>
-                        <li><a href="<%=sitePath%>article_display/DisplayUserAllArticles.jsp">Your articles</a></li>
+                        <li><a href="<%=sitePath%>article_display/DisplayAllArticles.jsp">All Articles</a></li>
+                        <li><a href="<%=sitePath%>article_display/DisplayUserAllArticles.jsp">Your Articles</a></li>
                         <li><a href="#">To be UPDATED</a></li>
                         <li><a href="#">To be UPDATED</a></li>
                     </ul>
