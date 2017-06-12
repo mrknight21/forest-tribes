@@ -59,15 +59,14 @@ public class InfoTree extends Text{
 
 
     //Update info tree brief info should go for DAO
-    public InfoTree(int id, String username, String introText, int likes, int views, String dateCreated, String dateLastEdited, String title, int exp, int coordinX, int coordinY ){
+    public InfoTree(int id, String username, String introText, int likes, int views, String dateCreated, String dateLastEdited, String title, int exp){
         super(id, username, introText, dateCreated, dateLastEdited, likes, views);
         this.title =title;
         this.exp =exp;
         calculateStage();
         calculateSize();
         calculateLeaves();
-        this.coordinX =coordinX;
-        this.coordinY = coordinY;
+
     }
 
 
