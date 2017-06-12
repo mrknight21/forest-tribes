@@ -111,7 +111,7 @@
                                         <span class="input-group-addon"><i
                                                 class="glyphicon glyphicon-envelope"></i></span>
                                     <input type="email" name="profileEmail" id="profileEmailID" tabindex="1"
-                                           class="form-control" value="<%= email%>" readonly>
+                                           class="form-control" value="<%= email%>">
                                 </div>
                                 <form id="profileChangePWFormID" action="<%=sitePath%>Serve_Changepassword"
                                       method="post"><input type="submit"

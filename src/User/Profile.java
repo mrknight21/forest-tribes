@@ -13,48 +13,48 @@ public class Profile implements Serializable {
     String occupation;
     String education;
     String political;
-    List<String> issues;
+    String issues;
 
-    public Profile(){
+    public Profile() {
 
     }
 
     public Profile(String username,
-            String gender,
-            String occupation,
-            String education,
-            String political,
-            List<String> issues){
+                   String gender,
+                   String occupation,
+                   String education,
+                   String political,
+                   String issues) {
 
         this.username = username;
-        this.gender =gender;
-        this.occupation =occupation;
+        this.gender = gender;
+        this.occupation = occupation;
         this.education = education;
         this.political = political;
         this.issues = issues;
     }
 
-    public String getUsername(){
+    public String getUsername() {
         return this.username;
     }
 
-    public String getGender(){
+    public String getGender() {
         return this.gender;
     }
 
-    public String getOccupation(){
+    public String getOccupation() {
         return this.occupation;
     }
 
-    public String getEducation(){
+    public String getEducation() {
         return this.education;
     }
 
-    public String getPolitical(){
+    public String getPolitical() {
         return this.political;
     }
 
-    public List<String> getIssues(){
+    public String getIssues() {
         return this.issues;
     }
 }

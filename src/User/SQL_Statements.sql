@@ -7,10 +7,10 @@
 DROP TABLE IF EXISTS inFoJaxs_User;
 
 CREATE TABLE IF NOT EXISTS inFoJaxs_User (
-  username VARCHAR(50) NOT NULL UNIQUE,
-  first_name VARCHAR(25) NOT NULL,
-  last_name VARCHAR(25) NOT NULL,
-  email VARCHAR(50) NOT NULL,
+  username      VARCHAR(50) NOT NULL UNIQUE,
+  first_name    VARCHAR(25) NOT NULL,
+  last_name     VARCHAR(25) NOT NULL,
+  email         VARCHAR(50) NOT NULL,
   date_of_birth DATE,
   PRIMARY KEY (username)
 );
@@ -19,43 +19,41 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_User (
 DROP TABLE IF EXISTS inFoJaxs_UserSecurity;
 
 CREATE TABLE IF NOT EXISTS inFoJaxs_UserSecurity (
-  userID INT AUTO_INCREMENT,
-  username VARCHAR(50),
-  salt BLOB NOT NULL,
-  iterations INT NOT NULL,
-  hash BLOB NOT NULL,
+  userID     INT AUTO_INCREMENT,
+  username   VARCHAR(50),
+  salt       BLOB NOT NULL,
+  iterations INT  NOT NULL,
+  hash       BLOB NOT NULL,
   PRIMARY KEY (userID),
-  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username)
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User (username)
 );
 
 
 DROP TABLE IF EXISTS inFoJaxs_Profile;
 CREATE TABLE IF NOT EXISTS inFoJaxs_Profile (
-  username VARCHAR(50) NOT NULL,
-  date_Of_Birth CHAR(10),
-  gender VARCHAR(6),
-  occupation VARCHAR (20),
-  education_level VARCHAR (30),
-  political_Orientation VARCHAR (30),
-  things_Loved VARCHAR (100),
-  short_intro TEXT,
-  CHECK (date_Of_Birth Like '__/__/____' ),
+  username   VARCHAR(50) NOT NULL,
+  gender     VARCHAR(6),
+  occupation VARCHAR(50),
+  education  VARCHAR(30),
+  political  VARCHAR(30),
+  issues     VARCHAR(500),
   PRIMARY KEY (username),
-  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username)
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User (username)
 );
 
 DROP TABLE IF EXISTS inFoJaxs_IssuesCared;
 CREATE TABLE IF NOT EXISTS inFoJaxs_IssuesCared (
-  ID INT AUTO_INCREMENT,
-  username VARCHAR(50) NOT NULL,
-  issues_Cared VARCHAR (50) NOT NULL ,
+  ID           INT AUTO_INCREMENT,
+  username     VARCHAR(50) NOT NULL,
+  issues_Cared VARCHAR(50) NOT NULL,
   PRIMARY KEY (ID),
-  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username)
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User (username)
 );
 
 ALTER TABLE inFoJaxs_User
-ADD UserFolderPath VARCHAR (400) NULL ;
-Update inFoJaxs_User set ProfileImagePath = NULL
+  ADD UserFolderPath VARCHAR(400) NULL;
+UPDATE inFoJaxs_User
+SET ProfileImagePath = NULL
 
 
 DROP TABLE IF EXISTS inFoJaxs_ReplyLikes;
@@ -67,49 +65,53 @@ DROP TABLE IF EXISTS inFoJaxs_Articles;
 
 
 CREATE TABLE IF NOT EXISTS inFoJaxs_Articles (
-  ID INT AUTO_INCREMENT,
-  username VARCHAR(50) NOT NULL,
-  title VARCHAR(80) NOT NULL,
-  content TEXT NOT NULL,
-  likes INT,
-  views INT,
+  ID           INT       AUTO_INCREMENT,
+  username     VARCHAR(50) NOT NULL,
+  title        VARCHAR(80) NOT NULL,
+  content      TEXT        NOT NULL,
+  likes        INT,
+  views        INT,
   commentCount INT,
-  shortIntro VARCHAR(120),
+  shortIntro   VARCHAR(120),
   creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  lastEdit     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),
-  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username) ON DELETE CASCADE
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User (username)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS inFoJaxs_Comments (
-  ID INT AUTO_INCREMENT,
-  parent_ID INT NOT NULL,
-  username VARCHAR(50) NOT NULL ,
-  content VARCHAR (8000) NOT NULL,
-  likes INT,
-  views INT,
+  ID           INT       AUTO_INCREMENT,
+  parent_ID    INT           NOT NULL,
+  username     VARCHAR(50)   NOT NULL,
+  content      VARCHAR(8000) NOT NULL,
+  likes        INT,
+  views        INT,
   repliesCount INT,
   creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  lastEdit     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),
-  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username) ON DELETE CASCADE,
-  FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Articles(ID) ON DELETE CASCADE
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User (username)
+    ON DELETE CASCADE,
+  FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Articles (ID)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS inFoJaxs_Replies (
-  ID INT AUTO_INCREMENT,
-  parent_ID INT NOT NULL ,
-  username VARCHAR(50) NOT NULL,
-  content VARCHAR (8000) NOT NULL,
-  likes INT,
-  views INT,
+  ID           INT       AUTO_INCREMENT,
+  parent_ID    INT           NOT NULL,
+  username     VARCHAR(50)   NOT NULL,
+  content      VARCHAR(8000) NOT NULL,
+  likes        INT,
+  views        INT,
   creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  lastEdit     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),
-  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username) ON DELETE CASCADE,
-  FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Comments(ID)ON DELETE CASCADE
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User (username)
+    ON DELETE CASCADE,
+  FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Comments (ID)
+    ON DELETE CASCADE
 );
-
 
 
 /*
@@ -141,52 +143,57 @@ DROP TABLE IF EXISTS inFoJaxs_Tree_Trees;
 
 
 CREATE TABLE IF NOT EXISTS inFoJaxs_Tree_Trees (
-  ID INT AUTO_INCREMENT,
-  username VARCHAR(50) NOT NULL,
-  title VARCHAR(200) NOT NULL,
-  content TEXT NOT NULL,
-  likes INT,
-  views INT,
-  exp INT,
-  stage INT,
-  size INT,
-  XCoordinate INT,
-  YCoordinate INT,
-  leaves INT,
+  ID           INT       AUTO_INCREMENT,
+  username     VARCHAR(50)  NOT NULL,
+  title        VARCHAR(200) NOT NULL,
+  content      TEXT         NOT NULL,
+  likes        INT,
+  views        INT,
+  exp          INT,
+  stage        INT,
+  size         INT,
+  XCoordinate  INT,
+  YCoordinate  INT,
+  leaves       INT,
   creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  lastEdit     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),
-  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username) ON DELETE CASCADE
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User (username)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS inFoJaxs_Tree_Reactions (
-  ID INT AUTO_INCREMENT,
-  parent_ID INT NOT NULL,
-  username VARCHAR(50) NOT NULL ,
-  content VARCHAR (8000) NOT NULL,
-  likes INT,
-  views INT,
+  ID           INT       AUTO_INCREMENT,
+  parent_ID    INT           NOT NULL,
+  username     VARCHAR(50)   NOT NULL,
+  content      VARCHAR(8000) NOT NULL,
+  likes        INT,
+  views        INT,
   repliesCount INT,
-  support_for BOOLEAN,
+  support_for  BOOLEAN,
   creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  lastEdit     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),
-  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username) ON DELETE CASCADE,
-  FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Tree_Trees(ID) ON DELETE CASCADE
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User (username)
+    ON DELETE CASCADE,
+  FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Tree_Trees (ID)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS inFoJaxs_Tree_Reaction_Replies (
-  ID INT AUTO_INCREMENT,
-  parent_ID INT NOT NULL ,
-  username VARCHAR(50) NOT NULL,
-  content VARCHAR (8000) NOT NULL,
-  likes INT,
-  views INT,
+  ID           INT       AUTO_INCREMENT,
+  parent_ID    INT           NOT NULL,
+  username     VARCHAR(50)   NOT NULL,
+  content      VARCHAR(8000) NOT NULL,
+  likes        INT,
+  views        INT,
   creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  lastEdit     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),
-  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username) ON DELETE CASCADE,
-  FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Tree_Reactions(ID)ON DELETE CASCADE
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User (username)
+    ON DELETE CASCADE,
+  FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Tree_Reactions (ID)
+    ON DELETE CASCADE
 );
 
 
@@ -198,41 +205,42 @@ boolean supportForArgument;
 
 
 CREATE TABLE IF NOT EXISTS inFoJaxs_Tree_Factual_URL (
-  ID INT AUTO_INCREMENT,
-  parent_ID INT NOT NULL ,
-  username VARCHAR(50) NOT NULL,
-  title VARCHAR(200) NOT NULL,
-  URL VARCHAR (8000) NOT NULL,
-  content VARCHAR (8000) NOT NULL,
-  likes INT,
-  views INT,
-  support_for BOOLEAN,
+  ID           INT       AUTO_INCREMENT,
+  parent_ID    INT           NOT NULL,
+  username     VARCHAR(50)   NOT NULL,
+  title        VARCHAR(200)  NOT NULL,
+  URL          VARCHAR(8000) NOT NULL,
+  content      VARCHAR(8000) NOT NULL,
+  likes        INT,
+  views        INT,
+  support_for  BOOLEAN,
   creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  lastEdit     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),
-  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username) ON DELETE CASCADE,
-  FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Tree_Trees(ID)ON DELETE CASCADE
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User (username)
+    ON DELETE CASCADE,
+  FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Tree_Trees (ID)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS inFoJaxs_Tree_Commentary_URL (
-  ID INT AUTO_INCREMENT,
-  parent_ID INT NOT NULL ,
-  username VARCHAR(50) NOT NULL,
-  title VARCHAR(200) NOT NULL,
-  URL VARCHAR (8000) NOT NULL,
-  content VARCHAR (8000) NOT NULL,
-  likes INT,
-  views INT,
-  support_for BOOLEAN,
+  ID           INT       AUTO_INCREMENT,
+  parent_ID    INT           NOT NULL,
+  username     VARCHAR(50)   NOT NULL,
+  title        VARCHAR(200)  NOT NULL,
+  URL          VARCHAR(8000) NOT NULL,
+  content      VARCHAR(8000) NOT NULL,
+  likes        INT,
+  views        INT,
+  support_for  BOOLEAN,
   creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  lastEdit     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),
-  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username) ON DELETE CASCADE,
-  FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Tree_Trees(ID)ON DELETE CASCADE
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User (username)
+    ON DELETE CASCADE,
+  FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Tree_Trees (ID)
+    ON DELETE CASCADE
 );
-
-
-
 
 
 /*CREATE TABLE IF NOT EXISTS inFoJaxs_ArticleLikes (
@@ -280,10 +288,10 @@ Spin it like some stop and go.
 Now let me see you make dat web semantic like a 3.0!');
 
 
-INSERT INTO inFoJaxs_Comments (parent_ID, username, content, likes, views, repliesCount ) VALUES
+INSERT INTO inFoJaxs_Comments (parent_ID, username, content, likes, views, repliesCount) VALUES
   (3, 'will', 'yo! yo! yo! yo! yo! yo!', 1000, 1000, 0);
 
 INSERT INTO inFoJaxs_Replies (parent_ID, username, content, likes, views) VALUES
-(2, 'zxcv', 'aahahhahahhahahahahahahahahahahahhahaahahahah!', 1000, 1000);
+  (2, 'zxcv', 'aahahhahahhahahahahahahahahahahahhahaahahahah!', 1000, 1000);
 
 

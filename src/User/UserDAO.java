@@ -99,7 +99,8 @@ public class UserDAO {
         }
         return status;
     }
-///Change password
+
+    ///Change password
     public static boolean updatePassword(AbstractDB db, String username, String password) {
 
         boolean status;
@@ -134,7 +135,7 @@ public class UserDAO {
         return status;
     }
 
-///Will try to make the method more generic
+    ///Will try to make the method more generic
     public static boolean updateEmail(AbstractDB db, String value, String username) {
 
         boolean status;
@@ -155,17 +156,15 @@ public class UserDAO {
     }
 
 
-
-
-    public static boolean createProfile (AbstractDB db, String username){
+    public static boolean createProfile(AbstractDB db, String username) {
         boolean status = false;
 
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT username FROM inFoJaxs_Profile WHERE username = ?")) {
                 p.setString(1, username);
                 try (ResultSet r = p.executeQuery()) {
-                    if(r.next()) {
-                        if (username.equals(r.getString("username"))){
+                    if (r.next()) {
+                        if (username.equals(r.getString("username"))) {
                             status = false;
                         }
                     } else {
@@ -178,49 +177,6 @@ public class UserDAO {
                     }
                 }
             }
-        }
-        catch (SQLException | ClassNotFoundException e) {
-        e.printStackTrace();
-            status = false;
-    }
-    return status;
-    }
-
-
-
-    public static boolean updateProfile(AbstractDB db, String username, Profile profile){
-
-        boolean status;
-
-        String gender = profile.getGender();
-        String occupation = profile.getOccupation();
-        String education_level = profile.getEducation_level();
-        String politicalOri= profile.getPoliticalOri();
-        String[] issues = profile.getIssues();
-
-        try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_Profile SET gender = ?, occupation = ?, education_level = ?, political_Orientation = ? WHERE username = ?")) {
-                p.setString(1, gender);
-                p.setString(2, occupation);
-                p.setString(3, education_level);
-                p.setString(4, politicalOri);
-                p.setString(5, username);
-                p.executeUpdate();
-                status = true;
-            }
-            try (PreparedStatement p = c.prepareStatement("DELETE FROM inFoJaxs_IssuesCared WHERE username = ?")) {
-                p.setString(1, username);
-               p.executeUpdate();
-            }
-
-            for(String issue: issues) {
-                try (PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_IssuesCared (username, issues_Cared) VALUE (?, ?)")) {
-                    p.setString(1, username);
-                    p.setString(2, issue);
-                    p.executeUpdate();
-                }
-            }
-
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             status = false;
@@ -228,11 +184,40 @@ public class UserDAO {
         return status;
     }
 
-    public static boolean updateProfileImagePath(AbstractDB db, String path, String username){
+
+    public static boolean updateProfile(AbstractDB db, String username, Profile profile) {
+
+        boolean status;
+
+        String gender = profile.getGender();
+        String occupation = profile.getOccupation();
+        String education = profile.getEducation();
+        String political = profile.getPolitical();
+        String issues = profile.getIssues();
+
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_Profile SET gender = ?, occupation = ?, education = ?, political = ?, issues = ? WHERE username = ?")) {
+                p.setString(1, gender);
+                p.setString(2, occupation);
+                p.setString(3, education);
+                p.setString(4, political);
+                p.setString(5, issues);
+                p.setString(6, username);
+                p.executeUpdate();
+                status = true;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            status = false;
+        }
+        return status;
+    }
+
+    public static boolean updateProfileImagePath(AbstractDB db, String path, String username) {
         boolean status;
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_User SET ProfileImagePath = ? WHERE username = ?;")) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_User SET ProfileImagePath = ? WHERE username = ?")) {
                 //p.setString(1, colunm);
                 p.setString(1, path);
                 p.setString(2, username);
@@ -245,6 +230,7 @@ public class UserDAO {
         }
         return status;
     }
+
     // Method to create a new User object from the information stored in the ResultSet.
     private static User userFromResultSet(ResultSet r) throws SQLException {
         return new User(
@@ -258,10 +244,11 @@ public class UserDAO {
     }
 
 
-    public static boolean deleteUser(AbstractDB db, String username, String password){
-        boolean success = false;
-        UserSecurity user = null;
+    public static boolean deleteUser(AbstractDB db, String username, String password) {
 
+        boolean success = false;
+
+        UserSecurity user = null;
 
         char[] passwordArray = password.toCharArray();
 
@@ -272,7 +259,7 @@ public class UserDAO {
 
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
-                         user = new UserSecurity(
+                        user = new UserSecurity(
                                 r.getString("username"),
                                 getByteArray(r.getBlob("salt")),
                                 r.getInt("iterations"),
@@ -291,13 +278,14 @@ public class UserDAO {
             int iterations = user.getIterations();
 
             // Call SecurityUtility method, isExpectedPassword to determine whether the user-parsed password matches the password stored in the database. The the result is returned.
-            if (SecurityUtility.isExpectedPassword(passwordArray, salt, iterations, hash)){
-                try(PreparedStatement p = c.prepareStatement("DELETE FROM inFoJaxs_User WHERE username = ?;")){
+            if (SecurityUtility.isExpectedPassword(passwordArray, salt, iterations, hash)) {
+                try (PreparedStatement p = c.prepareStatement("DELETE FROM inFoJaxs_User WHERE username = ?;")) {
                     p.setString(1, username);
                     p.executeUpdate();
                     success = true;
                 }
-            };
+            }
+            ;
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }

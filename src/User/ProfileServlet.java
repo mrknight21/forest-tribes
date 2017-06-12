@@ -43,49 +43,59 @@ public class ProfileServlet extends HttpServlet {
                 String email = request.getParameter("profileEmail");
                 String gender = request.getParameter("profileGender");
                 String occupation = request.getParameter("profileOccupation");
-                String education_level = request.getParameter("profileEducation");
-                String politicalOri = request.getParameter("profilePolitical");
+                String education = request.getParameter("profileEducation");
+                String political = request.getParameter("profilePolitical");
 
-                String[] listOfIssues = new String[17];
+                String[] allIssues = new String[17];
 
-                listOfIssues[0] = "Poverty";
-                listOfIssues[1] = "Hunger";
-                listOfIssues[2] = "Health";
-                listOfIssues[3] = "Education";
-                listOfIssues[4] = "Gender";
-                listOfIssues[5] = "Water";
-                listOfIssues[6] = "Energy";
-                listOfIssues[7] = "Economic";
-                listOfIssues[8] = "Innovation";
-                listOfIssues[9] = "Inequality";
-                listOfIssues[10] = "Community";
-                listOfIssues[11] = "Consumption";
-                listOfIssues[12] = "Climate";
-                listOfIssues[13] = "WaterLife";
-                listOfIssues[14] = "LandLife";
-                listOfIssues[15] = "Peace";
-                listOfIssues[16] = "Partnerships";
+                allIssues[0] = "Poverty";
+                allIssues[1] = "Hunger";
+                allIssues[2] = "Health";
+                allIssues[3] = "Education";
+                allIssues[4] = "Gender";
+                allIssues[5] = "Water";
+                allIssues[6] = "Energy";
+                allIssues[7] = "Economic";
+                allIssues[8] = "Innovation";
+                allIssues[9] = "Inequality";
+                allIssues[10] = "Community";
+                allIssues[11] = "Consumption";
+                allIssues[12] = "Climate";
+                allIssues[13] = "WaterLife";
+                allIssues[14] = "LandLife";
+                allIssues[15] = "Peace";
+                allIssues[16] = "Partnerships";
 
-                List<String> userIssues = new ArrayList<>();
+                String issues = "";
+
+                StringBuilder sb = new StringBuilder("");
 
                 for (int i = 0; i < 17; i++) {
-                    String issue = request.getParameter("profileIssues" + listOfIssues[i]);
+                    String issue = request.getParameter("profileIssues" + allIssues[i]);
 
                     if (issue != null) {
-                        userIssues.add(issue);
+                        sb.append(issue).append(", ");
                     }
                 }
 
-                Profile updateProfile = new Profile(username, gender, occupation, education_level, politicalOri, listOfIssues);
+                if (!sb.equals(null)) {
+                    issues = sb.toString();
+                }
+
+                System.out.println(issues);
+
+                Profile updateProfile = new Profile(username, gender, occupation, education, political, issues);
 
                 if (email != null && !(email.trim()).equals("")) {
                     UserDAO.updateEmail(DB, email, username);
                 }
+
                 UserDAO.updateProfile(DB, username, updateProfile);
+                System.out.println("success");
+
                 request.setAttribute("message", "Profile updated successfully!!");
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/profile.jsp");
                 dispatcher.forward(request, response);
-
             }
         } catch (IOException e) {
             e.printStackTrace();
