@@ -41,11 +41,26 @@ public class ProfileServlet extends HttpServlet {
                 String[] issues = new String[17];
 
                 String issue01 = request.getParameter("profileIssuesPoverty");
-                System.out.println(issue01);
+                String issue02 = request.getParameter("profileIssuesHunger");
+                String issue03 = request.getParameter("profileIssuesHealth");
+                String issue04 = request.getParameter("profileIssuesEducation");
+                String issue05 = request.getParameter("profileIssuesGender");
+                String issue06 = request.getParameter("profileIssuesWater");
+                String issue07 = request.getParameter("profileIssuesEnergy");
+                String issue08 = request.getParameter("profileIssuesEconomic");
+                String issue09 = request.getParameter("profileIssuesInnovation");
+                String issue10 = request.getParameter("profileIssuesInequality");
+                String issue11 = request.getParameter("profileIssuesCommunity");
+                String issue12 = request.getParameter("profileIssuesConsumption");
+                String issue13 = request.getParameter("profileIssuesClimate");
+                String issue14 = request.getParameter("profileIssuesWaterLife");
+                String issue15 = request.getParameter("profileIssuesLandLife");
+                String issue16 = request.getParameter("profileIssuesPeace");
+                String issue17 = request.getParameter("profileIssuesPartnerships");
 
                 Profile updateProfile = new Profile(username, gender, occupation, education_level, politicalOri, issues);
 
-                if (email != null && email.trim() != "") {
+                if (email != null && !(email.trim()).equals("")) {
                     UserDAO.updateEmail(DB, email, username);
                 }
                 UserDAO.updateProfile(DB, username, updateProfile);

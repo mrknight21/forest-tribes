@@ -347,7 +347,7 @@
                                                     alt="Peace, Justice and Strong Institutions"><input
                                                     type="checkbox"
                                                     name="profileIssuesPeace"
-                                                    id="profileIssuesConsumptionPeaceID"
+                                                    id="profileIssuesPeaceID"
                                                     value="peace, justice and strong institutions"
                                                     class="hidden"
                                                     autocomplete="off"></label>
