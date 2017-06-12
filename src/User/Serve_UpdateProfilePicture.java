@@ -1,5 +1,6 @@
 package User;
 
+import Utility.MicellaneousUntility;
 import Utility.MySQL;
 import Utility.SecurityUtility;
 import org.apache.commons.fileupload.FileItem;
@@ -36,7 +37,7 @@ public class Serve_UpdateProfilePicture extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
-        if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/login_interface/Login.jsp");
+        if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("login_interface/Login.jsp");
 
         HttpSession session1 = request.getSession();
         String username = (String) session1.getAttribute("username");
@@ -46,9 +47,9 @@ public class Serve_UpdateProfilePicture extends HttpServlet {
         String DefaultImagePathway = getServletContext().getRealPath(newProfileImagePath);
         String pathToUserFolder = getServletContext().getRealPath(user.getUserFolderPath());
 
-        // Ensure user folder exists
-        File userFolder = new File(pathToUserFolder);
-        if (!userFolder.isDirectory()) userFolder.mkdirs();
+        // Ensure user folders exist
+        MicellaneousUntility.DirCeation(new File(pathToUserFolder));
+
 
         File profileImage = new File(DefaultImagePathway);
         BufferedImage sourceImage = ImageIO.read(profileImage);
@@ -80,7 +81,7 @@ public class Serve_UpdateProfilePicture extends HttpServlet {
         img.createGraphics().drawImage(ImageIO.read(new File(pathToUserFolder + "/User_profile_picture." + extension)).getScaledInstance(100, 100, Image.SCALE_SMOOTH), 0, 0, null);
         ImageIO.write(img, "jpg", new File(pathToUserFolder + "/User_profile_picture_thumb.jpg"));
 
-        response.sendRedirect("/user_interface/ProfilePictureUpdate.jsp");
+        response.sendRedirect("user_interface/ProfilePictureUpdate.jsp");
 
     }
 
@@ -92,6 +93,9 @@ public class Serve_UpdateProfilePicture extends HttpServlet {
         User user = UserDAO.getUser(DB, username);
 
         String pathToUserFolder = getServletContext().getRealPath(user.getUserFolderPath());
+
+        // Ensure user folder exists
+        MicellaneousUntility.DirCeation(new File(pathToUserFolder));
 
         Boolean isMultipart = ServletFileUpload.isMultipartContent(request);
         try {
@@ -157,7 +161,7 @@ public class Serve_UpdateProfilePicture extends HttpServlet {
                     BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
                     img.createGraphics().drawImage(ImageIO.read(new File(pathToUserFolder + "/User_profile_picture." + extension)).getScaledInstance(100, 100, Image.SCALE_SMOOTH), 0, 0, null);
                     ImageIO.write(img, "jpg", new File(pathToUserFolder + "/User_profile_picture_thumb.jpg"));
-                    response.sendRedirect("/user_interface/ProfilePictureUpdate.jsp");
+                    response.sendRedirect("user_interface/ProfilePictureUpdate.jsp");
 
                 }
             }
