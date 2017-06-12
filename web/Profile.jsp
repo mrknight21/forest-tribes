@@ -22,6 +22,7 @@
 <head>
     <title>Profile</title>
 
+    <%--Importing all necessary libraries, frameworks etc.--%>
     <%@include file="WEB-INF/Head_Scripts.jsp" %>
 
     <script>
