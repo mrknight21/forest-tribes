@@ -19,12 +19,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-    <title>Display all Articles</title>
+    <title>Display All Articles</title>
 
     <%--Importing all necessary libraries, frameworks etc.--%>
     <%@include file="../WEB-INF/Head_Scripts.jsp" %>
 
- <tags:Style_Display-All-User-Articles/>
+    <script>
+        function revealArticle(id) {
+            var idLength = id.length;
+            var idNumber = id.substring(idLength - 1);
+
+            var introTextID = "#displayIntroTextID" + idNumber;
+            var fullTextID = "#displayFullTextID" + idNumber;
+            var linkID = "#displayArticleLinkID" + idNumber;
+
+            $(fullTextID).delay(100).fadeIn(100);
+            $(introTextID).fadeOut(100);
+            $(linkID).hide();
+        }
+    </script>
+
+    <%--Page Specific CSS--%>
+    <tags:Style_Display-All-User-Articles/>
 </head>
 <body>
 
@@ -34,44 +50,87 @@
     final MySQL DB = new MySQL();
     List<Article> articles = ArticleDAO.getArticlesByUser(DB, username);
     request.setAttribute("articles", articles);
-  %>
 
-<h1>ALL ARTICLES!!!!!</h1>
+    try {
+        if (articles.get(0) != null) {
+            request.setAttribute("status", true);
+        } else {
+            request.setAttribute("status", false);
+        }
+    } catch (NullPointerException | IndexOutOfBoundsException e) {
+        request.setAttribute("status", false);
+    }
+%>
 
 <div class="container">
-    <c:forEach items="${articles}" var="article">
-        <!--Article panel-->
-        <div class="col-sm-12 col-md-9 panel panel-default" id="article-container">
-            <div class="panel panel-default" id="article">
-
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div id="displayMainPanelID" class="panel panel-login">
                 <div class="panel-heading">
-                    <form action="DisplayFullArticle.jsp">
-                        <label for="fullarticle-${article.id}">
-                            <a href="DisplayFullArticle.jsp?article_id=${article.id}"><h4>${article.title}</h4></a>
-                        </label>
-                        <input type="text" value="${article.id}" name="article_id" readonly hidden/>
-                        <input type="submit"
-                               id="fullarticle-${article.id}"
-                               hidden
-                        />
-                    </form>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <fieldset>
+                                <legend id="displayMainTitleID"><%= username%>'s Articles:</legend>
+                            </fieldset>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="panel-body">
-                    <h3>${article.shortIntro}</h3>
-
-                    <div class="article_content">
-                        <p>
-                            Author: ${article.author} article id: ${article.id} likes: ${article.likes}
-                            views: ${article.views}
-                            Replies: ${article.commentCount} last time edited: ${article.dateLastEdited}
-                        </p>
+                <div id="displayMainPanelBodyID" class="panel-body">
+                    <div class="row">
+                        <c:choose>
+                            <c:when test="${status == true}">
+                                <c:forEach items="${articles}" var="article">
+                                    <!--Article panel-->
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-default" id="displayArticlePanelID">
+                                            <div class="panel-heading">
+                                                <form action="DisplayFullArticle.jsp">
+                                                    <label for="fullarticle-${article.id}">
+                                                        <a href="DisplayFullArticle.jsp?article_id=${article.id}">
+                                                            <h4>${article.title}</h4></a>
+                                                    </label>
+                                                    <input type="text" value="${article.id}" name="article_id" readonly
+                                                           hidden/>
+                                                    <input type="submit"
+                                                           id="fullarticle-${article.id}"
+                                                           hidden
+                                                    />
+                                                </form>
+                                            </div>
+                                            <div class="panel-body">
+                                                <p id="displayIntroTextID${article.id}"><em>${article.shortIntro}</em>
+                                                </p>
+                                                <p id="displayFullTextID${article.id}"
+                                                   style="display: none">${article.text}</p>
+                                                <a id="displayArticleLinkID${article.id}" href="#"
+                                                   onclick="revealArticle(this.id)">Reveal full article</a>
+                                            </div>
+                                            <div class="panel-footer">
+                                                <p style="display: inline-block"><i class="fa">&#xf2bd;</i>
+                                                    Author: ${article.author}</p>
+                                                <p style="display: inline-block"><i class="fa">&#xf087;</i>
+                                                    Likes: ${article.likes}</p>
+                                                <p style="display: inline-block"><i class="fa">&#xf0c0;</i>
+                                                    Views: ${article.views}</p>
+                                                <p style="display: inline-block"><i class="fa">&#xf112;</i>
+                                                    Replies: ${article.commentCount}</p>
+                                                <p style="display: inline-block"><i class="fa">&#xf044;</i> Last
+                                                    Edited: ${article.dateLastEdited}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <p style="text-align: center">You have not created any articles.<a href="#">
+                                    Please click here to get started.</a></p>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
             </div>
         </div>
-    </c:forEach>
+    </div>
 </div>
-
 </body>
 </html>

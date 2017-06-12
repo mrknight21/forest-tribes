@@ -17,6 +17,22 @@
             src: url('<%=sitePath%>Fonts/Plumpfull.ttf');
         }
 
+        @font-face {
+            font-family: Amperzand;
+            src: url('<%=sitePath%>Fonts/Amperzand.ttf');
+        }
+
+        h1 {
+            margin-top: 0px;
+            margin-bottom: 10px;
+            font-family: 'Plump';
+            color: #029f5b;
+        }
+
+        h4 {
+            font-family: 'Amperzand';
+        }
+
         #headerUser, #headerHome, #headerCollection {
             font-family: Plump;
             color: white;
@@ -148,7 +164,7 @@
         }
 
         .panel-login {
-            margin-top: 5%;
+            margin-top: 2%;
         }
 
         .form-group {

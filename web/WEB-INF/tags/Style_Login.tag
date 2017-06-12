@@ -187,6 +187,10 @@
         font-family: 'Amperzand';
     }
 
+    #loginFormLink, #registrationFormLink {
+        font-family: Futura;
+    }
+
     .panel-body {
         padding-top: 0px;
     }

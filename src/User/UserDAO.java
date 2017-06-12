@@ -192,25 +192,19 @@ public class UserDAO {
 
         boolean status;
 
-        String dateOfBirth = profile.getDateOfBirth();
         String gender = profile.getGender();
         String occupation = profile.getOccupation();
         String education_level = profile.getEducation_level();
         String politicalOri= profile.getPoliticalOri();
-        String thingsLoves= profile.getThingsLoves();
-        String short_intro= profile.getShort_intro();
         String[] issues = profile.getIssues();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_Profile SET date_Of_Birth = ?, gender = ?, occupation = ?, education_level = ?, political_Orientation = ?, things_Loved = ?, short_intro = ? WHERE username = ?")) {
-                p.setString(1, dateOfBirth);
-                p.setString(2, gender);
-                p.setString(3, occupation);
-                p.setString(4, education_level);
-                p.setString(5, politicalOri);
-                p.setString(6, thingsLoves);
-                p.setString(7, short_intro);
-                p.setString(8, username);
+            try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_Profile SET gender = ?, occupation = ?, education_level = ?, political_Orientation = ? WHERE username = ?")) {
+                p.setString(1, gender);
+                p.setString(2, occupation);
+                p.setString(3, education_level);
+                p.setString(4, politicalOri);
+                p.setString(5, username);
                 p.executeUpdate();
                 status = true;
             }

@@ -60,44 +60,8 @@
             background-color: #029f5b;
         }
 
-        .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
-            background-color: #029f5b;
-        }
-
-        .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
-            background-color: white;
-        }
-
-        .navbar-default {
-            margin-bottom: 0;
-            border-color: #029f5b;
-        }
-
-        .navbar-default .navbar-toggle {
-            border-color: white;
-            background-color: white;
-        }
-
-        .navbar-default .navbar-toggle .icon-bar {
-            background-color: #029f5b;
-        }
-
-        #headerSearchSubmit {
-            font-family: Plump;
-            color: #029f5b;
-        }
-
-        #headerThumbnail {
-            margin: 3px;
-            height: 44px;
-        }
-
-        #headerSearchIcon {
-            color: #029f5b;
-        }
-
         .panel {
-            margin-top: 20%;
+            margin-top: 2%;
         }
 
         .input-group {
@@ -106,7 +70,7 @@
 
         legend {
             font-family: Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
-            font-size: 14pt;
+            font-size: 11pt;
             color: #333;
             margin-bottom: 0;
         }

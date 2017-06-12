@@ -18,7 +18,7 @@
                        aria-haspopup="true"
                        aria-expanded="false"><i class="glyphicon glyphicon-user"></i> <%= username%><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<%=sitePath%>Profile.jsp">Update your account</a></li>
+                        <li><a href="<%=sitePath%>Profile.jsp">Update your profile</a></li>
                         <li><a href="<%=sitePath%>user_interface/ProfilePictureUpdate.jsp">Change profile picture</a></li>
                         <li><a href="<%=sitePath%>user_interface/changePassword.jsp">Change password</a></li>
                         <li role="separator" class="divider"></li>
