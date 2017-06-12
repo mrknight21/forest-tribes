@@ -1,4 +1,7 @@
 <%@ page import="Utility.SecurityUtility" %>
+<%@ page import="Utility.MySQL" %>
+<%@ page import="Article.ArticleDAO" %>
+<%@ page import="Article.Article" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -22,40 +25,50 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
-    String username = (String) session.getAttribute("username");%>
+    String username = (String) session.getAttribute("username");
+%>
 <html>
 <head>
     <title>display Full article</title>
-    <%@include file="../WEB-INF/Head_Scripts.jsp"%>
+    <%@include file="../WEB-INF/Head_Scripts.jsp" %>
 </head>
 <body>
 <%@ include file="../WEB-INF/Header_Navbar.jsp" %>
 
+<%
+    final MySQL DB = new MySQL();
+    Article article = ArticleDAO.getArticleById(DB,Integer.parseInt(request.getParameter("article_id")));
+    request.setAttribute("article", article);
+%>
+
 <div class="article container">
-<h1>${article.title}</h1>
-<h2>Author: ${article.author}                                      likes:${article.likes}  views:${article.views} replies:${article.commentCount}   last edited: ${article.dateLastEdited}</h2>
+    <h1>${article.title}</h1>
+    <h2>Author: ${article.author} likes:${article.likes} views:${article.views} replies:${article.commentCount} last
+        edited: ${article.dateLastEdited}</h2>
     <div id="content">
         <p>${article.text}</p>
     </div>
-<c:if test = "${article.commentCount != 0 }">
-<c:forEach var="comment" items="${article.comments}">
-    <h2>Comment: </h2>
-<div class="comment container">
-    <h3>         user: ${comment.author}       likes:${comment.likes} views:${comment.views} replies:${comment.replyCount} last edited: ${comment.dateLastEdited}</h3>
-    <div class="comment content">
-        <p>${comment.text}</p>
-    </div>
-    <c:if test = "${comment.replyCount != 0 }">
-    <c:forEach var="reply" items="${comment.replies}">
-        <h2>Reply: </h2>
-        <h4>                   user: ${reply.author}             likes:${reply.likes} views:${reply.views} last edited: ${article.dateLastEdited}</h4>
-        <div class="reply content">
-            <p>${reply.text}</p>
-        </div>
-    </c:forEach>
-    </c:if>
-</div>
-</c:forEach>
+    <c:if test="${article.commentCount != 0 }">
+        <c:forEach var="comment" items="${article.comments}">
+            <h2>Comment: </h2>
+            <div class="comment container">
+                <h3> user: ${comment.author} likes:${comment.likes} views:${comment.views} replies:${comment.replyCount}
+                    last edited: ${comment.dateLastEdited}</h3>
+                <div class="comment content">
+                    <p>${comment.text}</p>
+                </div>
+                <c:if test="${comment.replyCount != 0 }">
+                    <c:forEach var="reply" items="${comment.replies}">
+                        <h2>Reply: </h2>
+                        <h4> user: ${reply.author} likes:${reply.likes} views:${reply.views} last
+                            edited: ${article.dateLastEdited}</h4>
+                        <div class="reply content">
+                            <p>${reply.text}</p>
+                        </div>
+                    </c:forEach>
+                </c:if>
+            </div>
+        </c:forEach>
     </c:if>
 </div>
 </body>
