@@ -53,7 +53,10 @@
             <div class="panel panel-login">
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="col-lg-10 col-lg-offset-1">
+                        <div class="col-lg-12">
+                            <h1 style="text-align: center"><i class="fa">&#xf1bb;</i> Forest Tribes</h1>
+                            <h4 id="subtitle" style="text-align: center">The Beauty of Interconnectedness</h4>
+                            <br>
                             <fieldset>
                                 <legend><i style="font-size:24px" class="fa">&#xf03e;</i> Your Current Profile Picture:
                                 </legend>
@@ -66,7 +69,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-lg-10 col-lg-offset-1">
+                        <div class="col-lg-12">
                             <form id="select_default_options" action="<%=sitePath%>Serve_UpdateProfilePicture"
                                   method="GET">
                                 <fieldset>

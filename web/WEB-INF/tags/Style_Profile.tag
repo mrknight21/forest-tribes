@@ -14,7 +14,7 @@
         }
 
         .panel {
-            margin-top: 25%;
+            margin-top: 2%;
         }
 
         h1 {

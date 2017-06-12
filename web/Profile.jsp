@@ -82,7 +82,7 @@
                             <h1 style="text-align: center"><i class="fa">&#xf1bb;</i> Forest Tribes</h1>
                             <h4 id="subtitle" style="text-align: center">The Beauty of Interconnectedness</h4>
 
-                            <fieldset class="span4">
+                            <fieldset id="profilePictureFieldsetID" class="span4">
                                 <legend><i class="fa">&#xf083;</i> Profile Picture</legend>
                                 <div id="profileImageDiv" class="col-lg-10 col-lg-offset-1">
                                     <div class="thumbnail">
@@ -428,6 +428,7 @@
 <script>
     $(function () {
         $('#profileUpdateLink').click(function (e) {
+            $("#profilePictureFieldsetID").delay(100).fadeIn(100);
             $("#profileUpdateFormID").delay(100).fadeIn(100);
             $("#profileChangePPFormID").delay(100).fadeIn(100);
             $("#profileChangePWFormID").delay(100).fadeIn(100);
@@ -446,6 +447,7 @@
         });
         $('#profileDeleteLink').click(function (e) {
             $("#profileDeleteFormID").delay(100).fadeIn(100);
+            $("#profilePictureFieldsetID").fadeOut(100);
             $("#profileUpdateFormID").fadeOut(100);
             $("#profileChangePPFormID").fadeOut(100);
             $("#profileChangePWFormID").fadeOut(100);
