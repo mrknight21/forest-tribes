@@ -38,7 +38,9 @@
         });
     </script>
 
+    <%--Page Specific CSS--%>
     <tags:Style_Change-Profile-Picture/>
+
 </head>
 <body>
 

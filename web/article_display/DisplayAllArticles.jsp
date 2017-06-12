@@ -1,25 +1,76 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+
 <%@ page import="Utility.SecurityUtility" %>
 <%@ page import="Utility.MySQL" %>
 <%@ page import="Article.ArticleDAO" %>
 <%@ page import="java.util.List" %>
-<%@ page import="Article.Article" %><%--
-  Created by IntelliJ IDEA.
-  User: mche618
-  Date: 8/06/2017
-  Time: 3:53 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="Article.Article" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%
     if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
     String username = (String) session.getAttribute("username");%>
-<html>
+<!DOCTYPE html>
+<html lang="en" class="full">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
     <title>Display all articles</title>
     <%@include file="../WEB-INF/Head_Scripts.jsp" %>
+
+    <style>
+        .panel-footer p {
+            padding-right: 1%;
+        }
+
+        .full {
+            background: url('<%=sitePath%>login_interface/lake-baikal-9.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            -o-background-size: cover;
+        }
+
+        body {
+            background-color: transparent;
+        }
+
+        #displayMainPanelID {
+            margin-top: 2%;
+        }
+
+        .panel-heading {
+            padding-bottom: 0;
+        }
+
+        #displayMainPanelBodyID {
+            padding-top: 0;
+        }
+
+        @font-face {
+            font-family: Plump;
+            src: url('<%=sitePath%>Fonts/Plumpfull.ttf');
+        }
+
+        #displayMainTitleID {
+            font-family: Futura;
+        }
+
+        h4 {
+            font-family: Futura;
+            color: white;
+        }
+
+        .panel-default > .panel-heading {
+            background-color: #029f5b;
+            border-color: #029f5b;
+        }
+    </style>
 </head>
 <body>
+
 <%@ include file="../WEB-INF/Header_Navbar.jsp" %>
 
 <%
@@ -39,30 +90,53 @@
   lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,*/
 %>
 
-<h1>ALL ARTICLES!!!!!</h1>
-
 <div class="container">
-    <c:forEach items="${articles}" var="article">
-        <!--Article panel-->
-        <div class="col-sm-12 col-md-9 panel panel-default" id="article-container">
-            <div class="panel panel-default" id="article">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div id="displayMainPanelID" class="panel panel-login">
                 <div class="panel-heading">
-                    <h2>${article.title}</h2>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <fieldset>
+                              <legend id="displayMainTitleID">Articles:</legend>
+                            </fieldset>
+                        </div>
+                    </div>
                 </div>
-                <div class="panel-body">
-                    <h3>${article.shortIntro}</h3>
-
-                    <div class="article_content">
-                        <p>
-                            Author: ${article.author} article id: ${article.id} likes: ${article.likes}
-                            views: ${article.views}
-                            Replies: ${article.commentCount} last time edited: ${article.dateLastEdited}
-                        </p>
+                <div id="displayMainPanelBodyID" class="panel-body">
+                    <div class="row">
+                        <c:forEach items="${articles}" var="article">
+                            <!--Article panel-->
+                            <div class="col-lg-12">
+                                <div class="panel panel-default" id="displayArticlePanelID">
+                                    <div class="panel-heading">
+                                        <h4>${article.title}</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p><em>${article.shortIntro}</em></p>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <p style="display: inline-block"><i class="fa">&#xf2bd;</i>
+                                            Author: ${article.author}</p>
+                                        <p style="display: inline-block"><i class="fa">&#xf097;</i> Article
+                                            ID: ${article.id}</p>
+                                        <p style="display: inline-block"><i class="fa">&#xf087;</i>
+                                            Likes: ${article.likes}</p>
+                                        <p style="display: inline-block"><i class="fa">&#xf0c0;</i>
+                                            Views: ${article.views}</p>
+                                        <p style="display: inline-block"><i class="fa">&#xf112;</i>
+                                            Replies: ${article.commentCount}</p>
+                                        <p style="display: inline-block"><i class="fa">&#xf044;</i> Last
+                                            Edited: ${article.dateLastEdited}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
                     </div>
                 </div>
             </div>
         </div>
-    </c:forEach>
+    </div>
 </div>
 </body>
 </html>
