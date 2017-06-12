@@ -28,7 +28,7 @@ public class Serve_DeleteUser extends HttpServlet {
 
         try {
             if (!SecurityUtility.loggingStatusChecker(request)) {
-                response.sendRedirect("/login_interface/Login.jsp");
+                response.sendRedirect("login_interface/Login.jsp");
                 return;
             } else {
 

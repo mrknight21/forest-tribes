@@ -21,7 +21,7 @@ public class Serve_Authentication extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 
     @Override
@@ -29,14 +29,20 @@ public class Serve_Authentication extends HttpServlet {
 
         try {
             if (SecurityUtility.loggingStatusChecker(request)){
-            response.sendRedirect("/user_interface/Home.jsp");
+            response.sendRedirect("user_interface/Home.jsp");
             return;
             }else {
                 HttpSession session = request.getSession();
                 String username = request.getParameter("loginUsername");
                 String password = request.getParameter("loginPassword");
 
-                if(UserDAO.getUser(DB, username) != null){
+                if (username == null || password == null) {
+                    request.setAttribute("message", "Please enter a username and password to log in");
+                    System.out.println("No parameters received.");
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login_interface/Login.jsp");
+                    dispatcher.forward(request, response);
+
+                } else if (UserDAO.getUser(DB, username) != null){
                     if(SecurityUtility.passwordAuthentication(username, password)){
                         session.setAttribute("loggingStatus", true);
                         session.setAttribute("username", username);
@@ -44,13 +50,13 @@ public class Serve_Authentication extends HttpServlet {
                         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user_interface/Home.jsp");
                         System.out.println("logged in");
                         dispatcher.forward(request, response);
-                    }else {
+                    } else {
                         request.setAttribute("message", "The combination of username and password you have entered is incorrect");
                         System.out.println("Password was wrong");
                         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login_interface/Login.jsp");
                         dispatcher.forward(request, response);
                     }
-                }else if(UserDAO.getUser(DB, username) == null){
+                } else if (UserDAO.getUser(DB, username) == null){
                     request.setAttribute("message", "The combination of username and password you have entered is incorrect");
                     System.out.println("Password was wrong");
                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login_interface/Login.jsp");

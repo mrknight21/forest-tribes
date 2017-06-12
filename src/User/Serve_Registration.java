@@ -37,7 +37,7 @@ public class Serve_Registration extends HttpServlet {
 
         try {
             if (SecurityUtility.loggingStatusChecker(request)){
-                response.sendRedirect("/user_interface/Home.jsp");
+                response.sendRedirect("user_interface/Home.jsp");
                 return;
             } else {
                 HttpSession session = request.getSession();

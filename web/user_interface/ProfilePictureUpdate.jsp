@@ -14,10 +14,11 @@
 <%
     if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
     String username = (String) session.getAttribute("username");
+    String imagePath = sitePath + "User/" + username + "/User_profile_picture.jpg";
 
-    MySQL DB = new MySQL();
-    User user = UserDAO.getUser(DB, username);
-    String imagePath = user.getProfileImagePath();
+//    MySQL DB = new MySQL();
+//    User user = UserDAO.getUser(DB, username);
+//    String imagePath = user.getProfileImagePath();
 
 %>
 

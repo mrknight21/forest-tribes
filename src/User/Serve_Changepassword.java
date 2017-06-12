@@ -29,7 +29,7 @@ public class Serve_Changepassword extends HttpServlet{
 
         try {
             if (!SecurityUtility.loggingStatusChecker(request)){
-                response.sendRedirect("/login_interface/Login.jsp");
+                response.sendRedirect("login_interface/Login.jsp");
                 return;
             }else{
                 String currpassword = request.getParameter("CurrentPassword");

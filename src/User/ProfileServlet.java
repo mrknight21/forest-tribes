@@ -29,7 +29,7 @@ public class ProfileServlet extends HttpServlet {
 
         try {
             if (!SecurityUtility.loggingStatusChecker(request)) {
-                response.sendRedirect("/Login.jsp");
+                response.sendRedirect("Login.jsp");
                 return;
             } else {
 
