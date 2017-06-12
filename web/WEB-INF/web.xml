@@ -77,7 +77,7 @@
 
     <servlet>
         <servlet-name>Serve_fullArticlecontent</servlet-name>
-        <servlet-class>Article.Serve_fullArticlecontent</servlet-class>
+        <servlet-class>Article.ArticleServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Serve_fullArticlecontent</servlet-name>

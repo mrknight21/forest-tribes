@@ -31,7 +31,7 @@ public class ArticleDAO {
     }
 
     // Method to return all Articles by Author as an ArrayList from the database.
-   public static List<Article> getArticlesByUser(AbstractDB db, String username) {
+    public static List<Article> getArticlesByUser(AbstractDB db, String username) {
 
         List<Article> articles = new ArrayList<>();
 
@@ -67,10 +67,41 @@ public class ArticleDAO {
         return null;
     }
 
+    public static Comment getCommentById(AbstractDB db, int commentId) {
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Comments WHERE ID = ?")) {
+                p.setInt(1, commentId);
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        return commentFromResultSet(r, c);
+                    }
+                }
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Reply getReplyById(AbstractDB db, int replyId) {
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Replies WHERE ID = ?")) {
+                p.setInt(1, replyId);
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        return replyFromResultSet(r, c);
+                    }
+                }
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     ///////////Create new Text ///////////////////////////////////////////////////////////////////
 
-    public static boolean createNewArticle( AbstractDB db, Article article){
+    public static boolean createNewArticle(AbstractDB db, Article article) {
         boolean success;
 
         try (Connection c = db.connection()) {
@@ -95,9 +126,7 @@ public class ArticleDAO {
     }
 
 
-
-
-    public static boolean createNewComment( AbstractDB db, Comment comment){
+    public static boolean createNewComment(AbstractDB db, Comment comment) {
         boolean success;
         //Comment(String author, String text, int parentID)//
         try (Connection c = db.connection()) {
@@ -121,10 +150,7 @@ public class ArticleDAO {
     }
 
 
-
-
-
-    public static boolean createNewReply( AbstractDB db, Reply reply){
+    public static boolean createNewReply(AbstractDB db, Reply reply) {
         boolean success;
         //Comment(String author, String text, int parentID)//
         try (Connection c = db.connection()) {
@@ -149,14 +175,12 @@ public class ArticleDAO {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
     /////////////////////Update texts///////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
     //new Timestamp(System.currentTimeMillis() for current timeStamp//
 
-    public static boolean updateArticle(AbstractDB db, Article article){
+    public static boolean updateArticle(AbstractDB db, Article article) {
         boolean status;
 
         try (Connection c = db.connection()) {
@@ -178,8 +202,7 @@ public class ArticleDAO {
     }
 
 
-
-    public static boolean updateComment(AbstractDB db, Comment comment){
+    public static boolean updateComment(AbstractDB db, Comment comment) {
         boolean status;
 
         try (Connection c = db.connection()) {
@@ -187,7 +210,7 @@ public class ArticleDAO {
                 //p.setString(1, colunm);
                 p.setString(1, comment.getText());
                 p.setString(2, new Timestamp(System.currentTimeMillis()).toString());
-                p.setInt(3, comment.getId() );
+                p.setInt(3, comment.getId());
                 p.executeUpdate();
                 status = true;
             }
@@ -199,7 +222,7 @@ public class ArticleDAO {
     }
 
 
-    public static boolean updateReply(AbstractDB db, Reply reply){
+    public static boolean updateReply(AbstractDB db, Reply reply) {
         boolean status;
 
         try (Connection c = db.connection()) {
@@ -207,7 +230,7 @@ public class ArticleDAO {
                 //p.setString(1, colunm);
                 p.setString(1, reply.getText());
                 p.setString(2, new Timestamp(System.currentTimeMillis()).toString());
-                p.setInt(3, reply.getId() );
+                p.setInt(3, reply.getId());
                 p.executeUpdate();
                 status = true;
             }
@@ -219,13 +242,10 @@ public class ArticleDAO {
     }
 
 
-
-
-
 ///////////////////////////////////////////////////////Deleting text/////////////////////////////////////////////////////////////////
 
 
-    public static boolean deleteArticle(AbstractDB db, int articleID){
+    public static boolean deleteArticle(AbstractDB db, int articleID) {
         boolean success = false;
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("DELETE FROM inFoJaxs_Articles WHERE ID = ?;")) {
@@ -242,7 +262,7 @@ public class ArticleDAO {
     }
 
 
-    public static boolean deleteComment(AbstractDB db, int commentID){
+    public static boolean deleteComment(AbstractDB db, int commentID) {
         boolean success = false;
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("DELETE FROM inFoJaxs_Comments WHERE ID = ?;")) {
@@ -259,8 +279,7 @@ public class ArticleDAO {
     }
 
 
-
-    public static boolean deleteReply(AbstractDB db, int replyID){
+    public static boolean deleteReply(AbstractDB db, int replyID) {
         boolean success = false;
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("DELETE FROM inFoJaxs_Replies WHERE ID = ?;")) {
@@ -275,9 +294,6 @@ public class ArticleDAO {
         }
         return success;
     }
-
-
-
 
 
     // Method to insert a parsed-in Article, Comment & Reply into the database.
@@ -368,7 +384,6 @@ public class ArticleDAO {
     }
 
 
-
     // Methods to create a new Article/Comment/Reply objects from the information stored in the ResultSet.
     private static Article articleSummaryFromResultSet(ResultSet r) throws SQLException {
 
@@ -387,8 +402,7 @@ public class ArticleDAO {
     }
 
 
-
-    private static Article fullArticleFromResultSet(ResultSet r, Connection c ) throws SQLException {
+    private static Article fullArticleFromResultSet(ResultSet r, Connection c) throws SQLException {
         int id = r.getInt("ID");
         //(int id, String author, String title, String text, String shortIntro, List<Comment> comments,  int likes, int view, String dateCreated, String dateLastEdited)//
         return new Article(
@@ -419,7 +433,6 @@ public class ArticleDAO {
      */
 
 
-
     private static Comment commentFromResultSet(ResultSet r, Connection c) throws SQLException {
         int commentId = r.getInt("ID");
 //        (int id, String author, String text, List<Reply> replies, int likes, int views,  String dateCreated, String dateLastEdited)
@@ -430,8 +443,8 @@ public class ArticleDAO {
                 getCommentReplies(commentId, c),
                 r.getInt("likes"),
                 r.getInt("views"),
-                r.getString("creationDate"),
-                r.getString("lastEdit"));
+                r.getTimestamp("creationDate").toString(),
+                r.getTimestamp("lastEdit").toString());
     }
 
     private static Reply replyFromResultSet(ResultSet r, Connection c) throws SQLException {
@@ -444,8 +457,8 @@ public class ArticleDAO {
                 r.getInt("likes"),
                 // getTextLikes(c, replyId,"Reply")),
                 r.getInt("views"),
-                r.getString("creationDate"),
-                r.getString("lastEdit"));
+                r.getTimestamp("creationDate").toString(),
+                r.getTimestamp("lastEdit").toString());
     }
 
 
@@ -500,14 +513,14 @@ public class ArticleDAO {
                 return "inFoJaxs_ReplyLikes";
         }
         return null;
-    }
+    }*/
 
     // Method to delete the Article, Comment, Reply in the database.
     public static boolean deleteText(AbstractDB db, int textId, String textClassName) {
 
         String statement = "DELETE FROM $1 WHERE $2 = ?";
 
-        switch (textClassName){
+        switch (textClassName) {
             case "Article":
                 statement.replaceFirst("$1", "inFoJaxs_Articles");
                 statement.replaceFirst("$2", "ID");
@@ -515,8 +528,8 @@ public class ArticleDAO {
                 break;
 
             case "ArticleChildren":
-                statement.replaceFirst("$1","inFoJaxs_Comments");
-                statement.replaceFirst("$2","article_ID");
+                statement.replaceFirst("$1", "inFoJaxs_Comments");
+                statement.replaceFirst("$2", "parent_ID");
                 try {
                     for (Comment comment : getArticleComments(textId, db.connection())) {
                         deleteText(db, comment.getId(), "Comment");
@@ -527,14 +540,14 @@ public class ArticleDAO {
                 break;
 
             case "Comment":
-                statement.replaceFirst("$1","inFoJaxs_Comments");
-                statement.replaceFirst("$2","ID");
+                statement.replaceFirst("$1", "inFoJaxs_Comments");
+                statement.replaceFirst("$2", "ID");
                 deleteText(db, textId, "CommentChildren");
                 break;
 
             case "CommentChildren":
-                statement.replaceFirst("$1","inFoJaxs_Replies");
-                statement.replaceFirst("$2","comment_ID");
+                statement.replaceFirst("$1", "inFoJaxs_Replies");
+                statement.replaceFirst("$2", "parent_ID");
                 try {
                     for (Reply reply : getCommentReplies(textId, db.connection())) {
                         deleteText(db, reply.getId(), "Reply");
@@ -545,14 +558,14 @@ public class ArticleDAO {
                 break;
 
             case "Reply":
-                statement.replaceFirst("$1","inFoJaxs_Replies");
-                statement.replaceFirst("$2","ID");
+                statement.replaceFirst("$1", "inFoJaxs_Replies");
+                statement.replaceFirst("$2", "ID");
                 break;
         }
 
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement(statement)) {
-                deleteLikes(db, textId, textClassName);
+//                deleteLikes(db, textId, textClassName);
                 p.setInt(1, textId);
                 p.executeUpdate();
                 return true;
@@ -561,5 +574,5 @@ public class ArticleDAO {
             e.printStackTrace();
             return false;
         }
-    }*/
+    }
 }

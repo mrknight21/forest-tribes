@@ -13,21 +13,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by mche618 on 5/06/2017.
+ */
 public class ProfileServlet extends HttpServlet {
+
 
     private static final MySQL DB = new MySQL();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-
         try {
             if (!SecurityUtility.loggingStatusChecker(request)) {
                 response.sendRedirect("Login.jsp");
+                return;
+            } else if (!request.getParameterNames().hasMoreElements()) {
+                response.sendRedirect("Profile.jsp");
                 return;
 
             } else {

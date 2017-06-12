@@ -133,13 +133,17 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_Replies (
     protected int likes;
     protected String text;
     protected int views;*/
-
+DROP TABLE IF EXISTS inFoJaxs_Tree_Commentary_URL;
+DROP TABLE IF EXISTS inFoJaxs_Tree_Factual_URL;
+DROP TABLE IF EXISTS inFoJaxs_Tree_Reaction_Replies;
+DROP TABLE IF EXISTS inFoJaxs_Tree_Reactions;
+DROP TABLE IF EXISTS inFoJaxs_Tree_Trees;
 
 
 CREATE TABLE IF NOT EXISTS inFoJaxs_Tree_Trees (
   ID INT AUTO_INCREMENT,
   username VARCHAR(50) NOT NULL,
-  title VARCHAR(80) NOT NULL,
+  title VARCHAR(200) NOT NULL,
   content TEXT NOT NULL,
   likes INT,
   views INT,
@@ -197,6 +201,7 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_Tree_Factual_URL (
   ID INT AUTO_INCREMENT,
   parent_ID INT NOT NULL ,
   username VARCHAR(50) NOT NULL,
+  title VARCHAR(200) NOT NULL,
   URL VARCHAR (8000) NOT NULL,
   content VARCHAR (8000) NOT NULL,
   likes INT,
@@ -213,6 +218,7 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_Tree_Commentary_URL (
   ID INT AUTO_INCREMENT,
   parent_ID INT NOT NULL ,
   username VARCHAR(50) NOT NULL,
+  title VARCHAR(200) NOT NULL,
   URL VARCHAR (8000) NOT NULL,
   content VARCHAR (8000) NOT NULL,
   likes INT,

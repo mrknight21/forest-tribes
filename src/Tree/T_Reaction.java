@@ -10,7 +10,8 @@ import java.util.List;
  */
 public class T_Reaction extends Comment implements TreeComponents {
 
-    boolean supportForArgument;
+    private boolean supportForArgument;
+    private int repliesCount;
 
 
 
@@ -23,13 +24,15 @@ public class T_Reaction extends Comment implements TreeComponents {
     public T_Reaction(String author, String text, int parentID, boolean supportForArgument ){
         super(author, text, parentID);
         this.supportForArgument = supportForArgument;
+        this.repliesCount = 0;
     }
 
 
     //updating comment tree components
-    public T_Reaction(int id, String text, boolean supportForArgument){
+    public T_Reaction(int id, String text, boolean supportForArgument , int repliesCount){
         super(id, text);
         this.supportForArgument = supportForArgument;
+        this.repliesCount = replyCount;
     }
 
 
@@ -37,7 +40,13 @@ public class T_Reaction extends Comment implements TreeComponents {
     public T_Reaction(int id, String author, String text, List<Reply> replies, int likes, int views, String dateCreated, String dateLastEdited, boolean supportForArgument){
         super( id, author,  text,  replies, likes,  views, dateCreated, dateLastEdited);
         this.supportForArgument =supportForArgument;
+        this.repliesCount = replies.size();
     }
+
+
+    public int getRepliesCount(){return this.repliesCount;}
+
+    public void setRepliesCount(int repliesCount){this.repliesCount = repliesCount;}
 
 
     @Override
@@ -48,6 +57,6 @@ public class T_Reaction extends Comment implements TreeComponents {
 
     @Override
     public boolean isSupportForArgument() {
-        return false;
+        return this.supportForArgument;
     }
 }

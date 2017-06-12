@@ -8,9 +8,10 @@ import Article.Reply;
 public class T_URL extends Reply implements TreeComponents {
 
 
-    boolean supportForArgument;
-    boolean isfactual;
-    String URL;
+    private boolean supportForArgument;
+    private boolean isfactual;
+    private String URL;
+    private String title;
 
 
 
@@ -19,32 +20,47 @@ public class T_URL extends Reply implements TreeComponents {
 
 
 //create
-    public T_URL(String author, String introText, int parentID, String URL,boolean supportForArgument, boolean isfactual){
+    public T_URL(String author, String title, String introText, int parentID, String URL,boolean supportForArgument, boolean isfactual){
         super(author, introText, parentID);
         this.URL = URL;
+        this.title = title;
         this.supportForArgument = supportForArgument;
         this.isfactual = isfactual;
     }
 
 
     //update
-    public T_URL(int id, String introText, String URL, boolean supportForArgument ){
+    public T_URL(int id,String title, String introText, String URL, boolean supportForArgument ){
         super(id, introText);
+        this.title = title;
         this.URL = URL;
         this.supportForArgument = supportForArgument;
     }
 
     //retrieving data
-    public T_URL(int id, String author, String text,  int likes, int views, String dateCreated, String dateLastEdited, boolean supportForArgument, boolean isfactual, String URL) {
+    public T_URL(int id, String author,String title,  String text,  int likes, int views, String dateCreated, String dateLastEdited, boolean supportForArgument,  String URL) {
         super(id, author, text,   likes, views, dateCreated, dateLastEdited);
+        this.title = title;
         this.URL = URL;
         this.supportForArgument = supportForArgument;
-        this.isfactual = isfactual;
+
     }
 
     public boolean isFactual(){return this.isfactual;};
 
     public void setIsfactual(boolean isfactual){this.isfactual = isfactual;}
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getURL(){return this.URL;}
+
+    public void setURL(String URL){this.URL =URL;}
 
     @Override
     public void setSupportForArgument(boolean supportForArgument) {

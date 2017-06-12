@@ -32,7 +32,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="<%=sitePath%>article_display/DisplayAllArticles.jsp">All Articles</a></li>
                         <li><a href="<%=sitePath%>article_display/DisplayUserAllArticles.jsp">Your Articles</a></li>
-                        <li><a href="#">Create new article - To be created</a></li>
+                        <li><a href="<%=sitePath%>article_display/CreateArticle.jsp">Create new article</a></li>
                         <li><a href="#">To be UPDATED</a></li>
                     </ul>
                 </li>
