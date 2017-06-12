@@ -1,8 +1,5 @@
 package Article;
 
-import User.User;
-
-import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -10,14 +7,14 @@ import java.util.List;
  */
 public class Comment extends Text {
     protected List<Reply> replies;
-    private int replyCount;
-    private int articleID;
+    protected int replyCount;
+    protected int parentID;
 
     public Comment() {}
 
-    public Comment(String author, String text, int articleID) {
+    public Comment(String author, String text, int parentID) {
         super(author, text);
-        this.articleID = articleID;
+        this.parentID = parentID;
         likes = 0;
         views = 0;
         this.replies =null;
@@ -44,12 +41,12 @@ public class Comment extends Text {
 
 
 
-    public int getArticleID(){
-        return articleID;
+    public int getParentID(){
+        return parentID;
     }
 
-    public void setArticleID(int parent_id){
-        this.articleID = parent_id;
+    public void setParentID(int parent_id){
+        this.parentID = parent_id;
     }
 
 }

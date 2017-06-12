@@ -24,7 +24,7 @@ public class Serve_fullArticlecontent extends HttpServlet {
         int id =0;
 
         try{
-            id = Integer.parseInt(request.getParameter("articleID"));
+            id = Integer.parseInt(request.getParameter("parentID"));
         }catch (NumberFormatException e){
             System.out.println("wrong format of article ID");
         }

@@ -109,6 +109,126 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_Replies (
   FOREIGN KEY (username) REFERENCES inFoJaxs_User(username) ON DELETE CASCADE,
   FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Comments(ID)ON DELETE CASCADE
 );
+
+
+
+/*
+
+    private String title;
+    private List<T_URL> factual;
+    private List<T_URL> commentary;
+    private List<T_Reaction> reactoin;
+    private int stage;
+    private int size;
+    private int exp;
+    private int coordinX;
+    private int coordinY;
+    private int leaves;
+
+
+    /* protected int id;
+    protected String author;
+    protected String dateCreated;
+    protected String dateLastEdited;
+    protected int likes;
+    protected String text;
+    protected int views;*/
+
+
+
+CREATE TABLE IF NOT EXISTS inFoJaxs_Tree_Trees (
+  ID INT AUTO_INCREMENT,
+  username VARCHAR(50) NOT NULL,
+  title VARCHAR(80) NOT NULL,
+  content TEXT NOT NULL,
+  likes INT,
+  views INT,
+  exp INT,
+  stage INT,
+  size INT,
+  XCoordinate INT,
+  YCoordinate INT,
+  leaves INT,
+  creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS inFoJaxs_Tree_Reactions (
+  ID INT AUTO_INCREMENT,
+  parent_ID INT NOT NULL,
+  username VARCHAR(50) NOT NULL ,
+  content VARCHAR (8000) NOT NULL,
+  likes INT,
+  views INT,
+  repliesCount INT,
+  support_for BOOLEAN,
+  creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username) ON DELETE CASCADE,
+  FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Tree_Trees(ID) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS inFoJaxs_Tree_Reaction_Replies (
+  ID INT AUTO_INCREMENT,
+  parent_ID INT NOT NULL ,
+  username VARCHAR(50) NOT NULL,
+  content VARCHAR (8000) NOT NULL,
+  likes INT,
+  views INT,
+  creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username) ON DELETE CASCADE,
+  FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Tree_Reactions(ID)ON DELETE CASCADE
+);
+
+
+/*
+boolean supportForArgument;
+    boolean isfactual;
+    String URL;
+ */
+
+
+CREATE TABLE IF NOT EXISTS inFoJaxs_Tree_Factual_URL (
+  ID INT AUTO_INCREMENT,
+  parent_ID INT NOT NULL ,
+  username VARCHAR(50) NOT NULL,
+  URL VARCHAR (8000) NOT NULL,
+  content VARCHAR (8000) NOT NULL,
+  likes INT,
+  views INT,
+  support_for BOOLEAN,
+  creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username) ON DELETE CASCADE,
+  FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Tree_Trees(ID)ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS inFoJaxs_Tree_Commentary_URL (
+  ID INT AUTO_INCREMENT,
+  parent_ID INT NOT NULL ,
+  username VARCHAR(50) NOT NULL,
+  URL VARCHAR (8000) NOT NULL,
+  content VARCHAR (8000) NOT NULL,
+  likes INT,
+  views INT,
+  support_for BOOLEAN,
+  creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User(username) ON DELETE CASCADE,
+  FOREIGN KEY (parent_ID) REFERENCES inFoJaxs_Tree_Trees(ID)ON DELETE CASCADE
+);
+
+
+
+
+
 /*CREATE TABLE IF NOT EXISTS inFoJaxs_ArticleLikes (
   ID INT,
   likes INT DEFAULT 0,
