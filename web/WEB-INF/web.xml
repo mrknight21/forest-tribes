@@ -76,12 +76,12 @@
 
 
     <servlet>
-        <servlet-name>Serve_fullArticlecontent</servlet-name>
+        <servlet-name>ArticleServlet</servlet-name>
         <servlet-class>Article.ArticleServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Serve_fullArticlecontent</servlet-name>
-        <url-pattern>/Serve_fullArticlecontent</url-pattern>
+        <servlet-name>ArticleServlet</servlet-name>
+        <url-pattern>/TextUpdate</url-pattern>
     </servlet-mapping>
 
 

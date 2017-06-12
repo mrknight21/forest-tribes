@@ -55,7 +55,8 @@ public class ArticleServlet extends HttpServlet {
                     switch (parameter) {
                         case "createArticle":
                             createArticle(request);
-                            break chooser;
+                            response.sendRedirect("article_display/DisplayUserAllArticles.jsp");
+                            return;
                         case "createComment":
                             createComment(request);
                             break chooser;
@@ -77,9 +78,6 @@ public class ArticleServlet extends HttpServlet {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        doGet(request,response);
-
     }
 
     @Override
@@ -152,6 +150,7 @@ public class ArticleServlet extends HttpServlet {
                         getUsername(request),
                         request.getParameter("title"),
                         request.getParameter("text")));
+
         return true;
     }
 
