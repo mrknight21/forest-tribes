@@ -45,9 +45,20 @@
         <!--Article panel-->
         <div class="col-sm-12 col-md-9 panel panel-default" id="article-container">
             <div class="panel panel-default" id="article">
+
                 <div class="panel-heading">
-                    <h2>${article.title}</h2>
+                    <form action="DisplayFullArticle.jsp">
+                        <label for="fullarticle-${article.id}">
+                            <h4>${article.title}</h4>
+                        </label>
+                        <input type="text" value="${article.id}" name="article_id" readonly hidden/>
+                        <input type="submit"
+                               id="fullarticle-${article.id}"
+                               hidden
+                        />
+                    </form>
                 </div>
+
                 <div class="panel-body">
                     <h3>${article.shortIntro}</h3>
 

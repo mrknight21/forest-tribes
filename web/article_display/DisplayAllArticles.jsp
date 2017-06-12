@@ -58,7 +58,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <fieldset>
-                              <legend id="displayMainTitleID">Articles:</legend>
+                                <legend id="displayMainTitleID">Articles:</legend>
                             </fieldset>
                         </div>
                     </div>
@@ -69,9 +69,20 @@
                             <!--Article panel-->
                             <div class="col-lg-12">
                                 <div class="panel panel-default" id="displayArticlePanelID">
+
                                     <div class="panel-heading">
-                                        <h4>${article.title}</h4>
+                                        <form action="DisplayFullArticle.jsp">
+                                            <label for="fullarticle-${article.id}">
+                                                <h4>${article.title}</h4>
+                                            </label>
+                                            <input type="text" value="${article.id}" name="article_id" readonly hidden/>
+                                            <input type="submit"
+                                                   id="fullarticle-${article.id}"
+                                                   hidden
+                                            />
+                                        </form>
                                     </div>
+
                                     <div class="panel-body">
                                         <p><em>${article.shortIntro}</em></p>
                                         <p style="display: none">${article.text}</p>
@@ -80,8 +91,6 @@
                                     <div class="panel-footer">
                                         <p style="display: inline-block"><i class="fa">&#xf2bd;</i>
                                             Author: ${article.author}</p>
-                                        <p style="display: inline-block"><i class="fa">&#xf097;</i> Article
-                                            ID: ${article.id}</p>
                                         <p style="display: inline-block"><i class="fa">&#xf087;</i>
                                             Likes: ${article.likes}</p>
                                         <p style="display: inline-block"><i class="fa">&#xf0c0;</i>
