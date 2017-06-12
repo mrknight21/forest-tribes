@@ -57,19 +57,19 @@
                                     <p>${passwordStatus}</p>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                        <input type="password" id="changePasswordCurrentID" name="changePasswordCurrent"
+                                        <input type="password" id="changePasswordCurrentID" name="CurrentPassword"
                                                class="form-control"
                                                placeholder="Current password" tabindex="1" value=""/>
                                     </div>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                        <input type="password" id="changePasswordNewID" name="changePasswordNew"
+                                        <input type="password" id="changePasswordNewID" name="NewPassword"
                                                class="form-control"
                                                placeholder="New password" tabindex="2" value=""/>
                                     </div>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                        <input type="password" id="changePasswordConfirmID" name="changePasswordConfirm"
+                                        <input type="password" id="changePasswordConfirmID" name="ConfirmPassword"
                                                class="form-control"
                                                placeholder="Confirm password" tabindex="3" value=""
                                                onchange="checkPasswordMatch();"/>
@@ -90,7 +90,7 @@
                             </form>
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <a id="cancelLink" href="<%=sitePath%>Home.jsp"><p style="text-align: center"><i
+                                    <a id="cancelLink" href="<%=sitePath%>user_interface/Home.jsp"><p style="text-align: center"><i
                                             class="fa">&#xf00d;</i> Cancel</p></a>
                                 </div>
                             </div>

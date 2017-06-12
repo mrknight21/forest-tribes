@@ -20,12 +20,7 @@ public class Serve_DeleteUser extends HttpServlet {
 
 /////Testing on doGet, remember to switch to doPost when finalised.
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-
-
-
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try {
             if (!SecurityUtility.loggingStatusChecker(request)) {
                 response.sendRedirect("login_interface/Login.jsp");
@@ -76,6 +71,6 @@ public class Serve_DeleteUser extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-
+        doGet(request,response);
     }
 }

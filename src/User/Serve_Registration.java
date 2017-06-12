@@ -5,7 +5,7 @@ package User;
  */
 
 
-import Utility.MicellaneousUntility;
+import Utility.MiscellaneousUtility;
 import Utility.MySQL;
 import Utility.SecurityUtility;
 
@@ -54,10 +54,10 @@ public class Serve_Registration extends HttpServlet {
                 ServletContext servletContext = getServletContext();
                 String UsersFolder = servletContext.getRealPath("/User");
                 File UsersFolderfile = new File(UsersFolder);
-                MicellaneousUntility.DirCeation(UsersFolderfile);
+                MiscellaneousUtility.DirCeation(UsersFolderfile);
                 String  UserfilePath = servletContext.getRealPath("/User/"+username);
                 File userFolder = new File(UserfilePath);
-                MicellaneousUntility.DirCeation(userFolder);
+                MiscellaneousUtility.DirCeation(userFolder);
 
                 if(!password.equals(confirmPassword)){
                     request.setAttribute("messageRegistration", "Your password does not match with your confirmed password. Please try again.");

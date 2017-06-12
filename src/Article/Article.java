@@ -1,12 +1,7 @@
 package Article;
 
-import User.User;
-import Utility.MicellaneousUntility;
-import com.sun.xml.internal.fastinfoset.util.CharArray;
+import Utility.MiscellaneousUtility;
 
-import java.io.Serializable;
-import java.security.Timestamp;
-import java.sql.Time;
 import java.util.List;
 
 /**
@@ -23,6 +18,7 @@ public class Article extends Text {
 
     public Article() {}
 
+    // Create new article
     public Article(String author, String title, String text) {
         //creation time and last edit time will be automatically made in database.
         super(author, text);
@@ -34,7 +30,7 @@ public class Article extends Text {
         this.shortIntro = extractShortIntro(this.text);
     }
 
-    //update author, created time,
+    // Update article
     public Article(int id, String text, String title) {
         super( id, text);
         this.title = title;
@@ -67,7 +63,7 @@ public class Article extends Text {
     private String extractShortIntro(String text){
         int indexNum = 100;
         String shortIntro ="";
-        String pureText = MicellaneousUntility.htmlToStringParser(this.text);
+        String pureText = MiscellaneousUtility.htmlToStringParser(this.text);
         while( true){
             if(this.text.length() < 100)
             {
@@ -115,6 +111,4 @@ public class Article extends Text {
     public String getShortIntro(){
         return this.shortIntro;
     }
-
-
 }

@@ -10,7 +10,7 @@ import java.io.File;
 /**
  * Created by mche618 on 5/06/2017.
  */
-public class MicellaneousUntility {
+public class MiscellaneousUtility {
 
     public static BufferedImage scale(BufferedImage source, double ratio) {
         int w = (int) (source.getWidth() * ratio);

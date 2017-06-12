@@ -31,7 +31,7 @@ public class Serve_Authentication extends HttpServlet {
             if (SecurityUtility.loggingStatusChecker(request)){
             response.sendRedirect("user_interface/Home.jsp");
             return;
-            }else {
+            } else {
                 HttpSession session = request.getSession();
                 String username = request.getParameter("loginUsername");
                 String password = request.getParameter("loginPassword");
