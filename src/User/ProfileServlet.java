@@ -11,11 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-/**
- * Created by mche618 on 5/06/2017.
- */
 public class ProfileServlet extends HttpServlet {
-
 
     private static final MySQL DB = new MySQL();
 
@@ -31,26 +27,28 @@ public class ProfileServlet extends HttpServlet {
             if (!SecurityUtility.loggingStatusChecker(request)) {
                 response.sendRedirect("Login.jsp");
                 return;
+
             } else {
-
                 HttpSession session = request.getSession();
-                String username = (String)session.getAttribute("username");
-                String email = request.getParameter("email");
-                String dateOfBirth = request.getParameter("dateOfBirth");
-                String gender = request.getParameter("gender");
-                String occupation = request.getParameter("occupation");
-                String education_level = request.getParameter("education_level");
-                String politicalOri = request.getParameter("politicalOri");
-                String thingsLoves = request.getParameter("thingsLoves");
-                String short_intro = request.getParameter("short_intro");
-                String[] issues = request.getParameterValues("issuesCared");
+                String username = (String) session.getAttribute("username");
 
-                Profile updateProfile = new Profile(username, dateOfBirth, gender, occupation,education_level, politicalOri, thingsLoves, short_intro, issues);
+                String email = request.getParameter("profileEmail");
+                String gender = request.getParameter("profileGender");
+                String occupation = request.getParameter("profileOccupation");
+                String education_level = request.getParameter("profileEducation");
+                String politicalOri = request.getParameter("profilePolitical");
 
-                if(email != null && email.trim() != ""){
-                   UserDAO.updateEmail(DB, email, username);
+                String[] issues = new String[17];
+
+                String issue01 = request.getParameter("profileIssuesPoverty");
+                System.out.println(issue01);
+
+                Profile updateProfile = new Profile(username, gender, occupation, education_level, politicalOri, issues);
+
+                if (email != null && email.trim() != "") {
+                    UserDAO.updateEmail(DB, email, username);
                 }
-               UserDAO.updateProfile(DB, username, updateProfile);
+                UserDAO.updateProfile(DB, username, updateProfile);
                 request.setAttribute("message", "Profile updated successfully!!");
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/profile.jsp");
                 dispatcher.forward(request, response);
