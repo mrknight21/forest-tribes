@@ -122,7 +122,7 @@
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
-                                <p style="text-align: center">You have not created any articles.<a href="#">
+                                <p style="text-align: center">You have not created any articles.<a href="CreateArticle.jsp">
                                     Please click here to get started.</a></p>
                             </c:otherwise>
                         </c:choose>

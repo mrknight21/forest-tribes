@@ -51,7 +51,7 @@ protected int id;
 
             <div class="panel panel-default">
 
-                <form action="<%=sitePath%>Serve_fullArticlecontent" method="post">
+                <form action="<%=sitePath%>TextUpdate" method="post">
 
                     <div class="panel-heading">
                         <div class="row">
@@ -68,7 +68,7 @@ protected int id;
                         <div class="row">
                             <div class="col-lg-12">
                                 <p>
-                                    <textarea rows="10" cols="75" name="content"></textarea>
+                                    <textarea rows="10" cols="75" name="text"></textarea>
                                 </p>
                             </div>
                         </div>

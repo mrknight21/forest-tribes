@@ -43,6 +43,7 @@ protected int id;
 <%
     final MySQL DB = new MySQL();
     Article article = ArticleDAO.getArticleById(DB, Integer.parseInt(request.getParameter("article_id")));
+//    Add script to increase Article views by one one each load.
     request.setAttribute("article", article);
 %>
 
