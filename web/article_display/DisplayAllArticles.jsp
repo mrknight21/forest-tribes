@@ -11,7 +11,9 @@
 
 <%
     if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
-    String username = (String) session.getAttribute("username");%>
+    String username = (String) session.getAttribute("username");
+%>
+
 <!DOCTYPE html>
 <html lang="en" class="full">
 <meta charset="UTF-8">
