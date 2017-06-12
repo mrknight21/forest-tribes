@@ -80,7 +80,6 @@
                             <!--Article panel-->
                             <div class="col-lg-12">
                                 <div class="panel panel-default" id="displayArticlePanelID">
-
                                     <div class="panel-heading">
                                         <form action="DisplayFullArticle.jsp">
                                             <label for="fullarticle-${article.id}">
@@ -93,7 +92,6 @@
                                             />
                                         </form>
                                     </div>
-
                                     <div class="panel-body">
                                         <p id="displayIntroTextID${article.id}"><em>${article.shortIntro}</em></p>
                                         <p id="displayFullTextID${article.id}" style="display: none">${article.text}</p>
