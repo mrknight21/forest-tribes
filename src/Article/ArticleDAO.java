@@ -1,14 +1,10 @@
 package Article;
 
-import User.UserSecurity;
 import Utility.AbstractDB;
-import Utility.SecurityUtility;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import static Utility.BlobConverter.getByteArray;
 
 
 //http://alvinalexander.com/java/java-timestamp-example-current-time-now
@@ -103,10 +99,10 @@ public class ArticleDAO {
 
     public static boolean createNewComment( AbstractDB db, Comment comment){
         boolean success;
-        //Comment(String author, String text, int articleID)//
+        //Comment(String author, String text, int parentID)//
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_Comments (parent_ID, username,content, likes, views, repliesCount) VALUE ( ?, ?, ?, ?, ?, ?)")) {
-                p.setInt(1, comment.getArticleID());
+                p.setInt(1, comment.getParentID());
                 p.setString(2, comment.getAuthor());
                 p.setString(3, comment.getText());
                 p.setInt(4, comment.getLikes());
@@ -130,10 +126,10 @@ public class ArticleDAO {
 
     public static boolean createNewReply( AbstractDB db, Reply reply){
         boolean success;
-        //Comment(String author, String text, int articleID)//
+        //Comment(String author, String text, int parentID)//
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_Replies (parent_ID, username,content, likes, views) VALUE (?, ?, ?, ?, ?)")) {
-                p.setInt(1, reply.getCommentId());
+                p.setInt(1, reply.getParentID());
                 p.setString(2, reply.getAuthor());
                 p.setString(3, reply.getText());
                 p.setInt(4, reply.getLikes());
