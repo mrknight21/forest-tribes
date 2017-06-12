@@ -27,7 +27,7 @@
 <a href="<%=sitePath%>user_interface/changePassword.jsp"><button>Change Password</button></a>
 <a href="<%=sitePath%>Serve_Logout"><button>Log Out</button></a>
 
-<iframe src="<%=sitePath%>tree_TRIAL/trial.jsp"frameborder=0 height="750px" width="1000px" scrolling="auto">
+<iframe name="iframe_a" src="<%=sitePath%>tree_TRIAL/trial.html"frameborder=0 height="750px" width="1000px" scrolling="auto">
     <p>Your browser does not support iframes.</p>
 </iframe>
 

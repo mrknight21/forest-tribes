@@ -82,7 +82,7 @@
                             <h1 style="text-align: center"><i class="fa">&#xf1bb;</i> Forest Tribes</h1>
                             <h4 id="subtitle" style="text-align: center">The Beauty of Interconnectedness</h4>
 
-                            <fieldset class="span4">
+                            <fieldset id="profilePictureFieldsetID" class="span4">
                                 <legend><i class="fa">&#xf083;</i> Profile Picture</legend>
                                 <div id="profileImageDiv" class="col-lg-10 col-lg-offset-1">
                                     <div class="thumbnail">
@@ -131,11 +131,11 @@
                                         <legend><i class="fa">&#xf224;</i> Gender:</legend>
                                         <div class="form-group">
                                             <label for="profileRadioMaleID">Male</label>
-                                            <input type="radio" name="profileGender" id="profileRadioMaleID">
+                                            <input type="radio" name="profileGender" id="profileRadioMaleID" value="male">
                                             <label for="profileRadioFemaleID">Female</label>
-                                            <input type="radio" name="profileGender" id="profileRadioFemaleID">
+                                            <input type="radio" name="profileGender" id="profileRadioFemaleID" value="female">
                                             <label for="profileRadioOtherID">Other</label>
-                                            <input type="radio" name="profileGender" id="profileRadioOtherID">
+                                            <input type="radio" name="profileGender" id="profileRadioOtherID" value="other">
                                         </div>
                                     </fieldset>
                                     <fieldset id="profileOccupationFieldsetID">
@@ -143,7 +143,7 @@
                                         <div class="input-group">
                                         <span class="input-group-addon"><i
                                                 class="glyphicon glyphicon-pencil"></i></span>
-                                            <input type="text" name="occupation" id="profileOccupationID"
+                                            <input type="text" name="profileOccupation" id="profileOccupationID"
                                                    tabindex="1" class="form-control" placeholder="Occupation" value="">
                                         </div>
                                     </fieldset>
@@ -151,34 +151,34 @@
                                         <legend><i class="fa">&#xf19d;</i> Education:</legend>
                                         <div class="form-group">
                                             <label for="profileRadioPrimaryID">Primary</label>
-                                            <input type="radio" name="profileEducation" id="profileRadioPrimaryID">
+                                            <input type="radio" name="profileEducation" id="profileRadioPrimaryID" value="primary">
                                             <label for="profileRadioSecondaryID">Secondary</label>
-                                            <input type="radio" name="profileEducation" id="profileRadioSecondaryID">
+                                            <input type="radio" name="profileEducation" id="profileRadioSecondaryID" value="secondary">
                                             <label for="profileRadioTertiaryID">Tertiary</label>
-                                            <input type="radio" name="profileEducation" id="profileRadioTertiaryID">
+                                            <input type="radio" name="profileEducation" id="profileRadioTertiaryID" value="tertiary">
                                             <label for="profileRadioPostgraduateID">Postgraduate</label>
-                                            <input type="radio" name="profileEducation" id="profileRadioPostgraduateID">
+                                            <input type="radio" name="profileEducation" id="profileRadioPostgraduateID" value="postgraduate">
                                             <label for="profileRadioDoctorateID">Doctorate</label>
-                                            <input type="radio" name="profileEducation" id="profileRadioDoctorateID">
+                                            <input type="radio" name="profileEducation" id="profileRadioDoctorateID" value="doctorate">
                                         </div>
                                     </fieldset>
                                     <fieldset id="profilePoliticalFieldsetID">
                                         <legend><i class="fa">&#xf19c;</i> Political Orientation:</legend>
                                         <div class="form-group">
                                             <label for="profileRadioExLibID">Extremely Liberal</label>
-                                            <input type="radio" name="profilePolitical" id="profileRadioExLibID">
+                                            <input type="radio" name="profilePolitical" id="profileRadioExLibID" value="extremely liberal">
                                             <label for="profileRadioLibID">Liberal</label>
-                                            <input type="radio" name="profilePolitical" id="profileRadioLibID">
+                                            <input type="radio" name="profilePolitical" id="profileRadioLibID" value="liberal">
                                             <label for="profileRadioSliLibID">Slightly Liberal</label>
-                                            <input type="radio" name="profilePolitical" id="profileRadioSliLibID">
+                                            <input type="radio" name="profilePolitical" id="profileRadioSliLibID" value="slightly liberal">
                                             <label for="profileRadioCentID">Centrist</label>
-                                            <input type="radio" name="profilePolitical" id="profileRadioCentID">
+                                            <input type="radio" name="profilePolitical" id="profileRadioCentID" value="centrist">
                                             <label for="profileRadioSliConID">Slightly Conservative</label>
-                                            <input type="radio" name="profilePolitical" id="profileRadioSliConID">
+                                            <input type="radio" name="profilePolitical" id="profileRadioSliConID" value="slightly conservative">
                                             <label for="profileRadioConID">Conservative</label>
-                                            <input type="radio" name="profilePolitical" id="profileRadioConID">
+                                            <input type="radio" name="profilePolitical" id="profileRadioConID" value="conservative">
                                             <label for="profileRadioExConID">Extremely Conservative</label>
-                                            <input type="radio" name="profilePolitical" id="profileRadioExConID">
+                                            <input type="radio" name="profilePolitical" id="profileRadioExConID" value="extremely conservative">
                                         </div>
                                     </fieldset>
                                     <fieldset id="profileIssuesFieldsetID">
@@ -347,7 +347,7 @@
                                                     alt="Peace, Justice and Strong Institutions"><input
                                                     type="checkbox"
                                                     name="profileIssuesPeace"
-                                                    id="profileIssuesConsumptionPeaceID"
+                                                    id="profileIssuesPeaceID"
                                                     value="peace, justice and strong institutions"
                                                     class="hidden"
                                                     autocomplete="off"></label>
@@ -428,6 +428,7 @@
 <script>
     $(function () {
         $('#profileUpdateLink').click(function (e) {
+            $("#profilePictureFieldsetID").delay(100).fadeIn(100);
             $("#profileUpdateFormID").delay(100).fadeIn(100);
             $("#profileChangePPFormID").delay(100).fadeIn(100);
             $("#profileChangePWFormID").delay(100).fadeIn(100);
@@ -446,6 +447,7 @@
         });
         $('#profileDeleteLink').click(function (e) {
             $("#profileDeleteFormID").delay(100).fadeIn(100);
+            $("#profilePictureFieldsetID").fadeOut(100);
             $("#profileUpdateFormID").fadeOut(100);
             $("#profileChangePPFormID").fadeOut(100);
             $("#profileChangePWFormID").fadeOut(100);

@@ -1,22 +1,18 @@
 package Article;
 
-import User.User;
-
-import java.sql.Timestamp;
-
 /**
  * Created by wasia on 3/06/2017.
  */
 public class Reply extends Text {
 
-    private int commentId;
+    private int parentID;
 
     public Reply() {}
 
     //initial
-    public Reply(String author, String text, int commentId) {
+    public Reply(String author, String text, int parentID) {
         super(author, text);
-        this.commentId = commentId;
+        this.parentID = parentID;
     }
 
     //update
@@ -28,11 +24,11 @@ public class Reply extends Text {
         super(id, author, text, dateCreated, dateLastEdited, likes, views);
     }
 
-    public int getCommentId(){
-        return this.commentId;
+    public int getParentID(){
+        return this.parentID;
     }
 
-    public void setCommentId(int commentId){
-        this.commentId = commentId;
+    public void setParentID(int parentID){
+        this.parentID = parentID;
     }
 }

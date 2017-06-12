@@ -116,6 +116,4 @@ public class Article extends Text {
     public String getShortIntro(){
         return this.shortIntro;
     }
-
-
 }

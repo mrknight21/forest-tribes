@@ -19,7 +19,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-    <title>Display all articles</title>
+    <title>Display all Articles</title>
 
     <%--Importing all necessary libraries, frameworks etc.--%>
     <%@include file="../WEB-INF/Head_Scripts.jsp" %>
@@ -50,17 +50,6 @@
     final MySQL DB = new MySQL();
     List<Article> articles = ArticleDAO.getAllArticles(DB);
     request.setAttribute("articles", articles);
-
-    /*ID INT AUTO_INCREMENT,
-  username VARCHAR(50) NOT NULL,
-  title VARCHAR(80) NOT NULL,
-  content TEXT NOT NULL,
-  likes INT,
-  views INT,
-  commentCount INT,
-  shortIntro VARCHAR(120),
-  creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,*/
 %>
 
 <div class="container">
@@ -71,7 +60,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <fieldset>
-                                <legend id="displayMainTitleID">Articles:</legend>
+                                <legend id="displayMainTitleID">All Articles:</legend>
                             </fieldset>
                         </div>
                     </div>
