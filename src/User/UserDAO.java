@@ -184,6 +184,27 @@ public class UserDAO {
         return status;
     }
 
+    public static Profile getProfile(AbstractDB db, String username) {
+
+        Profile profile = null;
+
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Profile WHERE username = ?")) {
+                p.setString(1, username);
+
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        profile = profileFromResultSet(r);
+                    }
+                }
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            profile = null;
+        }
+        return profile;
+    }
+
 
     public static boolean updateProfile(AbstractDB db, String username, Profile profile) {
 
@@ -243,6 +264,16 @@ public class UserDAO {
         );
     }
 
+    private static Profile profileFromResultSet(ResultSet r) throws SQLException {
+        return new Profile(
+                r.getString("username"),
+                r.getString("gender"),
+                r.getString("occupation"),
+                r.getString("education"),
+                r.getString("political"),
+                r.getString("issues")
+        );
+    }
 
     public static boolean deleteUser(AbstractDB db, String username, String password) {
 

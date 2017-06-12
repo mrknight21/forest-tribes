@@ -2,17 +2,21 @@
 <%@ page import="Utility.SecurityUtility" %>
 <%@ page import="User.UserDAO" %>
 <%@ page import="User.User" %>
+<%@ page import="User.Profile" %>
 <%@ page import="Utility.MySQL" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<% if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("login_interface/Login.jsp");
+<%
+    if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("login_interface/Login.jsp");
     String username = (String) session.getAttribute("username");
 
     final MySQL DB = new MySQL();
 
     User user = UserDAO.getUser(DB, username);
     String email = user.getEmail();
+
+    Profile profile = null;
 %>
 
 <!DOCTYPE html>
