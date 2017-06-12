@@ -1,41 +1,39 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+
 <%@ page import="Utility.SecurityUtility" %>
 <%@ page import="Utility.MySQL" %>
 <%@ page import="Article.ArticleDAO" %>
 <%@ page import="java.util.List" %>
-<%@ page import="Article.Article" %><%--
-  Created by IntelliJ IDEA.
-  User: mche618
-  Date: 8/06/2017
-  Time: 3:53 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="Article.Article" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%
     if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
-    String username = (String) session.getAttribute("username");%>
-<html>
+    String username = (String) session.getAttribute("username");
+%>
+
+<!DOCTYPE html>
+<html lang="en" class="full">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-    <title>Display all articles</title>
-    <%@include file="../WEB-INF/Head_Scripts.jsp"%>
+    <title>Display all Articles</title>
+
+    <%--Importing all necessary libraries, frameworks etc.--%>
+    <%@include file="../WEB-INF/Head_Scripts.jsp" %>
+
+ <tags:Style_Display-All-User-Articles/>
 </head>
 <body>
+
 <%@ include file="../WEB-INF/Header_Navbar.jsp" %>
 
 <%
     final MySQL DB = new MySQL();
     List<Article> articles = ArticleDAO.getArticlesByUser(DB, username);
     request.setAttribute("articles", articles);
-
-    /*ID INT AUTO_INCREMENT,
-  username VARCHAR(50) NOT NULL,
-  title VARCHAR(80) NOT NULL,
-  content TEXT NOT NULL,
-  likes INT,
-  views INT,
-  commentCount INT,
-  shortIntro VARCHAR(120),
-  creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,*/
   %>
 
 <h1>ALL ARTICLES!!!!!</h1>

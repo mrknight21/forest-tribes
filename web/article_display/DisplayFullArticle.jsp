@@ -88,7 +88,7 @@ protected int id;
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <h4>Comment: </h4>
+                                        <h5>Comment: </h5>
                                     </div>
                                 </div>
                             </div>

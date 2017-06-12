@@ -17,7 +17,7 @@
         margin-top: 2%;
     }
 
-    h4 {
+    h4, h5 {
         font-family: Futura;
         color: white;
     }
