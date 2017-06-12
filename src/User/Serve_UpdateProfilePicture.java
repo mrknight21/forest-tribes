@@ -47,9 +47,8 @@ public class Serve_UpdateProfilePicture extends HttpServlet {
         String DefaultImagePathway = getServletContext().getRealPath(newProfileImagePath);
         String pathToUserFolder = getServletContext().getRealPath(user.getUserFolderPath());
 
-        // Ensure user folder exists
-        File userFolder = new File(pathToUserFolder);
-        MicellaneousUntility.DirCeation(userFolder);
+        // Ensure user folders exist
+        MicellaneousUntility.DirCeation(new File(pathToUserFolder));
 
 
         File profileImage = new File(DefaultImagePathway);
@@ -96,8 +95,7 @@ public class Serve_UpdateProfilePicture extends HttpServlet {
         String pathToUserFolder = getServletContext().getRealPath(user.getUserFolderPath());
 
         // Ensure user folder exists
-        File userFolder = new File(pathToUserFolder);
-        MicellaneousUntility.DirCeation(userFolder);
+        MicellaneousUntility.DirCeation(new File(pathToUserFolder));
 
         Boolean isMultipart = ServletFileUpload.isMultipartContent(request);
         try {
