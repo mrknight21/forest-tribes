@@ -1,4 +1,4 @@
-<%@include file="rootpath_toggle.jsp"%>
+<%@include file="Rootpath_Toggle.jsp"%>
 
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
@@ -27,4 +27,4 @@
 <%--Icons CSS--%>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<tags:header-styling/>
+<tags:Style_Header-Navbar/>

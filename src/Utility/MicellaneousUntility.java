@@ -12,7 +12,6 @@ import java.io.File;
  */
 public class MicellaneousUntility {
 
-
     public static BufferedImage scale(BufferedImage source, double ratio) {
         int w = (int) (source.getWidth() * ratio);
         int h = (int) (source.getHeight() * ratio);
@@ -34,31 +33,23 @@ public class MicellaneousUntility {
         return image;
     }
 
-
-
     public static boolean DirCeation (File theDir){
-        boolean result = false;
         if (!theDir.exists()) {
             System.out.println("creating directory: " + theDir.getName());
 
             try{
-                theDir.mkdir();
-                result = true;
+                theDir.mkdirs();
+                System.out.println("DIR created");
+                return true;
             }
             catch(SecurityException se){
                 System.out.println(se.getMessage());
             }
-            if(result) {
-                System.out.println("DIR created");
-            }
         }
-        return result;
+        return false;
     }
+
     public static String htmlToStringParser (String html) {
         return Jsoup.parse(html).text();
     }
-
-
-
-
 }

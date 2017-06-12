@@ -28,7 +28,7 @@ public class Serve_Logout extends HttpServlet {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login_interface/Login.jsp");
             dispatcher.forward(req, resp);
         }
-        resp.sendRedirect("/login_interface/Login.jsp");
+        resp.sendRedirect("login_interface/Login.jsp");
     }
 }
 

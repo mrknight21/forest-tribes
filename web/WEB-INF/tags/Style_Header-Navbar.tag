@@ -1,4 +1,4 @@
-<%@include file="../rootpath_toggle.jsp"%>
+<%@include file="../Rootpath_Toggle.jsp"%>
 <style>
         @font-face {
             font-family: Plump;
@@ -33,6 +33,10 @@
 
         .navbar-default .navbar-toggle .icon-bar {
             background-color: #029f5b;
+        }
+
+        .navbar-default {
+            border-color: #029f5b;
         }
 
         #headerSearchSubmit {

@@ -9,7 +9,7 @@
     <title>Login</title>
 
     <%--Importing all necessary libraries, frameworks etc.--%>
-    <%@include file="../WEB-INF/head-scripts.jsp" %>
+    <%@include file="../WEB-INF/Head_Scripts.jsp" %>
 
     <%--Google Library--%>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -17,7 +17,7 @@
           content="528062179592-r23sffi9bm4tnntec1e6eei3s1oot0k9.apps.googleusercontent.com">
 
     <%--Page Specific CSS--%>
-    <link rel="stylesheet" href="Login.css">
+    <tags:Style_Login/>
 
     <script>
         function checkPasswordMatch() {
@@ -152,7 +152,7 @@
                         <div class="col-lg-12">
                             <h1 style="text-align: center"><i class="fa">&#xf1bb;</i> Forest Tribes</h1>
                             <h4 style="text-align: center">The Beauty of Interconnectedness</h4>
-                            <form id="loginFormID" action="/Serve_Authentication" method="post" role="form"
+                            <form id="loginFormID" action="<%=sitePath%>Serve_Authentication" method="post" role="form"
                                   style="display: block;">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -205,7 +205,7 @@
                                     </div>
                                 </div>
                             </form>
-                            <form id="registrationFormID" action="/Serve_Registration" method="post" role="form"
+                            <form id="registrationFormID" action="<%=sitePath%>Serve_Registration" method="post" role="form"
                                   style="display: none;">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>

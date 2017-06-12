@@ -91,7 +91,7 @@
         and (orientation: portrait) {
             .panel {
                 margin-top: 20%;
-                margin-left: -1%;
+                margin-left: 1%;
             }
         }
 
