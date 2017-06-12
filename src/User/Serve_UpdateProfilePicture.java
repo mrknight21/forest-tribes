@@ -1,6 +1,6 @@
 package User;
 
-import Utility.MicellaneousUntility;
+import Utility.MiscellaneousUtility;
 import Utility.MySQL;
 import Utility.SecurityUtility;
 import org.apache.commons.fileupload.FileItem;
@@ -17,13 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
-
-import static Utility.MicellaneousUntility.scale;
 
 /**
  * Created by mche618 on 6/06/2017.
@@ -55,7 +51,7 @@ public class Serve_UpdateProfilePicture extends HttpServlet {
         String pathToUserFolder = getServletContext().getRealPath(user.getUserFolderPath());
 
         // Ensure user folders exist
-        MicellaneousUntility.DirCeation(new File(pathToUserFolder));
+        MiscellaneousUtility.DirCeation(new File(pathToUserFolder));
 
 
         File profileImage = new File(DefaultImagePathway);
@@ -102,7 +98,7 @@ public class Serve_UpdateProfilePicture extends HttpServlet {
         String pathToUserFolder = getServletContext().getRealPath(user.getUserFolderPath());
 
         // Ensure user folder exists
-        MicellaneousUntility.DirCeation(new File(pathToUserFolder));
+        MiscellaneousUtility.DirCeation(new File(pathToUserFolder));
 
         Boolean isMultipart = ServletFileUpload.isMultipartContent(request);
         try {

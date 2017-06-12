@@ -1,12 +1,7 @@
 package Article;
 
-import User.User;
-import Utility.MicellaneousUntility;
-import com.sun.xml.internal.fastinfoset.util.CharArray;
+import Utility.MiscellaneousUtility;
 
-import java.io.Serializable;
-import java.security.Timestamp;
-import java.sql.Time;
 import java.util.List;
 
 /**
@@ -68,7 +63,7 @@ public class Article extends Text {
     private String extractShortIntro(String text){
         int indexNum = 100;
         String shortIntro ="";
-        String pureText = MicellaneousUntility.htmlToStringParser(this.text);
+        String pureText = MiscellaneousUtility.htmlToStringParser(this.text);
         while( true){
             if(this.text.length() < 100)
             {

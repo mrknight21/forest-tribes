@@ -107,13 +107,13 @@ public class ArticleServlet extends HttpServlet {
                             break chooser;
                         case "deleteComment":
                             Comment comment = getCommentById(DB, id);
-                            if (username.equals(getArticleById(DB, getCommentById(DB, id).getArticleID()).getAuthor())
+                            if (username.equals(getArticleById(DB, getCommentById(DB, id).getParentID()).getAuthor())
                                     || username.equals(comment.getAuthor()))
                                 deleteText(DB, id, "Comment");
                             break chooser;
                         case "deleteReply":
                             Reply reply = getReplyById(DB,id);
-                            if (username.equals(getArticleById(DB, getCommentById(DB, reply.getCommentId()).getArticleID()).getAuthor())
+                            if (username.equals(getArticleById(DB, getCommentById(DB, reply.getParentID()).getParentID()).getAuthor())
                                     || username.equals(reply.getAuthor()))
                                 deleteText(DB, id, "Reply");
                             break chooser;
