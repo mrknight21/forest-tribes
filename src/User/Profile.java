@@ -1,6 +1,7 @@
 package User;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by mche618 on 5/06/2017.
@@ -10,9 +11,9 @@ public class Profile implements Serializable {
     String username;
     String gender;
     String occupation;
-    String education_level;
-    String politicalOri;
-    String[] issues;
+    String education;
+    String political;
+    List<String> issues;
 
     public Profile(){
 
@@ -21,15 +22,15 @@ public class Profile implements Serializable {
     public Profile(String username,
             String gender,
             String occupation,
-            String education_level,
-            String politicalOri,
-            String[] issues){
+            String education,
+            String political,
+            List<String> issues){
 
         this.username = username;
         this.gender =gender;
         this.occupation =occupation;
-        this.education_level = education_level;
-        this.politicalOri = politicalOri;
+        this.education = education;
+        this.political = political;
         this.issues = issues;
     }
 
@@ -45,15 +46,15 @@ public class Profile implements Serializable {
         return this.occupation;
     }
 
-    public String getEducation_level(){
-        return this.education_level;
+    public String getEducation(){
+        return this.education;
     }
 
-    public String getPoliticalOri(){
-        return this.politicalOri;
+    public String getPolitical(){
+        return this.political;
     }
 
-    public String[] getIssues(){
+    public List<String> getIssues(){
         return this.issues;
     }
 }
