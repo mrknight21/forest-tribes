@@ -23,7 +23,18 @@
     <%@include file="../WEB-INF/Head_Scripts.jsp" %>
 
     <script>
+        function revealArticle(id) {
+           var idLength = id.length;
+           var idNumber = id.substring(idLength - 1);
 
+           var introTextID = "#displayIntroTextID" + idNumber;
+           var fullTextID = "#displayFullTextID" + idNumber;
+           var linkID = "#displayArticleLinkID" + idNumber;
+
+           $(fullTextID).delay(100).fadeIn(100);
+           $(introTextID).fadeOut(100);
+           $(linkID).hide();
+        }
     </script>
 
     <%--Page Specific CSS--%>
@@ -73,9 +84,9 @@
                                         <h4>${article.title}</h4>
                                     </div>
                                     <div class="panel-body">
-                                        <p><em>${article.shortIntro}</em></p>
-                                        <p style="display: none">${article.text}</p>
-                                        <a href="#">Reveal full article</a>
+                                        <p id="displayIntroTextID${article.id}"><em>${article.shortIntro}</em></p>
+                                        <p id="displayFullTextID${article.id}" style="display: none">${article.text}</p>
+                                        <a id="displayArticleLinkID${article.id}" href="#" onclick="revealArticle(this.id)">Reveal full article</a>
                                     </div>
                                     <div class="panel-footer">
                                         <p style="display: inline-block"><i class="fa">&#xf2bd;</i>
