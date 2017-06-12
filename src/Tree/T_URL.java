@@ -35,11 +35,11 @@ public class T_URL extends Reply implements TreeComponents {
     }
 
     //retrieving data
-    public T_URL(int id, String author, String text,  int likes, int views, String dateCreated, String dateLastEdited, boolean supportForArgument, boolean isfactual, String URL) {
+    public T_URL(int id, String author, String text,  int likes, int views, String dateCreated, String dateLastEdited, boolean supportForArgument,  String URL) {
         super(id, author, text,   likes, views, dateCreated, dateLastEdited);
         this.URL = URL;
         this.supportForArgument = supportForArgument;
-        this.isfactual = isfactual;
+
     }
 
     public boolean isFactual(){return this.isfactual;};

@@ -430,8 +430,8 @@ public class ArticleDAO {
                 getCommentReplies(commentId, c),
                 r.getInt("likes"),
                 r.getInt("views"),
-                r.getString("creationDate"),
-                r.getString("lastEdit"));
+                r.getTimestamp("creationDate").toString(),
+                r.getTimestamp("lastEdit").toString());
     }
 
     private static Reply replyFromResultSet(ResultSet r, Connection c) throws SQLException {
@@ -444,8 +444,8 @@ public class ArticleDAO {
                 r.getInt("likes"),
                 // getTextLikes(c, replyId,"Reply")),
                 r.getInt("views"),
-                r.getString("creationDate"),
-                r.getString("lastEdit"));
+                r.getTimestamp("creationDate").toString(),
+                r.getTimestamp("lastEdit").toString());
     }
 
 

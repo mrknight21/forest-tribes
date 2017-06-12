@@ -34,7 +34,7 @@ public class Article extends Text {
         this.shortIntro = extractShortIntro(this.text);
     }
 
-    //author, created time,
+    //update author, created time,
     public Article(int id, String text, String title) {
         super( id, text);
         this.title = title;
