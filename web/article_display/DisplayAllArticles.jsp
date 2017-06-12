@@ -85,7 +85,7 @@
                                     <div class="panel-heading">
                                         <form action="DisplayFullArticle.jsp">
                                             <label for="fullarticle-${article.id}">
-                                                <h4>${article.title}</h4>
+                                                <a href="DisplayFullArticle.jsp?article_id=${article.id}"><h4>${article.title}</h4></a>
                                             </label>
                                             <input type="text" value="${article.id}" name="article_id" readonly hidden/>
                                             <input type="submit"

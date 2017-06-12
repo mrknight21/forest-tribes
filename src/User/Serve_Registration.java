@@ -29,15 +29,17 @@ public class Serve_Registration extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-
         try {
             if (SecurityUtility.loggingStatusChecker(request)){
                 response.sendRedirect("user_interface/Home.jsp");
+                return;
+            } else if (!request.getParameterNames().hasMoreElements()) {
+                response.sendRedirect("login_interface/Login.jsp");
                 return;
             } else {
                 HttpSession session = request.getSession();
@@ -47,7 +49,6 @@ public class Serve_Registration extends HttpServlet {
                 String registrationEmail = request.getParameter("registrationEmail");
                 String password = request.getParameter("registrationPassword");
                 String confirmPassword = request.getParameter("registrationConfirmPassword");
-
 
                 //get path for creating files
                 ServletContext servletContext = getServletContext();
@@ -64,26 +65,17 @@ public class Serve_Registration extends HttpServlet {
                     dispatcher.forward(request, response);
                 }
 
-
-
-
                 if (UserDAO.getUser(DB, username) == null){
-
-
-
 
                     byte[] salt = SecurityUtility.getNextSalt();
 
                     byte[] encodedPW = SecurityUtility.hash(password.toCharArray(), salt, ITERATIONS);
 
                     //UserDAO.RegisterUser(DB, new User(username,salt,ITERATIONS,encodedPW));
-
-
                     User newUser = new User(username, registrationFirstName, registrationLastName, registrationEmail, "/User/"+username+"/User_profile_picture.jpg", "/User/"+username);
                     UserSecurity newSecurity = new UserSecurity(username, salt, ITERATIONS, encodedPW);
                     UserDAO.registerUser(DB, newUser);
                     UserSecurityDAO.insertUser(DB, newSecurity);
-
 
                     //auto set-up user profile photo
                     String  DefaultImagePathway = servletContext.getRealPath("/images_material/Default/Userdefault.jpg");
@@ -98,17 +90,13 @@ public class Serve_Registration extends HttpServlet {
                         System.out.println(e.getMessage());
                     }
 
-
-
                     //generate thumbnail images
                     BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
                     img.createGraphics().drawImage(ImageIO.read(new File(UserfilePath+"/User_profile_picture.jpg")).getScaledInstance(100, 100, Image.SCALE_SMOOTH),0,0,null);
                     ImageIO.write(img, "jpg", new File(UserfilePath+"/User_profile_picture_thumb.jpg"));
 
-
                     //create a row in profile with username
                     UserDAO.createProfile(DB, username);
-
 
                     session.setAttribute("loggingStatus", true);
                     session.setAttribute("username", username);
