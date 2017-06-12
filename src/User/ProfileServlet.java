@@ -21,15 +21,17 @@ public class ProfileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-
         try {
             if (!SecurityUtility.loggingStatusChecker(request)) {
                 response.sendRedirect("Login.jsp");
+                return;
+            } else if (!request.getParameterNames().hasMoreElements()) {
+                response.sendRedirect("Profile.jsp");
                 return;
             } else {
 

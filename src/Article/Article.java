@@ -23,6 +23,7 @@ public class Article extends Text {
 
     public Article() {}
 
+    // Create new article
     public Article(String author, String title, String text) {
         //creation time and last edit time will be automatically made in database.
         super(author, text);
@@ -34,7 +35,7 @@ public class Article extends Text {
         this.shortIntro = extractShortIntro(this.text);
     }
 
-    //author, created time,
+    // Update article
     public Article(int id, String text, String title) {
         super( id, text);
         this.title = title;

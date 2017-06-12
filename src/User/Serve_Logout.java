@@ -30,6 +30,11 @@ public class Serve_Logout extends HttpServlet {
         }
         resp.sendRedirect("login_interface/Login.jsp");
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
+    }
 }
 
 /*From: content Page.

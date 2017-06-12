@@ -20,7 +20,6 @@ public class Serve_Changepassword extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         doPost(request, response);
     }
 
@@ -31,7 +30,10 @@ public class Serve_Changepassword extends HttpServlet{
             if (!SecurityUtility.loggingStatusChecker(request)){
                 response.sendRedirect("login_interface/Login.jsp");
                 return;
-            }else{
+            } else if (!request.getParameterNames().hasMoreElements()) {
+                response.sendRedirect("user_interface/changePassword.jsp");
+                return;
+            } else {
                 String currpassword = request.getParameter("CurrentPassword");
                 String newPassword = request.getParameter("NewPassword");
                 String confirmpassword = request.getParameter("ConfirmPassword");
