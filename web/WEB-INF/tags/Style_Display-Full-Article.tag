@@ -22,11 +22,6 @@
         color: white;
     }
 
-    .panel-default > .panel-heading {
-        background-color: #029f5b;
-        border-color: #029f5b;
-    }
-
     .panel-footer p {
         padding-right: 1%;
     }

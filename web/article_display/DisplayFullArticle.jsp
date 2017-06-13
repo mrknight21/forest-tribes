@@ -56,8 +56,8 @@
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
             <div class="panel panel-login">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
+                <div class="panel panel-default" style="border-color: #008975">
+                    <div class="panel-heading" style="background-color: #008975">
                         <div class="row">
                             <div class="col-lg-12">
                                 <h4>${article.title}</h4>
@@ -99,7 +99,7 @@
                 </div>
 
                 <%--Add JS to make Comment box to appear on click--%>
-                <div id="commentDivID" class="panel panel-default" style="display: none">
+                <div id="commentDivID" class="panel panel-default">
 
                     <form action="<%=sitePath%>TextUpdate" method="post">
                         <%--parentId--%>
@@ -109,11 +109,15 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <textarea style="display: inline-block" rows="3" cols="100" name="text"
+                                    <textarea style="width: inherit" rows="3" cols="100" name="text"
                                               placeholder="Share your thoughts"></textarea>
-                                    <input style="display: inline-block" type="submit" name="createComment"
-                                           class="btn-primary"
-                                           value="Submit Comment"/>
+                                    <input type="submit" name="createComment"
+                                           class="form-control btn btn-login"
+                                           value="Submit Comment" style="background-color: #008975;
+                                                                         border-color: #008975;
+                                                                         outline: none;
+                                                                         color: white;
+                                                                         text-transform: uppercase"/>
                                 </div>
                             </div>
                         </div>
@@ -121,11 +125,11 @@
                 </div>
                 <%----%>
 
-                <div id="commentsDivID" class="panel panel-default" style="display: none; border: none;">
+                <div id="commentsDivID" class="panel panel-default" style="border: none">
                     <c:if test="${article.responseCount != 0 }">
                         <c:forEach var="comment" items="${article.comments}">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
+                            <div class="panel panel-default" style="margin-left: 2%; border-color: #00AA8D">
+                                <div class="panel-heading" style="background-color: #00AA8D">
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <img id="headerThumbnail"
@@ -149,7 +153,8 @@
                                                 User: ${comment.author}</p>
                                             <p style="display: inline-block"><i class="fa">&#xf087;</i>
                                                 Likes: ${comment.likes}</p>
-                                            <a href="#" onclick="revealReplies${comment.id}()" style="display: inline-block"><i class="fa">&#xf112;</i>
+                                            <a href="#" onclick="revealReplies${comment.id}()"
+                                               style="display: inline-block"><i class="fa">&#xf112;</i>
                                                 Replies: ${comment.replyCount}</a>
                                             <p style="display: inline-block"><i class="fa">&#xf044;</i>
                                                 Edited: ${comment.dateLastEdited}</p>
@@ -173,10 +178,11 @@
                                     }
                                 </script>
 
-                                <div id="replyDivID${comment.id}" class="panel-body" style="padding: 0; display: none">
+                                <div id="replyDivID${comment.id}" class="panel-body"
+                                     style="padding: 0; display: none; border: none">
 
                                         <%--Add JS to make Reply box to appear on click--%>
-                                    <form action="<%=sitePath%>TextUpdate" method="post">
+                                    <form action="<%=sitePath%>TextUpdate" method="post" style="margin-bottom: 2%">
                                             <%--parentId--%>
                                         <input type="radio" name="parentId" value="${comment.id}" checked hidden/>
                                         <input type="radio" name="articleId" value="<%=articleId%>" checked hidden/>
@@ -184,10 +190,15 @@
                                         <div class="panel-footer">
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <p style="display: inline-block"><i class="fa">&#xf112;</i>
-                                                        <input type="submit" name="createReply" value="Send reply"/>
-                                                        <textarea rows="2" cols="100" name="text"
-                                                                  placeholder="Create a reply"></textarea></p>
+                                                    <textarea style="width: inherit" rows="3" cols="100" name="text"
+                                                              placeholder="Share your thoughts"></textarea>
+                                                    <input type="submit" name="createReply"
+                                                           class="form-control btn btn-login"
+                                                           value="Submit Reply" style="background-color: #00AA8D;
+                                                                                       border-color: #00AA8D;
+                                                                                       outline: none;
+                                                                                       color: white;
+                                                                                       text-transform: uppercase"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -197,7 +208,7 @@
 
                                     <c:if test="${comment.replyCount != 0 }">
                                         <c:forEach var="reply" items="${comment.replies}">
-                                            <div class="panel panel-default">
+                                            <div class="panel panel-default" style="margin-left: 4%; margin-right: 2%; border-color: #00BF9A">
                                                 <div class="panel-heading">
                                                     <div class="row">
                                                         <div class="col-lg-12">
@@ -205,14 +216,15 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="panel-footer">
+                                                <div class="panel-footer" style="background-color: #00BF9A;
+                                                                                 border-color: #00BF9A">
                                                     <div class="row">
                                                         <div class="col-lg-12">
-                                                            <p style="display: inline-block"><i class="fa">&#xf2bd;</i>
+                                                            <p style="display: inline-block; color: white"><i class="fa">&#xf2bd;</i>
                                                                 User: ${reply.author}</p>
-                                                            <p style="display: inline-block"><i class="fa">&#xf087;</i>
+                                                            <p style="display: inline-block; color: white"><i class="fa">&#xf087;</i>
                                                                 Likes: ${reply.likes}</p>
-                                                            <p style="display: inline-block"><i class="fa">&#xf044;</i>
+                                                            <p style="display: inline-block; color: white"><i class="fa">&#xf044;</i>
                                                                 Last
                                                                 Edited: ${reply.dateLastEdited}</p>
                                                             <%if (deletionRights) {%>
