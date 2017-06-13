@@ -94,5 +94,15 @@
     </servlet-mapping>
 
 
+    <servlet>
+        <servlet-name>Serve_TreeCreation</servlet-name>
+        <servlet-class>Tree.Serve_TreeCreation</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Serve_TreeCreation</servlet-name>
+        <url-pattern>/Serve_TreeCreation</url-pattern>
+    </servlet-mapping>
+
+
 
 </web-app>

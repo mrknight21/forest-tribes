@@ -10,7 +10,27 @@
     <base target="_parent">
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script>
+        $(document).ready(function(){
+            $(document).mousemove(function(event){
+                $("#X").val(event.pageY);
+                $("#Y").val(event.pageX);
+                $("span").text("X: " + event.pageX + ", Y: " + event.pageY);
+            });
+
+
+
+
+
+
+
+        });
+
+
+
+
     </script>
     <style>
         body  {
@@ -20,12 +40,13 @@
     </style>
 </head>
 <body >
-<div  style=" width: 10000px; height: 10000px;">
+<div id="map" style=" width: 10000px; height: 10000px;">
+
     <form>
         <input type="hidden"value="0" id="X">
         <input type="hidden"value="0" id="Y">
     </form>
-    <div style="position:fixed; color: gold; background-color: white; font-size: xx-large">
+    <div style="position:fixed; color: gold; top: 0px; background-color: white; font-size: xx-large">
         <p >The mouse pointer position is at: <span></span></p>
     </div>
 

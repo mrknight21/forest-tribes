@@ -34,6 +34,28 @@
                 });
             });
 
+
+           /* $("#myiframe").keydown(function(event){
+                //up
+                if (event.keyCode == 38){
+                    $("#myiframe").contentWindow.scrollTo( ,ycoord)
+                }
+                //right
+                if (event.keyCode == 39){
+
+                }
+                //left
+                if (event.keyCode == 37){
+
+                }
+                //down
+                if (event.keyCode == 40){
+
+                }
+
+            });*/
+
+
             $("#restart").click(function () {
                 $("#myiframe").contents().find("#new_seed").remove();
                 $("#seed").css("display", "initial");
@@ -44,12 +66,22 @@
     </script>
 </head>
 <body>
-<div id="seed" >
-    <p>click me to plant your tree!!</p>
-    <img  src="Tree_Material/sprout.png">
-</div>
+<h1>Plant your BIG ISSUE!!</h1>
+
 <p></p>
-<form>
+<form action="/">
+    <label for="title">The name of your Big issue:</label>
+    <input id="title" type="text" name="title" width="250px">
+    <p></p>
+    <label for="description">Tell use more about it:</label>
+    <br>
+    <textarea id="description" name="shortIntro" rows="6" cols="80">Please tell more about your tree...</textarea>
+    <p></p>
+    <div id="seed" >
+        <p>click me to plant your tree!!</p>
+        <img  src="Tree_Material/sprout.png">
+    </div>
+    <p></p>
     <label for>Coordinate: </label>
     <input type="number" value="0" id="Xcoordinate" name="X" readonly>
     <input type="number" value="0" id="Ycoordinate" name="Y" readonly>
@@ -57,7 +89,7 @@
     <input id="restart" type="reset" value="Click to restart planting">
 </form>
 <p></p>
-<iframe class="whole"  name="iframe_a" id="myiframe" src="trial_Iframe.html" frameborder=0 height="750px" width="1000px" scrolling="auto">
+<iframe class="whole"  name="iframe_a" id="myiframe" src="ForestTribe.jsp" frameborder=0 height="750px" width="1000px" scrolling="auto">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
