@@ -2,12 +2,14 @@ package Article;
 
 import Utility.MySQL;
 import Utility.SecurityUtility;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,22 +21,32 @@ import static Article.ArticleDAO.*;
 public class ArticleServlet extends HttpServlet {
 
     private static final MySQL DB = new MySQL();
+    private int id;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
 
-        int id = 0;
-
-        try {
-            id = Integer.parseInt(request.getParameter("articleID"));
-        } catch (NumberFormatException e) {
-            System.out.println("wrong format of article ID");
-        }
-
-        Article article = ArticleDAO.getArticleById(DB, id);
-        request.setAttribute("article", article);
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/article_display/DisplayFullArticle.jsp");
-        dispatcher.forward(request, response);
+//        if (!SecurityUtility.loggingStatusChecker(request)) {
+//            response.sendRedirect("login_interface/Login.jsp");
+//            return;
+//        } else if (!request.getParameterNames().hasMoreElements()) {
+//            response.sendRedirect("user_interface/Home.jsp");
+//            return;
+//        }
+//
+//        int id = 0;
+//
+//        try {
+//            id = Integer.parseInt(request.getParameter("article_id"));
+//        } catch (NumberFormatException e) {
+//            System.out.println("wrong format of article ID");
+//        }
+//
+//        Article article = ArticleDAO.getArticleById(DB, id);
+//        request.setAttribute("article", article);
+//        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/article_display/DisplayFullArticle.jsp");
+//        dispatcher.forward(request, response);
     }
 
     @Override
@@ -49,75 +61,62 @@ public class ArticleServlet extends HttpServlet {
             } else {
 
                 List<String> params = Collections.list(request.getParameterNames());
-
-                chooser:
-                for (String parameter : params) {
-                    switch (parameter) {
-                        case "createArticle":
-                            createArticle(request);
-                            response.sendRedirect("article_display/DisplayUserAllArticles.jsp");
-                            return;
-                        case "createComment":
-                            createComment(request);
-                            break chooser;
-                        case "createReply":
-                            createReply(request);
-                            break chooser;
-                        case "updateArticle":
-                            editArticle(request);
-                            break chooser;
-                        case "updateComment":
-                            editComment(request);
-                            break chooser;
-                        case "updateReply":
-                            editReply(request);
-                            break chooser;
-                    }
-                }
-                response.sendRedirect("article_display/DisplayFullArticle.jsp?article_id=" + request.getParameter("article_id"));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            if (!SecurityUtility.loggingStatusChecker(request)) {
-                response.sendRedirect("login_interface/Login.jsp");
-                return;
-            } else if (!request.getParameterNames().hasMoreElements()) {
-                response.sendRedirect("user_interface/Home.jsp");
-                return;
-            } else {
-
-                List<String> params = Collections.list(request.getParameterNames());
-
                 String username = getUsername(request);
 
                 chooser:
                 for (String parameter : params) {
-                    int id = Integer.parseInt(request.getParameter("id"));
-                    switch (parameter) {
-                        case "deleteArticle":
-                            if (username.equals(getArticleById(DB,id).getAuthor()))
-                                deleteText(DB, id, "Article");
-                            break chooser;
-                        case "deleteComment":
-                            Comment comment = getCommentById(DB, id);
-                            if (username.equals(getArticleById(DB, getCommentById(DB, id).getParentID()).getAuthor())
-                                    || username.equals(comment.getAuthor()))
-                                deleteText(DB, id, "Comment");
-                            break chooser;
-                        case "deleteReply":
-                            Reply reply = getReplyById(DB,id);
-                            if (username.equals(getArticleById(DB, getCommentById(DB, reply.getParentID()).getParentID()).getAuthor())
-                                    || username.equals(reply.getAuthor()))
-                                deleteText(DB, id, "Reply");
-                            break chooser;
+                    if (parameter.startsWith("create"))
+                        switch (parameter) {
+                            case "createArticle":
+                                createArticle(request);
+                                response.sendRedirect("article_display/DisplayUserAllArticles.jsp");
+                                return;
+                            case "createComment":
+                                createComment(request);
+                                break chooser;
+                            case "createReply":
+                                createReply(request);
+                                break chooser;
+                        }
+                    else {
+                        id = Integer.parseInt(request.getParameter("id"));
+                        try {
+                            switch (parameter) {
+                                case "updateArticle":
+                                    editArticle(request);
+                                    break chooser;
+                                case "updateComment":
+                                    editComment(request);
+                                    break chooser;
+                                case "updateReply":
+                                    editReply(request);
+                                    break chooser;
+                                case "deleteArticle":
+                                    if (username.equals(getArticleById(DB, id).getAuthor()))
+                                        deleteText(DB.connection(), id, "Article");
+                                    response.sendRedirect("article_display/DisplayUserAllArticles.jsp");
+                                    return;
+                                case "deleteComment":
+                                    Comment comment = getCommentById(DB, id);
+                                    Article article = getArticleById(DB, comment.getParentID());
+                                    if (username.equals(comment.getAuthor()) || username.equals(article.getAuthor()))
+                                        deleteText(DB.connection(), id, "Comment");
+                                    break chooser;
+                                case "deleteReply":
+                                    Reply reply = getReplyById(DB, id);
+                                    if (username.equals(getArticleById(DB, getCommentById(DB, reply.getParentID()).getParentID()).getAuthor())
+                                            || username.equals(reply.getAuthor()))
+                                        deleteText(DB.connection(), id, "Reply");
+                                    break chooser;
+                            }
+                        } catch (ClassNotFoundException | SQLException e) {
+                            e.printStackTrace();
+                        }
+
                     }
                 }
+//                response.sendRedirect("article_display/DisplayFullArticle.jsp?articleId=" + request.getParameter("articleId"));
+                getServletContext().getRequestDispatcher("/article_display/DisplayFullArticle.jsp").forward(request,response);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -156,8 +155,7 @@ public class ArticleServlet extends HttpServlet {
     }
 
     private boolean editReply(HttpServletRequest request) {
-        int id = Integer.parseInt(request.getParameter("id"));
-        if (getUsername(request).equals(getReplyById(DB,id).getAuthor())) {
+        if (getUsername(request).equals(getReplyById(DB, id).getAuthor())) {
             updateReply(
                     DB,
                     new Reply(
@@ -168,8 +166,7 @@ public class ArticleServlet extends HttpServlet {
     }
 
     private boolean editComment(HttpServletRequest request) {
-        int id = Integer.parseInt(request.getParameter("id"));
-        if (getUsername(request).equals(getCommentById(DB,id).getAuthor())) {
+        if (getUsername(request).equals(getCommentById(DB, id).getAuthor())) {
             updateComment(
                     DB,
                     new Comment(
@@ -180,13 +177,12 @@ public class ArticleServlet extends HttpServlet {
     }
 
     private boolean editArticle(HttpServletRequest request) {
-        int id = Integer.parseInt(request.getParameter("id"));
-        if (getUsername(request).equals(getArticleById(DB,id).getAuthor()))
-        updateArticle(
-                DB,
-                new Article(request.getParameter("id"),
-                        request.getParameter("title"),
-                        request.getParameter("text")));
+        if (getUsername(request).equals(getArticleById(DB, id).getAuthor()))
+            updateArticle(
+                    DB,
+                    new Article(request.getParameter("id"),
+                            request.getParameter("title"),
+                            request.getParameter("text")));
         return true;
     }
 

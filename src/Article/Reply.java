@@ -19,9 +19,11 @@ public class Reply extends Text {
     public Reply(int id, String text) {
         super(id, text);
     }
+
     //retrieve
-    public Reply(int id, String author, String text,  int likes, int views, String dateCreated, String dateLastEdited) {
+    public Reply(int id, int parentID, String author, String text,  int likes, int views, String dateCreated, String dateLastEdited) {
         super(id, author, text, dateCreated, dateLastEdited, likes, views);
+        this.parentID = parentID;
     }
 
     public int getParentID(){

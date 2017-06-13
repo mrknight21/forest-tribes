@@ -12,7 +12,7 @@ import java.util.List;
 public class Article extends Text {
     private String title;
     private List<Comment> comments;
-    private int commentCount;
+    private int responseCount;
     private String shortIntro;
 
     public Article() {
@@ -24,7 +24,7 @@ public class Article extends Text {
         super(author, text);
         this.title = title;
         comments = null;
-        commentCount = 0;
+        responseCount = 0;
         likes = 0;
         views = 0;
         this.shortIntro = extractShortIntro(text);
@@ -44,20 +44,22 @@ public class Article extends Text {
         this.title = title;
         this.comments = comments;
         this.shortIntro = shortIntro;
-
-        int count = 0;
-        count += comments.size();
-        for (Comment comment : comments) count += comment.getReplyCount();
-        this.commentCount = count;
+        setResponseCount(comments);
     }
 
-
     //retrieve articles brief info
-    public Article(int id, String author, String title, String text, int likes, int view, int commentsCount, String shortIntro, String dateCreated, String dateLastEdited) {
+    public Article(int id, String author, String title, String text, int likes, int view, int responseCount, String shortIntro, String dateCreated, String dateLastEdited) {
         super(id, author, text, dateCreated, dateLastEdited, likes, view);
         this.title = title;
         this.shortIntro = shortIntro;
-        this.commentCount = commentsCount;
+        this.responseCount = responseCount;
+    }
+
+    public void setResponseCount(List<Comment> comments) {
+        int count = 0;
+        count += comments.size();
+        for (Comment comment : comments) count += comment.getReplyCount();
+        this.responseCount = count;
     }
 
     private String extractShortIntro(String text) {
@@ -84,8 +86,8 @@ public class Article extends Text {
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
-    public int getCommentCount() {
-        return commentCount;
+    public int getResponseCount() {
+        return responseCount;
     }
     public void setShortIntro(String intro) {
         this.shortIntro = intro;
