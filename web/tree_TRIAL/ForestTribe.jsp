@@ -10,17 +10,46 @@
     <base target="_parent">
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script>
+        $(document).ready(function(){
+            $(document).mousemove(function(event){
+                $("#X").val(event.pageY);
+                $("#Y").val(event.pageX);
+                $("span").text("X: " + event.pageX + ", Y: " + event.pageY);
+            });
+
+
+
+
+
+
+
+        });
+
+
+
+
     </script>
     <style>
         body  {
             background-image: url("Tree_Material/Mars.jpg");
-            zoom: 50%;
+            zoom: 100%;
         }
     </style>
 </head>
 <body >
-<div  style=" width: 10000px; height: 10000px;">
+<div id="map" style=" width: 10000px; height: 10000px;">
+
+    <form>
+        <input type="hidden"value="0" id="X">
+        <input type="hidden"value="0" id="Y">
+    </form>
+    <div style="position:fixed; color: gold; top: 0px; background-color: white; font-size: xx-large">
+        <p >The mouse pointer position is at: <span></span></p>
+    </div>
+
     <a  href="#top_right_portal" target="iframe_a"><img id="top_left_portal" src="<%=sitePath%>tree_TRIAL/Tree_Material/Portal.png" height="400px" width="400px" style="position: absolute;"></a>
     <a  href="#bottom_right_portal" target="iframe_a"><img id="top_right_portal" src="<%=sitePath%>tree_TRIAL/Tree_Material/Portal.png" height="400px" width="400px" style="position: absolute;left: 9600px"></a>
     <a  href="#top_left_portal" target="iframe_a"><img id="bottom_left_portal" src="<%=sitePath%>tree_TRIAL/Tree_Material/Portal.png" height="400px" width="400px" style="position: absolute;left: 0px; top: 9600px;"></a>
