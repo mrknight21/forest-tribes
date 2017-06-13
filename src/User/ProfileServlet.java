@@ -13,11 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by mche618 on 5/06/2017.
- */
 public class ProfileServlet extends HttpServlet {
-
 
     private static final MySQL DB = new MySQL();
 
@@ -30,12 +26,11 @@ public class ProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try {
             if (!SecurityUtility.loggingStatusChecker(request)) {
-                response.sendRedirect("Login.jsp");
+                response.sendRedirect("login_interface/Login.jsp");
                 return;
-            } else if (!request.getParameterNames().hasMoreElements()) {
-                response.sendRedirect("Profile.jsp");
-                return;
-
+//            } else if (!request.getParameterNames().hasMoreElements()) {
+//                response.sendRedirect("Profile.jsp");
+//                return;
             } else {
                 HttpSession session = request.getSession();
                 String username = (String) session.getAttribute("username");
@@ -91,10 +86,10 @@ public class ProfileServlet extends HttpServlet {
                 }
 
                 UserDAO.updateProfile(DB, username, updateProfile);
-                System.out.println("success");
 
-                request.setAttribute("message", "Profile updated successfully!!");
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/profile.jsp");
+                request.setAttribute("message", "Profile successfully updated.");
+
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Profile.jsp");
                 dispatcher.forward(request, response);
             }
         } catch (IOException e) {

@@ -32,11 +32,23 @@
     <%--Importing all necessary libraries, frameworks etc.--%>
     <%@include file="../WEB-INF/Head_Scripts.jsp" %>
 
-    <%--Function to enable JQuery UI elements--%>
+
     <script>
+
+        <%--Function to enable JQuery UI elements--%>
         $(function () {
             $("input[type='radio']").checkboxradio();
         });
+
+        <%--Function to only enable the submitting of a user uploaded photo--%>
+        <%--if an actual photo has been specified.--%>
+        function checkEmptyInput() {
+           var file = $("#changePictureUploadInputID").val();
+
+           if (file !== null) {
+               $("#changePictureUploadSubmitID").prop('disabled', false);
+           }
+        }
     </script>
 
     <%--Page Specific CSS--%>
@@ -217,14 +229,14 @@
                                     </legend>
                                     <div id="changePictureUploadDivID" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-file"></i></span>
-                                        <input class="btn btn-primary" type="file" name="pic"
-                                               accept="image/*">
+                                        <input class="btn btn-primary" type="file" name="pic" id="changePictureUploadInputID"
+                                               accept="image/*" onchange="checkEmptyInput()">
                                     </div>
                                     <br>
                                     <div class="col-lg-12">
                                         <input type="submit" name="changePictureUpload" id="changePictureUploadSubmitID"
                                                class="form-control btn btn-register"
-                                               value="Change profile picture">
+                                               value="Change profile picture" disabled>
                                     </div>
                                 </fieldset>
                                 <br>
