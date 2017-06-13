@@ -30,4 +30,8 @@
     .panel-footer p {
         padding-right: 1%;
     }
+
+    .panel-footer a {
+        padding-right: 1%;
+    }
 </style>

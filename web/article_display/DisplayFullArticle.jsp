@@ -18,10 +18,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-    <title>display Full article</title>
+    <title>Display Full Article</title>
 
     <%--Importing all necessary libraries, frameworks etc.--%>
     <%@include file="../WEB-INF/Head_Scripts.jsp" %>
+
+    <script>
+        function revealComments() {
+            $("#commentDivID").toggle();
+            $("#commentsDivID").toggle();
+        }
+    </script>
 
     <%--Page Specific CSS--%>
     <tags:Style_Display-Full-Article/>
@@ -73,8 +80,8 @@
                                     Likes: ${article.likes}</p>
                                 <p style="display: inline-block"><i class="fa">&#xf0c0;</i>
                                     Views: ${article.views}</p>
-                                <p style="display: inline-block"><i class="fa">&#xf112;</i>
-                                    Replies: ${article.responseCount}</p>
+                                <a href="#" onclick="revealComments()" style="display: inline-block"><i class="fa">&#xf112;</i>
+                                    Replies: ${article.responseCount}</a>
                                 <p style="display: inline-block"><i class="fa">&#xf044;</i>
                                     Edited: ${article.dateLastEdited}</p>
                                 <%if (deletionRights) {%>
@@ -92,20 +99,21 @@
                 </div>
 
                 <%--Add JS to make Comment box to appear on click--%>
-                <div class="panel panel-default">
+                <div id="commentDivID" class="panel panel-default" style="display: none">
+
                     <form action="<%=sitePath%>TextUpdate" method="post">
                         <%--parentId--%>
                         <input type="radio" name="parentId" value="<%=articleId%>" checked hidden/>
                         <input type="radio" name="articleId" value="<%=articleId%>" checked hidden/>
 
-                        <div class="panel-footer">
+                        <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <p style="display: inline-block"><i class="fa">&#xf112;</i>
-                                        <input type="submit" name="createComment" value="Submit comment"/>
-                                        <textarea rows="3" cols="100" name="text"
-                                                  placeholder="Share your thoughts"></textarea>
-                                    </p>
+                                    <textarea style="display: inline-block" rows="3" cols="100" name="text"
+                                              placeholder="Share your thoughts"></textarea>
+                                    <input style="display: inline-block" type="submit" name="createComment"
+                                           class="btn-primary"
+                                           value="Submit Comment"/>
                                 </div>
                             </div>
                         </div>
@@ -113,98 +121,116 @@
                 </div>
                 <%----%>
 
-                <div class="panel panel-default">
+                <div id="commentsDivID" class="panel panel-default" style="display: none">
                     <c:if test="${article.responseCount != 0 }">
                         <c:forEach var="comment" items="${article.comments}">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <h5>Comment: ${comment.text}</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel-footer">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <p style="display: inline-block"><i class="fa">&#xf2bd;</i>
-                                            User: ${comment.author}</p>
-                                        <p style="display: inline-block"><i class="fa">&#xf087;</i>
-                                            Likes: ${comment.likes}</p>
-                                        <p style="display: inline-block"><i class="fa">&#xf112;</i>
-                                            Replies: ${comment.replyCount}</p>
-                                        <p style="display: inline-block"><i class="fa">&#xf044;</i>
-                                            Edited: ${comment.dateLastEdited}</p>
-                                        <%if (deletionRights) {%>
-                                        <p style="display: inline-block"><i class="fa">&#xf044;</i>
-                                        <form action="<%=sitePath%>TextUpdate" method="post">
-                                            <input type="radio" name="articleId" value="<%=articleId%>" checked hidden/>
-                                            <input type="radio" name="id" value="${comment.id}" checked hidden/>
-                                            <input type="submit" name="deleteComment" value="Delete Comment"/>
-                                        </form>
-                                        </p>
-                                        <%}%>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="panel panel-default">
-
-                                    <%--Add JS to make Reply box to appear on click--%>
-                                <form action="<%=sitePath%>TextUpdate" method="post">
-                                        <%--parentId--%>
-                                    <input type="radio" name="parentId" value="${comment.id}" checked hidden/>
-                                    <input type="radio" name="articleId" value="<%=articleId%>" checked hidden/>
-
-                                    <div class="panel-footer">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <p style="display: inline-block"><i class="fa">&#xf112;</i>
-                                                    <input type="submit" name="createReply" value="Send reply"/>
-                                                    <textarea rows="2" cols="100" name="text"
-                                                              placeholder="Create a reply"></textarea></p>
-                                            </div>
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <img id="headerThumbnail"
+                                                 src="<%=sitePath%>User/${comment.author}/User_profile_picture_thumb.jpg"
+                                                 class="img-thumbnail" alt="User Profile Picture">
+                                            <h5 style="display: inline-block;">${comment.author}</h5>
                                         </div>
                                     </div>
-                                </form>
-                                    <%----%>
-
-
-                                <c:if test="${comment.replyCount != 0 }">
-                                    <c:forEach var="reply" items="${comment.replies}">
-                                        <div class="panel-heading">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <h5>Reply: ${reply.text}</h5>
-                                                </div>
-                                            </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <p>${comment.text}</p>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="panel-footer">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <p style="display: inline-block"><i class="fa">&#xf2bd;</i>
+                                                User: ${comment.author}</p>
+                                            <p style="display: inline-block"><i class="fa">&#xf087;</i>
+                                                Likes: ${comment.likes}</p>
+                                            <p style="display: inline-block"><i class="fa">&#xf112;</i>
+                                                Replies: ${comment.replyCount}</p>
+                                            <p style="display: inline-block"><i class="fa">&#xf044;</i>
+                                                Edited: ${comment.dateLastEdited}</p>
+                                            <%if (deletionRights) {%>
+                                            <p style="display: inline-block"><i class="fa">&#xf044;</i>
+                                            <form action="<%=sitePath%>TextUpdate" method="post">
+                                                <input type="radio" name="articleId" value="<%=articleId%>" checked
+                                                       hidden/>
+                                                <input type="radio" name="id" value="${comment.id}" checked hidden/>
+                                                <input type="submit" name="deleteComment" value="Delete Comment"/>
+                                            </form>
+                                            </p>
+                                            <%}%>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel-body" style="padding: 0">
+
+                                        <%--Add JS to make Reply box to appear on click--%>
+                                    <form action="<%=sitePath%>TextUpdate" method="post">
+                                            <%--parentId--%>
+                                        <input type="radio" name="parentId" value="${comment.id}" checked hidden/>
+                                        <input type="radio" name="articleId" value="<%=articleId%>" checked hidden/>
+
                                         <div class="panel-footer">
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <p style="display: inline-block"><i class="fa">&#xf2bd;</i>
-                                                        User: ${reply.author}</p>
-                                                    <p style="display: inline-block"><i class="fa">&#xf087;</i>
-                                                        Likes: ${reply.likes}</p>
-                                                    <p style="display: inline-block"><i class="fa">&#xf044;</i> Last
-                                                        Edited: ${reply.dateLastEdited}</p>
-                                                    <%if (deletionRights) {%>
-                                                    <p style="display: inline-block"><i class="fa">&#xf044;</i>
-                                                    <form action="<%=sitePath%>TextUpdate" method="post">
-                                                        <input type="radio" name="articleId" value="<%=articleId%>"
-                                                               checked hidden/>
-                                                        <input type="radio" name="id" value="${reply.id}" checked
-                                                               hidden/>
-                                                        <input type="submit" name="deleteReply" value="Delete Reply"/>
-                                                    </form>
-                                                    </p>
-                                                    <%}%>
+                                                    <p style="display: inline-block"><i class="fa">&#xf112;</i>
+                                                        <input type="submit" name="createReply" value="Send reply"/>
+                                                        <textarea rows="2" cols="100" name="text"
+                                                                  placeholder="Create a reply"></textarea></p>
                                                 </div>
                                             </div>
                                         </div>
-                                    </c:forEach>
-                                </c:if>
-                            </div>
+                                    </form>
+                                        <%----%>
 
+
+                                    <c:if test="${comment.replyCount != 0 }">
+                                        <c:forEach var="reply" items="${comment.replies}">
+                                            <div class="panel panel-default" style="display: none">
+                                                <div class="panel-heading">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <p>Reply: ${reply.text}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel-footer">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <p style="display: inline-block"><i class="fa">&#xf2bd;</i>
+                                                                User: ${reply.author}</p>
+                                                            <p style="display: inline-block"><i class="fa">&#xf087;</i>
+                                                                Likes: ${reply.likes}</p>
+                                                            <p style="display: inline-block"><i class="fa">&#xf044;</i>
+                                                                Last
+                                                                Edited: ${reply.dateLastEdited}</p>
+                                                            <%if (deletionRights) {%>
+                                                            <p style="display: inline-block"><i class="fa">&#xf044;</i>
+                                                            <form action="<%=sitePath%>TextUpdate" method="post">
+                                                                <input type="radio" name="articleId"
+                                                                       value="<%=articleId%>"
+                                                                       checked hidden/>
+                                                                <input type="radio" name="id" value="${reply.id}"
+                                                                       checked
+                                                                       hidden/>
+                                                                <input type="submit" name="deleteReply"
+                                                                       value="Delete Reply"/>
+                                                            </form>
+                                                            </p>
+                                                            <%}%>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </c:forEach>
+                                    </c:if>
+                                </div>
+                            </div>
                         </c:forEach>
                     </c:if>
                 </div>
