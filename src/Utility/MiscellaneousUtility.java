@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.security.SecureRandom;
 
 /**
  * Created by mche618 on 5/06/2017.
@@ -49,7 +50,22 @@ public class MiscellaneousUtility {
         return false;
     }
 
+
+
+
     public static String htmlToStringParser (String html) {
         return Jsoup.parse(html).text();
+    }
+
+
+
+    static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    static SecureRandom rnd = new SecureRandom();
+
+   public static String randomString( int len ){
+        StringBuilder sb = new StringBuilder( len );
+        for( int i = 0; i < len; i++ )
+            sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
+        return sb.toString();
     }
 }

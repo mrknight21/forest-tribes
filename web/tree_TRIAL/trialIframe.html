@@ -4,13 +4,40 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <base target="_parent">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#draggable" ).draggable();
+            $( 'your-iframe' ).contents().find( 'elements-to-find' ).droppable();
+        } );
+
+
+
+
+        $('#iframe_a').contents().find('html').on('mousemove', function (e) {
+            var x = e.clientX
+            var y = e.clientY
+            console.log(x + " " + y);
+        })
+
+       // $("#myiframe").contents().find("#myContent")
+
+
+
+
+
+    </script>
 </head>
 <body>
-<iframe src="trial.html" frameborder=0 height="750px" width="1000px" scrolling="auto">
+<iframe   name="iframe_a" id="droppable" src="trial_Iframe.html" frameborder=0 height="750px" width="1000px" scrolling="auto">
     <p>Your browser does not support iframes.</p>
 </iframe>
-
-
-
+<div id="draggable">
+<img  src="Tree_Material/sprout.png">
+</div>
 </body>
 </html>

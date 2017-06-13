@@ -84,5 +84,15 @@
         <url-pattern>/TextUpdate</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Serve_FullTree</servlet-name>
+        <servlet-class>Tree.Serve_FullTree</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Serve_FullTree</servlet-name>
+        <url-pattern>/Serve_FullTree</url-pattern>
+    </servlet-mapping>
+
+
 
 </web-app>
