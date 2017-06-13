@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="bcar289@mysql1.sporadic.co.nz">
-  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.1">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
     <root id="1"/>
     <schema id="2" parent="1" name="bcar289">
       <Current>1</Current>
@@ -99,7 +99,6 @@
       <DataType>varchar(8000)|0</DataType>
     </column>
     <key id="58" parent="8" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -121,7 +120,6 @@
       <DataType>varchar(64)|0</DataType>
     </column>
     <key id="63" parent="9" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <Primary>1</Primary>
     </key>
@@ -147,7 +145,6 @@
       <DataType>double|0</DataType>
     </column>
     <key id="69" parent="10" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>bar_code</ColNames>
       <Primary>1</Primary>
     </key>
@@ -170,7 +167,6 @@
       <ColNames>article_id</ColNames>
     </index>
     <key id="74" parent="11" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -211,7 +207,6 @@
       <ColNames>movie</ColNames>
     </index>
     <key id="83" parent="12" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -254,7 +249,6 @@
       <Unique>1</Unique>
     </index>
     <key id="92" parent="13" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>name</ColNames>
       <Primary>1</Primary>
     </key>
@@ -289,7 +283,6 @@
       <Unique>1</Unique>
     </index>
     <key id="100" parent="14" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>name</ColNames>
       <Primary>1</Primary>
     </key>
@@ -335,7 +328,6 @@
       <Unique>1</Unique>
     </index>
     <key id="111" parent="15" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>movie_name</ColNames>
       <Primary>1</Primary>
     </key>
@@ -390,7 +382,6 @@
       <DataType>text|0</DataType>
     </column>
     <key id="123" parent="17" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -416,7 +407,6 @@
       <DefaultExpression>&apos;1&apos;</DefaultExpression>
     </column>
     <key id="128" parent="18" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -455,7 +445,6 @@
       <ColNames>teamID</ColNames>
     </index>
     <key id="136" parent="20" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>playerID
 playerName</ColNames>
       <Primary>1</Primary>
@@ -514,7 +503,6 @@ playerName</RefColNames>
       <DataType>int(11)|0</DataType>
     </column>
     <key id="147" parent="22" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>teamID
 teamName</ColNames>
       <Primary>1</Primary>
@@ -594,7 +582,6 @@ teamName</RefColNames>
       <ColNames>username</ColNames>
     </index>
     <key id="163" parent="24" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
@@ -603,7 +590,7 @@ teamName</RefColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_User</RefTableName>
       <RefColNames>username</RefColNames>
-      <OnDelete>cascade</OnDelete>
+      <OnDelete>delete</OnDelete>
     </foreign-key>
     <column id="165" parent="25" name="ID">
       <Position>1</Position>
@@ -657,7 +644,6 @@ teamName</RefColNames>
       <ColNames>username</ColNames>
     </index>
     <key id="176" parent="25" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
@@ -666,14 +652,14 @@ teamName</RefColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_Articles</RefTableName>
       <RefColNames>ID</RefColNames>
-      <OnDelete>cascade</OnDelete>
+      <OnDelete>delete</OnDelete>
     </foreign-key>
     <foreign-key id="178" parent="25" name="inFoJaxs_Comments_ibfk_1">
       <ColNames>username</ColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_User</RefTableName>
       <RefColNames>username</RefColNames>
-      <OnDelete>cascade</OnDelete>
+      <OnDelete>delete</OnDelete>
     </foreign-key>
     <column id="179" parent="26" name="ID">
       <Position>1</Position>
@@ -695,7 +681,6 @@ teamName</RefColNames>
       <ColNames>username</ColNames>
     </index>
     <key id="183" parent="26" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
@@ -704,7 +689,7 @@ teamName</RefColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_User</RefTableName>
       <RefColNames>username</RefColNames>
-      <OnDelete>cascade</OnDelete>
+      <OnDelete>delete</OnDelete>
     </foreign-key>
     <column id="185" parent="27" name="username">
       <Position>1</Position>
@@ -732,7 +717,6 @@ teamName</RefColNames>
       <DataType>varchar(500)|0</DataType>
     </column>
     <key id="191" parent="27" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <Primary>1</Primary>
     </key>
@@ -790,7 +774,6 @@ teamName</RefColNames>
       <ColNames>username</ColNames>
     </index>
     <key id="203" parent="28" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
@@ -799,14 +782,14 @@ teamName</RefColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_Comments</RefTableName>
       <RefColNames>ID</RefColNames>
-      <OnDelete>cascade</OnDelete>
+      <OnDelete>delete</OnDelete>
     </foreign-key>
     <foreign-key id="205" parent="28" name="inFoJaxs_Replies_ibfk_1">
       <ColNames>username</ColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_User</RefTableName>
       <RefColNames>username</RefColNames>
-      <OnDelete>cascade</OnDelete>
+      <OnDelete>delete</OnDelete>
     </foreign-key>
     <column id="206" parent="29" name="ID">
       <Position>1</Position>
@@ -870,7 +853,6 @@ teamName</RefColNames>
       <ColNames>username</ColNames>
     </index>
     <key id="219" parent="29" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
@@ -879,14 +861,14 @@ teamName</RefColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_Tree_Trees</RefTableName>
       <RefColNames>ID</RefColNames>
-      <OnDelete>cascade</OnDelete>
+      <OnDelete>delete</OnDelete>
     </foreign-key>
     <foreign-key id="221" parent="29" name="inFoJaxs_Tree_Commentary_URL_ibfk_1">
       <ColNames>username</ColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_User</RefTableName>
       <RefColNames>username</RefColNames>
-      <OnDelete>cascade</OnDelete>
+      <OnDelete>delete</OnDelete>
     </foreign-key>
     <column id="222" parent="30" name="ID">
       <Position>1</Position>
@@ -950,7 +932,6 @@ teamName</RefColNames>
       <ColNames>username</ColNames>
     </index>
     <key id="235" parent="30" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
@@ -959,14 +940,14 @@ teamName</RefColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_Tree_Trees</RefTableName>
       <RefColNames>ID</RefColNames>
-      <OnDelete>cascade</OnDelete>
+      <OnDelete>delete</OnDelete>
     </foreign-key>
     <foreign-key id="237" parent="30" name="inFoJaxs_Tree_Factual_URL_ibfk_1">
       <ColNames>username</ColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_User</RefTableName>
       <RefColNames>username</RefColNames>
-      <OnDelete>cascade</OnDelete>
+      <OnDelete>delete</OnDelete>
     </foreign-key>
     <column id="238" parent="31" name="ID">
       <Position>1</Position>
@@ -1016,7 +997,6 @@ teamName</RefColNames>
       <ColNames>username</ColNames>
     </index>
     <key id="248" parent="31" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
@@ -1025,14 +1005,14 @@ teamName</RefColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_Tree_Reactions</RefTableName>
       <RefColNames>ID</RefColNames>
-      <OnDelete>cascade</OnDelete>
+      <OnDelete>delete</OnDelete>
     </foreign-key>
     <foreign-key id="250" parent="31" name="inFoJaxs_Tree_Reaction_Replies_ibfk_1">
       <ColNames>username</ColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_User</RefTableName>
       <RefColNames>username</RefColNames>
-      <OnDelete>cascade</OnDelete>
+      <OnDelete>delete</OnDelete>
     </foreign-key>
     <column id="251" parent="32" name="ID">
       <Position>1</Position>
@@ -1090,7 +1070,6 @@ teamName</RefColNames>
       <ColNames>username</ColNames>
     </index>
     <key id="263" parent="32" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
@@ -1099,14 +1078,14 @@ teamName</RefColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_Tree_Trees</RefTableName>
       <RefColNames>ID</RefColNames>
-      <OnDelete>cascade</OnDelete>
+      <OnDelete>delete</OnDelete>
     </foreign-key>
     <foreign-key id="265" parent="32" name="inFoJaxs_Tree_Reactions_ibfk_1">
       <ColNames>username</ColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_User</RefTableName>
       <RefColNames>username</RefColNames>
-      <OnDelete>cascade</OnDelete>
+      <OnDelete>delete</OnDelete>
     </foreign-key>
     <column id="266" parent="33" name="ID">
       <Position>1</Position>
@@ -1177,7 +1156,6 @@ teamName</RefColNames>
       <ColNames>username</ColNames>
     </index>
     <key id="281" parent="33" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
@@ -1186,7 +1164,7 @@ teamName</RefColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_User</RefTableName>
       <RefColNames>username</RefColNames>
-      <OnDelete>cascade</OnDelete>
+      <OnDelete>delete</OnDelete>
     </foreign-key>
     <column id="283" parent="34" name="username">
       <Position>1</Position>
@@ -1223,7 +1201,6 @@ teamName</RefColNames>
       <Unique>1</Unique>
     </index>
     <key id="290" parent="34" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <Primary>1</Primary>
     </key>
@@ -1260,7 +1237,6 @@ teamName</RefColNames>
       <ColNames>username</ColNames>
     </index>
     <key id="298" parent="35" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>userID</ColNames>
       <Primary>1</Primary>
     </key>
@@ -1269,7 +1245,7 @@ teamName</RefColNames>
       <RefSchemaName>bcar289</RefSchemaName>
       <RefTableName>inFoJaxs_User</RefTableName>
       <RefColNames>username</RefColNames>
-      <OnDelete>cascade</OnDelete>
+      <OnDelete>delete</OnDelete>
     </foreign-key>
     <column id="300" parent="36" name="game_id">
       <Position>1</Position>
@@ -1313,7 +1289,6 @@ teamName</RefColNames>
       <ColNames>team2_name</ColNames>
     </index>
     <key id="309" parent="36" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>game_id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -1378,7 +1353,6 @@ teamName</RefColNames>
       <ColNames>team_name</ColNames>
     </index>
     <key id="322" parent="37" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>player_id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -1434,7 +1408,6 @@ teamName</RefColNames>
       <NotNull>1</NotNull>
     </column>
     <key id="333" parent="38" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>team_name</ColNames>
       <Primary>1</Primary>
     </key>
@@ -1452,7 +1425,6 @@ teamName</RefColNames>
       <DataType>text|0</DataType>
     </column>
     <key id="337" parent="39" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>artid</ColNames>
       <Primary>1</Primary>
     </key>
@@ -1484,7 +1456,6 @@ teamName</RefColNames>
 num</ColNames>
     </index>
     <key id="344" parent="40" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>id
 dept
 num</ColNames>
@@ -1535,7 +1506,6 @@ num</RefColNames>
       <ColNames>rep_id</ColNames>
     </index>
     <key id="354" parent="41" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>dept
 num</ColNames>
       <Primary>1</Primary>
@@ -1572,7 +1542,6 @@ num</ColNames>
       <DataType>char(8)|0</DataType>
     </column>
     <key id="361" parent="42" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>staff_no</ColNames>
       <Primary>1</Primary>
     </key>
@@ -1601,7 +1570,6 @@ num</ColNames>
       <NotNull>1</NotNull>
     </column>
     <key id="367" parent="43" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -1624,7 +1592,6 @@ num</ColNames>
       <ColNames>staff_no</ColNames>
     </index>
     <key id="372" parent="44" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>dept
 num
 staff_no</ColNames>
@@ -1669,7 +1636,6 @@ num</RefColNames>
       <Unique>1</Unique>
     </index>
     <key id="380" parent="45" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <Primary>1</Primary>
     </key>
