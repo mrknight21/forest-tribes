@@ -13,11 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by mche618 on 5/06/2017.
- */
 public class ProfileServlet extends HttpServlet {
-
 
     private static final MySQL DB = new MySQL();
 
@@ -91,8 +87,9 @@ public class ProfileServlet extends HttpServlet {
 
                 UserDAO.updateProfile(DB, username, updateProfile);
 
-                request.setAttribute("message", "Profile updated successfully!!");
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/profile.jsp");
+                request.setAttribute("message", "Profile successfully updated.");
+
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Profile.jsp");
                 dispatcher.forward(request, response);
             }
         } catch (IOException e) {

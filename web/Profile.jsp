@@ -80,8 +80,8 @@
                     input = input.replace(/ /g, "");
                     input = input.replace(/,/g, "");
                 }
+
                 var elementID = "#profile" + id + input + "ID";
-                console.log(elementID);
                 $(elementID).prop('checked', true);
                 $(elementID).checkboxradio("refresh");
             }
@@ -156,7 +156,7 @@
                         <div class="col-lg-12">
                             <h1 style="text-align: center"><i class="fa">&#xf1bb;</i> Forest Tribes</h1>
                             <h4 id="subtitle" style="text-align: center">The Beauty of Interconnectedness</h4>
-
+                            <p id="statusMessage" style="text-align: center">${message}</p>
                             <fieldset id="profilePictureFieldsetID" class="span4">
                                 <legend><i class="fa">&#xf083;</i> Profile Picture</legend>
                                 <div id="profileImageDiv" class="col-lg-10 col-lg-offset-1">
