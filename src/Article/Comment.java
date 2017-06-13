@@ -35,6 +35,13 @@ public class Comment extends Text {
         setReplyCount(replies);
     }
 
+    // Tree
+    public Comment(int id, String author, String text, List<Reply> replies, int likes, int views,  String dateCreated, String dateLastEdited) {
+        super(id,  author, text,  dateCreated,  dateLastEdited, likes, views);
+        this.replies = replies;
+        setReplyCount(replies);
+    }
+
     public List<Reply> getReplies() {return replies;}
     public void setReplies(List<Reply> replies) {this.replies = replies;}
     public int getReplyCount() {return replyCount;}
