@@ -26,6 +26,11 @@ public class Reply extends Text {
         this.parentID = parentID;
     }
 
+    //tree
+    public Reply(int id, String author, String text,  int likes, int views, String dateCreated, String dateLastEdited) {
+        super(id, author, text, dateCreated, dateLastEdited, likes, views);
+    }
+
     public int getParentID(){
         return this.parentID;
     }
