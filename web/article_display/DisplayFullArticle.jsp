@@ -149,8 +149,8 @@
                                                 User: ${comment.author}</p>
                                             <p style="display: inline-block"><i class="fa">&#xf087;</i>
                                                 Likes: ${comment.likes}</p>
-                                            <p style="display: inline-block"><i class="fa">&#xf112;</i>
-                                                Replies: ${comment.replyCount}</p>
+                                            <a href="#" onclick="revealReplies${comment.id}()" style="display: inline-block"><i class="fa">&#xf112;</i>
+                                                Replies: ${comment.replyCount}</a>
                                             <p style="display: inline-block"><i class="fa">&#xf044;</i>
                                                 Edited: ${comment.dateLastEdited}</p>
                                             <%if (deletionRights) {%>
@@ -167,7 +167,13 @@
                                     </div>
                                 </div>
 
-                                <div class="panel-body" style="padding: 0">
+                                <script>
+                                    function revealReplies${comment.id}() {
+                                        $("#replyDivID${comment.id}").toggle();
+                                    }
+                                </script>
+
+                                <div id="replyDivID${comment.id}" class="panel-body" style="padding: 0; display: none">
 
                                         <%--Add JS to make Reply box to appear on click--%>
                                     <form action="<%=sitePath%>TextUpdate" method="post">
@@ -191,7 +197,7 @@
 
                                     <c:if test="${comment.replyCount != 0 }">
                                         <c:forEach var="reply" items="${comment.replies}">
-                                            <div id="comment-${comment.id}" class="panel panel-default" style="display: none">
+                                            <div class="panel panel-default">
                                                 <div class="panel-heading">
                                                     <div class="row">
                                                         <div class="col-lg-12">
