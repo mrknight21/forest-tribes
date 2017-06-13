@@ -78,19 +78,23 @@ public class ArticleServlet extends HttpServlet {
                                 createReply(request);
                                 break chooser;
                         }
-                    else {
+                    else if (parameter.startsWith("update")) {
+                        id = Integer.parseInt(request.getParameter("id"));
+                        switch (parameter) {
+                            case "updateArticle":
+                                editArticle(request);
+                                break chooser;
+                            case "updateComment":
+                                editComment(request);
+                                break chooser;
+                            case "updateReply":
+                                editReply(request);
+                                break chooser;
+                        }
+                    } else if (parameter.startsWith("delete")) {
                         id = Integer.parseInt(request.getParameter("id"));
                         try {
                             switch (parameter) {
-                                case "updateArticle":
-                                    editArticle(request);
-                                    break chooser;
-                                case "updateComment":
-                                    editComment(request);
-                                    break chooser;
-                                case "updateReply":
-                                    editReply(request);
-                                    break chooser;
                                 case "deleteArticle":
                                     if (username.equals(getArticleById(DB, id).getAuthor()))
                                         deleteText(DB.connection(), id, "Article");
@@ -115,8 +119,7 @@ public class ArticleServlet extends HttpServlet {
 
                     }
                 }
-//                response.sendRedirect("article_display/DisplayFullArticle.jsp?articleId=" + request.getParameter("articleId"));
-                getServletContext().getRequestDispatcher("/article_display/DisplayFullArticle.jsp").forward(request,response);
+                getServletContext().getRequestDispatcher("/article_display/DisplayFullArticle.jsp").forward(request, response);
             }
         } catch (IOException e) {
             e.printStackTrace();
