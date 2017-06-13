@@ -121,7 +121,7 @@
                 </div>
                 <%----%>
 
-                <div id="commentsDivID" class="panel panel-default" style="display: none">
+                <div id="commentsDivID" class="panel panel-default" style="display: none; border: none;">
                     <c:if test="${article.responseCount != 0 }">
                         <c:forEach var="comment" items="${article.comments}">
                             <div class="panel panel-default">
@@ -191,7 +191,7 @@
 
                                     <c:if test="${comment.replyCount != 0 }">
                                         <c:forEach var="reply" items="${comment.replies}">
-                                            <div class="panel panel-default" style="display: none">
+                                            <div id="comment-${comment.id}" class="panel panel-default" style="display: none">
                                                 <div class="panel-heading">
                                                     <div class="row">
                                                         <div class="col-lg-12">
