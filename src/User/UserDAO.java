@@ -200,7 +200,6 @@ public class UserDAO {
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-            profile = null;
         }
         return profile;
     }
