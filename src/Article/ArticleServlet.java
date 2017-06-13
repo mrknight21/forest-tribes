@@ -74,6 +74,7 @@ public class ArticleServlet extends HttpServlet {
                             break chooser;
                     }
                 }
+                response.sendRedirect("article_display/DisplayFullArticle.jsp?article_id=" + request.getParameter("article_id"));
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -83,20 +83,36 @@ protected int id;
                         </div>
                     </div>
                 </div>
+
+                <%--Add JS to make Comment/Reply box to appear on click--%>
+                <div class="panel panel-default">
+                    <form action="<%=sitePath%>TextUpdate" method="post">
+                        <%--parentId--%>
+                        <input type="radio" name="parentId" value="${article.id}" checked hidden/>
+                        <input type="radio" name="article_id" value="${article.id}" checked hidden/>
+
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p style="display: inline-block"><i class="fa">&#xf112;</i>
+                                        <input type="submit" name="createComment" value="Submit comment"/>
+                                        <textarea rows="3" cols="100" name="text"
+                                                  placeholder="Share your thoughts"></textarea>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <%----%>
+
                 <div class="panel panel-default">
                     <c:if test="${article.commentCount != 0 }">
                         <c:forEach var="comment" items="${article.comments}">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <h5>Comment: </h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <p>${comment.text}</p>
+                                        <h5>Comment: ${comment.text}</h5>
                                     </div>
                                 </div>
                             </div>
@@ -107,8 +123,6 @@ protected int id;
                                             User: ${comment.author}</p>
                                         <p style="display: inline-block"><i class="fa">&#xf087;</i>
                                             Likes: ${comment.likes}</p>
-                                        <p style="display: inline-block"><i class="fa">&#xf0c0;</i>
-                                            Views: ${comment.views}</p>
                                         <p style="display: inline-block"><i class="fa">&#xf112;</i>
                                             Replies: ${comment.replyCount}</p>
                                         <p style="display: inline-block"><i class="fa">&#xf044;</i> Last
@@ -116,20 +130,35 @@ protected int id;
                                     </div>
                                 </div>
                             </div>
+
                             <div class="panel panel-default">
+
+                                    <%--Add JS to make Comment/Reply box to appear on click--%>
+                                <form action="<%=sitePath%>TextUpdate" method="post">
+                                        <%--parentId--%>
+                                    <input type="radio" name="parentId" value="${comment.id}" checked hidden/>
+                                    <input type="radio" name="article_id" value="${article.id}" checked hidden/>
+
+                                    <div class="panel-footer">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <p style="display: inline-block"><i class="fa">&#xf112;</i>
+                                                    <input type="submit" name="createReply" value="Send reply"/>
+                                                    <textarea rows="2" cols="100" name="text"
+                                                              placeholder="Create a reply"></textarea></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                    <%----%>
+
+
                                 <c:if test="${comment.replyCount != 0 }">
                                     <c:forEach var="reply" items="${comment.replies}">
                                         <div class="panel-heading">
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <h4>Reply: </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel-body">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <p>${reply.text}</p>
+                                                    <h5>Reply: ${reply.text}</h5>
                                                 </div>
                                             </div>
                                         </div>
@@ -140,8 +169,6 @@ protected int id;
                                                         User: ${reply.author}</p>
                                                     <p style="display: inline-block"><i class="fa">&#xf087;</i>
                                                         Likes: ${reply.likes}</p>
-                                                    <p style="display: inline-block"><i class="fa">&#xf0c0;</i>
-                                                        Views: ${reply.views}</p>
                                                     <p style="display: inline-block"><i class="fa">&#xf044;</i> Last
                                                         Edited: ${article.dateLastEdited}</p>
                                                 </div>
@@ -150,9 +177,11 @@ protected int id;
                                     </c:forEach>
                                 </c:if>
                             </div>
+
                         </c:forEach>
                     </c:if>
                 </div>
+
             </div>
         </div>
     </div>
