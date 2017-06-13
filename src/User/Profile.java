@@ -8,12 +8,12 @@ import java.util.List;
  */
 public class Profile implements Serializable {
 
-    String username;
-    String gender;
-    String occupation;
-    String education;
-    String political;
-    String issues;
+    private String username;
+    private String gender;
+    private String occupation;
+    private String education;
+    private String political;
+    private String issues;
 
     public Profile() {
 

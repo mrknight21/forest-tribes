@@ -77,9 +77,8 @@ protected int id;
                     <div class="panel-footer">
                         <div class="row">
                             <div class="col-lg-12">
-                                <p style="display: inline-block">
-                                    <i class="fa">&#xf2bd;</i>
-                                    <input type="submit" name="createArticle" value="Publish Article" />
+                                <p style="display: inline-block"><i class="fa">&#xf112;</i>
+                                    <input type="submit" name="createArticle" value="Publish Article"/>
                                 </p>
                             </div>
                         </div>

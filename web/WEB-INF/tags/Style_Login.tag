@@ -262,7 +262,7 @@
 
     #messageLogin, #registrationMessageID {
         color: red;
-        font-family: Plump;
+        font-family: Futura;
     }
 
     .form-control[disabled] {

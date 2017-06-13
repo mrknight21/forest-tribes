@@ -2,17 +2,55 @@
 <%@ page import="Utility.SecurityUtility" %>
 <%@ page import="User.UserDAO" %>
 <%@ page import="User.User" %>
+<%@ page import="User.Profile" %>
 <%@ page import="Utility.MySQL" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<% if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("login_interface/Login.jsp");
+<%
+    if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("login_interface/Login.jsp");
     String username = (String) session.getAttribute("username");
 
     final MySQL DB = new MySQL();
 
     User user = UserDAO.getUser(DB, username);
+
     String email = user.getEmail();
+
+    Profile profile = UserDAO.getProfile(DB, username);
+
+    String gender = null;
+
+    if (profile.getGender() != null) {
+        gender = profile.getGender();
+    }
+
+    String occupation = null;
+
+    if (profile.getOccupation() != null) {
+        occupation = profile.getOccupation();
+    } else {
+        occupation = "";
+    }
+
+    String education = null;
+
+    if (profile.getEducation() != null) {
+        education = profile.getEducation();
+    }
+
+    String political = null;
+
+    if (profile.getPolitical() != null) {
+        political = profile.getPolitical();
+    }
+
+    String issues = null;
+
+    if (profile.getIssues() != null) {
+        issues = profile.getIssues();
+    }
+
 %>
 
 <!DOCTYPE html>
@@ -26,11 +64,28 @@
     <%@include file="WEB-INF/Head_Scripts.jsp" %>
 
     <script>
+
         <%--Function to enable JQuery UI elements--%>
         $(function () {
             $("input[type='radio']").checkboxradio();
             $(".form-group").controlgroup();
         });
+
+        <%--Function to determine whether the checkbox elements should be checked.--%>
+        <%--Checkbox elements should only be checked if the user has updated their profile before.--%>
+        function checkedStatus(input, id) {
+
+            if (input !== "null") {
+                if (input.indexOf(" ") > -1) {
+                    input = input.replace(/ /g, "");
+                    input = input.replace(/,/g, "");
+                }
+
+                var elementID = "#profile" + id + input + "ID";
+                $(elementID).prop('checked', true);
+                $(elementID).checkboxradio("refresh");
+            }
+        }
 
         <%--Function to check inputted passwords match each other--%>
         function checkPasswordMatch() {
@@ -48,7 +103,27 @@
 
         $(document).ready(function () {
             $("#profileDeleteConfirmPasswordID").keyup(checkPasswordMatch);
+
+            var gender = "<%= gender%>";
+            checkedStatus(gender, "Radio");
+
+            var education = "<%= education%>";
+            checkedStatus(education, "Radio");
+
+            var political = "<%= political%>";
+            checkedStatus(political, "Radio");
+
+            var issues = "<%= issues%>";
+            console.log(issues);
+            var issuesArray = issues.split(", ");
+
+            issuesArray.forEach(function (i) {
+                if (i !== "") {
+                    checkedStatus(i, "Issues");
+                }
+            });
         });
+
     </script>
 
     <%--Page Specific CSS--%>
@@ -81,7 +156,7 @@
                         <div class="col-lg-12">
                             <h1 style="text-align: center"><i class="fa">&#xf1bb;</i> Forest Tribes</h1>
                             <h4 id="subtitle" style="text-align: center">The Beauty of Interconnectedness</h4>
-
+                            <p id="statusMessage" style="text-align: center">${message}</p>
                             <fieldset id="profilePictureFieldsetID" class="span4">
                                 <legend><i class="fa">&#xf083;</i> Profile Picture</legend>
                                 <div id="profileImageDiv" class="col-lg-10 col-lg-offset-1">
@@ -131,11 +206,14 @@
                                         <legend><i class="fa">&#xf224;</i> Gender:</legend>
                                         <div class="form-group">
                                             <label for="profileRadioMaleID">Male</label>
-                                            <input type="radio" name="profileGender" id="profileRadioMaleID" value="male">
+                                            <input type="radio" name="profileGender" id="profileRadioMaleID"
+                                                   value="Male">
                                             <label for="profileRadioFemaleID">Female</label>
-                                            <input type="radio" name="profileGender" id="profileRadioFemaleID" value="female">
+                                            <input type="radio" name="profileGender" id="profileRadioFemaleID"
+                                                   value="Female">
                                             <label for="profileRadioOtherID">Other</label>
-                                            <input type="radio" name="profileGender" id="profileRadioOtherID" value="other">
+                                            <input type="radio" name="profileGender" id="profileRadioOtherID"
+                                                   value="Other">
                                         </div>
                                     </fieldset>
                                     <fieldset id="profileOccupationFieldsetID">
@@ -144,41 +222,60 @@
                                         <span class="input-group-addon"><i
                                                 class="glyphicon glyphicon-pencil"></i></span>
                                             <input type="text" name="profileOccupation" id="profileOccupationID"
-                                                   tabindex="1" class="form-control" placeholder="Occupation" value="">
+                                                   tabindex="1" class="form-control" placeholder="Occupation"
+                                                   value="<%= occupation%>">
                                         </div>
                                     </fieldset>
                                     <fieldset id="profileEducationFieldsetID">
                                         <legend><i class="fa">&#xf19d;</i> Education:</legend>
                                         <div class="form-group">
                                             <label for="profileRadioPrimaryID">Primary</label>
-                                            <input type="radio" name="profileEducation" id="profileRadioPrimaryID" value="primary">
+                                            <input type="radio" name="profileEducation" id="profileRadioPrimaryID"
+                                                   value="Primary">
                                             <label for="profileRadioSecondaryID">Secondary</label>
-                                            <input type="radio" name="profileEducation" id="profileRadioSecondaryID" value="secondary">
+                                            <input type="radio" name="profileEducation" id="profileRadioSecondaryID"
+                                                   value="Secondary">
                                             <label for="profileRadioTertiaryID">Tertiary</label>
-                                            <input type="radio" name="profileEducation" id="profileRadioTertiaryID" value="tertiary">
+                                            <input type="radio" name="profileEducation" id="profileRadioTertiaryID"
+                                                   value="Tertiary">
                                             <label for="profileRadioPostgraduateID">Postgraduate</label>
-                                            <input type="radio" name="profileEducation" id="profileRadioPostgraduateID" value="postgraduate">
+                                            <input type="radio" name="profileEducation" id="profileRadioPostgraduateID"
+                                                   value="Postgraduate">
                                             <label for="profileRadioDoctorateID">Doctorate</label>
-                                            <input type="radio" name="profileEducation" id="profileRadioDoctorateID" value="doctorate">
+                                            <input type="radio" name="profileEducation" id="profileRadioDoctorateID"
+                                                   value="Doctorate">
                                         </div>
                                     </fieldset>
                                     <fieldset id="profilePoliticalFieldsetID">
                                         <legend><i class="fa">&#xf19c;</i> Political Orientation:</legend>
                                         <div class="form-group">
-                                            <label for="profileRadioExLibID">Extremely Liberal</label>
-                                            <input type="radio" name="profilePolitical" id="profileRadioExLibID" value="extremely liberal">
-                                            <label for="profileRadioLibID">Liberal</label>
-                                            <input type="radio" name="profilePolitical" id="profileRadioLibID" value="liberal">
-                                            <label for="profileRadioSliLibID">Slightly Liberal</label>
-                                            <input type="radio" name="profilePolitical" id="profileRadioSliLibID" value="slightly liberal">
-                                            <label for="profileRadioCentID">Centrist</label>
-                                            <input type="radio" name="profilePolitical" id="profileRadioCentID" value="centrist">
-                                            <label for="profileRadioSliConID">Slightly Conservative</label>
-                                            <input type="radio" name="profilePolitical" id="profileRadioSliConID" value="slightly conservative">
-                                            <label for="profileRadioConID">Conservative</label>
-                                            <input type="radio" name="profilePolitical" id="profileRadioConID" value="conservative">
-                                            <label for="profileRadioExConID">Extremely Conservative</label>
-                                            <input type="radio" name="profilePolitical" id="profileRadioExConID" value="extremely conservative">
+                                            <label for="profileRadioExtremelyLiberalID">Extremely Liberal</label>
+                                            <input type="radio" name="profilePolitical"
+                                                   id="profileRadioExtremelyLiberalID"
+                                                   value="Extremely Liberal">
+                                            <label for="profileRadioLiberalID">Liberal</label>
+                                            <input type="radio" name="profilePolitical" id="profileRadioLiberalID"
+                                                   value="Liberal">
+                                            <label for="profileRadioSlightlyLiberalID">Slightly Liberal</label>
+                                            <input type="radio" name="profilePolitical"
+                                                   id="profileRadioSlightlyLiberalID"
+                                                   value="Slightly Liberal">
+                                            <label for="profileRadioCentristID">Centrist</label>
+                                            <input type="radio" name="profilePolitical" id="profileRadioCentristID"
+                                                   value="Centrist">
+                                            <label for="profileRadioSlightlyConservativeID">Slightly
+                                                Conservative</label>
+                                            <input type="radio" name="profilePolitical"
+                                                   id="profileRadioSlightlyConservativeID"
+                                                   value="Slightly Conservative">
+                                            <label for="profileRadioConservativeID">Conservative</label>
+                                            <input type="radio" name="profilePolitical" id="profileRadioConservativeID"
+                                                   value="Conservative">
+                                            <label for="profileRadioExtremelyConservativeID">Extremely
+                                                Conservative</label>
+                                            <input type="radio" name="profilePolitical"
+                                                   id="profileRadioExtremelyConservativeID"
+                                                   value="Extremely Conservative">
                                         </div>
                                     </fieldset>
                                     <fieldset id="profileIssuesFieldsetID">
@@ -189,8 +286,8 @@
                                                     class="img-thumbnail img-check" alt="No Poverty"><input
                                                     type="checkbox"
                                                     name="profileIssuesPoverty"
-                                                    id="profileIssuesPovertyID"
-                                                    value="no poverty"
+                                                    id="profileIssuesNoPovertyID"
+                                                    value="No Poverty"
                                                     class="hidden"
                                                     autocomplete="off"></label>
                                             </div>
@@ -199,8 +296,8 @@
                                                     class="img-thumbnail img-check" alt="Zero Hunger"><input
                                                     type="checkbox"
                                                     name="profileIssuesHunger"
-                                                    id="profileIssuesHungerID"
-                                                    value="zero hunger"
+                                                    id="profileIssuesZeroHungerID"
+                                                    value="Zero Hunger"
                                                     class="hidden"
                                                     autocomplete="off"></label>
                                             </div>
@@ -210,8 +307,8 @@
                                                     alt="Good Health and Well-Being"><input
                                                     type="checkbox"
                                                     name="profileIssuesHealth"
-                                                    id="profileIssuesHealthID"
-                                                    value="good health and well-being"
+                                                    id="profileIssuesGoodHealthandWell-BeingID"
+                                                    value="Good Health and Well-Being"
                                                     class="hidden"
                                                     autocomplete="off"></label>
                                             </div>
@@ -220,8 +317,8 @@
                                                     class="img-thumbnail img-check" alt="Quality Education"><input
                                                     type="checkbox"
                                                     name="profileIssuesEducation"
-                                                    id="profileIssuesEducationID"
-                                                    value="quality education"
+                                                    id="profileIssuesQualityEducationID"
+                                                    value="Quality Education"
                                                     class="hidden"
                                                     autocomplete="off"></label>
                                             </div>
@@ -230,8 +327,8 @@
                                                     class="img-thumbnail img-check" alt="Gender Equality"><input
                                                     type="checkbox"
                                                     name="profileIssuesGender"
-                                                    id="profileIssuesGenderID"
-                                                    value="gender equality"
+                                                    id="profileIssuesGenderEqualityID"
+                                                    value="Gender Equality"
                                                     class="hidden"
                                                     autocomplete="off"></label>
                                             </div>
@@ -241,8 +338,8 @@
                                                     alt="Clean Water and Sanitation"><input
                                                     type="checkbox"
                                                     name="profileIssuesWater"
-                                                    id="profileIssuesWaterID"
-                                                    value="clean water and sanitation"
+                                                    id="profileIssuesCleanWaterandSanitationID"
+                                                    value="Clean Water and Sanitation"
                                                     class="hidden"
                                                     autocomplete="off"></label>
                                             </div>
@@ -252,8 +349,8 @@
                                                     alt="Affordable and Clean Energy"><input
                                                     type="checkbox"
                                                     name="profileIssuesEnergy"
-                                                    id="profileIssuesEnergyID"
-                                                    value="affordable and clean energy"
+                                                    id="profileIssuesAffordableandCleanEnergyID"
+                                                    value="Affordable and Clean Energy"
                                                     class="hidden"
                                                     autocomplete="off"></label>
                                             </div>
@@ -263,8 +360,8 @@
                                                     alt="Decent Work and Economic Growth"><input
                                                     type="checkbox"
                                                     name="profileIssuesEconomic"
-                                                    id="profileIssuesEconomicID"
-                                                    value="decent work and economic growth"
+                                                    id="profileIssuesDecentWorkandEconomicGrowthID"
+                                                    value="Decent Work and Economic Growth"
                                                     class="hidden"
                                                     autocomplete="off"></label>
                                             </div>
@@ -274,8 +371,8 @@
                                                     alt="Industry, Innovation and Infrastructure"><input
                                                     type="checkbox"
                                                     name="profileIssuesInnovation"
-                                                    id="profileIssuesInnovationID"
-                                                    value="industry, innovation and infrastructure"
+                                                    id="profileIssuesIndustryInnovationandInfrastructureID"
+                                                    value="Industry, Innovation and Infrastructure"
                                                     class="hidden"
                                                     autocomplete="off"></label>
                                             </div>
@@ -284,8 +381,8 @@
                                                     class="img-thumbnail img-check" alt="Reduced Inequality"><input
                                                     type="checkbox"
                                                     name="profileIssuesInequality"
-                                                    id="profileIssuesInequalityID"
-                                                    value="reduced equality"
+                                                    id="profileIssuesReducedInequalityID"
+                                                    value="Reduced Inequality"
                                                     class="hidden"
                                                     autocomplete="off"></label>
                                             </div>
@@ -295,8 +392,8 @@
                                                     alt="Sustainable Cities and Communities"><input
                                                     type="checkbox"
                                                     name="profileIssuesCommunity"
-                                                    id="profileIssuesCommunityID"
-                                                    value="sustainable cities and communities"
+                                                    id="profileIssuesSustainableCitiesandCommunitiesID"
+                                                    value="Sustainable Cities and Communities"
                                                     class="hidden"
                                                     autocomplete="off"></label>
                                             </div>
@@ -306,8 +403,8 @@
                                                     alt="Responsible Consumption and Production"><input
                                                     type="checkbox"
                                                     name="profileIssuesConsumption"
-                                                    id="profileIssuesConsumptionID"
-                                                    value="responsible consumption and production"
+                                                    id="profileIssuesResponsibleConsumptionandProductionID"
+                                                    value="Responsible Consumption and Production"
                                                     class="hidden"
                                                     autocomplete="off"></label>
                                             </div>
@@ -316,8 +413,8 @@
                                                     class="img-thumbnail img-check" alt="Climate Action"><input
                                                     type="checkbox"
                                                     name="profileIssuesClimate"
-                                                    id="profileIssuesClimateID"
-                                                    value="climate action"
+                                                    id="profileIssuesClimateActionID"
+                                                    value="Climate Action"
                                                     class="hidden"
                                                     autocomplete="off"></label>
                                             </div>
@@ -326,8 +423,8 @@
                                                     class="img-thumbnail img-check" alt="Life below Water"><input
                                                     type="checkbox"
                                                     name="profileIssuesWaterLife"
-                                                    id="profileIssuesWaterLifeID"
-                                                    value="life below water"
+                                                    id="profileIssuesLifebelowWaterID"
+                                                    value="Life below Water"
                                                     class="hidden"
                                                     autocomplete="off"></label>
                                             </div>
@@ -336,8 +433,8 @@
                                                     class="img-thumbnail img-check" alt="Life on Land"><input
                                                     type="checkbox"
                                                     name="profileIssuesLandLife"
-                                                    id="profileIssuesLandLife"
-                                                    value="life on land"
+                                                    id="profileIssuesLifeonLand"
+                                                    value="Life on Land"
                                                     class="hidden"
                                                     autocomplete="off"></label>
                                             </div>
@@ -347,8 +444,8 @@
                                                     alt="Peace, Justice and Strong Institutions"><input
                                                     type="checkbox"
                                                     name="profileIssuesPeace"
-                                                    id="profileIssuesPeaceID"
-                                                    value="peace, justice and strong institutions"
+                                                    id="profileIssuesPeaceJusticeandStrongInstitutionsID"
+                                                    value="Peace, Justice and Strong Institutions"
                                                     class="hidden"
                                                     autocomplete="off"></label>
                                             </div>
@@ -358,8 +455,8 @@
                                                     alt="Partnerships for the Goals"><input
                                                     type="checkbox"
                                                     name="profileIssuesPartnerships"
-                                                    id="profileIssuesConsumptionPartnershipsID"
-                                                    value="partnerships for the goals"
+                                                    id="profileIssuesPartnershipsfortheGoalsID"
+                                                    value="Partnerships for the Goals"
                                                     class="hidden"
                                                     autocomplete="off"></label>
                                             </div>

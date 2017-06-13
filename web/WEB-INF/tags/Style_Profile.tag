@@ -118,8 +118,8 @@
             transition: all 0.1s linear;
         }
 
-        #profileDeleteWarningID, #profileMessageID {
-            font-family: Plump;
+        #profileDeleteWarningID, #profileMessageID, #statusMessage {
+            font-family: Futura;
             color: red;
         }
 

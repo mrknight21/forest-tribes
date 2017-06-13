@@ -86,10 +86,10 @@
                                             <div class="panel-heading">
                                                 <form action="DisplayFullArticle.jsp">
                                                     <label for="fullarticle-${article.id}">
-                                                        <a href="DisplayFullArticle.jsp?article_id=${article.id}">
+                                                        <a href="DisplayFullArticle.jsp?articleId=${article.id}">
                                                             <h4>${article.title}</h4></a>
                                                     </label>
-                                                    <input type="text" value="${article.id}" name="article_id" readonly
+                                                    <input type="text" value="${article.id}" name="articleId" readonly
                                                            hidden/>
                                                     <input type="submit"
                                                            id="fullarticle-${article.id}"
@@ -113,7 +113,7 @@
                                                 <p style="display: inline-block"><i class="fa">&#xf0c0;</i>
                                                     Views: ${article.views}</p>
                                                 <p style="display: inline-block"><i class="fa">&#xf112;</i>
-                                                    Replies: ${article.commentCount}</p>
+                                                    Replies: ${article.responseCount}</p>
                                                 <p style="display: inline-block"><i class="fa">&#xf044;</i> Last
                                                     Edited: ${article.dateLastEdited}</p>
                                             </div>
