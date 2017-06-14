@@ -193,7 +193,7 @@
 
 
                                 <script>
-                                    function revealReplies ${comment.id}() {
+                                    function revealReplies${comment.id}() {
                                         $("#replyDivID${comment.id}").toggle();
                                     }
                                 </script>
