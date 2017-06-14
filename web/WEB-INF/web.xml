@@ -103,6 +103,18 @@
         <url-pattern>/Serve_TreeCreation</url-pattern>
     </servlet-mapping>
 
+    Serve_TreeURL
+
+
+    <servlet>
+        <servlet-name>Serve_TreeURL</servlet-name>
+        <servlet-class>Tree.Serve_TreeURL</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Serve_TreeURL</servlet-name>
+        <url-pattern>/Serve_TreeURL</url-pattern>
+    </servlet-mapping>
+
 
 
 </web-app>

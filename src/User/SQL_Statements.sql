@@ -295,3 +295,4 @@ INSERT INTO inFoJaxs_Replies (parent_ID, username, content, likes, views) VALUES
   (2, 'zxcv', 'aahahhahahhahahahahahahahahahahahhahaahahahah!', 1000, 1000);
 
 
+SELECT ID FROM inFoJaxs_Tree_Trees WHERE id=(SELECT MAX(id) FROM inFoJaxs_Tree_Trees)

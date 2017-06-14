@@ -69,9 +69,9 @@
 <h1>Plant your BIG ISSUE!!</h1>
 
 <p></p>
-<form action="/">
+<form action="/Serve_TreeCreation" METHOD="get">
     <label for="title">The name of your Big issue:</label>
-    <input id="title" type="text" name="title" width="250px">
+    <input id="title" type="text" name="title" width="500px">
     <p></p>
     <label for="description">Tell use more about it:</label>
     <br>

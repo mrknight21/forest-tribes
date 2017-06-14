@@ -69,6 +69,46 @@ public class TreeDAO {
     }
 
 
+    public static T_URL getURLbyId(AbstractDB db, int URLId, boolean isfactual) {
+        try (Connection c = db.connection()) {
+            PreparedStatement p = null;
+            if(isfactual){
+                p = c.prepareStatement("SELECT * FROM inFoJaxs_Tree_Factual_URL WHERE ID = ?");
+            }
+            else {
+                p = c.prepareStatement("SELECT * FROM inFoJaxs_Tree_Commentary_URL WHERE ID = ?"); }
+                p.setInt(1, URLId);
+               ResultSet r = p.executeQuery();
+                    while (r.next()) {
+                        return URLFromResultSet(r, c);
+                    }
+                }
+        catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+    public static T_Reaction getReactionbyId(AbstractDB db, int reactionId) {
+        try (Connection c = db.connection()) {
+            PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Tree_Reactions WHERE ID = ?");
+            p.setInt(1, reactionId);
+            ResultSet r = p.executeQuery();
+            while (r.next()) {
+                return reactionFromResultSet(r, c);
+            }
+        }
+        catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+
     /*
    username VARCHAR(50) NOT NULL,
   title VARCHAR(80) NOT NULL,
@@ -86,11 +126,11 @@ public class TreeDAO {
 
     ///////////////create////////////////////////////////////////////
 
-    public static boolean createNewTree( AbstractDB db, InfoTree tree){
-        boolean success;
+    public static int createNewTree( AbstractDB db, InfoTree tree){
+        int newID = 0;
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_Tree_Trees (username, title, content, likes, views, exp, stage, size, leaves, XCoordinate, YCoordinate) VALUE (?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?)")) {
+            PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_Tree_Trees (username, title, content, likes, views, exp, stage, size, leaves, XCoordinate, YCoordinate) VALUE (?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?)");
                 p.setString(1, tree.getAuthor());
                 p.setString(2, tree.getTitle());
                 p.setString(3, tree.getText());
@@ -103,13 +143,18 @@ public class TreeDAO {
                 p.setInt(10, tree.getCoordinX());
                 p.setInt(11, tree.getCoordinY());
                 p.executeUpdate();
-                success = true;
+            PreparedStatement k = c.prepareStatement("SELECT ID FROM inFoJaxs_Tree_Trees WHERE id=(SELECT MAX(id) FROM inFoJaxs_Tree_Trees)");
+            ResultSet r = k.executeQuery();
+            while (r.next()) {
+                newID = r.getInt("ID");
             }
+
+
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-            success = false;
+            newID= -1;
         }
-        return success;
+        return newID;
 
     }
 
@@ -164,7 +209,7 @@ ID INT AUTO_INCREMENT,
 
 
 
-    public static boolean AddNewURL( AbstractDB db, T_URL URL){
+    public static boolean createNewURL( AbstractDB db, T_URL URL){
         boolean success;
 
         try (Connection c = db.connection()) {
@@ -207,7 +252,7 @@ ID INT AUTO_INCREMENT,
 
 
 
-    public static boolean AddNewReaction( AbstractDB db, T_Reaction reaction){
+    public static boolean createReaction( AbstractDB db, T_Reaction reaction){
         boolean success;
 
         try (Connection c = db.connection()) {
