@@ -64,9 +64,10 @@ public class Article extends Text {
 
     private String extractShortIntro(String text) {
         int indexNum = 100;
-        if (text.length() < indexNum) return text;
 
         String pureText = MiscellaneousUtility.htmlToStringParser(text);
+
+        if (pureText.length() < indexNum) return pureText;
 
         while (true)
             if (pureText.charAt(indexNum) == ' ')

@@ -34,9 +34,21 @@ public class Serve_FullTree extends HttpServlet {
                 return;
             }
 
+            int ID;
+
             HttpSession session = request.getSession();
             String username = (String) session.getAttribute("username");
-            int ID = Integer.parseInt(request.getParameter("TreeID"));
+            if(request.getParameter("TreeID") == null){
+                ID = (int) request.getAttribute("TreeID");
+            }
+            else {
+                ID = Integer.parseInt(request.getParameter("TreeID"));
+            }
+
+            System.out.println("FROM TREE CREATION ID: "+ID);
+
+
+
             InfoTree tree = TreeDAO.getInfoTreeById(DB, ID);
 
 
