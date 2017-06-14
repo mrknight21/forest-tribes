@@ -81,7 +81,7 @@
                                 <p style="display: inline-block"><i class="fa">&#xf0c0;</i>
                                     Views: ${article.views}</p>
                                 <a href="#" onclick="revealComments()" style="display: inline-block"><i class="fa">&#xf112;</i>
-                                    Replies: ${article.responseCount}</a>
+                                    Responses: ${article.responseCount}</a>
                                 <p style="display: inline-block"><i class="fa">&#xf044;</i>
                                     Edited: ${article.dateLastEdited}</p>
                                 <%if (deletionRights) {%>
@@ -142,7 +142,7 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <p>${comment.text}</p>
+                                            <p id="comment-${comment.id}">${comment.text}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -156,8 +156,9 @@
                                             <a href="#" onclick="revealReplies${comment.id}()"
                                                style="display: inline-block"><i class="fa">&#xf112;</i>
                                                 Replies: ${comment.replyCount}</a>
-                                            <p style="display: inline-block"><i class="fa">&#xf044;</i>
-                                                Edited: ${comment.dateLastEdited}</p>
+                                            <a href="#" onclick="editComment${comment.id}()"
+                                               style="display: inline-block"><i class="fa">&#xf044;</i>
+                                                Edited: ${comment.dateLastEdited}</a>
                                             <%if (deletionRights) {%>
                                             <p style="display: inline-block"><i class="fa">&#xf044;</i>
                                             <form action="<%=sitePath%>TextUpdate" method="post">
@@ -172,8 +173,33 @@
                                     </div>
                                 </div>
 
+
                                 <script>
-                                    function revealReplies${comment.id}() {
+                                    /*var comment${comment.id} = $("#comment-${comment.id}");
+                                    var comment${comment.id}text = comment.children();
+
+                                    var editComment${comment.id} = $("<form action='<%=sitePath%>TextUpdate' method='post'><input type='radio' name='parentId' value='<%=articleId%>' checked hidden/><input type='radio' name='articleId' value='<%=articleId%>' checked hidden/><textarea style='display: inline-block' rows='3' cols='100' name='text' value='${comment.text}'></textarea><input style='display: inline-block' type='submit' name='updateComment' class='btn-primary' value='Submit Ammendment'/></form>");
+
+                                    function editComment ${comment.id}() {
+                                        comment${comment.id}.replaceWith("<div id='click'></div>");
+                                    }
+
+                                    var additional = $("div#additional");
+
+                                    additional.replaceWith("<div id='click'></div>");
+
+
+                                    var clickable = $("#click").append("<p>Click here to read more...</p>");
+
+
+                                    $("#click > p").css("text-align", "center");
+
+                                    clickable.click(function () {
+                                        clickable.replaceWith(additional);
+                                    })*/
+
+
+                                    function revealReplies ${comment.id}() {
                                         $("#replyDivID${comment.id}").toggle();
                                     }
                                 </script>

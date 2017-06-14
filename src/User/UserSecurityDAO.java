@@ -1,6 +1,7 @@
 package User;
 
 import Utility.AbstractDB;
+import Utility.MySQL;
 import Utility.SecurityUtility;
 
 import java.sql.*;
@@ -33,25 +34,27 @@ public class UserSecurityDAO {
     }
 
     // Method to return a UserSecurity object relating to the parsed-in username, from the database.
-    public static UserSecurity getUser(AbstractDB db, String username) {
-
-        UserSecurity user = null;
-
+    public static UserSecurity getUserByUsername(AbstractDB db, String username) {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_UserSecurity WHERE username = ?")) {
                 p.setString(1, username);
 
-                try (ResultSet r = p.executeQuery()) {
-                    while (r.next()) {
-                        user = userFromResultSet(r);
-                    }
-                }
+                try (ResultSet r = p.executeQuery()) {while (r.next()) return userFromResultSet(r);}
             }
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            user = null;
         }
-        return user;
+        catch (SQLException | ClassNotFoundException e) {e.printStackTrace();}
+        return null;
+    }
+
+    public static String getUserByGoogleID(AbstractDB db, String userId) {
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_UserSSO WHERE userGoogleID = ?")) {
+                p.setString(1, userId);
+                try (ResultSet r = p.executeQuery()) {while (r.next()) return r.getString("username");}
+            }
+        }
+        catch (SQLException | ClassNotFoundException e) {e.printStackTrace();}
+        return null;
     }
 
     // Method to insert a parsed-in UserSecurity object into the database.

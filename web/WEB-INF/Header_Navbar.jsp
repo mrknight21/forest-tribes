@@ -22,7 +22,7 @@
                         <li><a href="<%=sitePath%>user_interface/ProfilePictureUpdate.jsp">Change profile picture</a></li>
                         <li><a href="<%=sitePath%>user_interface/changePassword.jsp">Change password</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="<%=sitePath%>Serve_Logout">Logout</a></li>
+                        <li><a onclick="signOut()">Logout</a></li>
                     </ul>
                 </li>
                 <li>

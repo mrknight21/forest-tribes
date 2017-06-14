@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="google-lib">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/web/WEB-INF/google-lib" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/web/WEB-INF/google-lib" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/web/WEB-INF/google-lib" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/web/WEB-INF/google-lib" recursive="false" type="SOURCES" />
+  </library>
+</component>

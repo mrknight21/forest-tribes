@@ -1,4 +1,4 @@
-<%@include file="Rootpath_Toggle.jsp"%>
+<%@include file="Rootpath_Toggle.jsp" %>
 
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
@@ -26,5 +26,16 @@
 
 <%--Icons CSS--%>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<%--Google Logout--%>
+<script>
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            console.log('User signed out.');
+        });
+        window.open("<%=sitePath%>Serve_Logout", "_self");
+    }
+</script>
 
 <tags:Style_Header-Navbar/>

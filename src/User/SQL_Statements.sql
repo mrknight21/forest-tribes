@@ -20,6 +20,8 @@ DROP TABLE IF EXISTS inFoJaxs_UserSecurity;
 
 CREATE TABLE IF NOT EXISTS inFoJaxs_UserSecurity (
   userID     INT AUTO_INCREMENT,
+  userGoogleID INT UNIQUE,
+  userFacebookID INT UNIQUE,
   username   VARCHAR(50),
   salt       BLOB NOT NULL,
   iterations INT  NOT NULL,
@@ -28,6 +30,15 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_UserSecurity (
   FOREIGN KEY (username) REFERENCES inFoJaxs_User (username)
 );
 
+DROP TABLE IF EXISTS inFoJaxs_UserSSO;
+
+CREATE TABLE IF NOT EXISTS inFoJaxs_UserSSO (
+  userGoogleID INT,
+  userFacebookID INT UNIQUE,
+  username   VARCHAR(50),
+  PRIMARY KEY (userGoogleID),
+  FOREIGN KEY (username) REFERENCES inFoJaxs_User (username)
+);
 
 DROP TABLE IF EXISTS inFoJaxs_Profile;
 CREATE TABLE IF NOT EXISTS inFoJaxs_Profile (
