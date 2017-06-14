@@ -54,11 +54,11 @@
 <h1>${tree.title}</h1>
 <P></P>
 <h2>Author: ${tree.author}     created on: ${tree.dateCreated}  last edited: ${tree.dateLastEdited}</h2>
-<h3> Likes: ${tree.likes} Views: ${tree.views} Stage: ${tree.stage} Exp: ${tree.exp} Coordinate: (${tree.coordinX}, ${tree.coordinY})</h3>
+<h3> Likes: ${tree.likes} Views: ${tree.views} Stage: ${tree.stage} Exp: ${tree.exp} Size:${tree.size} Coordinate: (${tree.coordinX}, ${tree.coordinY})</h3>
 <p></p>
 <p></p>
 <div class="image continer">
-    <img src="<%=sitePath%>tree_TRIAL/Tree_Material/Venusaur_stage_${tree.stage}.png" >
+    <img src="<%=sitePath%>tree_TRIAL/Tree_Material/stage_0${tree.stage}.png" >
 </div>
 
 <h1>Facts</h1>
