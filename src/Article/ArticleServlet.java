@@ -147,14 +147,13 @@ public class ArticleServlet extends HttpServlet {
     }
 
     private boolean createArticle(HttpServletRequest request) {
-        System.out.println(request.getParameter("text"));
         createNewArticle(
                 DB,
                 new Article(
                         getUsername(request),
                         request.getParameter("title"),
-                        request.getParameter("text")));
-
+                        request.getParameter("text"),
+                        request.getParameter("summary")));
         return true;
     }
 
@@ -186,7 +185,8 @@ public class ArticleServlet extends HttpServlet {
                     DB,
                     new Article(request.getParameter("id"),
                             request.getParameter("title"),
-                            request.getParameter("text")));
+                            request.getParameter("text"),
+                            request.getParameter("summary")));
         return true;
     }
 

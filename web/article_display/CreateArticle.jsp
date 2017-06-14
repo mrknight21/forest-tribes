@@ -77,6 +77,7 @@ protected int id;
             color: white;
             text-transform: uppercase;
         }
+
         fieldset {
             margin-top: 2%;
             margin-left: 2%;
@@ -119,7 +120,26 @@ protected int id;
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <input class="form-control" id="articleTitleInputID" name="title"
-                                               type="text" value="" placeholder="Enter your article title here">
+                                               type="text" value="" placeholder="Enter your article title here" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h5>Article Summary: </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <input class="form-control" id="articleTitleSummaryID" name="summary"
+                                               type="text" value="" placeholder="Enter your article summary here" required>
                                     </div>
                                 </div>
                             </div>

@@ -43,7 +43,16 @@
     }
 
     .panel-default > .panel-heading {
-        background-color: #029f5b;
-        border-color: #029f5b;
+        background-color: #008975;
+        border-color: #008975
+    }
+
+    .panel-default {
+        border-color: #008975;
+    }
+
+    fieldset {
+        margin-top: 1%;
+        margin-left: 1%;
     }
 </style>
