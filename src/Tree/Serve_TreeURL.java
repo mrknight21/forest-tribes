@@ -49,6 +49,7 @@ public class Serve_TreeURL extends HttpServlet{
             // public T_URL(int id,String title, String introText, String URL, boolean supportForArgument )
 
             if (URLid == -1) {
+                System.out.println(support);
                 T_URL newURL = new T_URL(username, title, shortIntro, TreeID, URL, support, isfactual);
                 TreeDAO.createNewURL(DB, newURL);
                 String fullTreeAdress = "/Serve_FullTree?TreeID=" + TreeID;

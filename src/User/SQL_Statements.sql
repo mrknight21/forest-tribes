@@ -288,8 +288,8 @@ Spin it like some stop and go.
 Now let me see you make dat web semantic like a 3.0!');
 
 
-INSERT INTO inFoJaxs_Comments (parent_ID, username, content, likes, views, repliesCount) VALUES
-  (3, 'will', 'yo! yo! yo! yo! yo! yo!', 1000, 1000, 0);
+INSERT INTO inFoJaxs_Tree_Factual_URL (parent_ID, username, title, URL,  content, likes, views, bcar289.inFoJaxs_Tree_Factual_URL.support_for) VALUES
+  (152, 'zxcv', 'yo! yo! yo! yo! yo! yo!', 'yahoo.com.tw', 'alalalalalaalalalallaalalalalaalala', 0, 0, FALSE  );
 
 INSERT INTO inFoJaxs_Replies (parent_ID, username, content, likes, views) VALUES
   (2, 'zxcv', 'aahahhahahhahahahahahahahahahahahhahaahahahah!', 1000, 1000);

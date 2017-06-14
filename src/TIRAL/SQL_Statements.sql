@@ -110,3 +110,5 @@ INSERT INTO inFoJaxs_ReplyLikes (ID, likes) VALUES
 UPDATE inFoJaxs_Articles SET content = 'Hello! Wordl! Hope it will update' WHERE ID = 1;
 
 DELETE FROM inFoJaxs_Articles WHERE ID = 6 OR ID =7;
+
+SELECT * FROM inFoJaxs_Tree_Factual_URL WHERE ID = 1

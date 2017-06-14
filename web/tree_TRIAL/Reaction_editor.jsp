@@ -1,8 +1,19 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: mche618
+  Date: 14/06/2017
+  Time: 5:49 PM
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page import="Utility.SecurityUtility" %>
 <%@ page import="Tree.TreeDAO" %>
 <%@ page import="java.util.function.DoubleBinaryOperator" %>
 <%@ page import="Utility.MySQL" %>
-<%@ page import="Tree.T_URL" %><%--
+<%@ page import="Tree.T_URL" %>
+<%@ page import="Tree.T_Reaction" %>
+<%@ page import="java.util.List" %>
+<%@ page import="Article.Reply" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: mche618
   Date: 14/06/2017
@@ -25,47 +36,50 @@
     String username = (String) session.getAttribute("username");
 
 
+
+
+
     String requestType = request.getParameter("request");
-    String URLtype = request.getParameter("type");
 
     int TreeID = Integer.parseInt(request.getParameter("TreeID"));
-    boolean isfactual = (URLtype.equals("factual"));
-    String title ="";
-    String shortIntro ="";
-    String URL ="";
+    String text ="";
     boolean support = true;
     String lastEdit = "";
-    int URLid = -1;
+    int reactionID = -1;
+    String author = username;
+    List<Reply> replies = new ArrayList<>();
+
 
 
     if (requestType.equals("Update")){
-        URLid = Integer.parseInt(request.getParameter("id"));
-        System.out.println(isfactual);
-        System.out.println(URLid);
-        T_URL url = TreeDAO.getURLbyId(DB, URLid, isfactual);
-        title = url.getTitle();
-        shortIntro = url.getText();
-        URL = url.getURL();
-        lastEdit= url.getDateLastEdited();
-        support = url.isSupportForArgument();
+        reactionID = Integer.parseInt(request.getParameter("id"));
+        System.out.println(reactionID);
+        T_Reaction reaction = TreeDAO.getReactionbyId(DB, reactionID);
+        text = reaction.getText();
+        lastEdit= reaction.getDateLastEdited();
+        support = reaction.isSupportForArgument();
+        author = reaction.getAuthor();
+        replies = reaction.getReplies();
+
     }
+
+
+
+
 
 
 %>
 <%@ include file="../WEB-INF/Header_Navbar.jsp" %>
 
-<form action="/Serve_TreeURL" method="get">
-    <label for="URLtitle">Title: </label>
-    <br>
-    <input id="URLtitle"type="text" name="title" value="<%=title%>">
-    <p></p>
+<form action="/Serve_TreeReaction" method="get">
+
+    <p>User: <%=author%></p>
     <% if (!lastEdit.equals("")){%>
     <p>Last Edited: <%=lastEdit%></p>
     <%}%>
     <p></p>
     <p>For or against the tree?</p>
     <br>
-
     <% if (support){%>
     <label for="for">For</label>
     <input id="for" type="radio"  class= "supportRadio" name="support" value="for" checked/>
@@ -79,17 +93,29 @@
     <%}%>
 
     <P></P>
-    <label for="description">What is it about:</label>
+    <label for="description">Have your say: </label>
     <br>
-    <textarea id="description" name="shortIntro" rows="7" cols="80"><%=shortIntro%></textarea>
+    <textarea id="description" name="content" rows="7" cols="80"><%=text%></textarea>
     <p></p>
-    <label for="URL">URL: </label>
-    <input id="URL"type="text" name="URL" value="<%=URL%>">
-    <p></p>
-    <input type="hidden" name="URLid" value="<%=URLid%>">
+    <input type="hidden" name="reactionID" value="<%=reactionID%>">
     <input type="hidden" name="TreeID" value="<%=TreeID%>">
-    <input type="hidden" name="URLtype" value="<%=URLtype%>">
+    <input type="hidden" name="repliesNum" value="<%=replies.size()%>">
     <input type="submit" value="Submit!!">
 </form>
+
+<p></p>
+<p></p>
+<p></p>
+<div class="replies_container">
+<% if (replies.size() > 0){
+    for (Reply reply: replies){%>
+<div class="single_reply_container">
+    <p>User: <%=reply.getAuthor()%></p>
+    <p>Likes: <%=reply.getLikes()%>  Views: <%=reply.getViews()%> Last Edited: <%=reply.getDateLastEdited()%></p>
+    <p><%=reply.getText()%></p>
+</div>
+   <% }
+}%>
+</div>
 </body>
 </html>

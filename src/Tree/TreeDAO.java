@@ -226,7 +226,7 @@ ID INT AUTO_INCREMENT,
                 p.setString(5, URL.getText());
                 p.setInt(6, URL.getLikes());
                 p.setInt(7, URL.getViews());
-                p.setBoolean(8, URL.isFactual());
+                p.setBoolean(8, URL.isSupportForArgument());
             p.executeUpdate();
                 success = true;
             }
@@ -256,7 +256,7 @@ ID INT AUTO_INCREMENT,
         boolean success;
 
         try (Connection c = db.connection()) {
-            PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_Tree_Reactions (parent_ID, username, content, likes, views, repliesCount,support_for) VALUE (?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_Tree_Reactions (parent_ID, username, content, likes, views, repliesCount,support_for) VALUE (?, ?, ?, ?, ?, ?, ?)");
             p.setInt(1, reaction.getParentID());
             p.setString(2, reaction.getAuthor());
             p.setString(3, reaction.getText());
