@@ -215,7 +215,6 @@ public class ArticleDAO {
 
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_Articles SET title = ?, content = ?, shortIntro = ?, lastEdit = ? WHERE ID = ?;")) {
-                //p.setString(1, colunm);
                 p.setString(1, article.getTitle());
                 p.setString(2, article.getText());
                 p.setString(3, article.getShortIntro());
