@@ -18,7 +18,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-    <title>Display Full Article</title>
+    <title>${article.title}</title>
 
     <%--Importing all necessary libraries, frameworks etc.--%>
     <%@include file="../WEB-INF/Head_Scripts.jsp" %>
@@ -85,13 +85,15 @@
                                 <p style="display: inline-block"><i class="fa">&#xf044;</i>
                                     Edited: ${article.dateLastEdited}</p>
                                 <%if (deletionRights) {%>
-                                <p style="display: inline-block"><i class="fa">&#xf044;</i>
                                 <form action="<%=sitePath%>TextUpdate" method="post">
                                     <input type="radio" name="id" value="<%=articleId%>" checked hidden/>
                                     <input type="radio" name="articleId" value="<%=articleId%>" checked hidden/>
-                                    <input type="submit" name="deleteArticle" value="Delete Article"/>
+                                    <input type="submit" class="form-control btn btn-login" name="deleteArticle" value="Delete Article" style="background-color: #008975;
+                                                                                                                                                           border-color: #008975;
+                                                                                                                                                           outline: none;
+                                                                                                                                                           color: white;
+                                                                                                                                                           text-transform: uppercase"/>
                                 </form>
-                                </p>
                                 <%}%>
                             </div>
                         </div>
@@ -110,7 +112,7 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <textarea style="width: inherit" rows="3" cols="100" name="text"
-                                              placeholder="Share your thoughts"></textarea>
+                                              placeholder="Share your thoughts" required></textarea>
                                     <input type="submit" name="createComment"
                                            class="form-control btn btn-login"
                                            value="Submit Comment" style="background-color: #008975;
@@ -159,14 +161,16 @@
                                             <p style="display: inline-block"><i class="fa">&#xf044;</i>
                                                 Edited: ${comment.dateLastEdited}</p>
                                             <%if (deletionRights) {%>
-                                            <p style="display: inline-block"><i class="fa">&#xf044;</i>
                                             <form action="<%=sitePath%>TextUpdate" method="post">
                                                 <input type="radio" name="articleId" value="<%=articleId%>" checked
                                                        hidden/>
                                                 <input type="radio" name="id" value="${comment.id}" checked hidden/>
-                                                <input type="submit" name="deleteComment" value="Delete Comment"/>
+                                                <input type="submit" class="form-control btn btn-login" name="deleteComment" value="Delete Comment" style="background-color: #00AA8D;
+                                                                                                                                                           border-color: #00AA8D;
+                                                                                                                                                           outline: none;
+                                                                                                                                                           color: white;
+                                                                                                                                                           text-transform: uppercase"/>
                                             </form>
-                                            </p>
                                             <%}%>
                                         </div>
                                     </div>
@@ -191,7 +195,7 @@
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <textarea style="width: inherit" rows="3" cols="100" name="text"
-                                                              placeholder="Share your thoughts"></textarea>
+                                                              placeholder="Share your thoughts" required></textarea>
                                                     <input type="submit" name="createReply"
                                                            class="form-control btn btn-login"
                                                            value="Submit Reply" style="background-color: #00AA8D;
@@ -232,7 +236,6 @@
                                                                 Last
                                                                 Edited: ${reply.dateLastEdited}</p>
                                                             <%if (deletionRights) {%>
-                                                            <p style="display: inline-block"><i class="fa">&#xf044;</i>
                                                             <form action="<%=sitePath%>TextUpdate" method="post">
                                                                 <input type="radio" name="articleId"
                                                                        value="<%=articleId%>"
@@ -240,10 +243,11 @@
                                                                 <input type="radio" name="id" value="${reply.id}"
                                                                        checked
                                                                        hidden/>
-                                                                <input type="submit" name="deleteReply"
-                                                                       value="Delete Reply"/>
+                                                                <input type="submit" class="form-control btn btn-login" name="deleteReply" value="Delete Reply" style="background-color: #f5f5f5;
+                                                                                                                                                           border-color: #ddd;
+                                                                                                                                                           outline: none;
+                                                                                                                                                           text-transform: uppercase"/>
                                                             </form>
-                                                            </p>
                                                             <%}%>
                                                         </div>
                                                     </div>
@@ -256,7 +260,6 @@
                         </c:forEach>
                     </c:if>
                 </div>
-
             </div>
         </div>
     </div>
