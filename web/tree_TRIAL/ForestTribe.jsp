@@ -31,6 +31,7 @@
 
             var divID = "#infoContainerID" + idNumber;
 
+            $(divID).css("zIndex", 999);
             $(divID).show();
         }
 
@@ -41,6 +42,7 @@
             var divID = "#infoContainerID" + idNumber;
 
             $(divID).hide();
+            $(divID).css("zIndex", 1);
         }
     </script>
     <style>
