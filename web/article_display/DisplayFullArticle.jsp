@@ -57,8 +57,6 @@
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
             <div class="panel panel-login">
-
-
                 <div class="panel panel-default" style="border-color: #008975">
                     <div class="panel-heading" style="background-color: #008975">
                         <div class="row">
@@ -74,7 +72,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel-footer">
+                    <div class="panel-footer" style="padding-bottom: 0">
                         <div class="row">
                             <div class="col-lg-12">
                                 <p style="display: inline-block"><i class="fa">&#xf2bd;</i>
@@ -88,7 +86,14 @@
                                 <p style="display: inline-block"><i class="fa">&#xf044;</i>
                                     Edited: ${article.dateLastEdited}</p>
                                 <%if (deletionRights) {%>
-                                <div class="row">
+                                <div class="row" style="background-color: #f5f5f5">
+                                    <a class="form-control btn btn-login"
+                                       href="EditArticle.jsp?articleId=<%=articleId%>" style="background-color: #008975;
+                                                                                                                                                           border-color: #008975;
+                                                                                                                                                           margin-bottom: 1%;
+                                                                                                                                                           outline: none;
+                                                                                                                                                           color: white;
+                                                                                                                                                           text-transform: uppercase">Edit Article</a>
                                     <form action="<%=sitePath%>TextUpdate" method="post">
                                         <input type="radio" name="id" value="<%=articleId%>" checked hidden/>
                                         <input type="radio" name="articleId" value="<%=articleId%>" checked hidden/>
@@ -99,7 +104,6 @@
                                                                                                                                                            color: white;
                                                                                                                                                            text-transform: uppercase"/>
                                     </form>
-                                    <a href=""
                                 </div>
                                 <%}%>
                             </div>

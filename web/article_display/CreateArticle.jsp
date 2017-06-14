@@ -8,16 +8,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%--Article(int id, String author, String title, String text, String shortIntro, List<Comment> comments,  int likes, int view, String dateCreated, String dateLastEdited)
-
-protected int id;
-  protected String author;
-  protected String dateCreated;
-  protected String dateLastEdited;
-  protected int likes;
-  protected String text;
-  protected int views;--%>
-
 <%
     if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
     String username = (String) session.getAttribute("username");
@@ -28,7 +18,7 @@ protected int id;
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-    <title>Forest Tribes: Create an article</title>
+    <title>Forest Tribes: Create your article</title>
 
     <%--Importing all necessary libraries, frameworks etc.--%>
     <%@include file="../WEB-INF/Head_Scripts.jsp" %>
@@ -43,12 +33,6 @@ protected int id;
 <body>
 
 <%@ include file="../WEB-INF/Header_Navbar.jsp" %>
-
-<%--
-    final MySQL DB = new MySQL();
-    Article article = ArticleDAO.getArticleById(DB, Integer.parseInt(request.getParameter("article_id")));
-    request.setAttribute("article", article);
---%>
 
 <div class="container">
     <div class="row">
