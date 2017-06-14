@@ -26,7 +26,7 @@
 
     <script>
         function revealArticle(id) {
-            var search = id.search(/\d/)
+            var search = id.search(/\d/);
             var idNumber = id.substring(search);
 
             var introTextID = "#displayIntroTextID" + idNumber;
