@@ -9,7 +9,6 @@ import Utility.MiscellaneousUtility;
 import Utility.MySQL;
 import Utility.SecurityUtility;
 
-import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -17,9 +16,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class Serve_Registration extends HttpServlet {
@@ -43,6 +39,9 @@ public class Serve_Registration extends HttpServlet {
                 return;
             } else {
                 HttpSession session = request.getSession();
+
+
+                // Get registration Parameters:
                 String username = request.getParameter("registrationUsername");
                 String registrationFirstName = request.getParameter("registrationFirstName");
                 String registrationLastName = request.getParameter("registrationLastName");
@@ -50,66 +49,32 @@ public class Serve_Registration extends HttpServlet {
                 String password = request.getParameter("registrationPassword");
                 String confirmPassword = request.getParameter("registrationConfirmPassword");
 
-                //get path for creating files
-                ServletContext servletContext = getServletContext();
-                String UsersFolder = servletContext.getRealPath("/User");
-                File UsersFolderfile = new File(UsersFolder);
-                MiscellaneousUtility.DirCeation(UsersFolderfile);
-                String  UserfilePath = servletContext.getRealPath("/User/"+username);
-                File userFolder = new File(UserfilePath);
-                MiscellaneousUtility.DirCeation(userFolder);
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login_interface/Login.jsp");;
 
                 if(!password.equals(confirmPassword)){
                     request.setAttribute("messageRegistration", "Your password does not match with your confirmed password. Please try again.");
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login_interface/Login.jsp");
-                    dispatcher.forward(request, response);
-                }
+                } else if (UserDAO.getUserByUserName(DB, username) == null){
 
-                if (UserDAO.getUser(DB, username) == null){
+                    // Register user details
+                    ServletContext servletContext = getServletContext();
+                    String  imagePathway = servletContext.getRealPath("/images_material/Default/Userdefault.jpg");
+                    UserDAO.registerUserDetails(DB, servletContext, username, registrationFirstName, registrationLastName, registrationEmail, imagePathway);
 
+                    // Register user security details
                     byte[] salt = SecurityUtility.getNextSalt();
-
                     byte[] encodedPW = SecurityUtility.hash(password.toCharArray(), salt, ITERATIONS);
-
-                    //UserDAO.RegisterUser(DB, new User(username,salt,ITERATIONS,encodedPW));
-                    User newUser = new User(username, registrationFirstName, registrationLastName, registrationEmail, "/User/"+username+"/User_profile_picture.jpg", "/User/"+username);
                     UserSecurity newSecurity = new UserSecurity(username, salt, ITERATIONS, encodedPW);
-                    UserDAO.registerUser(DB, newUser);
                     UserSecurityDAO.insertUser(DB, newSecurity);
-
-                    //auto set-up user profile photo
-                    String  DefaultImagePathway = servletContext.getRealPath("/images_material/Default/Userdefault.jpg");
-                    File defaultImage = new File(DefaultImagePathway);
-                    BufferedImage sourceImage = ImageIO.read(defaultImage);
-
-                    try {
-                        // retrieve image
-                        File outputfile = new File(UserfilePath+"/User_profile_picture.jpg");
-                        ImageIO.write(sourceImage, "jpg", outputfile);
-                    } catch (IOException e) {
-                        System.out.println(e.getMessage());
-                    }
-
-                    //generate thumbnail images
-                    BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
-                    img.createGraphics().drawImage(ImageIO.read(new File(UserfilePath+"/User_profile_picture.jpg")).getScaledInstance(100, 100, Image.SCALE_SMOOTH),0,0,null);
-                    ImageIO.write(img, "jpg", new File(UserfilePath+"/User_profile_picture_thumb.jpg"));
-
-                    //create a row in profile with username
-                    UserDAO.createProfile(DB, username);
 
                     session.setAttribute("loggingStatus", true);
                     session.setAttribute("username", username);
-                    request.setAttribute("message", "Welcome logging!!");
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user_interface/Home.jsp");
+                    request.setAttribute("message", "Such wisdom, much intelligence. Welcome to the Forest!!");
+                    dispatcher = getServletContext().getRequestDispatcher("/user_interface/Home.jsp");
                     System.out.println("registered");
-                    dispatcher.forward(request, response);
-                }
-                else {
+                } else {
                     request.setAttribute("message", "The username you have registered already exists");
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login_interface/Login.jsp");
-                    dispatcher.forward(request, response);
                 }
+                dispatcher.forward(request, response);
             }
         } catch (IOException e) {
             e.printStackTrace();

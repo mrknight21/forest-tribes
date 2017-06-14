@@ -17,7 +17,7 @@
     String imagePath = sitePath + "User/" + username + "/User_profile_picture.jpg";
 
 //    MySQL DB = new MySQL();
-//    User user = UserDAO.getUser(DB, username);
+//    User user = UserDAO.getUserByUserName(DB, username);
 //    String imagePath = user.getProfileImagePath();
 
 %>

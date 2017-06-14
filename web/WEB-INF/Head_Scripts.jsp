@@ -591,4 +591,16 @@ Gr1p/hrAbP4bxXP+G8Vz/R3ShOUe1om0HdKE0B/YjYwf2o8WAAAAAAAAAAAf2o8AH9qPAR/YjUEe
 jwAf2o8HH9qPGB7WiiYe1YhFHteLqx7WiqQe1oliH9mNMB/ajwAf2o8AH9qPAAAAAAAAAAAA4A8A
 APAfAAD4PwAA+D8AAPgfAADgBwAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAgAEAAIABAACAAQAA
 wAMAAA==" rel="icon" type="image/x-icon" />
+
+<%--Google Logout--%>
+<script>
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            console.log('User signed out.');
+        });
+        window.open("<%=sitePath%>Serve_Logout", "_self");
+    }
+</script>
+
 <tags:Style_Header-Navbar/>

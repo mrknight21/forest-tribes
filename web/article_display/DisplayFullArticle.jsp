@@ -85,7 +85,7 @@
                                 <p style="display: inline-block"><i class="fa">&#xf0c0;</i>
                                     Views: ${article.views}</p>
                                 <a href="#" onclick="revealComments()" style="display: inline-block"><i class="fa">&#xf112;</i>
-                                    Replies: ${article.responseCount}</a>
+                                    Responses: ${article.responseCount}</a>
                                 <p style="display: inline-block"><i class="fa">&#xf044;</i>
                                     Edited: ${article.dateLastEdited}</p>
                                 <%if (deletionRights) {%>
@@ -190,6 +190,7 @@
                                         </div>
                                     </div>
                                 </div>
+
 
                                 <script>
                                     function revealReplies ${comment.id}() {

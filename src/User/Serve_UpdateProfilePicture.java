@@ -43,46 +43,10 @@ public class Serve_UpdateProfilePicture extends HttpServlet {
             return;
         }
 
-        HttpSession session1 = request.getSession();
-        String username = (String) session1.getAttribute("username");
-        User user = UserDAO.getUser(DB, username);
+        String username = (String) request.getSession().getAttribute("username");
+        User user = UserDAO.getUserByUserName(DB, username);
 
-        String DefaultImagePathway = getServletContext().getRealPath(newProfileImagePath);
-        String pathToUserFolder = getServletContext().getRealPath(user.getUserFolderPath());
-
-        // Ensure user folders exist
-        MiscellaneousUtility.DirCeation(new File(pathToUserFolder));
-
-
-        File profileImage = new File(DefaultImagePathway);
-        BufferedImage sourceImage = ImageIO.read(profileImage);
-
-
-        //getting extention of the new image file
-        String extension = "";
-        int i = DefaultImagePathway.lastIndexOf('.');
-        int p = Math.max(DefaultImagePathway.lastIndexOf('/'), DefaultImagePathway.lastIndexOf('\\'));
-        if (i > p) {
-            extension = DefaultImagePathway.substring(i + 1);
-        }
-
-
-        String newImageFilePath = "";
-        try {
-            // retrieve image
-            File outputfile = new File(pathToUserFolder + "/User_profile_picture." + extension);
-            ImageIO.write(sourceImage, extension, outputfile);
-            newImageFilePath = user.getUserFolderPath() + "/User_profile_picture." + extension;
-            UserDAO.updateProfileImagePath(DB, newImageFilePath, username);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-
-
-        //generate thumbnail for new profile picture image//
-        BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
-        img.createGraphics().drawImage(ImageIO.read(new File(pathToUserFolder + "/User_profile_picture." + extension)).getScaledInstance(100, 100, Image.SCALE_SMOOTH), 0, 0, null);
-        ImageIO.write(img, "jpg", new File(pathToUserFolder + "/User_profile_picture_thumb.jpg"));
+        updateDP(getServletContext().getRealPath(newProfileImagePath), username, user);
 
         response.sendRedirect("user_interface/ProfilePictureUpdate.jsp");
 
@@ -91,14 +55,13 @@ public class Serve_UpdateProfilePicture extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 
-        HttpSession session1 = request.getSession();
-        String username = (String) session1.getAttribute("username");
-        User user = UserDAO.getUser(DB, username);
+        String username = (String) request.getSession().getAttribute("username");
+        User user = UserDAO.getUserByUserName(DB, username);
 
         String pathToUserFolder = getServletContext().getRealPath(user.getUserFolderPath());
 
         // Ensure user folder exists
-        MiscellaneousUtility.DirCeation(new File(pathToUserFolder));
+        MiscellaneousUtility.createUserDir(getServletContext(),username);
 
         Boolean isMultipart = ServletFileUpload.isMultipartContent(request);
         try {
@@ -134,35 +97,9 @@ public class Serve_UpdateProfilePicture extends HttpServlet {
 
                     String fileName = fi.getName();
                     long sizeInBytes = fi.getSize();
+                    if (createDP(request, response, username, user, pathToUserFolder, fi, fileName)) return;
 
 
-
-                    //getting extention of the new image file
-                    String extension = "";
-                    int a = fileName.lastIndexOf('.');
-                    int p = Math.max(fileName.lastIndexOf('/'), fileName.lastIndexOf('\\'));
-                    if (a > p) {
-                        extension = fileName.substring(a + 1);
-                    }
-                    String newImageFilePath = user.getUserFolderPath() + "/User_profile_picture." + extension;
-                    UserDAO.updateProfileImagePath(DB, newImageFilePath, username);
-
-
-                    // Write the file
-                    File outputfile = new File(pathToUserFolder + "/User_profile_picture." + extension);
-                    try {
-                        fi.write(outputfile);
-
-                        //create thumnnail
-                        BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
-                        img.createGraphics().drawImage(ImageIO.read(new File(pathToUserFolder + "/User_profile_picture." + extension)).getScaledInstance(100, 100, Image.SCALE_SMOOTH), 0, 0, null);
-                        ImageIO.write(img, "jpg", new File(pathToUserFolder + "/User_profile_picture_thumb.jpg"));
-                    } catch (Exception e) {
-                        request.setAttribute("message", "No file uploaded or invalid file format. Please try again.");
-                        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user_interface/ProfilePictureUpdate.jsp");
-                        dispatcher.forward(request, response);
-                        return;
-                    }
                     response.sendRedirect("user_interface/ProfilePictureUpdate.jsp");
                 }
             }
@@ -170,6 +107,67 @@ public class Serve_UpdateProfilePicture extends HttpServlet {
             e.printStackTrace();
         } catch (FileUploadException e) {
             e.printStackTrace();
+        }
+    }
+
+    private boolean createDP(HttpServletRequest request, HttpServletResponse response, String username, User user, String pathToUserFolder, FileItem fi, String fileName) throws ServletException, IOException {
+        //getting extention of the new image file
+        String extension = "";
+        int a = fileName.lastIndexOf('.');
+        int p = Math.max(fileName.lastIndexOf('/'), fileName.lastIndexOf('\\'));
+        if (a > p) {
+            extension = fileName.substring(a + 1);
+        }
+        String newImageFilePath = user.getUserFolderPath() + "/User_profile_picture." + extension;
+        UserDAO.updateProfileImagePath(DB, newImageFilePath, username);
+
+
+        // Write the file
+        File outputfile = new File(pathToUserFolder + "/User_profile_picture." + extension);
+        try {
+            fi.write(outputfile);
+
+            //create thumnnail
+            BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+            img.createGraphics().drawImage(ImageIO.read(new File(pathToUserFolder + "/User_profile_picture." + extension)).getScaledInstance(100, 100, Image.SCALE_SMOOTH), 0, 0, null);
+            ImageIO.write(img, "jpg", new File(pathToUserFolder + "/User_profile_picture_thumb.jpg"));
+        } catch (Exception e) {
+            request.setAttribute("message", "No file uploaded or invalid file format. Please try again.");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user_interface/ProfilePictureUpdate.jsp");
+            dispatcher.forward(request, response);
+            return true;
+        }
+        return false;
+    }
+
+    private void updateDP(String newImagePath, String username, User user) throws IOException {
+        // Get image extension
+        String extension = "";
+        int i = newImagePath.lastIndexOf('.');
+        int p = Math.max(newImagePath.lastIndexOf('/'), newImagePath.lastIndexOf('\\'));
+        if (i > p) {
+            extension = newImagePath.substring(i + 1);
+        }
+
+        // Ensure user folders exist
+        String userDirPath = getServletContext().getRealPath("/User/" + username);
+        MiscellaneousUtility.DirCeation(new File(userDirPath));
+
+        BufferedImage sourceImage = ImageIO.read(new File(newImagePath));
+
+        String newImageFilePath = "";
+        try {
+            // retrieve image
+            ImageIO.write(sourceImage, extension, new File(userDirPath + "/User_profile_picture." + extension));
+            newImageFilePath = user.getUserFolderPath() + "/User_profile_picture." + extension;
+            UserDAO.updateProfileImagePath(DB, newImageFilePath, username);
+
+            //generate thumbnail for new profile picture image//
+            BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+            img.createGraphics().drawImage(ImageIO.read(new File(userDirPath + "/User_profile_picture." + extension)).getScaledInstance(100, 100, Image.SCALE_SMOOTH), 0, 0, null);
+            ImageIO.write(img, "jpg", new File(userDirPath + "/User_profile_picture_thumb.jpg"));
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

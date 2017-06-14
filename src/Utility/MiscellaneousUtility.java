@@ -2,6 +2,7 @@ package Utility;
 
 import org.jsoup.Jsoup;
 
+import javax.servlet.ServletContext;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -34,6 +35,12 @@ public class MiscellaneousUtility {
         return image;
     }
 
+    public static String createUserDir(ServletContext servletContext, String username) {
+        String userDirPath = servletContext.getRealPath("/User/"+username);
+        MiscellaneousUtility.DirCeation(new File(userDirPath));
+        return userDirPath;
+    }
+
     public static boolean DirCeation (File theDir){
         if (!theDir.exists()) {
             System.out.println("creating directory: " + theDir.getName());
@@ -50,14 +57,9 @@ public class MiscellaneousUtility {
         return false;
     }
 
-
-
-
     public static String htmlToStringParser (String html) {
         return Jsoup.parse(html).text();
     }
-
-
 
     static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     static SecureRandom rnd = new SecureRandom();

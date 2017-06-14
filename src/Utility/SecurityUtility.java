@@ -14,7 +14,6 @@ import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
 import java.util.Base64;
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -239,7 +238,7 @@ public class SecurityUtility {
         char[] passwordArray = password.toCharArray();
 
         // Get the user relating to the parsed-in username from the database.
-        UserSecurity user = UserSecurityDAO.getUser(DB, username);
+        UserSecurity user = UserSecurityDAO.getUserByUsername(DB, username);
         
         // Get the salt byte array assigned to the user.
         byte[] salt = user.getSalt();
