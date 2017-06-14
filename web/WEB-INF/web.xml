@@ -113,4 +113,37 @@
 
 
 
+
+    <servlet>
+        <servlet-name>Serve_TreeURL</servlet-name>
+        <servlet-class>Tree.Serve_TreeURL</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Serve_TreeURL</servlet-name>
+        <url-pattern>/Serve_TreeURL</url-pattern>
+    </servlet-mapping>
+
+
+
+    <servlet>
+        <servlet-name>Serve_TreeReaction</servlet-name>
+        <servlet-class>Tree.Serve_TreeReaction</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Serve_TreeReaction</servlet-name>
+        <url-pattern>/Serve_TreeReaction</url-pattern>
+    </servlet-mapping>
+
+
+
+    <servlet>
+        <servlet-name>Serve_DeleteTreeComponents</servlet-name>
+        <servlet-class>Tree.Serve_DeleteTreeComponents</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Serve_DeleteTreeComponents</servlet-name>
+        <url-pattern>/Serve_DeleteTreeComponents</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>

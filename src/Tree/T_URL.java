@@ -30,11 +30,12 @@ public class T_URL extends Reply implements TreeComponents {
 
 
     //update
-    public T_URL(int id,String title, String introText, String URL, boolean supportForArgument ){
+    public T_URL(int id,String title, String introText, String URL, boolean supportForArgument, boolean isfactual ){
         super(id, introText);
         this.title = title;
         this.URL = URL;
         this.supportForArgument = supportForArgument;
+        this.isfactual = isfactual;
     }
 
     //retrieving data
@@ -51,7 +52,7 @@ public class T_URL extends Reply implements TreeComponents {
     public void setIsfactual(boolean isfactual){this.isfactual = isfactual;}
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public void setTitle(String title) {

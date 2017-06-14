@@ -1,12 +1,10 @@
-<%--todo connect TPA login with servlet login & registration--%>
-
 <%@ page import="Utility.SecurityUtility" %>
 <!DOCTYPE html>
 <html lang="en" class="full">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-    <title>Login</title>
+    <title>Forest Tribes: Login</title>
 
     <%--Importing all necessary libraries, frameworks etc.--%>
     <%@include file="../WEB-INF/Head_Scripts.jsp" %>

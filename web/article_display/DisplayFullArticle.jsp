@@ -13,12 +13,30 @@
     String username = (String) session.getAttribute("username");
 %>
 
+<%
+    final MySQL DB = new MySQL();
+    int articleId = Integer.parseInt(request.getParameter("articleId"));
+    Article article = ArticleDAO.getArticleById(DB, articleId);
+
+    Boolean deletionRights = false;
+    Boolean editRights = false;
+    if (article.getAuthor().equals(username))
+        deletionRights = true;
+
+    if (!article.getAuthor().equals(username)) {
+        response.sendRedirect("../article_display/DisplayAllArticles.jsp");
+    }
+
+//    Add script to increase Article views by one one each load.
+    request.setAttribute("article", article);
+%>
+
 <!DOCTYPE html>
 <html lang="en" class="full">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-    <title>Display Full Article</title>
+    <title>Forest Tribes: ${article.title}</title>
 
     <%--Importing all necessary libraries, frameworks etc.--%>
     <%@include file="../WEB-INF/Head_Scripts.jsp" %>
@@ -37,20 +55,6 @@
 
 <%@ include file="../WEB-INF/Header_Navbar.jsp" %>
 
-<%
-    final MySQL DB = new MySQL();
-    int articleId = Integer.parseInt(request.getParameter("articleId"));
-    Article article = ArticleDAO.getArticleById(DB, articleId);
-
-    Boolean deletionRights = false;
-    Boolean editRights = false;
-    if (article.getAuthor().equals(username))
-        deletionRights = true;
-
-
-//    Add script to increase Article views by one one each load.
-    request.setAttribute("article", article);
-%>
 
 <div class="container">
     <div class="row">
@@ -71,7 +75,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel-footer">
+                    <div class="panel-footer" style="padding-bottom: 0">
                         <div class="row">
                             <div class="col-lg-12">
                                 <p style="display: inline-block"><i class="fa">&#xf2bd;</i>
@@ -85,13 +89,25 @@
                                 <p style="display: inline-block"><i class="fa">&#xf044;</i>
                                     Edited: ${article.dateLastEdited}</p>
                                 <%if (deletionRights) {%>
-                                <p style="display: inline-block"><i class="fa">&#xf044;</i>
-                                <form action="<%=sitePath%>TextUpdate" method="post">
-                                    <input type="radio" name="id" value="<%=articleId%>" checked hidden/>
-                                    <input type="radio" name="articleId" value="<%=articleId%>" checked hidden/>
-                                    <input type="submit" name="deleteArticle" value="Delete Article"/>
-                                </form>
-                                </p>
+                                <div class="row" style="background-color: #f5f5f5">
+                                    <a class="form-control btn btn-login"
+                                       href="EditArticle.jsp?articleId=<%=articleId%>" style="background-color: #008975;
+                                                                                                                                                           border-color: #008975;
+                                                                                                                                                           margin-bottom: 1%;
+                                                                                                                                                           outline: none;
+                                                                                                                                                           color: white;
+                                                                                                                                                           text-transform: uppercase">Edit Article</a>
+                                    <form action="<%=sitePath%>TextUpdate" method="post">
+                                        <input type="radio" name="id" value="<%=articleId%>" checked hidden/>
+                                        <input type="radio" name="articleId" value="<%=articleId%>" checked hidden/>
+                                        <input type="submit" class="form-control btn btn-login" name="deleteArticle"
+                                               value="Delete Article" style="background-color: #008975;
+                                                                                                                                                           border-color: #008975;
+                                                                                                                                                           outline: none;
+                                                                                                                                                           color: white;
+                                                                                                                                                           text-transform: uppercase"/>
+                                    </form>
+                                </div>
                                 <%}%>
                             </div>
                         </div>
@@ -110,7 +126,7 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <textarea style="width: inherit" rows="3" cols="100" name="text"
-                                              placeholder="Share your thoughts"></textarea>
+                                              placeholder="Share your thoughts" required></textarea>
                                     <input type="submit" name="createComment"
                                            class="form-control btn btn-login"
                                            value="Submit Comment" style="background-color: #008975;
@@ -142,7 +158,7 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <p id="comment-${comment.id}">${comment.text}</p>
+                                            <p>${comment.text}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -156,18 +172,20 @@
                                             <a href="#" onclick="revealReplies${comment.id}()"
                                                style="display: inline-block"><i class="fa">&#xf112;</i>
                                                 Replies: ${comment.replyCount}</a>
-                                            <a href="#" onclick="editComment${comment.id}()"
-                                               style="display: inline-block"><i class="fa">&#xf044;</i>
-                                                Edited: ${comment.dateLastEdited}</a>
-                                            <%if (deletionRights) {%>
                                             <p style="display: inline-block"><i class="fa">&#xf044;</i>
+                                                Edited: ${comment.dateLastEdited}</p>
+                                            <%if (deletionRights) {%>
                                             <form action="<%=sitePath%>TextUpdate" method="post">
                                                 <input type="radio" name="articleId" value="<%=articleId%>" checked
                                                        hidden/>
                                                 <input type="radio" name="id" value="${comment.id}" checked hidden/>
-                                                <input type="submit" name="deleteComment" value="Delete Comment"/>
+                                                <input type="submit" class="form-control btn btn-login"
+                                                       name="deleteComment" value="Delete Comment" style="background-color: #00AA8D;
+                                                                                                                                                           border-color: #00AA8D;
+                                                                                                                                                           outline: none;
+                                                                                                                                                           color: white;
+                                                                                                                                                           text-transform: uppercase"/>
                                             </form>
-                                            </p>
                                             <%}%>
                                         </div>
                                     </div>
@@ -175,30 +193,6 @@
 
 
                                 <script>
-                                    /*var comment${comment.id} = $("#comment-${comment.id}");
-                                    var comment${comment.id}text = comment.children();
-
-                                    var editComment${comment.id} = $("<form action='<%=sitePath%>TextUpdate' method='post'><input type='radio' name='parentId' value='<%=articleId%>' checked hidden/><input type='radio' name='articleId' value='<%=articleId%>' checked hidden/><textarea style='display: inline-block' rows='3' cols='100' name='text' value='${comment.text}'></textarea><input style='display: inline-block' type='submit' name='updateComment' class='btn-primary' value='Submit Ammendment'/></form>");
-
-                                    function editComment ${comment.id}() {
-                                        comment${comment.id}.replaceWith("<div id='click'></div>");
-                                    }
-
-                                    var additional = $("div#additional");
-
-                                    additional.replaceWith("<div id='click'></div>");
-
-
-                                    var clickable = $("#click").append("<p>Click here to read more...</p>");
-
-
-                                    $("#click > p").css("text-align", "center");
-
-                                    clickable.click(function () {
-                                        clickable.replaceWith(additional);
-                                    })*/
-
-
                                     function revealReplies ${comment.id}() {
                                         $("#replyDivID${comment.id}").toggle();
                                     }
@@ -217,7 +211,7 @@
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <textarea style="width: inherit" rows="3" cols="100" name="text"
-                                                              placeholder="Share your thoughts"></textarea>
+                                                              placeholder="Share your thoughts" required></textarea>
                                                     <input type="submit" name="createReply"
                                                            class="form-control btn btn-login"
                                                            value="Submit Reply" style="background-color: #00AA8D;
@@ -234,7 +228,8 @@
 
                                     <c:if test="${comment.replyCount != 0 }">
                                         <c:forEach var="reply" items="${comment.replies}">
-                                            <div class="panel panel-default" style="margin-left: 4%; margin-right: 2%; border-color: #00BF9A">
+                                            <div class="panel panel-default"
+                                                 style="margin-left: 4%; margin-right: 2%; border-color: #00BF9A">
                                                 <div class="panel-heading">
                                                     <div class="row">
                                                         <div class="col-lg-12">
@@ -246,15 +241,17 @@
                                                                                  border-color: #00BF9A">
                                                     <div class="row">
                                                         <div class="col-lg-12">
-                                                            <p style="display: inline-block; color: white"><i class="fa">&#xf2bd;</i>
+                                                            <p style="display: inline-block; color: white"><i
+                                                                    class="fa">&#xf2bd;</i>
                                                                 User: ${reply.author}</p>
-                                                            <p style="display: inline-block; color: white"><i class="fa">&#xf087;</i>
+                                                            <p style="display: inline-block; color: white"><i
+                                                                    class="fa">&#xf087;</i>
                                                                 Likes: ${reply.likes}</p>
-                                                            <p style="display: inline-block; color: white"><i class="fa">&#xf044;</i>
+                                                            <p style="display: inline-block; color: white"><i
+                                                                    class="fa">&#xf044;</i>
                                                                 Last
                                                                 Edited: ${reply.dateLastEdited}</p>
                                                             <%if (deletionRights) {%>
-                                                            <p style="display: inline-block"><i class="fa">&#xf044;</i>
                                                             <form action="<%=sitePath%>TextUpdate" method="post">
                                                                 <input type="radio" name="articleId"
                                                                        value="<%=articleId%>"
@@ -262,10 +259,12 @@
                                                                 <input type="radio" name="id" value="${reply.id}"
                                                                        checked
                                                                        hidden/>
-                                                                <input type="submit" name="deleteReply"
-                                                                       value="Delete Reply"/>
+                                                                <input type="submit" class="form-control btn btn-login"
+                                                                       name="deleteReply" value="Delete Reply" style="background-color: #f5f5f5;
+                                                                                                                                                           border-color: #ddd;
+                                                                                                                                                           outline: none;
+                                                                                                                                                           text-transform: uppercase"/>
                                                             </form>
-                                                            </p>
                                                             <%}%>
                                                         </div>
                                                     </div>
@@ -278,7 +277,6 @@
                         </c:forEach>
                     </c:if>
                 </div>
-
             </div>
         </div>
     </div>

@@ -74,6 +74,20 @@
                 <ul>
                     <c:forEach var="URLS" items="${fact_for}">
                         <a href="${URLS.URL}"><li>${URLS.title}</li></a>
+                        <form class="URL_editor" action="/tree_TRIAL/URL_editor.jsp" method="get">
+                            <input type="hidden" value="${URLS.id}" name="id">
+                            <input type="hidden" value="factual" name="type">
+                            <input type="hidden" value="${tree.id}" name="TreeID">
+                            <input type="hidden" value="for" name="support">
+                            <input type="submit" value="Update" name="request">
+                        </form>
+                        <form class="URL_deleter" action="/Serve_DeleteTreeComponents" method="get">
+                            <input type="hidden" value="${URLS.id}" name="id">
+                            <input type="hidden" value="1" name="deletetype">
+                            <input type="hidden" value="${tree.id}" name="TreeID">
+                            <input type="hidden" value="factual" name="type">
+                            <input type="submit" value="Delete">
+                        </form>
                     </c:forEach>
                 </ul>
             </td>
@@ -81,6 +95,20 @@
                 <ul>
                     <c:forEach var="URLS" items="${fact_against}">
                         <a href="${URLS.URL}"><li>${URLS.title}</li></a>
+                        <form class="URL_editor" action="/tree_TRIAL/URL_editor.jsp" method="get">
+                            <input type="hidden" value="${URLS.id}" name="id">
+                            <input type="hidden" value="factual" name="type">
+                            <input type="hidden" value="${tree.id}" name="TreeID">
+                            <input type="hidden" value="against" name="support">
+                            <input type="submit" value="Update" name="request">
+                        </form>
+                        <form class="URL_deleter" action="/Serve_DeleteTreeComponents" method="get">
+                            <input type="hidden" value="${URLS.id}" name="id">
+                            <input type="hidden" value="1" name="deletetype">
+                            <input type="hidden" value="${tree.id}" name="TreeID">
+                            <input type="hidden" value="factual" name="type">
+                            <input type="submit" value="Delete">
+                        </form>
                     </c:forEach>
                 </ul>
             </td>
@@ -91,6 +119,11 @@
 <p></p>
 <p></p>
 <p></p>
+<form class="URL_Adder" action="/tree_TRIAL/URL_editor.jsp" method="get">
+    <input type="hidden" value="${tree.id}" name="TreeID">
+    <input type="hidden" value="factual" name="type">
+    <input type="submit" value="Add" name="request">
+</form>
 <h1>Commentary</h1>
 <div id="CommentaryURLS">
     <table>
@@ -104,6 +137,20 @@
                 <ul>
                     <c:forEach var="URLS" items="${commentary_for}">
                         <a href="${URLS.URL}"><li>${URLS.title}</li></a>
+                        <form class="URL_editor" action="/tree_TRIAL/URL_editor.jsp" method="get">
+                            <input type="hidden" value="${URLS.id}" name="id">
+                            <input type="hidden" value="commentary" name="type">
+                            <input type="hidden" value="for" name="support">
+                            <input type="hidden" value="${tree.id}" name="TreeID">
+                            <input type="submit" value="Update" name="request">
+                        </form>
+                        <form class="URL_deleter" action="/Serve_DeleteTreeComponents" method="get">
+                            <input type="hidden" value="${URLS.id}" name="id">
+                            <input type="hidden" value="2" name="deletetype">
+                            <input type="hidden" value="${tree.id}" name="TreeID">
+                            <input type="hidden" value="commentary" name="type">
+                            <input type="submit" value="Delete">
+                        </form>
                     </c:forEach>
                 </ul>
             </td>
@@ -111,11 +158,30 @@
                 <ul>
                     <c:forEach var="URLS" items="${commentary_against}">
                         <a href="${URLS.URL}"><li>${URLS.title}</li></a>
+                        <form class="URL_editor" action="/tree_TRIAL/URL_editor.jsp" method="get">
+                            <input type="hidden" value="${URLS.id}" name="id">
+                            <input type="hidden" value="commentary" name="type">
+                            <input type="hidden" value="against" name="support">
+                            <input type="hidden" value="${tree.id}" name="TreeID">
+                            <input type="submit" value="Update" name="request">
+                        </form>
+                        <form class="URL_deleter" action="/Serve_DeleteTreeComponents" method="get">
+                            <input type="hidden" value="${URLS.id}" name="id">
+                            <input type="hidden" value="2" name="deletetype">
+                            <input type="hidden" value="${tree.id}" name="TreeID">
+                            <input type="hidden" value="commentary" name="type">
+                            <input type="submit" value="Delete">
+                        </form>
                     </c:forEach>
                 </ul>
             </td>
         </tr>
     </table>
+    <form class="URL_Adder" action="/tree_TRIAL/URL_editor.jsp" method="get">
+        <input type="hidden" value="${tree.id}" name="TreeID">
+        <input type="hidden" value="commentary" name="type">
+        <input type="submit" value="Add" name="request">
+    </form>
 </div>
 <h1>Reactions</h1>
 <div id="Reactions">
@@ -130,18 +196,46 @@
                 <ul>
                     <c:forEach var="reaction" items="${reaction_for}">
                         <<li>${reaction.text}</li>
+                        <form class="reaction_editor" action="/tree_TRIAL/Reaction_editor.jsp" method="get">
+                            <input type="hidden" value="${reaction.id}" name="id">
+                            <input type="hidden" value="${tree.id}" name="TreeID">
+                            <input type="hidden" value="for" name="support">
+                            <input type="submit" value="Update" name="request">
+                        </form>
+                        <form class="reaction_deleter" action="/Serve_DeleteTreeComponents" method="get">
+                            <input type="hidden" value="${reaction.id}" name="id">
+                            <input type="hidden" value="3" name="deletetype">
+                            <input type="hidden" value="${tree.id}" name="TreeID">
+                            <input type="submit" value="Delete">
+                        </form>
                     </c:forEach>
                 </ul>
             </td>
             <td>
                 <ul>
                     <c:forEach var="reaction" items="${reaction_against}">
-                        <<li>${reaction.text}</li>
+                        <li>${reaction.text}</li>
+                        <form class="reaction_editor" action="/tree_TRIAL/Reaction_editor.jsp" method="get">
+                            <input type="hidden" value="${reaction.id}" name="id">
+                            <input type="hidden" value="${tree.id}" name="TreeID">
+                            <input type="hidden" value="against" name="support">
+                            <input type="submit" value="Update" name="request">
+                        </form>
+                        <form class="reaction_deleter" action="/Serve_DeleteTreeComponents" method="get">
+                            <input type="hidden" value="${reaction.id}" name="id">
+                            <input type="hidden" value="3" name="deletetype">
+                            <input type="hidden" value="${tree.id}" name="TreeID">
+                            <input type="submit" value="Delete">
+                        </form>
                     </c:forEach>
                 </ul>
             </td>
         </tr>
     </table>
+    <form class="Reaction_Adder" action="/tree_TRIAL/Reaction_editor.jsp" method="get">
+        <input type="hidden" value="${tree.id}" name="TreeID">
+        <input type="submit" value="Add new reaction" name="request">
+    </form>
 </div>
 
 

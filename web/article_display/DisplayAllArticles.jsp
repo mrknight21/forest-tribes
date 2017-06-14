@@ -19,23 +19,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-    <title>Display all Articles</title>
+    <title>Forest Tribes: All articles</title>
 
     <%--Importing all necessary libraries, frameworks etc.--%>
     <%@include file="../WEB-INF/Head_Scripts.jsp" %>
 
     <script>
         function revealArticle(id) {
-           var idLength = id.length;
-           var idNumber = id.substring(idLength - 1);
+            var search = id.search(/\d/);
+            var idNumber = id.substring(search);
 
-           var introTextID = "#displayIntroTextID" + idNumber;
-           var fullTextID = "#displayFullTextID" + idNumber;
-           var linkID = "#displayArticleLinkID" + idNumber;
+            var introTextID = "#displayIntroTextID" + idNumber;
+            var fullTextID = "#displayFullTextID" + idNumber;
+            var linkID = "#displayArticleLinkID" + idNumber;
 
-           $(fullTextID).delay(100).fadeIn(100);
-           $(introTextID).fadeOut(100);
-           $(linkID).hide();
+            $(fullTextID).delay(100).fadeIn(100);
+            $(introTextID).fadeOut(100);
+            $(linkID).hide();
         }
     </script>
 
@@ -72,21 +72,14 @@
                             <div class="col-lg-12">
                                 <div class="panel panel-default" id="displayArticlePanelID">
                                     <div class="panel-heading">
-                                        <%--<form action="DisplayFullArticle.jsp">--%>
-                                            <%--<label for="fullarticle-${article.id}">--%>
-                                                <a href="DisplayFullArticle.jsp?articleId=${article.id}"><h4>${article.title}</h4></a>
-                                            <%--</label>--%>
-                                            <%--<input type="text" value="${article.id}" name="article_id" readonly hidden/>--%>
-                                            <%--<input type="submit"--%>
-                                                   <%--id="fullarticle-${article.id}"--%>
-                                                   <%--hidden--%>
-                                            <%--/>--%>
-                                        <%--</form>--%>
+                                        <a href="DisplayFullArticle.jsp?articleId=${article.id}">
+                                            <h4>${article.title}</h4></a>
                                     </div>
-                                    <div class="panel-body">
+                                    <div class="panel-body" id="displayArticlePanelBodyID">
                                         <p id="displayIntroTextID${article.id}"><em>${article.shortIntro}</em></p>
-                                        <p id="displayFullTextID${article.id}" style="display: none">${article.text}</p>
-                                        <a id="displayArticleLinkID${article.id}" href="#" onclick="revealArticle(this.id)">Reveal full article</a>
+                                        <div id="displayFullTextID${article.id}" style="display: none">${article.text}</div>
+                                        <a id="displayArticleLinkID${article.id}" href="#"
+                                           onclick="revealArticle(this.id)">Reveal full article</a>
                                     </div>
                                     <div class="panel-footer">
                                         <p style="display: inline-block"><i class="fa">&#xf2bd;</i>

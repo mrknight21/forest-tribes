@@ -1,23 +1,22 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: mche618
-  Date: 31/05/2017
-  Time: 9:45 PM
-  To change this template use File | Settings | File Templates.
---%>
-
 <%@ page import="User.UserSecurity" %>
 <%@ page import="Utility.SecurityUtility" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%  if(!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
     String username = (String) session.getAttribute("username");
 %>
 
-<html>
+<!DOCTYPE html>
+<html lang="en" class="full">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-    <title>Home</title>
+    <title>Forest Tribes: Home</title>
+
+    <%--Importing all necessary libraries, frameworks etc.--%>
     <%@include file="../WEB-INF/Head_Scripts.jsp"%>
+
 </head>
 <body>
 <%@ include file="../WEB-INF/Header_Navbar.jsp" %>
@@ -27,7 +26,7 @@
 <a href="<%=sitePath%>user_interface/changePassword.jsp"><button>Change Password</button></a>
 <a href="<%=sitePath%>Serve_Logout"><button>Log Out</button></a>
 
-<iframe name="iframe_a" src="<%=sitePath%>tree_TRIAL/ForestTribe.jsp"frameborder=0 height="900px" width="1200px" scrolling="auto">
+<iframe name="iframe_a" src="<%=sitePath%>tree_TRIAL/ForestTribe.jsp" frameborder=0 width="100%" height="900px" scrolling="auto">
     <p>Your browser does not support iframes.</p>
 </iframe>
 

@@ -18,7 +18,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-    <title>Forest Tribes: Create your article</title>
+    <title>Forest Tribes: Edit your article</title>
 
     <%--Importing all necessary libraries, frameworks etc.--%>
     <%@include file="../WEB-INF/Head_Scripts.jsp" %>
@@ -34,12 +34,23 @@
 
 <%@ include file="../WEB-INF/Header_Navbar.jsp" %>
 
+<%
+    final MySQL DB = new MySQL();
+    int articleId = Integer.parseInt(request.getParameter("articleId"));
+    Article article = ArticleDAO.getArticleById(DB, articleId);
+
+
+//    Add script to increase Article views by one one each load.
+    request.setAttribute("article", article);
+%>
+
+
 <div class="container">
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
             <div class="panel panel-login">
                 <fieldset>
-                    <legend>Create your article:</legend>
+                    <legend>Edit your article:</legend>
                 </fieldset>
                 <form id="articleFormID" action="<%= sitePath%>TextUpdate" method="post">
                     <div class="panel panel-default">
@@ -55,7 +66,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <input class="form-control" id="articleTitleInputID" name="title"
-                                               type="text" value="" placeholder="Enter your article title here" required>
+                                               type="text" value="${article.title}" placeholder="Enter your article title here" required>
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +85,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <input class="form-control" id="articleTitleSummaryID" name="summary"
-                                               type="text" value="" placeholder="Enter your article summary here" required>
+                                               type="text" value="${article.shortIntro}" placeholder="Enter your article summary here" required>
                                     </div>
                                 </div>
                             </div>
@@ -93,7 +104,7 @@
                                 <div class="col-lg-12">
                                     <div class="row form-group">
                                         <input id="articleContentInputID" name="text" type="hidden">
-                                        <div id="editor-container" style="height:375px"></div>
+                                        <div id="editor-container" style="height:375px">${article.text}</div>
                                     </div>
                                 </div>
                             </div>
@@ -101,7 +112,7 @@
                         <div class="panel-footer">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <input type="submit" class="form-control btn btn-login" name="createArticle" value="Publish your article">
+                                    <input type="submit" class="form-control btn btn-login" name="updateArticle" value="Update your article">
                                 </div>
                             </div>
                         </div>
@@ -126,6 +137,16 @@
         theme: 'snow'
     });
 
+    $(document).ready(function(){
+       $("#articleContentInputID").val("${article.text}");
+    });
+
+    <%--$(document).ready(function(){--%>
+       <%--var articleContent = ${article.text};--%>
+
+       <%--quill.setContents(articleContent);--%>
+    <%--});--%>
+
     quill.on("text-change", function(delta, oldDelta, source){
 
         var content = $("#articleContentInputID");
@@ -137,40 +158,3 @@
 
 </body>
 </html>
-
-<%--<form action="<%=sitePath%>TextUpdate" method="post">--%>
-
-<%--<div class="panel-heading">--%>
-<%--<div class="row">--%>
-<%--<div class="col-lg-12">--%>
-<%--<h4>--%>
-<%--<textarea rows="2" cols="75" name="title"></textarea>--%>
-<%--</h4>--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--</div>--%>
-
-
-<%--<div class="panel-body" id="content">--%>
-<%--<div class="row">--%>
-<%--<div class="col-lg-12">--%>
-<%--<div id="editor-container" style="height: 375px">--%>
-<%--<p>Hello World!</p>--%>
-<%--<p>Some initial <strong>bold</strong> text</p>--%>
-<%--<p><br></p>--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--</div>--%>
-
-<%--<div class="panel-footer">--%>
-<%--<div class="row">--%>
-<%--<div class="col-lg-12">--%>
-<%--<p style="display: inline-block"><i class="fa">&#xf112;</i>--%>
-<%--<input type="submit" name="createArticle" value="Publish Article"/>--%>
-<%--</p>--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--</div>--%>
-
-<%--</form>--%>

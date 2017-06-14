@@ -152,8 +152,8 @@ public class ArticleServlet extends HttpServlet {
                 new Article(
                         getUsername(request),
                         request.getParameter("title"),
-                        request.getParameter("text")));
-
+                        request.getParameter("text"),
+                        request.getParameter("summary")));
         return true;
     }
 
@@ -185,7 +185,8 @@ public class ArticleServlet extends HttpServlet {
                     DB,
                     new Article(request.getParameter("id"),
                             request.getParameter("title"),
-                            request.getParameter("text")));
+                            request.getParameter("text"),
+                            request.getParameter("summary")));
         return true;
     }
 
