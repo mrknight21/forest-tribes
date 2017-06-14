@@ -105,7 +105,7 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="row form-group">
-                                        <input id="articleContentInputID" name="text" type="hidden" value="${article.text}">
+                                        <input id="articleContentInputID" name="text" type="hidden" value="">
                                         <div id="editor-container" style="height:375px">${article.text}</div>
                                     </div>
                                 </div>
@@ -114,7 +114,7 @@
                         <div class="panel-footer">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <input type="submit" class="form-control btn btn-login" name="updateArticle" value="Update your article">
+                                    <input type="submit" class="form-control btn btn-login" name="updateArticle" id="updateArticleSubmitID" value="Update your article" disabled>
                                 </div>
                             </div>
                         </div>
@@ -139,17 +139,23 @@
         theme: 'snow'
     });
 
-    <%--$(document).ready(function(){--%>
-       <%--$("#articleContentInputID").val("${article.text}");--%>
-    <%--});--%>
+    quill.once("text-change", function(delta, oldDelta, source){
+
+        var content = $("#articleContentInputID");
+
+        content.val(quill.root.innerHTML);
+
+        $("#updateArticleSubmitID").prop('disabled', false);
+    });
 
     quill.on("text-change", function(delta, oldDelta, source){
 
         var content = $("#articleContentInputID");
 
         content.val(quill.root.innerHTML);
-
     });
+
+
 </script>
 
 </body>

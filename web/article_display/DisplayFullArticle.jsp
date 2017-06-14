@@ -91,7 +91,7 @@
                                 <%if (deletionRights) {%>
                                 <div class="row" style="background-color: #f5f5f5">
                                     <a class="form-control btn btn-login"
-                                       href="EditArticle.jsp?articleId=<%=articleId%>" style="background-color: #008975;
+                                       href="<%=sitePath%>article_display/EditArticle.jsp?articleId=<%=articleId%>" style="background-color: #008975;
                                                                                                                                                            border-color: #008975;
                                                                                                                                                            margin-bottom: 1%;
                                                                                                                                                            outline: none;
