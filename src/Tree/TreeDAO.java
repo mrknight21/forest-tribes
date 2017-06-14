@@ -164,14 +164,14 @@ public class TreeDAO {
 
         try (Connection c = db.connection()) {
             for (String username: usernames){
-                for ( int i =0; i <=3; i++){
+                for ( int i =0; i <=7; i++){
                     PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_Tree_Trees (username, title, content, likes, views, exp, stage, size, leaves, XCoordinate, YCoordinate) VALUE (?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?)");
                         p.setString(1, username);
                         p.setString(2, MiscellaneousUtility.randomString(40));
                         p.setString(3, MiscellaneousUtility.randomString(100));
                         p.setInt(4, 100);
                         p.setInt(5, 50);
-                        p.setInt(6, (int)(Math.random()*3200));
+                        p.setInt(6, (int)(Math.random()*6000));
                         p.setInt(7, 1 );
                         p.setInt(8, 100);
                         p.setInt(9, 30);

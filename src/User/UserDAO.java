@@ -1,8 +1,16 @@
 package User;
 
 import Utility.AbstractDB;
+import Utility.MiscellaneousUtility;
+import Utility.MySQL;
 import Utility.SecurityUtility;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +19,8 @@ import static Utility.BlobConverter.getBlob;
 import static Utility.BlobConverter.getByteArray;
 
 public class UserDAO {
+
+
 
     // Method to return all Users as an ArrayList from the database.
     public static List<User> getAllUsers(AbstractDB db) {
@@ -32,31 +42,20 @@ public class UserDAO {
     }
 
     // Method to return a User relating to the parsed-in username, from the database.
-    public static User getUser(AbstractDB db, String username) {
-
-        User user = null;
-
+    public static User getUserByUserName(AbstractDB db, String username) {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_User WHERE username = ?")) {
                 p.setString(1, username);
 
-                try (ResultSet r = p.executeQuery()) {
-                    while (r.next()) {
-                        user = userFromResultSet(r);
-                    }
-                }
+                try (ResultSet r = p.executeQuery()) {while (r.next()) return userFromResultSet(r);}
             }
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            user = null;
         }
-        return user;
+        catch (SQLException | ClassNotFoundException e) {e.printStackTrace();}
+        return null;
     }
 
     // Method to insert a parsed-in User into the database.
     public static boolean registerUser(AbstractDB db, User newUser) {
-
-        boolean status;
 
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_User (username, first_name, last_name, email, ProfileImagePath, UserFolderPath) VALUE (?, ?, ?, ?, ?, ?)")) {
@@ -68,13 +67,10 @@ public class UserDAO {
                 p.setString(6, newUser.getUserFolderPath());
 
                 p.executeUpdate();
-                status = true;
+                return true;
             }
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            status = false;
-        }
-        return status;
+        } catch (SQLException | ClassNotFoundException e) {e.printStackTrace();}
+        return false;
     }
 
     // Method to update the parsed-in User's information in the database, relating to the parsed-in username.
@@ -320,5 +316,39 @@ public class UserDAO {
             e.printStackTrace();
         }
         return success;
+    }
+
+    public static void registerUserDetails(AbstractDB DB, ServletContext servletContext, String username, String registrationFirstName, String registrationLastName, String registrationEmail, String imagePathway) throws IOException {
+
+        // Register user and create profile
+        User newUser = new User(username, registrationFirstName, registrationLastName, registrationEmail, "/User/"+username+"/User_profile_picture.jpg", "/User/"+username);
+
+        //auto set-up user profile photo
+        setUserDP(imagePathway, username, servletContext);
+
+        registerUser(DB, newUser);
+
+        createProfile(DB, username);
+    }
+
+    private static void setUserDP(String imagePathway, String username, ServletContext servletContext) throws IOException {
+
+        // Create user dir
+        String userDirPath = MiscellaneousUtility.createUserDir(servletContext, username);
+
+        BufferedImage sourceImage = ImageIO.read(new File(imagePathway));
+
+        try {
+            // retrieve image
+            File outputfile = new File(userDirPath +"/User_profile_picture.jpg");
+            ImageIO.write(sourceImage, "jpg", outputfile);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        //generate thumbnail images
+        BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+        img.createGraphics().drawImage(ImageIO.read(new File(userDirPath +"/User_profile_picture.jpg")).getScaledInstance(100, 100, Image.SCALE_SMOOTH),0,0,null);
+        ImageIO.write(img, "jpg", new File(userDirPath +"/User_profile_picture_thumb.jpg"));
     }
 }

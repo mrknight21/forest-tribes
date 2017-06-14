@@ -13,7 +13,7 @@
 
     final MySQL DB = new MySQL();
 
-    User user = UserDAO.getUser(DB, username);
+    User user = UserDAO.getUserByUserName(DB, username);
 
     String email = user.getEmail();
 

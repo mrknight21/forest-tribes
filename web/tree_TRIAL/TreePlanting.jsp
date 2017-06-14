@@ -24,7 +24,7 @@
                     var Y = $("#myiframe").contents().find("#Y").val();
                     var Xcoor = X + "px";
                     var Ycoor = Y + "px";
-                    $("#myiframe").contents().find("#map").append("<img src='Tree_Material/Venusaur_stage_1.png' id='new_seed'>")
+                    $("#myiframe").contents().find("#map").append("<img src='Tree_Material/stage_01.png' id='new_seed' style='-webkit-transform: scale(0.5);-moz-transform: scale(0.5);-ms-transform: scale(0.5);-o-transform: scale(0.5);transform: scale(0.5);'>");
                     $("#myiframe").contents().find("#new_seed").css("top", Xcoor).css("left", Ycoor).css("position", "absolute");
                     $("#Xcoordinate").val(Y);
                     $("#Ycoordinate").val(X);

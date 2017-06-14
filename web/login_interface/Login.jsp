@@ -13,6 +13,7 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id"
           content="528062179592-r23sffi9bm4tnntec1e6eei3s1oot0k9.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/api.js"></script>
 
     <%--Page Specific CSS--%>
     <tags:Style_Login/>
@@ -34,6 +35,32 @@
         $(document).ready(function () {
             $("#registrationConfirmPasswordID").keyup(checkPasswordMatch);
         });
+
+        //// Google Login
+        gapi.load('auth2', function () {
+            gapi.auth2.init();
+        });
+
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+
+            /// Verifying user with Google ID token
+            var id_token = googleUser.getAuthResponse().id_token;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '<%=sitePath%>tokensignin');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                console.log('Signed in as: ' + xhr.responseText);
+                if (xhr.responseText != null) location.reload(true);
+            };
+            xhr.send('idtoken=' + id_token);
+        }
     </script>
 </head>
 <body>
@@ -117,14 +144,6 @@
     }
 </script>
 
-<!--
-  Below we include the Login Button social plugin. This button uses
-  the JavaScript SDK to present a graphical Login button that triggers
-  the FB.login() function when clicked.
--->
-
-<%--//////////////////////////////////////////////////////////////--%>
-
 <% if (SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("/user_interface/Home.jsp"); %>
 
 <div class="container" style="background-color: transparent">
@@ -180,6 +199,9 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="text-center">
+                                                <!-- Below we include the Login Button social plugin. This button uses
+                                                     the JavaScript SDK to present a graphical Login button that triggers
+                                                     the FB.login() function when clicked -->
                                                 <div id="status">
                                                     <%--FB Login button:--%>
                                                     <fb:login-button scope="public_profile,email"
@@ -203,7 +225,8 @@
                                     </div>
                                 </div>
                             </form>
-                            <form id="registrationFormID" action="<%=sitePath%>Serve_Registration" method="post" role="form"
+                            <form id="registrationFormID" action="<%=sitePath%>Serve_Registration" method="post"
+                                  role="form"
                                   style="display: none;">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
