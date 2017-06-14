@@ -85,7 +85,7 @@
                                     </div>
                                     <div class="panel-body">
                                         <p id="displayIntroTextID${article.id}"><em>${article.shortIntro}</em></p>
-                                        <p id="displayFullTextID${article.id}" style="display: none">${article.text}</p>
+                                        <div id="displayFullTextID${article.id}" style="display: none">${article.text}</div>
                                         <a id="displayArticleLinkID${article.id}" href="#" onclick="revealArticle(this.id)">Reveal full article</a>
                                     </div>
                                     <div class="panel-footer">

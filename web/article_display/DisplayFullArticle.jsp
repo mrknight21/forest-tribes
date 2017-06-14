@@ -208,7 +208,8 @@
 
                                     <c:if test="${comment.replyCount != 0 }">
                                         <c:forEach var="reply" items="${comment.replies}">
-                                            <div class="panel panel-default" style="margin-left: 4%; margin-right: 2%; border-color: #00BF9A">
+                                            <div class="panel panel-default"
+                                                 style="margin-left: 4%; margin-right: 2%; border-color: #00BF9A">
                                                 <div class="panel-heading">
                                                     <div class="row">
                                                         <div class="col-lg-12">
@@ -220,11 +221,14 @@
                                                                                  border-color: #00BF9A">
                                                     <div class="row">
                                                         <div class="col-lg-12">
-                                                            <p style="display: inline-block; color: white"><i class="fa">&#xf2bd;</i>
+                                                            <p style="display: inline-block; color: white"><i
+                                                                    class="fa">&#xf2bd;</i>
                                                                 User: ${reply.author}</p>
-                                                            <p style="display: inline-block; color: white"><i class="fa">&#xf087;</i>
+                                                            <p style="display: inline-block; color: white"><i
+                                                                    class="fa">&#xf087;</i>
                                                                 Likes: ${reply.likes}</p>
-                                                            <p style="display: inline-block; color: white"><i class="fa">&#xf044;</i>
+                                                            <p style="display: inline-block; color: white"><i
+                                                                    class="fa">&#xf044;</i>
                                                                 Last
                                                                 Edited: ${reply.dateLastEdited}</p>
                                                             <%if (deletionRights) {%>

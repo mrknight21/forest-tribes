@@ -147,6 +147,7 @@ public class ArticleServlet extends HttpServlet {
     }
 
     private boolean createArticle(HttpServletRequest request) {
+        System.out.println(request.getParameter("text"));
         createNewArticle(
                 DB,
                 new Article(
