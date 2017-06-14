@@ -19,15 +19,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-    <title>Display All Articles</title>
+    <title>Forest Tribes: <%= username%>'s articles</title>
 
     <%--Importing all necessary libraries, frameworks etc.--%>
     <%@include file="../WEB-INF/Head_Scripts.jsp" %>
 
     <script>
         function revealArticle(id) {
-            var idLength = id.length;
-            var idNumber = id.substring(idLength - 1);
+            var search = id.search(/\d/);
+            var idNumber = id.substring(search);
 
             var introTextID = "#displayIntroTextID" + idNumber;
             var fullTextID = "#displayFullTextID" + idNumber;
@@ -100,8 +100,7 @@
                                             <div class="panel-body">
                                                 <p id="displayIntroTextID${article.id}"><em>${article.shortIntro}</em>
                                                 </p>
-                                                <p id="displayFullTextID${article.id}"
-                                                   style="display: none">${article.text}</p>
+                                                <div id="displayFullTextID${article.id}" style="display: none">${article.text}</div>
                                                 <a id="displayArticleLinkID${article.id}" href="#"
                                                    onclick="revealArticle(this.id)">Reveal full article</a>
                                             </div>

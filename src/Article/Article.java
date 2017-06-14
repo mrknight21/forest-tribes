@@ -19,7 +19,7 @@ public class Article extends Text {
     }
 
     // Create new article
-    public Article(String author, String title, String text) {
+    public Article(String author, String title, String text, String shortIntro) {
         //creation time and last edit time will be automatically made in database.
         super(author, text);
         this.title = title;
@@ -27,15 +27,16 @@ public class Article extends Text {
         responseCount = 0;
         likes = 0;
         views = 0;
-        this.shortIntro = extractShortIntro(text);
+        this.shortIntro = shortIntro;
+//        this.shortIntro = extractShortIntro(text);
     }
 
     // Update article
-    public Article(int id, String text, String title) {
+    public Article(int id, String text, String title, String shortIntro) {
         super(id, text);
         this.title = title;
-        this.shortIntro = extractShortIntro(text);
-
+        this.shortIntro = shortIntro;
+//        this.shortIntro = extractShortIntro(text);
     }
 
     //retrieve a complete article including comment and replies.
