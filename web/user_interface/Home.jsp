@@ -16,7 +16,7 @@
 
 <html>
 <head>
-    <title>Home</title>
+    <title>Forest Tribes: Home</title>
     <%@include file="../WEB-INF/Head_Scripts.jsp"%>
 </head>
 <body>

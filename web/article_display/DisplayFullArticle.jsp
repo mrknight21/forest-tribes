@@ -13,12 +13,27 @@
     String username = (String) session.getAttribute("username");
 %>
 
+<%
+    final MySQL DB = new MySQL();
+    int articleId = Integer.parseInt(request.getParameter("articleId"));
+    Article article = ArticleDAO.getArticleById(DB, articleId);
+
+    Boolean deletionRights = false;
+    Boolean editRights = false;
+    if (article.getAuthor().equals(username))
+        deletionRights = true;
+
+
+//    Add script to increase Article views by one one each load.
+    request.setAttribute("article", article);
+%>
+
 <!DOCTYPE html>
 <html lang="en" class="full">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-    <title>${article.title}</title>
+    <title>Forest Tribes: ${article.title}</title>
 
     <%--Importing all necessary libraries, frameworks etc.--%>
     <%@include file="../WEB-INF/Head_Scripts.jsp" %>
@@ -37,20 +52,7 @@
 
 <%@ include file="../WEB-INF/Header_Navbar.jsp" %>
 
-<%
-    final MySQL DB = new MySQL();
-    int articleId = Integer.parseInt(request.getParameter("articleId"));
-    Article article = ArticleDAO.getArticleById(DB, articleId);
 
-    Boolean deletionRights = false;
-    Boolean editRights = false;
-    if (article.getAuthor().equals(username))
-        deletionRights = true;
-
-
-//    Add script to increase Article views by one one each load.
-    request.setAttribute("article", article);
-%>
 
 <div class="container">
     <div class="row">

@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-    <title>Change Password</title>
+    <title>Forest Tribes: Change your password</title>
     <%@include file="../WEB-INF/Head_Scripts.jsp" %>
 
     <script>
