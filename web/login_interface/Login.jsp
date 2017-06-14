@@ -1,5 +1,3 @@
-<%--todo connect TPA login with servlet login & registration--%>
-
 <%@ page import="Utility.SecurityUtility" %>
 <!DOCTYPE html>
 <html lang="en" class="full">

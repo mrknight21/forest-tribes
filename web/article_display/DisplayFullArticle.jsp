@@ -53,11 +53,12 @@
 <%@ include file="../WEB-INF/Header_Navbar.jsp" %>
 
 
-
 <div class="container">
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
             <div class="panel panel-login">
+
+
                 <div class="panel panel-default" style="border-color: #008975">
                     <div class="panel-heading" style="background-color: #008975">
                         <div class="row">
@@ -87,15 +88,19 @@
                                 <p style="display: inline-block"><i class="fa">&#xf044;</i>
                                     Edited: ${article.dateLastEdited}</p>
                                 <%if (deletionRights) {%>
-                                <form action="<%=sitePath%>TextUpdate" method="post">
-                                    <input type="radio" name="id" value="<%=articleId%>" checked hidden/>
-                                    <input type="radio" name="articleId" value="<%=articleId%>" checked hidden/>
-                                    <input type="submit" class="form-control btn btn-login" name="deleteArticle" value="Delete Article" style="background-color: #008975;
+                                <div class="row">
+                                    <form action="<%=sitePath%>TextUpdate" method="post">
+                                        <input type="radio" name="id" value="<%=articleId%>" checked hidden/>
+                                        <input type="radio" name="articleId" value="<%=articleId%>" checked hidden/>
+                                        <input type="submit" class="form-control btn btn-login" name="deleteArticle"
+                                               value="Delete Article" style="background-color: #008975;
                                                                                                                                                            border-color: #008975;
                                                                                                                                                            outline: none;
                                                                                                                                                            color: white;
                                                                                                                                                            text-transform: uppercase"/>
-                                </form>
+                                    </form>
+                                    <a href=""
+                                </div>
                                 <%}%>
                             </div>
                         </div>
@@ -167,7 +172,8 @@
                                                 <input type="radio" name="articleId" value="<%=articleId%>" checked
                                                        hidden/>
                                                 <input type="radio" name="id" value="${comment.id}" checked hidden/>
-                                                <input type="submit" class="form-control btn btn-login" name="deleteComment" value="Delete Comment" style="background-color: #00AA8D;
+                                                <input type="submit" class="form-control btn btn-login"
+                                                       name="deleteComment" value="Delete Comment" style="background-color: #00AA8D;
                                                                                                                                                            border-color: #00AA8D;
                                                                                                                                                            outline: none;
                                                                                                                                                            color: white;
@@ -179,7 +185,7 @@
                                 </div>
 
                                 <script>
-                                    function revealReplies${comment.id}() {
+                                    function revealReplies ${comment.id}() {
                                         $("#replyDivID${comment.id}").toggle();
                                     }
                                 </script>
@@ -245,7 +251,8 @@
                                                                 <input type="radio" name="id" value="${reply.id}"
                                                                        checked
                                                                        hidden/>
-                                                                <input type="submit" class="form-control btn btn-login" name="deleteReply" value="Delete Reply" style="background-color: #f5f5f5;
+                                                                <input type="submit" class="form-control btn btn-login"
+                                                                       name="deleteReply" value="Delete Reply" style="background-color: #f5f5f5;
                                                                                                                                                            border-color: #ddd;
                                                                                                                                                            outline: none;
                                                                                                                                                            text-transform: uppercase"/>
