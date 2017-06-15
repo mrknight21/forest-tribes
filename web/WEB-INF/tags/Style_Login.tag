@@ -187,6 +187,10 @@
         color: #029f5b;
     }
 
+    h4 {
+        font-family: Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;;
+    }
+
     #loginFormLink, #registrationFormLink {
         font-family: Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
