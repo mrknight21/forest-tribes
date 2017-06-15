@@ -55,7 +55,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
+        <div class="col-lg-12">
             <div class="panel panel-login">
                 <div class="panel panel-default" style="border-color: #008975">
                     <div class="panel-heading" style="background-color: #008975">

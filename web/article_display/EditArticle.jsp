@@ -50,7 +50,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
+        <div class="col-lg-12">
             <div class="panel panel-login">
                 <fieldset>
                     <legend>Edit your article:</legend>
