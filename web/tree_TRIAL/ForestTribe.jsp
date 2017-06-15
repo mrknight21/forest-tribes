@@ -171,7 +171,7 @@
             String title = tree.getTitle();
             String author = tree.getAuthor();
             int stage = tree.getStage();
-            double size = ((double)tree.getSize()/125);
+            String size = tree.getSize()+"%";
             System.out.println(size);
             int X = tree.getCoordinX();
             int Y = tree.getCoordinY();
@@ -183,12 +183,12 @@
             }
 
     %>
-    <div class="container" id="treeContainerID<%= ID%>" style="position: absolute; top: <%=Y%>px; left: <%=X%>px;">
+    <div class="tree_container" id="treeContainerID<%= ID%>" style="position: absolute; top: <%=Y%>px; left: <%=X%>px;">
         <div id="imageContainerID<%= ID%>">
             <a href="/Serve_FullTree?TreeID=<%=ID%>"><img id="treeImageID<%= ID%>" onmouseover="revealDiv(this.id);" onmouseout="hideDiv(this.id);"
-                    src="<%= sitePath%>tree_TRIAL/Tree_Material/stage_0<%=stage%>.png" style="-webkit-transform: scale(<%=size%>);-moz-transform: scale(<%=size%>);-ms-transform: scale(<%=size%>);-o-transform: scale(<%=size%>);transform: scale(<%=size%>);"></a>
+                    src="<%= sitePath%>tree_TRIAL/Tree_Material/stage_0<%=stage%>.png" style="zoom: <%=size%>"></a>
         </div>
-        <div class="panel panel-default" id="infoContainerID<%= ID%>" style="display: none; width: 200px; border-color: #008975;">
+        <div class="panel panel-default" id="infoContainerID<%= ID%>" style="display: none;  border-color: #008975;">
             <div class="panel-heading" style="background-color: #008975; border-color: #00AA8D; color: white;">
                 <p style="font-family: Futura; word-wrap: break-word;"><%=title%></p>
             </div>

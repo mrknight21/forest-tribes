@@ -201,17 +201,17 @@ public InfoTree(int id, String username, String title,String introText, int like
     //calculate size
     private void calculateSize(){
         switch (this.stage){
-            case 1: this.size = (int)(150.0*(this.exp/500.0)+50.0);
+            case 1: this.size = (int)(100.0*(this.exp/500.0)+50.0);
             return;
-            case 2: this.size =(int)(150.0*((this.exp-500.0)/500.0)+50.0);
+            case 2: this.size =(int)(120.0*((this.exp-500.0)/500.0)+50.0);
                 return;
-            case 3:this.size =(int)(150.0*((this.exp-1000.0)/1000.0)+50.0);
+            case 3:this.size =(int)(130.0*((this.exp-1000.0)/1000.0)+50.0);
                 return;
-            case 4: this.size =(int)(150.0*((double)(this.exp-2000.0)/1000.0)+50.0);
+            case 4: this.size =(int)(130.0*((double)(this.exp-2000.0)/1000.0)+50.0);
                 return;
-            case 5: this.size =(int)(150.0*((double)(this.exp-3000.0)/1000.0)+50.0);
+            case 5: this.size =(int)(130.0*((double)(this.exp-3000.0)/1000.0)+50.0);
                 return;
-            case 6:this.size =(int)(150.0*((double)(this.exp-4000.0)/1000.0)+50.0);
+            case 6:this.size =(int)(130.0*((double)(this.exp-4000.0)/1000.0)+50.0);
                 return;
         }
 
