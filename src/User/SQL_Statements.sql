@@ -3,9 +3,15 @@
 /* All tables created for the final project will start with
  the suffix, inFoJaxs. */
 
--- Statements to create the table which will store the User information.
+DROP TABLE IF EXISTS inFoJaxs_Replies;
+DROP TABLE IF EXISTS inFoJaxs_Comments;
+DROP TABLE IF EXISTS inFoJaxs_Articles;
+DROP TABLE IF EXISTS inFoJaxs_IssuesCared;
+DROP TABLE IF EXISTS inFoJaxs_Profile;
+DROP TABLE IF EXISTS inFoJaxs_UserSecurity;
 DROP TABLE IF EXISTS inFoJaxs_User;
 
+-- Statements to create the table which will store the User information.
 CREATE TABLE IF NOT EXISTS inFoJaxs_User (
   username      VARCHAR(50) NOT NULL UNIQUE,
   first_name    VARCHAR(25) NOT NULL,
@@ -13,34 +19,24 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_User (
   email         VARCHAR(50) NOT NULL,
   date_of_birth DATE,
   userGoogleID VARCHAR(50) UNIQUE,
+  UserFolderPath VARCHAR(400) NULL,
+  ProfileImagePath VARCHAR(400) NULL,
   PRIMARY KEY (username)
 );
 
 -- Statements to create the table which will the UserSecurity information.
-DROP TABLE IF EXISTS inFoJaxs_UserSecurity;
-
 CREATE TABLE IF NOT EXISTS inFoJaxs_UserSecurity (
   userID     INT AUTO_INCREMENT,
-  userGoogleID INT UNIQUE,
-  userFacebookID INT UNIQUE,
+
   username   VARCHAR(50),
   salt       BLOB NOT NULL,
   iterations INT  NOT NULL,
   hash       BLOB NOT NULL,
   PRIMARY KEY (userID),
   FOREIGN KEY (username) REFERENCES inFoJaxs_User (username)
+    ON DELETE CASCADE
 );
 
-ALTER TABLE inFoJaxs_User ADD userGoogleID VARCHAR(50) UNIQUE;
-
-CREATE TABLE IF NOT EXISTS inFoJaxs_UserSSO (
-  userGoogleID VARCHAR(50),
-  username   VARCHAR(50),
-  PRIMARY KEY (userGoogleID),
-  FOREIGN KEY (username) REFERENCES inFoJaxs_User (username)
-);
-
-DROP TABLE IF EXISTS inFoJaxs_Profile;
 CREATE TABLE IF NOT EXISTS inFoJaxs_Profile (
   username   VARCHAR(50) NOT NULL,
   gender     VARCHAR(6),
@@ -50,27 +46,17 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_Profile (
   issues     VARCHAR(500),
   PRIMARY KEY (username),
   FOREIGN KEY (username) REFERENCES inFoJaxs_User (username)
+    ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS inFoJaxs_IssuesCared;
 CREATE TABLE IF NOT EXISTS inFoJaxs_IssuesCared (
   ID           INT AUTO_INCREMENT,
   username     VARCHAR(50) NOT NULL,
   issues_Cared VARCHAR(50) NOT NULL,
   PRIMARY KEY (ID),
   FOREIGN KEY (username) REFERENCES inFoJaxs_User (username)
+    ON DELETE CASCADE
 );
-
-ALTER TABLE inFoJaxs_User
-  ADD UserFolderPath VARCHAR(400) NULL;
-UPDATE inFoJaxs_User
-SET ProfileImagePath = NULL
-
-
-DROP TABLE IF EXISTS inFoJaxs_Replies;
-DROP TABLE IF EXISTS inFoJaxs_Comments;
-DROP TABLE IF EXISTS inFoJaxs_Articles;
-
 
 CREATE TABLE IF NOT EXISTS inFoJaxs_Articles (
   ID           INT       AUTO_INCREMENT,
@@ -92,7 +78,7 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_Comments (
   ID           INT       AUTO_INCREMENT,
   parent_ID    INT           NOT NULL,
   username     VARCHAR(50)   NOT NULL,
-  content      VARCHAR(8000) NOT NULL,
+  content      TEXT NOT NULL,
   likes        INT DEFAULT 0,
   views        INT DEFAULT 0,
   repliesCount INT DEFAULT 0,
@@ -109,7 +95,7 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_Replies (
   ID           INT       AUTO_INCREMENT,
   parent_ID    INT           NOT NULL,
   username     VARCHAR(50)   NOT NULL,
-  content      VARCHAR(8000) NOT NULL,
+  content      TEXT NOT NULL,
   likes        INT DEFAULT 0,
   views        INT DEFAULT 0,
   creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -213,7 +199,6 @@ boolean supportForArgument;
     String URL;
  */
 
-
 CREATE TABLE IF NOT EXISTS inFoJaxs_Tree_Factual_URL (
   ID           INT       AUTO_INCREMENT,
   parent_ID    INT           NOT NULL,
@@ -305,6 +290,4 @@ INSERT INTO inFoJaxs_Replies (parent_ID, username, content, likes, views) VALUES
   (2, 'zxcv', 'aahahhahahhahahahahahahahahahahahhahaahahahah!', 1000, 1000);
 
 
-SELECT ID FROM inFoJaxs_Tree_Trees WHERE id=(SELECT MAX(id) FROM inFoJaxs_Tree_Trees)
-
-DELETE
+SELECT ID FROM inFoJaxs_Tree_Trees WHERE id=(SELECT MAX(id));

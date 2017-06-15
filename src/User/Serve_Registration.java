@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Serve_Registration extends HttpServlet {
 
@@ -38,6 +39,9 @@ public class Serve_Registration extends HttpServlet {
                 return;
             } else if (!request.getParameterNames().hasMoreElements()) {
                 response.sendRedirect("login_interface/Login.jsp");
+                return;
+            } else if (request.getParameter("usernameCheck") != null) {
+                checkUserNameAvailable(request, response);
                 return;
             } else {
                 HttpSession session = request.getSession();
@@ -81,6 +85,23 @@ public class Serve_Registration extends HttpServlet {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    private void checkUserNameAvailable(HttpServletRequest request, HttpServletResponse response) {
+
+
+        try {
+            PrintWriter out = response.getWriter();
+
+            if (UserDAO.getUserByUserName(DB, request.getParameter("usernameCheck")) == null)
+                out.write("" + null);
+            else out.write("available");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 

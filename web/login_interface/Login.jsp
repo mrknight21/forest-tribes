@@ -11,6 +11,63 @@
     <%--Importing all necessary libraries, frameworks etc.--%>
     <%@include file="../WEB-INF/Head_Scripts.jsp" %>
 
+    <script>
+        // Google API signin
+        function onSignIn(googleUser) {
+            // Useful data for your client-side scripts:
+            var profile = googleUser.getBasicProfile();
+            console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+            console.log('Full Name: ' + profile.getName());
+            console.log('Given Name: ' + profile.getGivenName());
+            console.log('Family Name: ' + profile.getFamilyName());
+            console.log("Image URL: " + profile.getImageUrl());
+            console.log("Email: " + profile.getEmail());
+
+            // The ID token you need to pass to your backend:
+            var id_token = googleUser.getAuthResponse().id_token;
+            console.log("ID Token: " + id_token);
+
+            // Pass ID token to backend:
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '<%=sitePath%>TokenSignIn');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                console.log('Signed in as: ' + xhr.responseText);
+                if (xhr.responseText != null) window.open("<%=sitePath%>user_interface/Home.jsp", "_self");
+            };
+            xhr.send('idtoken=' + id_token);
+        };
+    </script>
+
+    <script>
+        // Check user name exists
+        function onSignIn(googleUser) {
+            // Useful data for your client-side scripts:
+            var profile = googleUser.getBasicProfile();
+            console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+            console.log('Full Name: ' + profile.getName());
+            console.log('Given Name: ' + profile.getGivenName());
+            console.log('Family Name: ' + profile.getFamilyName());
+            console.log("Image URL: " + profile.getImageUrl());
+            console.log("Email: " + profile.getEmail());
+
+            // The ID token you need to pass to your backend:
+            var id_token = googleUser.getAuthResponse().id_token;
+            console.log("ID Token: " + id_token);
+
+            // Pass ID token to backend:
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '<%=sitePath%>TokenSignIn');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                console.log('Signed in as: ' + xhr.responseText);
+                if (xhr.responseText != null) window.open("<%=sitePath%>user_interface/Home.jsp", "_self");
+            };
+            xhr.send('idtoken=' + id_token);
+        };
+    </script>
+
+
     <%--Page Specific CSS--%>
     <tags:Style_Login/>
 
@@ -27,6 +84,29 @@
                 $("#registrationMessageID").hide();
             }
         }
+
+
+        function checkUserNameFree() {
+            var registerUsername = $("#registrationUsernameID").val();
+
+            // Pass desired username to backend:
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '<%=sitePath%>Serve_Registration');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (xhr.responseText === "null") {
+                    $("#usernameExistsID").hide();
+                    $("#usernameAvailableID").show();
+//                    $("#registrationSubmitID").prop('disabled', false);
+                } else {
+                    $("#usernameExistsID").show();
+                    $("#usernameAvailableID").hide();
+                    $("#registrationSubmitID").prop('disabled', true);
+                }
+            };
+            xhr.send('usernameCheck=' + registerUsername);
+        }
+
 
         $(document).ready(function () {
             $("#registrationConfirmPasswordID").keyup(checkPasswordMatch);
@@ -95,8 +175,10 @@
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                     <input type="text" name="registrationUsername" id="registrationUsernameID"
-                                           tabindex="1" class="form-control" placeholder="Username" value="">
+                                           tabindex="1" class="form-control" placeholder="Username" value="" onchange="checkUserNameFree()">
                                 </div>
+                                <p id="usernameExistsID" style="text-align: center; display: none;">This username already exists!</p>
+                                <p id="usernameAvailableID" style="text-align: center; display: none;">This username will pass our entry criteria.</p>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                     <input type="text" name="registrationFirstName" id="registrationFirstNameID"
@@ -142,34 +224,6 @@
         </div>
     </div>
 </div>
-
-<script>
-    // Google API
-    function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
-        var profile = googleUser.getBasicProfile();
-        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-        console.log('Full Name: ' + profile.getName());
-        console.log('Given Name: ' + profile.getGivenName());
-        console.log('Family Name: ' + profile.getFamilyName());
-        console.log("Image URL: " + profile.getImageUrl());
-        console.log("Email: " + profile.getEmail());
-
-        // The ID token you need to pass to your backend:
-        var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
-
-        // Pass ID token to backend:
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '<%=sitePath%>TokenSignIn');
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onload = function() {
-            console.log('Signed in as: ' + xhr.responseText);
-            if (xhr.responseText != null) window.open("<%=sitePath%>user_interface/Home.jsp", "_self");
-        };
-        xhr.send('idtoken=' + id_token);
-    };
-</script>
 
 <script>
     $(function () {
