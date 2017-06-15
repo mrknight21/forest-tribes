@@ -206,14 +206,14 @@ public class ArticleDAO {
     public static boolean createNewText(AbstractDB db, Text newText, int parentId) {
         String statement = "INSERT INTO #1 (#2, username, content) VALUE (?, ?, ?)";
         if (parentId == -1) {
-            statement.replaceFirst("#1", "inFoJaxs_Articles");
-            statement.replaceFirst("#2", "title");
+            statement = statement.replaceFirst("#1", "inFoJaxs_Articles");
+            statement = statement.replaceFirst("#2", "title");
         } else {
             if (newText instanceof Comment)
-                statement.replaceFirst("#1","inFoJaxs_Comments");
+                statement = statement.replaceFirst("#1","inFoJaxs_Comments");
             else if (newText instanceof Reply)
-                statement.replaceFirst("#1","inFoJaxs_Replies");
-            statement.replaceFirst("#2","parent_ID");
+                statement = statement.replaceFirst("#1","inFoJaxs_Replies");
+            statement = statement.replaceFirst("#2","parent_ID");
         }
 
         try (Connection c = db.connection()) {
