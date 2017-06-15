@@ -58,7 +58,7 @@ public class Serve_DeleteTreeComponents extends  HttpServlet {
                     break;
             }
 
-            String fullTreeAdress = "/Serve_FullTree?TreeID=" + TreeID;
+            String fullTreeAdress = "Serve_FullTree?TreeID=" + TreeID;
             response.sendRedirect(fullTreeAdress);
 
         } catch (IOException e) {

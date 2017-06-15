@@ -84,7 +84,7 @@
                     <div class="panel-body" style="padding-bottom: 0">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form action="/Serve_TreeURL" method="get" id="contributionFormID">
+                                <form action="<%= sitePath%>Serve_TreeURL" method="get" id="contributionFormID">
                                     <fieldset>
                                         <legend><i class="fa">&#xf02b;</i> Title:</legend>
                                         <div class="form-group">

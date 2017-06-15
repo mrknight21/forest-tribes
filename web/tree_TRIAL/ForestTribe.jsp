@@ -183,7 +183,7 @@
     %>
     <div class="tree_container" id="treeContainerID<%= ID%>" style="position: absolute; top: <%=Y%>px; left: <%=X%>px;">
         <div id="imageContainerID<%= ID%>">
-            <a href="/Serve_FullTree?TreeID=<%=ID%>"><img id="treeImageID<%= ID%>" onmouseover="revealDiv(this.id);" onmouseout="hideDiv(this.id);"
+            <a href="<%= sitePath%>Serve_FullTree?TreeID=<%=ID%>"><img id="treeImageID<%= ID%>" onmouseover="revealDiv(this.id);" onmouseout="hideDiv(this.id);"
                     src="<%= sitePath%>tree_TRIAL/Tree_Material/stage_0<%=stage%>.png" style="zoom: <%=size%>"></a>
         </div>
         <div class="panel panel-default" id="infoContainerID<%= ID%>" style="display: none;  border-color: #008975;">

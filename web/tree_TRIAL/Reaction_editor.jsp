@@ -85,7 +85,7 @@
                     <div class="panel-body" style="padding-bottom: 0">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form action="/Serve_TreeReaction" method="get" id="reactionFormID">
+                                <form action="<%= sitePath%>Serve_TreeReaction" method="get" id="reactionFormID">
                                     <fieldset>
                                         <legend><i class="fa">&#xf24e;</i> For or against the tree ?</legend>
                                         <div class="form-group" id="stanceRadioID">

@@ -71,7 +71,7 @@
 <h1>Plant your BIG ISSUE!!</h1>
 
 <p></p>
-<form action="/Serve_TreeCreation" METHOD="get">
+<form action="<%= sitePath%>Serve_TreeCreation" METHOD="get">
     <label for="title">The name of your Big issue:</label>
     <input id="title" type="text" name="title" width="500px">
     <p></p>
