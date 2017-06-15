@@ -1,3 +1,4 @@
+<%@include file="../Rootpath_Toggle.jsp" %>
 <style>
         .full {
             background: url('<%=sitePath%>tree_TRIAL/background_02.jpg') no-repeat center center fixed;
