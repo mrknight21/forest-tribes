@@ -69,7 +69,7 @@ public class ArticleServlet extends HttpServlet {
                         switch (parameter) {
                             case "createArticle":
                                 createArticle(request);
-                                response.sendRedirect("article_display/DisplayUserAllArticles.jsp");
+                                response.sendRedirect("article_display/DisplayUserAllArticles.jsp?author="+username);
                                 return;
                             case "createComment":
                                 createComment(request);
@@ -78,46 +78,48 @@ public class ArticleServlet extends HttpServlet {
                                 createReply(request);
                                 break chooser;
                         }
-                    else if (parameter.startsWith("update")) {
-                        id = Integer.parseInt(request.getParameter("id"));
-                        System.out.println(id);
-                        switch (parameter) {
-                            case "updateArticle":
-                                editArticle(request);
-                                break chooser;
-                            case "updateComment":
-                                editComment(request);
-                                break chooser;
-                            case "updateReply":
-                                editReply(request);
-                                break chooser;
-                        }
-                    } else if (parameter.startsWith("delete")) {
-                        id = Integer.parseInt(request.getParameter("id"));
-                        try {
+                    else {
+                        if (parameter.startsWith("update")) {
+                            id = Integer.parseInt(request.getParameter("id"));
+                            System.out.println(id);
                             switch (parameter) {
-                                case "deleteArticle":
-                                    if (username.equals(getArticleById(DB, id).getAuthor()))
-                                        deleteText(DB.connection(), id, "Article");
-                                    response.sendRedirect("article_display/DisplayUserAllArticles.jsp");
-                                    return;
-                                case "deleteComment":
-                                    Comment comment = getCommentById(DB, id);
-                                    Article article = getArticleById(DB, comment.getParentID());
-                                    if (username.equals(comment.getAuthor()) || username.equals(article.getAuthor()))
-                                        deleteText(DB.connection(), id, "Comment");
+                                case "updateArticle":
+                                    editArticle(request);
                                     break chooser;
-                                case "deleteReply":
-                                    Reply reply = getReplyById(DB, id);
-                                    if (username.equals(getArticleById(DB, getCommentById(DB, reply.getParentID()).getParentID()).getAuthor())
-                                            || username.equals(reply.getAuthor()))
-                                        deleteText(DB.connection(), id, "Reply");
+                                case "updateComment":
+                                    editComment(request);
+                                    break chooser;
+                                case "updateReply":
+                                    editReply(request);
                                     break chooser;
                             }
-                        } catch (ClassNotFoundException | SQLException e) {
-                            e.printStackTrace();
-                        }
+                        } else if (parameter.startsWith("delete")) {
+                            id = Integer.parseInt(request.getParameter("id"));
+                            try {
+                                switch (parameter) {
+                                    case "deleteArticle":
+                                        if (username.equals(getArticleById(DB, id).getAuthor()))
+                                            deleteText(DB.connection(), id, "Article");
+                                        response.sendRedirect("article_display/DisplayUserAllArticles.jsp?author="+username);
+                                        return;
+                                    case "deleteComment":
+                                        Comment comment = getCommentById(DB, id);
+                                        Article article = getArticleById(DB, comment.getParentID());
+                                        if (username.equals(comment.getAuthor()) || username.equals(article.getAuthor()))
+                                            deleteText(DB.connection(), id, "Comment");
+                                        break chooser;
+                                    case "deleteReply":
+                                        Reply reply = getReplyById(DB, id);
+                                        if (username.equals(getArticleById(DB, getCommentById(DB, reply.getParentID()).getParentID()).getAuthor())
+                                                || username.equals(reply.getAuthor()))
+                                            deleteText(DB.connection(), id, "Reply");
+                                        break chooser;
+                                }
+                            } catch (ClassNotFoundException | SQLException e) {
+                                e.printStackTrace();
+                            }
 
+                        }
                     }
                 }
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/article_display/DisplayFullArticle.jsp");
