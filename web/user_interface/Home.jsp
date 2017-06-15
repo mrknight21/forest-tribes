@@ -40,6 +40,14 @@
                     <div class="panel-body" style="z-index: 999">
                         <div class="row">
                             <div class="col-lg-12">
+                                <label for="background_selector">background: </label>
+                                <select name="background" id="background_selector">
+                                    <option value="background_Mars.jpg">Mars</option>
+                                    <option value="background_Schizophrenic.jpg">Schizophrenic</option>
+                                    <option value="background_GreenMozaic.jpg">Green Mozaic</option>
+                                    <option value="background_Brick.jpg">Brick</option>
+                                </select>
+                                <br><br>
                                 <fieldset>
                                     <legend>Zoom Control:</legend>
                                     <div class="slider" id="zoom-control"></div>

@@ -21,6 +21,11 @@
 
         $(document).ready(function () {
 
+            $("#screen_expand").click(function (event){
+                this.css("display", "none");
+                this.css("pointer-events", "none");
+            })
+
 
             $(document).mousemove(function (event) {
                 var zoom = $("body").css("zoom");
@@ -57,12 +62,9 @@
     </script>
     <style>
         #map {
-            background-image: url("Tree_Material/background_Brick.jpg");
+            background-image: url("Tree_Material/background_Mars.jpg");
             zoom: 100%;
         }
-
-
-
 
     </style>
 </head>
@@ -72,13 +74,16 @@
 
 
 
+    <a href="#"><img id="screen_expand" src="<%=sitePath%>tree_TRIAL/Tree_Material/full screen.png" style="position: fixed; left: 95%;width:5%; "></a>
+
+
 
 
     <form>
         <input type="hidden" value="0" id="X">
         <input type="hidden" value="0" id="Y">
     </form>
-    <p style="position: fixed; top: 0%; color: seashell; font-family: 'Californian FB'; font-size: xx-large">Coordinate: <span id="coordinate" ></span></p>
+    <p style="position: fixed; top: 0%; color: seashell; font-family: 'Californian FB'; font-size: xx-large; z-index: 999">Coordinate: <span id="coordinate" ></span></p>
 
 
 
@@ -152,7 +157,6 @@
             String author = tree.getAuthor();
             int stage = tree.getStage();
             String size = tree.getSize()+"%";
-            System.out.println(size);
             int X = tree.getCoordinX();
             int Y = tree.getCoordinY();
             int likes = tree.getLikes();
@@ -191,7 +195,7 @@
     <div id="userTressBar" style="position: fixed; left:0%; top:10%; width:200px;">
         <% for(Map.Entry<Integer, Integer> tree : userTreesID.entrySet()){ %>
         <div class=" small_tree_container">
-            <a href="#treeContainerID<%=tree.getKey()%>"><img src="<%= sitePath%>tree_TRIAL/Tree_Material/stage_0<%=tree.getValue()%>.png" width="75px"></a>
+            <a href="#treeContainerID<%=tree.getKey()%>" target="iframe_a" ><img src="<%= sitePath%>tree_TRIAL/Tree_Material/stage_0<%=tree.getValue()%>.png" width="75px"></a>
         </div>
         <%}
         }%>

@@ -21,6 +21,8 @@
 
     String gender = null;
 
+    System.out.println(profile.getGender());
+
     if (profile.getGender() != null) {
         gender = profile.getGender();
     }
