@@ -19,7 +19,7 @@
                 <span class="icon-bar"></span>
             </button>
             <img id="headerThumbnail" src="<%=sitePath%>User/<%= username%>/User_profile_picture_thumb.jpg"
-                 class="img-thumbnail" alt="User Profile Picture">
+                 class="img-thumbnail" alt="User Profile Picture" style="width: 44px; height: 44px;">
         </div>
         <div class="collapse navbar-collapse" id="headerNavBar">
             <ul class="nav navbar-nav">
