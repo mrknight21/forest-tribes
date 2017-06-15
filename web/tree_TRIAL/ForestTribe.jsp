@@ -19,19 +19,6 @@
     <%@include file="../WEB-INF/Head_Scripts.jsp" %>
     <script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
         $(document).ready(function () {
 
 
@@ -47,11 +34,6 @@
                 $("#coordinate").text("X: " + x + ", Y: " + y);
             });
         });
-
-
-
-
-
 
         function revealDiv(id) {
             var search = id.search(/\d/);
@@ -74,8 +56,8 @@
         }
     </script>
     <style>
-        body {
-            background-image: url("Tree_Material/Mars.jpg");
+        #map {
+            background-image: url("Tree_Material/background_Brick.jpg");
             zoom: 100%;
         }
 
@@ -96,7 +78,7 @@
         <input type="hidden" value="0" id="X">
         <input type="hidden" value="0" id="Y">
     </form>
-    <p style="position: fixed; top: 0%; color: seashell; font-family: 'Californian FB'; font-size: x-large">Coordinate: <span id="coordinate" ></span></p>
+    <p style="position: fixed; top: 0%; color: seashell; font-family: 'Californian FB'; font-size: xx-large">Coordinate: <span id="coordinate" ></span></p>
 
 
 
