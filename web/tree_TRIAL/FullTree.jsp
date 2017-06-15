@@ -16,39 +16,8 @@
     <%--Importing all necessary libraries, frameworks etc.--%>
     <%@include file="../WEB-INF/Head_Scripts.jsp" %>
 
-    <style>
-        .full {
-            background: url('<%=sitePath%>login_interface/lake-baikal-9.jpg') no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            background-size: cover;
-            -o-background-size: cover;
-        }
-
-        body {
-            background-color: transparent;
-        }
-
-        h4 {
-            font-family: Futura;
-            color: white;
-        }
-
-        th {
-            font-family: Futura;
-            font-weight: normal;
-        }
-
-        .panel-login {
-            margin-top: 2%;
-            padding-left: 2%;
-            padding-right: 2%;
-            padding-top: 2%;
-        }
-    </style>
-
     <%--Page Specific CSS--%>
-
+    <tags:Style_Full-Tree/>
 </head>
 <body>
 
