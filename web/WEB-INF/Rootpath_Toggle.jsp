@@ -9,6 +9,6 @@
     // Server upload pathway:
     //public String sitePath = "/ForestTribes/";
 
-    // Local host pathway:
-   public String sitePath = "/";
+    //local host pathway:
+    public String sitePath = "/";
 %>
