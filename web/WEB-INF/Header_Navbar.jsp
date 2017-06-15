@@ -22,7 +22,7 @@
                         <li><a href="<%=sitePath%>user_interface/ProfilePictureUpdate.jsp">Change profile picture</a></li>
                         <li><a href="<%=sitePath%>user_interface/changePassword.jsp">Change password</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a onclick="signOut()">Logout</a></li>
+                        <li><a href="#" onclick="signOut()">Logout</a></li>
                     </ul>
                 </li>
                 <li>
@@ -49,3 +49,13 @@
         </div>
     </div>
 </nav>
+<%--Google Logout--%>
+<script>
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            console.log('User signed out.');
+        });
+        window.open("<%=sitePath%>Serve_Logout", "_self");
+    }
+</script>

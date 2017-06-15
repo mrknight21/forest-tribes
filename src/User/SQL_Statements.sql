@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_User (
   last_name     VARCHAR(25) NOT NULL,
   email         VARCHAR(50) NOT NULL,
   date_of_birth DATE,
+  userGoogleID VARCHAR(50) UNIQUE,
   PRIMARY KEY (username)
 );
 
@@ -30,11 +31,10 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_UserSecurity (
   FOREIGN KEY (username) REFERENCES inFoJaxs_User (username)
 );
 
-DROP TABLE IF EXISTS inFoJaxs_UserSSO;
+ALTER TABLE inFoJaxs_User ADD userGoogleID VARCHAR(50) UNIQUE;
 
 CREATE TABLE IF NOT EXISTS inFoJaxs_UserSSO (
-  userGoogleID INT,
-  userFacebookID INT UNIQUE,
+  userGoogleID VARCHAR(50),
   username   VARCHAR(50),
   PRIMARY KEY (userGoogleID),
   FOREIGN KEY (username) REFERENCES inFoJaxs_User (username)
