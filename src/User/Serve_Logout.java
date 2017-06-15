@@ -24,7 +24,7 @@ public class Serve_Logout extends HttpServlet {
             HttpSession session = req.getSession();
             session.removeAttribute("username");
             session.removeAttribute("loggingStatus");
-            req.setAttribute("message","Log out successfully! Hope to see you again");
+            req.setAttribute("message","Logged out. Hope to see you again!");
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login_interface/Login.jsp");
             dispatcher.forward(req, resp);
         }
