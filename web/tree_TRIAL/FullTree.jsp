@@ -21,6 +21,7 @@
     <%
         if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
         String username = (String) session.getAttribute("username");
+        request.setAttribute("username", username);
 
     %>
     <script>
@@ -339,7 +340,8 @@
                                         <td>
                                             <ul>
                                                 <c:forEach var="reaction" items="${reaction_for}">
-                                                    <li>${reaction.text}</li>
+                                                    <li>${reaction.author}: ${reaction.text}</li>
+                                                    <c:if test = "${( reaction.author == username) ||( tree.author == username)}">
                                                     <form class="reaction_editor" id="reactionEditorForID${reaction.id}"
                                                           action="<%= sitePath%>tree_TRIAL/Reaction_editor.jsp"
                                                           method="get" style="display: inline-block">
@@ -365,13 +367,15 @@
                                                                 class="btn btn-danger"><i class="fa">&#xf014;</i> Delete
                                                         </button>
                                                     </form>
+                                                </c:if>
                                                 </c:forEach>
                                             </ul>
                                         </td>
                                         <td>
                                             <ul>
                                                 <c:forEach var="reaction" items="${reaction_against}">
-                                                    <li>${reaction.text}</li>
+                                                    <li>${reaction.author}: ${reaction.text}</li>
+                                                    <c:if test = "${(reaction.author == username) ||( tree.author == username)}">
                                                     <form class="reaction_editor" id="reactionEditorAgainstID${reaction.id}"
                                                           action="<%= sitePath%>tree_TRIAL/Reaction_editor.jsp"
                                                           method="get" style="display: inline-block">
@@ -397,6 +401,7 @@
                                                                 class="btn btn-danger"><i class="fa">&#xf014;</i> Delete
                                                         </button>
                                                     </form>
+                                                    </c:if>
                                                 </c:forEach>
                                             </ul>
                                         </td>

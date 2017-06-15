@@ -76,7 +76,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form action="/Serve_TreeCreation" METHOD="get" id="plantFormID">
+                                <form action="<%= sitePath%>Serve_TreeCreation" METHOD="get" id="plantFormID">
                                     <fieldset>
                                         <legend>The Name of your Big Issue:</legend>
                                         <div class="form-group">
@@ -113,9 +113,10 @@
                             </div>
                         </div>
                     </div>
+                    <div id="loader"><img src="<%=sitePath%>tree_TRIAL/Tree_Material/tree-leaf-gif.gif"></div>
                     <iframe class="whole" name="iframe_a" id="myiframe" src="ForestTribe.jsp" frameborder=0
                             height="750px"
-                            width="1000px" scrolling="auto" style="display: block; margin: auto">
+                            width="1000px" scrolling="auto" onload="StopLoader()" style="display: block; margin: auto">
                         <p>Your browser does not support iframes.</p>
                     </iframe>
                 </div>
