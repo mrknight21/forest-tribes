@@ -1,7 +1,7 @@
 <%@include file="../Rootpath_Toggle.jsp"%>
 <style>
     .full {
-        background: url('<%=sitePath%>login_interface/lake-baikal-9.jpg') no-repeat center center fixed;
+        background: url('<%=sitePath%>article_display/background_04.jpg') no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         background-size: cover;
