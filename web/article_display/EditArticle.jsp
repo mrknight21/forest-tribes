@@ -39,6 +39,9 @@
     int articleId = Integer.parseInt(request.getParameter("articleId"));
     Article article = ArticleDAO.getArticleById(DB, articleId);
 
+    if (!article.getAuthor().equals(username)) {
+        response.sendRedirect("../article_display/DisplayAllArticles.jsp");
+    }
 
 //    Add script to increase Article views by one one each load.
     request.setAttribute("article", article);
