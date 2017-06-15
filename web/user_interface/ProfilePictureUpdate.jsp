@@ -73,7 +73,7 @@
                                 </legend>
                                 <a href="<%=imagePath%>"><img id="userImageID" src="<%=imagePath%>"
                                                               class="img-rounded"
-                                                              alt="User Profile Picture" height="400"></a>
+                                                              alt="User Profile Picture" style="height: 50%"></a>
                             </fieldset>
                         </div>
                     </div>
@@ -214,7 +214,7 @@
                                     <div id="changePictureDefaultDivID" class="col-lg-12">
                                         <input type="submit" name="changePictureDefault"
                                                id="changePictureDefaultSubmitID"
-                                               class="btn btn-success btn-block"
+                                               class="btn btn-primary btn-block"
                                                value="Change profile picture">
                                     </div>
                                 </fieldset>
@@ -234,7 +234,7 @@
                                     <br>
                                     <div class="col-lg-12">
                                         <input type="submit" name="changePictureUpload" id="changePictureUploadSubmitID"
-                                               class="btn btn-block btn-success"
+                                               class="btn btn-block btn-primary"
                                                value="Change profile picture" disabled>
                                     </div>
                                 </fieldset>

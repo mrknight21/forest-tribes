@@ -90,18 +90,14 @@
                         </div>
                         <div class="panel-body" style="padding-top: 0">
                             <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="row form-group">
+                                <div class="col-lg-12" style="padding: 0">
+                                    <div class="form-group">
                                         <input id="articleContentInputID" name="text" type="hidden">
                                         <div id="editor-container" style="height:375px"></div>
+                                        <div class="col-lg-12">
+                                            <input type="submit" class="btn btn-block btn-success" name="createArticle" value="Publish your article" style="margin-top: 2%">
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-footer">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <input type="submit" class="form-control btn btn-login" name="createArticle" value="Publish your article">
                                 </div>
                             </div>
                         </div>

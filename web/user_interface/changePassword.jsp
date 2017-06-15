@@ -81,7 +81,7 @@
                                             <div class="col-lg-12">
                                                 <input type="submit" name="changeSubmit" id="changePasswordSubmitID"
                                                        tabindex="4"
-                                                       class="btn btn-block btn-success" value="Change your password">
+                                                       class="btn btn-block btn-primary" value="Change your password">
                                             </div>
                                         </div>
                                     </div>

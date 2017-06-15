@@ -34,18 +34,6 @@
             color: #029f5b;
         }
 
-        .btn-login {
-            background-color: #008975;
-            outline: none;
-            color: white;
-            font-size: 14px;
-            height: auto;
-            font-weight: normal;
-            padding: 14px 0;
-            text-transform: uppercase;
-            border-color: #008975;
-        }
-
         .panel {
             margin-top: 2%;
         }

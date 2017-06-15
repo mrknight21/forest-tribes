@@ -24,8 +24,7 @@
             $("#screen_expand").click(function (event){
                 this.css("display", "none");
                 this.css("pointer-events", "none");
-            })
-
+            });
 
             $(document).mousemove(function (event) {
                 var zoom = $("body").css("zoom");
@@ -83,7 +82,7 @@
         <input type="hidden" value="0" id="X">
         <input type="hidden" value="0" id="Y">
     </form>
-    <p style="position: fixed; top: 0%; color: seashell; font-family: 'Californian FB'; font-size: xx-large; z-index: 999">Coordinate: <span id="coordinate" ></span></p>
+    <p style="position: fixed; top: 0%; color: white; font-family: Futura, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: xx-large; z-index: 999">Coordinate: <span id="coordinate" ></span></p>
 
 
 

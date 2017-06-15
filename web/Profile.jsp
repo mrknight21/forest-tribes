@@ -170,7 +170,7 @@
                                 <form id="profileChangePPFormID" action="<%=sitePath%>Serve_UpdateProfilePicture"
                                       method="post"><input type="submit"
                                                            value="Change Profile Picture"
-                                                           class="btn btn-success btn-block">
+                                                           class="btn btn-primary btn-block">
                                 </form>
                             </fieldset>
                             <br>
@@ -192,7 +192,7 @@
                                 <form id="profileChangePWFormID" action="<%=sitePath%>Serve_Changepassword"
                                       method="post"><input type="submit"
                                                            value="Change Password"
-                                                           class="btn btn-success btn-block">
+                                                           class="btn btn-primary btn-block">
                                 </form>
                             </fieldset>
                             <br>
@@ -470,7 +470,7 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <input type="submit" name="profileUpdateSubmit" id="profileUpdateSubmitID"
-                                               class="btn btn-success btn-block"
+                                               class="btn btn-primary btn-block"
                                                value="Update your Profile">
                                     </div>
                                 </div>

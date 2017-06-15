@@ -47,17 +47,6 @@
             border-color: transparent;
         }
 
-        .btn-register {
-            background-color: #008975;
-            outline: none;
-            color: white;
-            height: auto;
-            font-weight: normal;
-            padding: 14px 0;
-            text-transform: uppercase;
-            border-color: #008975;
-        }
-
         .form-control[disabled] {
             background-color: #008975;
             opacity: 1;
@@ -68,23 +57,8 @@
             padding-left: 0;
         }
 
-        label.btn.btn-primary {
-            width: 180px;
-            height: 160px;
-        }
-
-        input.btn.btn-primary {
-            max-width: 190px;
-        }
-
         label {
             max-width: none;
-        }
-
-        .btn-primary {
-            color: black;
-            background-color: #f6f6f6;
-            border: 1px solid #c5c5c5;
         }
 
         .btn-primary:hover {
