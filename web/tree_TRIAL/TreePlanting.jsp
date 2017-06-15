@@ -9,9 +9,11 @@
 <html>
 <head>
     <title>Plant your tree</title>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <%@include file="../WEB-INF/Head_Scripts.jsp"%>
+    <%@include file="../WEB-INF/Mapviewer.jsp"%>
     <script>
         $( function() {
+
             $("#seed").click(function () {
                 console.log("click");
                 $("body").css("cursor", "url(\"Tree_Material/sprout_hand.png\"), default");
@@ -20,14 +22,14 @@
                 $(this).css("pointer-events", "none");
                 $("#myiframe").contents().find("#map").click(function () {
 
-                    var X = $("#myiframe").contents().find("#X").val();
-                    var Y = $("#myiframe").contents().find("#Y").val();
+                    var X = $("#myiframe").contents().find("#Y").val();
+                    var Y = $("#myiframe").contents().find("#X").val();
                     var Xcoor = X + "px";
                     var Ycoor = Y + "px";
-                    $("#myiframe").contents().find("#map").append("<img src='Tree_Material/stage_01.png' id='new_seed' style='-webkit-transform: scale(0.5);-moz-transform: scale(0.5);-ms-transform: scale(0.5);-o-transform: scale(0.5);transform: scale(0.5);'>");
-                    $("#myiframe").contents().find("#new_seed").css("top", Xcoor).css("left", Ycoor).css("position", "absolute");
-                    $("#Xcoordinate").val(Y);
-                    $("#Ycoordinate").val(X);
+                    $("#myiframe").contents().find("#map").append("<img src='Tree_Material/stage_01.png' id='new_seed' style='-webkit-transform: scale(0.75);-moz-transform: scale(0.75);-ms-transform: scale(0.75);-o-transform: scale(0.75);transform: scale(0.75);'>");
+                    $("#myiframe").contents().find("#new_seed").css("top", Ycoor).css("left", Xcoor).css("position", "absolute");
+                    $("#Xcoordinate").val(X);
+                    $("#Ycoordinate").val(Y);
                     $(this).off("click");
                     $("body").css("cursor", "");
                     $("#myiframe").contents().find("#map").css("cursor", "");
@@ -88,10 +90,18 @@
     <input type="submit" value="Confirm location, and go further tree editing">
     <input id="restart" type="reset" value="Click to restart planting">
 </form>
-<p></p>
-<iframe class="whole"  name="iframe_a" id="myiframe" src="ForestTribe.jsp" frameborder=0 height="750px" width="1000px" scrolling="auto">
+
+    <div slider container style="position:relative; float: left; z-index: 999">
+        <label for="zoom-control"  style="color: brown;font-size: xx-large; font-family: 'Californian FB';">Zoom Control: <em id="zoom-control-lable"></em></label>
+        <div class="slider" id="zoom-control"></div>
+    </div>
+
+<div id="iframe_container" >
+    <div id="loader"></div>
+<iframe onload="StopLoader()"class="whole"  name="iframe_a" id="myiframe" src="ForestTribe.jsp" frameborder=0 height="750px" width="1000px" scrolling="auto" style="width: 100%">
     <p>Your browser does not support iframes.</p>
 </iframe>
+</div>
 
 
 </body>

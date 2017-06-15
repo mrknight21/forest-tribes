@@ -31,27 +31,25 @@
 
 
 
+
         $(document).ready(function () {
+
+
             $(document).mousemove(function (event) {
-                $("#X").val(event.pageY);
-                $("#Y").val(event.pageX);
-                $("span").text("X: " + event.pageX + ", Y: " + event.pageY);
+                var zoom = $("body").css("zoom");
+                var x = (event.pageY/zoom).toFixed(2);
+                var y = (event.pageX/zoom).toFixed(2);
+
+
+                $("#X").val(x);
+                $("#Y").val(y);
+
+                $("#coordinate").text("X: " + x + ", Y: " + y);
             });
         });
 
 
 
-        $(".slider").css("margin","10px").css("width","400px");
-        $("#zoom-control").slider({
-            value: 100,
-            min: 20,
-            max: 200,
-            step: 10,
-            slide: function (event, ui) {
-                var zoom = ui.value+ "%" ;
-                $("body").css("zoom", zoom)
-            }
-        });
 
 
 
@@ -80,6 +78,10 @@
             background-image: url("Tree_Material/Mars.jpg");
             zoom: 100%;
         }
+
+
+
+
     </style>
 </head>
 <body>
@@ -88,20 +90,16 @@
 
 
 
+
+
     <form>
         <input type="hidden" value="0" id="X">
         <input type="hidden" value="0" id="Y">
     </form>
-    <div style="position:fixed; color: seashell; top: 0px; font-size: xx-large; font-family: 'Californian FB'">
-        <p>The Current position is : <span></span></p>
-    </div>
+    <p style="position: fixed; top: 0%; color: seashell; font-family: 'Californian FB'; font-size: x-large">Coordinate: <span id="coordinate" ></span></p>
 
-    <form>
-        <div slider container style="position:fixed; top: 0%; left: 35%;">
-            <label for="zoom-control" style="color: seashell;font-size: xx-large; font-family: 'Californian FB';">Zoom Control:</label>
-            <div class="slider" id="zoom-control"></div>
-        </div>
-    </form>
+
+
 
     <a href="#top_right_portal" target="iframe_a"><img id="top_left_portal"
                                                        src="<%=sitePath%>tree_TRIAL/Tree_Material/Portal.png"

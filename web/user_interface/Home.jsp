@@ -16,6 +16,9 @@
 
     <%--Importing all necessary libraries, frameworks etc.--%>
     <%@include file="../WEB-INF/Head_Scripts.jsp"%>
+    <%@include file="../WEB-INF/Mapviewer.jsp"%>
+
+
 
 </head>
 <body>
@@ -23,12 +26,24 @@
 
 <p>Hi <%= username%></p>
 <p>${message}</p>
-<a href="<%=sitePath%>user_interface/changePassword.jsp"><button>Change Password</button></a>
-<a href="<%=sitePath%>Serve_Logout"><button>Log Out</button></a>
 
-<iframe name="iframe_a" src="<%=sitePath%>tree_TRIAL/ForestTribe.jsp" frameborder=0 width="100%" height="900px" scrolling="auto">
+
+
+
+
+<form>
+    <div slider container style="position:relative; top: 0%; left: 35%; z-index: 999">
+        <label for="zoom-control"  style="color: brown;font-size: xx-large; font-family: 'Californian FB';">Zoom Control: <em id="zoom-control-lable"></em></label>
+        <div class="slider" id="zoom-control"></div>
+    </div>
+</form>
+
+<div id="iframe_container" >
+    <div id="loader"></div>
+<iframe  onload="StopLoader()" id="myiframe" name="iframe_a" src="<%=sitePath%>tree_TRIAL/ForestTribe.jsp" frameborder=0 width="100%" height="900px" scrolling="auto">
     <p>Your browser does not support iframes.</p>
 </iframe>
+</div>
 
 </body>
 </html>
