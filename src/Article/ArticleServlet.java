@@ -80,6 +80,7 @@ public class ArticleServlet extends HttpServlet {
                         }
                     else if (parameter.startsWith("update")) {
                         id = Integer.parseInt(request.getParameter("id"));
+                        System.out.println(id);
                         switch (parameter) {
                             case "updateArticle":
                                 editArticle(request);
@@ -119,7 +120,9 @@ public class ArticleServlet extends HttpServlet {
 
                     }
                 }
-                getServletContext().getRequestDispatcher("/article_display/DisplayFullArticle.jsp").forward(request, response);
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/article_display/DisplayFullArticle.jsp");
+                dispatcher.forward(request, response);
+//                getServletContext().getRequestDispatcher("/article_display/DisplayFullArticle.jsp").forward(request, response);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -181,11 +184,11 @@ public class ArticleServlet extends HttpServlet {
 
     private boolean editArticle(HttpServletRequest request) {
         if (getUsername(request).equals(getArticleById(DB, id).getAuthor()))
-            updateArticle(
+        updateArticle(
                     DB,
-                    new Article(request.getParameter("id"),
-                            request.getParameter("title"),
+                    new Article(Integer.parseInt(request.getParameter("id")),
                             request.getParameter("text"),
+                            request.getParameter("title"),
                             request.getParameter("summary")));
         return true;
     }

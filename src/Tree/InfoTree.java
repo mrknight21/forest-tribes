@@ -159,8 +159,8 @@ public InfoTree(int id, String username, String title,String introText, int like
 
     private void calculateExp(){
         int exp = this.factual.size()*100 + this.commentary.size()*100+this.reactoin.size()*20;
-        if (exp > 4000){
-            this.exp =4000;
+        if (exp > 6000){
+            this.exp =6000;
             return;
         }
         this.exp =exp;
@@ -184,22 +184,35 @@ public InfoTree(int id, String username, String title,String introText, int like
            this.stage =3;
            return;
        }
-       else if(this.exp >2000){
+       if(this.exp >2000 & this.exp<3000){
            this.stage = 4;
+           return;
        }
+        if(this.exp >3000 & this.exp<4500){
+            this.stage = 5;
+            return;
+        }
+        if(this.exp >4500 ){
+            this.stage = 6;
+            return;
+        }
     }
 
     //calculate size
     private void calculateSize(){
         switch (this.stage){
-            case 1: this.size = 150*(this.exp/500)+50;
-                break;
-            case 2: this.size =150*((this.exp-500)/500)+50;
-                break;
-            case 3:this.size =150*((this.exp-1000)/1000)+50;
-                break;
-            case 4: this.size =150*((this.exp-2000)/2000)+50;
-                break;
+            case 1: this.size = (int)(100.0*(this.exp/500.0)+50.0);
+            return;
+            case 2: this.size =(int)(120.0*((this.exp-500.0)/500.0)+50.0);
+                return;
+            case 3:this.size =(int)(130.0*((this.exp-1000.0)/1000.0)+50.0);
+                return;
+            case 4: this.size =(int)(130.0*((double)(this.exp-2000.0)/1000.0)+50.0);
+                return;
+            case 5: this.size =(int)(130.0*((double)(this.exp-3000.0)/1000.0)+50.0);
+                return;
+            case 6:this.size =(int)(130.0*((double)(this.exp-4000.0)/1000.0)+50.0);
+                return;
         }
 
     }

@@ -3,6 +3,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="Tree.TreeDAO" %>
 <%@ page import="Utility.MySQL" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -15,8 +17,20 @@
 
     <%--Importing all necessary libraries, frameworks etc.--%>
     <%@include file="../WEB-INF/Head_Scripts.jsp" %>
-
     <script>
+
+
+
+
+
+
+
+
+
+
+
+
+
         $(document).ready(function () {
             $(document).mousemove(function (event) {
                 $("#X").val(event.pageY);
@@ -24,6 +38,22 @@
                 $("span").text("X: " + event.pageX + ", Y: " + event.pageY);
             });
         });
+
+
+
+        $(".slider").css("margin","10px").css("width","400px");
+        $("#zoom-control").slider({
+            value: 100,
+            min: 20,
+            max: 200,
+            step: 10,
+            slide: function (event, ui) {
+                var zoom = ui.value+ "%" ;
+                $("body").css("zoom", zoom)
+            }
+        });
+
+
 
         function revealDiv(id) {
             var search = id.search(/\d/);
@@ -55,13 +85,23 @@
 <body>
 <div id="map" style=" width: 10000px; height: 10000px;">
 
+
+
+
     <form>
         <input type="hidden" value="0" id="X">
         <input type="hidden" value="0" id="Y">
     </form>
-    <div style="position:fixed; color: gold; top: 0px; background-color: white; font-size: xx-large">
-        <p>The mouse pointer position is at: <span></span></p>
+    <div style="position:fixed; color: seashell; top: 0px; font-size: xx-large; font-family: 'Californian FB'">
+        <p>The Current position is : <span></span></p>
     </div>
+
+    <form>
+        <div slider container style="position:fixed; top: 0%; left: 35%;">
+            <label for="zoom-control" style="color: seashell;font-size: xx-large; font-family: 'Californian FB';">Zoom Control:</label>
+            <div class="slider" id="zoom-control"></div>
+        </div>
+    </form>
 
     <a href="#top_right_portal" target="iframe_a"><img id="top_left_portal"
                                                        src="<%=sitePath%>tree_TRIAL/Tree_Material/Portal.png"
@@ -101,6 +141,8 @@
     <%
         MySQL DB = new MySQL();
         List<InfoTree> trees = new ArrayList<>();
+        Map<Integer, Integer> userTreesID = new HashMap<>();
+        String username = (String)session.getAttribute("username");
         trees = TreeDAO.geAllInfoTrees(DB);
 
 
@@ -129,19 +171,24 @@
             String title = tree.getTitle();
             String author = tree.getAuthor();
             int stage = tree.getStage();
-            double size = tree.getSize() / 100;
+            String size = tree.getSize()+"%";
+            System.out.println(size);
             int X = tree.getCoordinX();
             int Y = tree.getCoordinY();
             int likes = tree.getLikes();
             int views = tree.getViews();
             int ID = tree.getId();
+            if(username.equals(author)){
+                userTreesID.put(ID, stage);
+            }
+
     %>
-    <div class="container" id="treeContainerID<%= ID%>" style="position: absolute; top: <%=Y%>px; left: <%=X%>px;">
+    <div class="tree_container" id="treeContainerID<%= ID%>" style="position: absolute; top: <%=Y%>px; left: <%=X%>px;">
         <div id="imageContainerID<%= ID%>">
             <a href="/Serve_FullTree?TreeID=<%=ID%>"><img id="treeImageID<%= ID%>" onmouseover="revealDiv(this.id);" onmouseout="hideDiv(this.id);"
-                    src="<%= sitePath%>tree_TRIAL/Tree_Material/Venusaur_stage_<%=stage%>.png"></a>
+                    src="<%= sitePath%>tree_TRIAL/Tree_Material/stage_0<%=stage%>.png" style="zoom: <%=size%>"></a>
         </div>
-        <div class="panel panel-default" id="infoContainerID<%= ID%>" style="display: none; width: 200px; border-color: #008975;">
+        <div class="panel panel-default" id="infoContainerID<%= ID%>" style="display: none;  border-color: #008975;">
             <div class="panel-heading" style="background-color: #008975; border-color: #00AA8D; color: white;">
                 <p style="font-family: Futura; word-wrap: break-word;"><%=title%></p>
             </div>
@@ -155,8 +202,20 @@
             </div>
         </div>
     </div>
-    <%}%>
+    <%}
 
+
+
+    if (userTreesID.size() != 0){
+    %>
+    <div id="userTressBar" style="position: fixed; left:0%; top:10%; width:200px;">
+        <% for(Map.Entry<Integer, Integer> tree : userTreesID.entrySet()){ %>
+        <div class=" small_tree_container">
+            <a href="#treeContainerID<%=tree.getKey()%>"><img src="<%= sitePath%>tree_TRIAL/Tree_Material/stage_0<%=tree.getValue()%>.png" width="75px"></a>
+        </div>
+        <%}
+        }%>
+    </div>
 </div>
 </body>
 </html>
