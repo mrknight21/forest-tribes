@@ -63,6 +63,7 @@
         replies = reaction.getReplies();
     }
 %>
+
 <%@ include file="../WEB-INF/Header_Navbar.jsp" %>
 
 <div class="container">
@@ -76,8 +77,7 @@
                                 <h3><%=author%>'s Reaction</h3>
 
                                 <% if (!lastEdit.equals("")) {%>
-                                <p style="color: white">Last Edited: <%=lastEdit%>
-                                </p>
+                                <p style="color: white">Last Edited: <%=lastEdit%></p>
                                 <%}%>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                                         </div>
                                         <legend><i class="fa">&#xf0e5;</i> Have your say:</legend>
                                         <div class="form-group">
-                                            <textarea id="description" name="content" rows="7"
+                                            <textarea id="descriptionID" name="content" rows="7"
                                                       cols="90"><%=text%></textarea required>
                                             <input type="hidden" name="reactionID" value="<%=reactionID%>">
                                             <input type="hidden" name="TreeID" value="<%=TreeID%>">
