@@ -76,7 +76,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form action="/Serve_TreeCreation" METHOD="get" id="plantFormID">
+                                <form action="<%= sitePath%>Serve_TreeCreation" METHOD="get" id="plantFormID">
                                     <fieldset>
                                         <legend>The Name of your Big Issue:</legend>
                                         <div class="form-group">
