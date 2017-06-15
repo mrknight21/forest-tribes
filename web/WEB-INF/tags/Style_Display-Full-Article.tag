@@ -23,7 +23,7 @@
     }
 
     h4, h5 {
-        font-family: Futura;
+        font-family: Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
         color: white;
     }
 

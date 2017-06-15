@@ -183,7 +183,7 @@
     h1 {
         margin-top: 0;
         margin-bottom: 10px;
-        font-family: 'Plump';
+        font-family: 'Plump', Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
         color: #029f5b;
     }
 
@@ -193,7 +193,7 @@
     }
 
     #loginFormLink, #registrationFormLink {
-        font-family: Futura;
+        font-family: Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 
     .panel-body {
@@ -205,7 +205,7 @@
     }
 
     .btn-login, .btn-register {
-        background-color: #029f5b;
+        background-color: #008975;
         outline: none;
         color: white;
         font-size: 14px;
@@ -213,7 +213,7 @@
         font-weight: normal;
         padding: 14px 0;
         text-transform: uppercase;
-        border-color: #029f5b;
+        border-color: #008975;
     }
 
     .btn-primary.active, .btn-primary.active:hover, .btn-primary.active:focus {
@@ -238,7 +238,7 @@
 
     .panel-login > .panel-heading a {
         text-decoration: none;
-        color: #029f5b;
+        color: #008975;
         font-weight: bold;
         font-size: 15px;
         -webkit-transition: all 0.1s linear;
@@ -247,7 +247,7 @@
     }
 
     .panel-login > .panel-heading a.active {
-        color: #029f5b;
+        color: #008975;
         font-size: 18px;
     }
 
@@ -267,11 +267,11 @@
 
     #messageLogin, #registrationMessageID {
         color: red;
-        font-family: Futura;
+        font-family: Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;;
     }
 
     .form-control[disabled] {
-        background-color: #029f5b;
+        background-color: #008975;
         opacity: 1;
     }
 

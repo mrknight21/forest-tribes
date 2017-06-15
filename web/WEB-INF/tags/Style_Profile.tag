@@ -25,8 +25,8 @@
         h1 {
             margin-top: 0px;
             margin-bottom: 10px;
-            font-family: 'Plump';
-            color: #029f5b;
+            font-family: 'Plump', Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #008975;
         }
 
         h4 {
@@ -51,14 +51,14 @@
         }
 
         h5 {
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-family: Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
             line-height: 1.42857143;
             color: #333;
             font-weight: 700;
         }
 
         .btn-register {
-            background-color: #029f5b;
+            background-color: #008975;
             outline: none;
             color: #fff;
             font-size: 14px;
@@ -66,7 +66,7 @@
             font-weight: normal;
             padding: 14px 0;
             text-transform: uppercase;
-            border-color: #029f5b;
+            border-color: #008975;
         }
 
         .control-label {
@@ -78,8 +78,8 @@
         }
 
         .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
-            background-color: #029f5b;
-            border-color: #1A9B42;
+            background-color: #008975;
+            border-color: #008975;
         }
 
         .ui-icon-background, .ui-state-active .ui-icon-background {
@@ -96,7 +96,7 @@
         }
 
         #profileUpdateLink, #profileDeleteLink {
-            font-family: Futura;
+            font-family: Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
 
         .thumbnail {
@@ -124,12 +124,12 @@
         }
 
         #profileDeleteWarningID, #profileMessageID, #statusMessage {
-            font-family: Futura;
+            font-family: Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
             color: red;
         }
 
         .form-control[disabled] {
-            background-color: #029f5b;
+            background-color: #008975;
             opacity: 1;
         }
     </style>

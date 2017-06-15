@@ -50,7 +50,7 @@
     }
 
     legend {
-        font-family: Futura;
+        font-family: Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;;
         margin-bottom: 0;
     }
 </style>

@@ -36,7 +36,7 @@
         h1 {
             margin-top: 0;
             margin-bottom: 10px;
-            font-family: 'Plump';
+            font-family: 'Plump', Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
             color: #029f5b;
         }
 
@@ -46,7 +46,7 @@
         }
 
         .btn-login {
-            background-color: #029f5b;
+            background-color: #008975;
             outline: none;
             color: white;
             font-size: 14px;
@@ -54,7 +54,7 @@
             font-weight: normal;
             padding: 14px 0;
             text-transform: uppercase;
-            border-color: #029f5b;
+            border-color: #008975;
         }
 
         .panel {
@@ -73,7 +73,7 @@
         }
 
         #changePasswordMessageID {
-            font-family: Plump;
+            font-family: Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
             color: red;
         }
 

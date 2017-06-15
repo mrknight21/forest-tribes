@@ -18,12 +18,12 @@
         }
 
         h3, h4 {
-            font-family: Futura;
+            font-family: Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
             color: white;
         }
 
         th {
-            font-family: Futura;
+            font-family: Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
             font-weight: normal;
         }
 
