@@ -31,8 +31,8 @@ public class Serve_TreeCreation extends HttpServlet{
             }
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
-        int Xcoor = Integer.parseInt(request.getParameter("X"));
-        int Ycoor = Integer.parseInt(request.getParameter("Y"));
+        int Xcoor = (int) Double.parseDouble(request.getParameter("X"));
+        int Ycoor = (int) Double.parseDouble(request.getParameter("Y"));
         String title = request.getParameter("title");
         String shorIntro = request.getParameter("shortIntro");
 

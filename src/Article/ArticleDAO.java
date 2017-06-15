@@ -138,93 +138,38 @@ public class ArticleDAO {
         return replies;
     }
 
-    ///////////Create new Text ///////////////////////////////////////////////////////////////////
-
-    public static boolean createNewArticle(AbstractDB db, Article article) {
-        boolean success;
-
-        try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_Articles (username, title, content, shortIntro) VALUE (?, ?, ?, ?)")) {
-                p.setString(1, article.getAuthor());
-                p.setString(2, article.getTitle());
-                p.setString(3, article.getText());
-                p.setString(4, article.getShortIntro());
-                p.executeUpdate();
-                success = true;
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            success = false;
-        }
-        return success;
-
-    }
-
-    public static boolean createNewComment(AbstractDB db, Comment comment) {
-        boolean success;
-        //Comment(String author, String text, int parentID)//
-        try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_Comments (parent_ID, username,content, likes, views, repliesCount) VALUE ( ?, ?, ?, ?, ?, ?)")) {
-                p.setInt(1, comment.getParentID());
-                p.setString(2, comment.getAuthor());
-                p.setString(3, comment.getText());
-                p.setInt(4, comment.getLikes());
-                p.setInt(5, comment.getViews());
-                p.setInt(6, comment.getReplyCount());
-
-                p.executeUpdate();
-                success = true;
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            success = false;
-        }
-        return success;
-
-    }
-
-    public static boolean createNewReply(AbstractDB db, Reply reply) {
-        boolean success;
-        //Comment(String author, String text, int parentID)//
-        try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_Replies (parent_ID, username,content) VALUE (?, ?, ?)")) {
-                p.setInt(1, reply.getParentID());
-                p.setString(2, reply.getAuthor());
-                p.setString(3, reply.getText());
-                p.executeUpdate();
-                success = true;
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            success = false;
-        }
-        return success;
-
-    }
 
     // Method to insert a parsed-in Article, Comment & Reply into the database.
     public static boolean createNewText(AbstractDB db, Text newText, int parentId) {
-        String statement = "INSERT INTO #1 (#2, username, content) VALUE (?, ?, ?)";
+        String statement1 = "INSERT INTO #1 (username, content, #2";
+        String injection1 = "";
+        String statement2 = ") VALUE (?, ?, ?";
+        String injection2 = "";
+        String statement3 = ")";
+
         if (parentId == -1) {
-            statement = statement.replaceFirst("#1", "inFoJaxs_Articles");
-            statement = statement.replaceFirst("#2", "title");
+            statement1 = statement1.replaceFirst("#1", "inFoJaxs_Articles");
+            statement1 = statement1.replaceFirst("#2", "title");
+            injection1 = ", shortIntro";
+            injection2 = ", ?";
         } else {
             if (newText instanceof Comment)
-                statement = statement.replaceFirst("#1","inFoJaxs_Comments");
+                statement1 = statement1.replaceFirst("#1","inFoJaxs_Comments");
             else if (newText instanceof Reply)
-                statement = statement.replaceFirst("#1","inFoJaxs_Replies");
-            statement = statement.replaceFirst("#2","parent_ID");
+                statement1 = statement1.replaceFirst("#1","inFoJaxs_Replies");
+            statement1 = statement1.replaceFirst("#2","parent_ID");
         }
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement(statement)) {
+            try (PreparedStatement p = c.prepareStatement(statement1 + injection1 + statement2 + injection2 + statement3)) {
+
                 if (parentId == -1) {
-                    p.setString(1, ((Article) newText).getTitle());
-                } else {
-                    p.setInt(1, parentId);
-                }
-                p.setString(2, newText.getAuthor());
-                p.setString(3, newText.getText());
+                    p.setString(3, ((Article) newText).getTitle());
+                    p.setString(4, ((Article) newText).getShortIntro());
+                } else p.setInt(3, parentId);
+
+                p.setString(1, newText.getAuthor());
+                p.setString(2, newText.getText());
                 p.executeUpdate();
                 return true;
             }
@@ -360,7 +305,66 @@ public class ArticleDAO {
         return true;
     }
 
+    // Legacy create text methods
 
+
+    /*public static boolean createNewArticle(AbstractDB db, Article article) {
+        boolean success;
+
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_Articles (username, content, title, shortIntro) VALUE (?, ?, ?, ?)")) {
+                p.setString(1, article.getAuthor());
+                p.setString(2, article.getText());
+                p.setString(3, article.getTitle());
+                p.setString(4, article.getShortIntro());
+                p.executeUpdate();
+                success = true;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            success = false;
+        }
+        return success;
+
+    }
+
+    public static boolean createNewComment(AbstractDB db, Comment comment) {
+        boolean success;
+        //Comment(String author, String text, int parentID)//
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_Comments (parent_ID, username, content) VALUE ( ?, ?, ?)")) {
+                p.setInt(1, comment.getParentID());
+                p.setString(2, comment.getAuthor());
+                p.setString(3, comment.getText());
+                p.executeUpdate();
+                success = true;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            success = false;
+        }
+        return success;
+
+    }
+
+    public static boolean createNewReply(AbstractDB db, Reply reply) {
+        boolean success;
+        //Comment(String author, String text, int parentID)//
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_Replies (parent_ID, username, content) VALUE (?, ?, ?)")) {
+                p.setInt(1, reply.getParentID());
+                p.setString(2, reply.getAuthor());
+                p.setString(3, reply.getText());
+                p.executeUpdate();
+                success = true;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            success = false;
+        }
+        return success;
+
+    }*/
 
     // Legacy update text methods
 

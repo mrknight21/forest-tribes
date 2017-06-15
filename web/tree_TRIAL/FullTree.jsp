@@ -117,7 +117,7 @@
                                                         <li>${URLS.title}</li>
                                                     </a>
                                                     <form class="URL_editor" id="urlFactEditorForID${URLS.id}"
-                                                          action="/tree_TRIAL/URL_editor.jsp"
+                                                          action="<%=sitePath%>tree_TRIAL/URL_editor.jsp"
                                                           method="get" style="display: inline-block">
                                                         <input type="hidden" value="${URLS.id}" name="id">
                                                         <input type="hidden" value="factual" name="type">
@@ -131,7 +131,7 @@
                                                         </button>
                                                     </form>
                                                     <form class="URL_deleter" id="urlFactDeleterForID${URLS.id}"
-                                                          action="/Serve_DeleteTreeComponents"
+                                                          action="<%=sitePath%>Serve_DeleteTreeComponents"
                                                           method="get" style="display: inline-block">
                                                         <input type="hidden" value="${URLS.id}" name="id">
                                                         <input type="hidden" value="1" name="deletetype">

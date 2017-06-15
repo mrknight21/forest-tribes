@@ -92,7 +92,7 @@
                                     <input type="radio" name="id" value="${text.id}" checked hidden/>
                                     <input type="radio" name="parentId" value="<%=parentId%>" checked hidden/>
                                     <input type="radio" name="articleId" value="<%=articleId%>" checked hidden/>
-                                    <input type="submit" class="form-control btn btn-login" name="update<%=type%>" id="updateArticleSubmitID" value="Reform your life" disabled>
+                                    <input type="submit" class="form-control btn btn-login" name="update<%=type%>" id="updateArticleSubmitID" value="Make the change" disabled>
                                 </div>
                             </div>
                         </div>

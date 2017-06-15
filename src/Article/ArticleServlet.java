@@ -65,20 +65,23 @@ public class ArticleServlet extends HttpServlet {
 
                 chooser:
                 for (String parameter : params) {
-                    if (parameter.startsWith("create"))
-                        switch (parameter) {
-                            case "createArticle":
-                                createArticle(request);
-                                response.sendRedirect("article_display/DisplayUserAllArticles.jsp?author="+username);
-                                return;
-                            case "createComment":
-                                createComment(request);
-                                break chooser;
-                            case "createReply":
-                                createReply(request);
-                                break chooser;
+                    if (parameter.startsWith("create")) {
+                        if (parameter.endsWith("Article")) {
+                            createArticle(request);
+                            response.sendRedirect("article_display/DisplayUserAllArticles.jsp?author="+username);
+                            return;
+                        } else {
+                            id = Integer.parseInt(request.getParameter("parentId"));
+                            switch (parameter) {
+                                case "createComment":
+                                    createComment(request);
+                                    break chooser;
+                                case "createReply":
+                                    createReply(request);
+                                    break chooser;
+                            }
                         }
-                    else {
+                    } else {
                         if (parameter.startsWith("update")) {
                             id = Integer.parseInt(request.getParameter("id"));
                             System.out.println(id);
@@ -132,33 +135,36 @@ public class ArticleServlet extends HttpServlet {
     }
 
     private boolean createReply(HttpServletRequest request) {
-        createNewReply(
+        createNewText(
                 DB,
                 new Reply(
                         getUsername(request),
                         request.getParameter("text"),
-                        Integer.parseInt(request.getParameter("parentId"))));
+                        id),
+                id);
         return false;
     }
 
     private boolean createComment(HttpServletRequest request) {
-        createNewComment(
+        createNewText(
                 DB,
                 new Comment(
                         getUsername(request),
                         request.getParameter("text"),
-                        Integer.parseInt(request.getParameter("parentId"))));
+                        id),
+                id);
         return false;
     }
 
     private boolean createArticle(HttpServletRequest request) {
-        createNewArticle(
+        createNewText(
                 DB,
                 new Article(
                         getUsername(request),
                         request.getParameter("title"),
                         request.getParameter("text"),
-                        request.getParameter("summary")));
+                        request.getParameter("summary")),
+                -1);
         return true;
     }
 
