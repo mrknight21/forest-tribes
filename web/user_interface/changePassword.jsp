@@ -57,20 +57,20 @@
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                         <input type="password" id="changePasswordCurrentID" name="CurrentPassword"
-                                               class="form-control"
+                                               class="form-control" required
                                                placeholder="Current password" tabindex="1" value=""/>
                                     </div>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                         <input type="password" id="changePasswordNewID" name="NewPassword"
-                                               class="form-control"
+                                               class="form-control" required
                                                placeholder="New password" tabindex="2" value=""/>
                                     </div>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                         <input type="password" id="changePasswordConfirmID" name="ConfirmPassword"
                                                class="form-control"
-                                               placeholder="Confirm password" tabindex="3" value=""
+                                               placeholder="Confirm password" tabindex="3" value="" required
                                                onchange="checkPasswordMatch();"/>
                                     </div>
                                     <p id="changePasswordMessageID" style="text-align: center; display: none;">The
@@ -81,7 +81,7 @@
                                             <div class="col-lg-12">
                                                 <input type="submit" name="changeSubmit" id="changePasswordSubmitID"
                                                        tabindex="4"
-                                                       class="form-control btn btn-login" value="Change your password">
+                                                       class="btn btn-block btn-success" value="Change your password">
                                             </div>
                                         </div>
                                     </div>

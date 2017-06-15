@@ -214,7 +214,7 @@
                                     <div id="changePictureDefaultDivID" class="col-lg-12">
                                         <input type="submit" name="changePictureDefault"
                                                id="changePictureDefaultSubmitID"
-                                               class="form-control btn btn-register"
+                                               class="btn btn-success btn-block"
                                                value="Change profile picture">
                                     </div>
                                 </fieldset>
@@ -234,7 +234,7 @@
                                     <br>
                                     <div class="col-lg-12">
                                         <input type="submit" name="changePictureUpload" id="changePictureUploadSubmitID"
-                                               class="form-control btn btn-register"
+                                               class="btn btn-block btn-success"
                                                value="Change profile picture" disabled>
                                     </div>
                                 </fieldset>
