@@ -120,7 +120,9 @@ public class ArticleServlet extends HttpServlet {
 
                     }
                 }
-                getServletContext().getRequestDispatcher("/article_display/DisplayFullArticle.jsp").forward(request, response);
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/article_display/DisplayFullArticle.jsp");
+                dispatcher.forward(request, response);
+//                getServletContext().getRequestDispatcher("/article_display/DisplayFullArticle.jsp").forward(request, response);
             }
         } catch (IOException e) {
             e.printStackTrace();
