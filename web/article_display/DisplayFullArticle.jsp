@@ -161,6 +161,9 @@
                                                 <c:if test="${username.equals(comment.author)}">
                                                     <form action="<%=sitePath%>article_display/EditResponse.jsp" method="post"
                                                           style="display: inline-block; float: left; width: 48%; margin: 1%">
+                                                        <input type="radio" name="articleId" value="<%=articleId%>"
+                                                               checked
+                                                               hidden/>
                                                         <input type="radio" name="parentId" value="<%=articleId%>"
                                                                checked
                                                                hidden/>
@@ -249,7 +252,10 @@
                                                                 <c:if test="${username.equals(reply.author)}">
                                                                     <form action="<%=sitePath%>article_display/EditResponse.jsp"
                                                                           method="post" style="display: inline-block; float: left; width: 48%; margin: 1%">
-                                                                        <input type="radio" name="articleId"
+                                                                        <input type="radio" name="articleId" value="<%=articleId%>"
+                                                                               checked
+                                                                               hidden/>
+                                                                        <input type="radio" name="parentId"
                                                                                value="${comment.id}"
                                                                                checked hidden/>
                                                                         <input type="radio" name="id"

@@ -6,6 +6,7 @@
 <%@ page import="Article.ArticleDAO" %>
 <%@ page import="Article.Text" %>
 <%@ page import="Article.Comment" %>
+<%@ page import="Article.Reply" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -39,7 +40,8 @@
     final MySQL DB = new MySQL();
     int textId = Integer.parseInt(request.getParameter("id"));
     int parentId = -1;
-    String type = ""
+    int articleId = Integer.parseInt(request.getParameter("articleId"));
+    String type = "";
 
     Text reply = new Comment();
     if (request.getParameter("updateComment") != null) {
@@ -49,7 +51,7 @@
     }
     else if (request.getParameter("updateReply") != null) {
         reply = ArticleDAO.getReplyById(DB, textId);
-        parentId = ((Comment)reply).getParentID();
+        parentId = ((Reply)reply).getParentID();
         type = "Reply";
     }
 
@@ -65,15 +67,12 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-login">
-                <fieldset>
-                    <legend>Edit your article:</legend>
-                </fieldset>
                 <form id="articleFormID" action="<%= sitePath%>TextUpdate" method="post">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <h5>Ammend your ways: </h5>
+                                    <h5>Amend your ways: </h5>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +91,8 @@
                                 <div class="col-lg-12">
                                     <input type="radio" name="id" value="${text.id}" checked hidden/>
                                     <input type="radio" name="parentId" value="<%=parentId%>" checked hidden/>
-                                    <input type="submit" class="form-control btn btn-login" name="update<%=type%>" id="updateArticleSubmitID" value="Update your article" disabled>
+                                    <input type="radio" name="articleId" value="<%=articleId%>" checked hidden/>
+                                    <input type="submit" class="form-control btn btn-login" name="update<%=type%>" id="updateArticleSubmitID" value="Reform your life" disabled>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +109,7 @@
         modules: {
             toolbar: [
                 ['bold', 'italic'],
-                ['link', 'blockquote', 'code-block', 'image'],
+                ['link', 'blockquote', 'code-block',],
                 [{list: 'ordered'}, {list: 'bullet'}]
             ]
         },

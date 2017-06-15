@@ -244,14 +244,12 @@ public class ArticleDAO {
         int id = 3;
 
         if (text instanceof  Article) {
-            injection = ", title = ?, shortIntro = ?, ";
-            statement1.replaceFirst("#1", "inFoJaxs_Articles");
+            injection = ", title = ?, shortIntro = ? ";
+            statement1 = statement1.replaceFirst("#1", "inFoJaxs_Articles");
             article = true;
             id = 5;
-        } else {
-            if (text instanceof Comment) statement1.replaceFirst("#1","inFoJaxs_Comments");
-            else if (text instanceof Reply) statement1.replaceFirst("#1","inFoJaxs_Replies");
-        }
+        } else if (text instanceof Comment) statement1 = statement1.replaceFirst("#1","inFoJaxs_Comments");
+        else if (text instanceof Reply) statement1 = statement1.replaceFirst("#1","inFoJaxs_Replies");
 
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement(statement1 + injection + statement2)) {
