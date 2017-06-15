@@ -26,22 +26,12 @@
             margin-top: 0px;
             margin-bottom: 10px;
             font-family: 'Plump', Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
-            color: #008975;
-        }
-
-        h4 {
-            margin-bottom: 10px;
-            font-family: 'Amperzand';
+            color: #029f5b;
         }
 
         @font-face {
             font-family: Plump;
             src: url('<%=sitePath%>Fonts/Plumpfull.ttf');
-        }
-
-        @font-face {
-            font-family: Amperzand;
-            src: url('<%=sitePath%>Fonts/Amperzand.ttf');
         }
 
         legend {
@@ -55,18 +45,6 @@
             line-height: 1.42857143;
             color: #333;
             font-weight: 700;
-        }
-
-        .btn-register {
-            background-color: #008975;
-            outline: none;
-            color: #fff;
-            font-size: 14px;
-            height: auto;
-            font-weight: normal;
-            padding: 14px 0;
-            text-transform: uppercase;
-            border-color: #008975;
         }
 
         .control-label {
@@ -115,7 +93,7 @@
 
         .panel-login > .panel-heading a {
             text-decoration: none;
-            color: #029f5b;
+            color: #008975;
             font-weight: bold;
             font-size: 15px;
             -webkit-transition: all 0.1s linear;

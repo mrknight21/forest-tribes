@@ -18,12 +18,6 @@
         }
 
         @font-face {
-            font-family: Amperzand;
-            src: url('<%=sitePath%>Fonts/Amperzand.ttf');
-        }
-
-
-        @font-face {
             font-family: Futura;
             src: url('<%=sitePath%>Fonts/Futura.ttc');
         }
@@ -38,11 +32,6 @@
             margin-bottom: 10px;
             font-family: 'Plump', Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
             color: #029f5b;
-        }
-
-        h4 {
-            margin-bottom: 10px;
-            font-family: 'Amperzand';
         }
 
         .btn-login {

@@ -155,7 +155,6 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 style="text-align: center"><i class="fa">&#xf1bb;</i> Forest Tribes</h1>
-                            <h4 id="subtitle" style="text-align: center">The Beauty of Interconnectedness</h4>
                             <p id="statusMessage" style="text-align: center">${message}</p>
                             <fieldset id="profilePictureFieldsetID" class="span4">
                                 <legend><i class="fa">&#xf083;</i> Profile Picture</legend>
@@ -169,7 +168,7 @@
                                 <form id="profileChangePPFormID" action="<%=sitePath%>Serve_UpdateProfilePicture"
                                       method="post"><input type="submit"
                                                            value="Change Profile Picture"
-                                                           class="form-control btn btn-register">
+                                                           class="btn btn-success btn-block">
                                 </form>
                             </fieldset>
                             <br>
@@ -191,7 +190,7 @@
                                 <form id="profileChangePWFormID" action="<%=sitePath%>Serve_Changepassword"
                                       method="post"><input type="submit"
                                                            value="Change Password"
-                                                           class="form-control btn btn-register">
+                                                           class="btn btn-success btn-block">
                                 </form>
                             </fieldset>
                             <br>
@@ -469,7 +468,7 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <input type="submit" name="profileUpdateSubmit" id="profileUpdateSubmitID"
-                                               class="form-control btn btn-register"
+                                               class="btn btn-success btn-block"
                                                value="Update your Profile">
                                     </div>
                                 </div>
@@ -509,7 +508,7 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <input type="submit" name="profileDeleteSubmit" id="profileDeleteSubmitID"
-                                                   class="form-control btn btn-register"
+                                                   class="btn btn-block btn-danger"
                                                    value="Delete your profile">
                                         </div>
                                     </div>
