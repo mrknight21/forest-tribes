@@ -92,10 +92,10 @@
                             <div class="row">
                                 <div class="col-lg-12" style="padding: 0">
                                     <div class="form-group">
-                                        <input id="articleContentInputID" name="text" type="hidden">
+                                        <input id="articleContentInputID" name="text" type="hidden" required>
                                         <div id="editor-container" style="height:375px"></div>
                                         <div class="col-lg-12">
-                                            <input type="submit" class="btn btn-block btn-success" name="createArticle" value="Publish your article" style="margin-top: 2%">
+                                            <input type="submit" class="btn btn-block btn-success" name="createArticle" id="createArticleSubmitID" value="Publish your article" disabled style="margin-top: 2%">
                                         </div>
                                     </div>
                                 </div>
@@ -120,6 +120,10 @@
         },
         placeholder: 'Compose your article here',
         theme: 'snow'
+    });
+
+    quill.once("text-change", function(delta, oldDelta, source){
+        $("#createArticleSubmitID").prop('disabled', false);
     });
 
     quill.on("text-change", function(delta, oldDelta, source){
