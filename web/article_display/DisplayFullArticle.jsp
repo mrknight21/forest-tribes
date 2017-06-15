@@ -73,8 +73,8 @@
                     <div class="panel-footer" style="padding-bottom: 0">
                         <div class="row">
                             <div class="col-lg-12">
-                                <p style="display: inline-block"><i class="fa">&#xf2bd;</i>
-                                    Author: ${article.author}</p>
+                                <a href="<%=sitePath%>article_display/DisplayUserAllArticles.jsp?author=${article.author}" style="display: inline-block"><i class="fa">&#xf2bd;</i>
+                                    Author: ${article.author}</a>
                                 <p style="display: inline-block"><i class="fa">&#xf0c0;</i>
                                     Views: ${article.views}</p>
                                 <a href="#" onclick="revealComments()" style="display: inline-block"><i class="fa">&#xf112;</i>
@@ -148,8 +148,8 @@
                                 <div class="panel-footer">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <p style="display: inline-block"><i class="fa">&#xf2bd;</i>
-                                                User: ${comment.author}</p>
+                                            <a href="<%=sitePath%>article_display/DisplayUserAllArticles.jsp?author=${comment.author}"  style="display: inline-block"><i class="fa">&#xf2bd;</i>
+                                                User: ${comment.author}</a>
                                             <p style="display: inline-block"><i class="fa">&#xf087;</i>
                                                 Likes: ${comment.likes}</p>
                                             <a href="#" onclick="revealReplies${comment.id}()"
@@ -235,9 +235,9 @@
                                                                                  border-color: #00BF9A">
                                                     <div class="row">
                                                         <div class="col-lg-12">
-                                                            <p style="display: inline-block; color: white"><i
+                                                            <a href="<%=sitePath%>article_display/DisplayUserAllArticles.jsp?author=${reply.author}" style="display: inline-block; color: white"><i
                                                                     class="fa">&#xf2bd;</i>
-                                                                User: ${reply.author}</p>
+                                                                User: ${reply.author}</a>
                                                             <p style="display: inline-block; color: white"><i
                                                                     class="fa">&#xf087;</i>
                                                                 Likes: ${reply.likes}</p>
