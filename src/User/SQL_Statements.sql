@@ -143,6 +143,8 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_Replies (
     protected int likes;
     protected String text;
     protected int views;*/
+DELETE FROM inFoJaxs_Tree_Trees WHERE ID = 191;
+
 DROP TABLE IF EXISTS inFoJaxs_Tree_Commentary_URL;
 DROP TABLE IF EXISTS inFoJaxs_Tree_Factual_URL;
 DROP TABLE IF EXISTS inFoJaxs_Tree_Reaction_Replies;
@@ -304,3 +306,5 @@ INSERT INTO inFoJaxs_Replies (parent_ID, username, content, likes, views) VALUES
 
 
 SELECT ID FROM inFoJaxs_Tree_Trees WHERE id=(SELECT MAX(id) FROM inFoJaxs_Tree_Trees)
+
+DELETE
