@@ -54,12 +54,9 @@
     List<Article> articles = ArticleDAO.getArticlesByUser(DB, author);
     request.setAttribute("articles", articles);
 
-    try {
-        request.setAttribute("status", articles.get(0) != null);
-        request.setAttribute("author", author.equals(username));
-    } catch (NullPointerException | IndexOutOfBoundsException e) {
-        request.setAttribute("status", false);
-    }
+    try {request.setAttribute("status", articles.size() > 0);}
+    catch (NullPointerException e) {request.setAttribute("status", false);}
+    boolean userAuthor = author.equals(username);
 %>
 
 <div class="container">
@@ -119,13 +116,10 @@
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
-                                <c:when test="${author}">
-                                <p style="text-align: center">You have not created any articles.<a href="CreateArticle.jsp">
+                                <%if (userAuthor) {%>
+                                <p style="text-align: center; font-family: Futura, 'Helvetica Neue', Helvetica, Arial, sans-serif">You have not created any articles.<a href="CreateArticle.jsp">
                                     Please click here to get started.</a></p>
-                                </c:when>
-                                <c:otherwise>
-                                    <p style="text-align: center">This user has not authored any articles yet!!</p>
-                                </c:otherwise>
+                                <%} else {%><p style="text-align: center; font-family: Futura, 'Helvetica Neue', Helvetica, Arial, sans-serif"><%=author%> has yet to author its mind...</p><%}%>
                             </c:otherwise>
                         </c:choose>
                     </div>
