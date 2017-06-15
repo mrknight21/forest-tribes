@@ -16,6 +16,11 @@
             background-color: transparent;
         }
 
+        @font-face {
+            font-family: Futura;
+            src: url('<%=sitePath%>Fonts/Futura.ttc');
+        }
+
         #displayMainPanelID {
             margin-top: 2%;
         }

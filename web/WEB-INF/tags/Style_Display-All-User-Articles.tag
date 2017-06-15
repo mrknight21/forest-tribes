@@ -33,6 +33,11 @@
         src: url('<%=sitePath%>Fonts/Plumpfull.ttf');
     }
 
+    @font-face {
+        font-family: Futura;
+        src: url('<%=sitePath%>Fonts/Futura.ttc');
+    }
+
     #displayMainTitleID {
         font-family: Futura;
     }

@@ -22,61 +22,20 @@
             src: url('<%=sitePath%>Fonts/Amperzand.ttf');
         }
 
+        @font-face {
+            font-family: Futura;
+            src: url('<%=sitePath%>Fonts/Futura.ttc');
+        }
+
         h1 {
             margin-top: 0px;
             margin-bottom: 10px;
-            font-family: 'Plump';
+            font-family: 'Plump', Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
             color: #029f5b;
         }
 
         h4 {
             font-family: 'Amperzand';
-        }
-
-        #headerUser, #headerHome, #headerCollection {
-            font-family: Plump;
-            color: white;
-        }
-
-        .container-fluid {
-            background-color: #029f5b;
-        }
-
-        .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
-            background-color: #029f5b;
-        }
-
-        .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
-            background-color: white;
-        }
-
-        .navbar-default {
-            margin-bottom: 0;
-            border-color: #029f5b;
-        }
-
-        .navbar-default .navbar-toggle {
-            border-color: white;
-            background-color: white;
-        }
-
-        .navbar-default .navbar-toggle .icon-bar {
-            background-color: #029f5b;
-        }
-
-        #headerSearchSubmit {
-            font-family: Plump;
-            color: #029f5b;
-        }
-
-        #headerThumbnail {
-            margin: 3px;
-            height: 44px;
-            width: 44px;
-        }
-
-        #headerSearchIcon {
-            color: #029f5b;
         }
 
         legend {
@@ -98,18 +57,18 @@
         }
 
         .btn-register {
-            background-color: #029f5b;
+            background-color: #008975;
             outline: none;
             color: white;
             height: auto;
             font-weight: normal;
             padding: 14px 0;
             text-transform: uppercase;
-            border-color: #029f5b;
+            border-color: #008975;
         }
 
         .form-control[disabled] {
-            background-color: #029f5b;
+            background-color: #008975;
             opacity: 1;
         }
 
@@ -143,8 +102,8 @@
         }
 
         .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
-            background-color: #029f5b;
-            border-color: #1A9B42;
+            background-color: #008975;
+            border-color: #008975;
         }
 
         .ui-icon-background, .ui-state-active .ui-icon-background {

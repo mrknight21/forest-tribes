@@ -22,13 +22,14 @@
             src: url('<%=sitePath%>Fonts/Amperzand.ttf');
         }
 
-        #headerUser, #headerHome, #headerCollection {
-            font-family: Plump;
-            color: white;
+
+        @font-face {
+            font-family: Futura;
+            src: url('<%=sitePath%>Fonts/Futura.ttc');
         }
 
         #cancelLink {
-            font-family: Plump;
+            font-family: Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
             color: red;
         }
 
@@ -56,10 +57,6 @@
             border-color: #029f5b;
         }
 
-        .container-fluid {
-            background-color: #029f5b;
-        }
-
         .panel {
             margin-top: 2%;
         }
@@ -81,7 +78,7 @@
         }
 
         .form-control[disabled] {
-            background-color: #029f5b;
+            background-color: #008975;
             opacity: 1;
         }
     </style>

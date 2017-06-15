@@ -1,8 +1,8 @@
 <%@include file="../Rootpath_Toggle.jsp"%>
 <style>
         @font-face {
-            font-family: Plump;
-            src: url('<%=sitePath%>Fonts/Plumpfull.ttf');
+            font-family: Futura;
+            src: url('<%=sitePath%>Fonts/Futura.ttc');
         }
 
         #headerUser, #headerHome, #headerCollection {

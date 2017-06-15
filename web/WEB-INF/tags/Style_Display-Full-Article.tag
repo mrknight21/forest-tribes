@@ -12,6 +12,11 @@
         background-color: transparent;
     }
 
+    @font-face {
+        font-family: Futura;
+        src: url('<%=sitePath%>Fonts/Futura.ttc');
+    }
+
     .panel-login {
         padding: 1%;
         margin-top: 2%;

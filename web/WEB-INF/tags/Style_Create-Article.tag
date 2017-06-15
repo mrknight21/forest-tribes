@@ -12,8 +12,13 @@
         background-color: transparent;
     }
 
-    h5 {
+    @font-face {
         font-family: Futura;
+        src: url('<%=sitePath%>Fonts/Futura.ttc');
+    }
+
+    h5 {
+        font-family: Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
         color: white;
     }
 
