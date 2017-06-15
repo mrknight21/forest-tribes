@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     <div id="iframe_container">
-                        <div id="loader"></div>
+                        <div id="loader"><img src="<%=sitePath%>tree_TRIAL/Tree_Material/tree-leaf-gif.gif"></div>
                         <iframe onload="StopLoader()" id="myiframe" name="iframe_a"
                                 src="<%=sitePath%>tree_TRIAL/ForestTribe.jsp" frameborder=0 width="100%" height="900px"
                                 scrolling="auto">
