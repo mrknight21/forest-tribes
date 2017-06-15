@@ -33,7 +33,7 @@
                         <li><a href="<%=sitePath%>article_display/DisplayAllArticles.jsp">All articles</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="<%=sitePath%>tree_TRIAL/TreePlanting.jsp">Plant your tree</a></li>
-                        <li><a href="<%=sitePath%>article_display/DisplayUserAllArticles.jsp">Your articles</a></li>
+                        <li><a href="<%=sitePath%>article_display/DisplayUserAllArticles.jsp?author=<%=username%>">Your articles</a></li>
                         <li><a href="<%=sitePath%>article_display/CreateArticle.jsp">Create new article</a></li>
                     </ul>
                 </li>

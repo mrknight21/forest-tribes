@@ -9,9 +9,12 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%
-    if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
+<%if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
+
     String username = (String) session.getAttribute("username");
+
+    String author = request.getParameter("author");
+
 %>
 
 <!DOCTYPE html>
@@ -19,7 +22,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-    <title>Forest Tribes: <%= username%>'s articles</title>
+    <title>Forest Tribes: <%= author%>'s articles</title>
 
     <%--Importing all necessary libraries, frameworks etc.--%>
     <%@include file="../WEB-INF/Head_Scripts.jsp" %>
@@ -48,7 +51,7 @@
 
 <%
     final MySQL DB = new MySQL();
-    List<Article> articles = ArticleDAO.getArticlesByUser(DB, username);
+    List<Article> articles = ArticleDAO.getArticlesByUser(DB, author);
     request.setAttribute("articles", articles);
 
     try {
@@ -70,7 +73,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <fieldset>
-                                <legend id="displayMainTitleID"><%= username%>'s Articles:</legend>
+                                <legend id="displayMainTitleID"><%= author%>'s Articles:</legend>
                             </fieldset>
                         </div>
                     </div>
