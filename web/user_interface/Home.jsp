@@ -3,7 +3,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%  if(!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
+<% if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
     String username = (String) session.getAttribute("username");
 %>
 
@@ -15,36 +15,51 @@
     <title>Forest Tribes: Home</title>
 
     <%--Importing all necessary libraries, frameworks etc.--%>
-    <%@include file="../WEB-INF/Head_Scripts.jsp"%>
-    <%@include file="../WEB-INF/Mapviewer.jsp"%>
+    <%@include file="../WEB-INF/Head_Scripts.jsp" %>
 
+    <%@include file="../WEB-INF/Mapviewer.jsp" %>
 
-
+    <%--Page Specific CSS--%>
+    <tags:Style_Reaction-Editor/>
 </head>
 <body>
 <%@ include file="../WEB-INF/Header_Navbar.jsp" %>
 
-<p>Hi <%= username%></p>
-<p>${message}</p>
-
-
-
-
-
-<form>
-    <div slider container style="position:relative; top: 0%; left: 35%; z-index: 999">
-        <label for="zoom-control"  style="color: brown;font-size: xx-large; font-family: 'Californian FB';">Zoom Control: <em id="zoom-control-lable"></em></label>
-        <div class="slider" id="zoom-control"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-login">
+                <div class="panel panel-default" style="border-color: #008975">
+                    <div class="panel-heading" style="background-color: #008975">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h3><i class="fa">&#xf1bb;</i> The Forest Map:</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body" style="z-index: 999">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <legend>Zoom Control:</legend>
+                                    <div class="slider" id="zoom-control"></div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="iframe_container">
+                        <div id="loader"></div>
+                        <iframe onload="StopLoader()" id="myiframe" name="iframe_a"
+                                src="<%=sitePath%>tree_TRIAL/ForestTribe.jsp" frameborder=0 width="100%" height="900px"
+                                scrolling="auto">
+                            <p>Your browser does not support iframes.</p>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</form>
-
-<div id="iframe_container" >
-    <div id="loader"></div>
-<iframe  onload="StopLoader()" id="myiframe" name="iframe_a" src="<%=sitePath%>tree_TRIAL/ForestTribe.jsp" frameborder=0 width="100%" height="900px" scrolling="auto">
-    <p>Your browser does not support iframes.</p>
-</iframe>
 </div>
-
 </body>
 </html>
 
