@@ -6,16 +6,16 @@
         }
 
         #headerUser, #headerHome, #headerCollection {
-            font-family: Plump;
+            font-family: Futura;
             color: white;
         }
 
         .container-fluid {
-            background-color: #029f5b;
+            background-color: #008975;
         }
 
         .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
-            background-color: #029f5b;
+            background-color: #008975;
         }
 
         .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
@@ -32,16 +32,16 @@
         }
 
         .navbar-default .navbar-toggle .icon-bar {
-            background-color: #029f5b;
+            background-color: #008975;
         }
 
         .navbar-default {
-            border-color: #029f5b;
+            border-color: #008975;
         }
 
         #headerSearchSubmit {
-            font-family: Plump;
-            color: #029f5b;
+            font-family: Futura;
+            color: #008975;
         }
 
         #headerThumbnail {
@@ -50,6 +50,6 @@
         }
 
         #headerSearchIcon {
-            color: #029f5b;
+            color: #008975;
         }
     </style>
