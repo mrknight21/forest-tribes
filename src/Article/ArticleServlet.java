@@ -162,7 +162,7 @@ public class ArticleServlet extends HttpServlet {
 
     private boolean editReply(HttpServletRequest request) {
         if (getUsername(request).equals(getReplyById(DB, id).getAuthor())) {
-            updateReply(
+            updateText(
                     DB,
                     new Reply(
                             id,
@@ -173,7 +173,7 @@ public class ArticleServlet extends HttpServlet {
 
     private boolean editComment(HttpServletRequest request) {
         if (getUsername(request).equals(getCommentById(DB, id).getAuthor())) {
-            updateComment(
+            updateText(
                     DB,
                     new Comment(
                             id,
@@ -184,7 +184,7 @@ public class ArticleServlet extends HttpServlet {
 
     private boolean editArticle(HttpServletRequest request) {
         if (getUsername(request).equals(getArticleById(DB, id).getAuthor()))
-        updateArticle(
+        updateText(
                     DB,
                     new Article(Integer.parseInt(request.getParameter("id")),
                             request.getParameter("text"),

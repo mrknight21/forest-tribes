@@ -67,9 +67,6 @@ UPDATE inFoJaxs_User
 SET ProfileImagePath = NULL
 
 
-DROP TABLE IF EXISTS inFoJaxs_ReplyLikes;
-DROP TABLE IF EXISTS inFoJaxs_CommentLikes;
-DROP TABLE IF EXISTS inFoJaxs_ArticleLikes;
 DROP TABLE IF EXISTS inFoJaxs_Replies;
 DROP TABLE IF EXISTS inFoJaxs_Comments;
 DROP TABLE IF EXISTS inFoJaxs_Articles;
@@ -78,12 +75,12 @@ DROP TABLE IF EXISTS inFoJaxs_Articles;
 CREATE TABLE IF NOT EXISTS inFoJaxs_Articles (
   ID           INT       AUTO_INCREMENT,
   username     VARCHAR(50) NOT NULL,
-  title        VARCHAR(80) NOT NULL,
+  title        TEXT NOT NULL,
   content      TEXT        NOT NULL,
-  likes        INT,
-  views        INT,
-  commentCount INT,
-  shortIntro   VARCHAR(120),
+  likes        INT DEFAULT 0,
+  views        INT DEFAULT 0,
+  commentCount INT DEFAULT 0,
+  shortIntro   TEXT,
   creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   lastEdit     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),
@@ -96,9 +93,9 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_Comments (
   parent_ID    INT           NOT NULL,
   username     VARCHAR(50)   NOT NULL,
   content      VARCHAR(8000) NOT NULL,
-  likes        INT,
-  views        INT,
-  repliesCount INT,
+  likes        INT DEFAULT 0,
+  views        INT DEFAULT 0,
+  repliesCount INT DEFAULT 0,
   creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   lastEdit     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),
@@ -113,8 +110,8 @@ CREATE TABLE IF NOT EXISTS inFoJaxs_Replies (
   parent_ID    INT           NOT NULL,
   username     VARCHAR(50)   NOT NULL,
   content      VARCHAR(8000) NOT NULL,
-  likes        INT,
-  views        INT,
+  likes        INT DEFAULT 0,
+  views        INT DEFAULT 0,
   creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   lastEdit     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),

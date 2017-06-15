@@ -67,7 +67,6 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 style="text-align: center"><i class="fa">&#xf1bb;</i> Forest Tribes</h1>
-                            <h4 id="subtitle" style="text-align: center">The Beauty of Interconnectedness</h4>
                             <br>
                             <fieldset>
                                 <legend><i style="font-size:24px" class="fa">&#xf03e;</i> Your Current Profile Picture:
@@ -215,7 +214,7 @@
                                     <div id="changePictureDefaultDivID" class="col-lg-12">
                                         <input type="submit" name="changePictureDefault"
                                                id="changePictureDefaultSubmitID"
-                                               class="form-control btn btn-register"
+                                               class="btn btn-success btn-block"
                                                value="Change profile picture">
                                     </div>
                                 </fieldset>
@@ -235,7 +234,7 @@
                                     <br>
                                     <div class="col-lg-12">
                                         <input type="submit" name="changePictureUpload" id="changePictureUploadSubmitID"
-                                               class="form-control btn btn-register"
+                                               class="btn btn-block btn-success"
                                                value="Change profile picture" disabled>
                                     </div>
                                 </fieldset>

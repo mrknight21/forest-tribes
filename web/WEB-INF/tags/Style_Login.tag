@@ -187,11 +187,6 @@
         color: #029f5b;
     }
 
-    h4 {
-        margin-bottom: 10px;
-        font-family: 'Amperzand';
-    }
-
     #loginFormLink, #registrationFormLink {
         font-family: Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
@@ -254,11 +249,6 @@
     @font-face {
         font-family: Plump;
         src: url('<%=sitePath%>Fonts/Plumpfull.ttf');
-    }
-
-    @font-face {
-        font-family: Amperzand;
-        src: url('<%=sitePath%>Fonts/Amperzand.ttf');
     }
 
     .input-group {

@@ -157,7 +157,6 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 style="text-align: center"><i class="fa">&#xf1bb;</i> Forest Tribes</h1>
-                            <h4 id="subtitle" style="text-align: center">The Beauty of Interconnectedness</h4>
                             <p id="statusMessage" style="text-align: center">${message}</p>
                             <fieldset id="profilePictureFieldsetID" class="span4">
                                 <legend><i class="fa">&#xf083;</i> Profile Picture</legend>
@@ -171,7 +170,7 @@
                                 <form id="profileChangePPFormID" action="<%=sitePath%>Serve_UpdateProfilePicture"
                                       method="post"><input type="submit"
                                                            value="Change Profile Picture"
-                                                           class="form-control btn btn-register">
+                                                           class="btn btn-success btn-block">
                                 </form>
                             </fieldset>
                             <br>
@@ -193,7 +192,7 @@
                                 <form id="profileChangePWFormID" action="<%=sitePath%>Serve_Changepassword"
                                       method="post"><input type="submit"
                                                            value="Change Password"
-                                                           class="form-control btn btn-register">
+                                                           class="btn btn-success btn-block">
                                 </form>
                             </fieldset>
                             <br>
@@ -471,7 +470,7 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <input type="submit" name="profileUpdateSubmit" id="profileUpdateSubmitID"
-                                               class="form-control btn btn-register"
+                                               class="btn btn-success btn-block"
                                                value="Update your Profile">
                                     </div>
                                 </div>
@@ -489,21 +488,21 @@
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                         <input type="text" name="profileDeleteUsername" id="profileDeleteUsernameID"
-                                               tabindex="1"
+                                               tabindex="1" required
                                                class="form-control" placeholder="Username" value="<%= username%>"
                                                readonly>
                                     </div>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                         <input type="password" name="profileDeletePassword" id="profileDeletePasswordID"
-                                               tabindex="2"
+                                               tabindex="2" required
                                                class="form-control" placeholder="Password">
                                     </div>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                         <input type="password" name="profileDeleteConfirmPassword"
                                                id="profileDeleteConfirmPasswordID" tabindex="3"
-                                               class="form-control" placeholder="Confirm Password"
+                                               class="form-control" placeholder="Confirm Password" required
                                                onchange="checkPasswordMatch();">
                                     </div>
                                     <p id="profileMessageID" style="text-align: center; display: none">The entered-in
@@ -511,7 +510,7 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <input type="submit" name="profileDeleteSubmit" id="profileDeleteSubmitID"
-                                                   class="form-control btn btn-register"
+                                                   class="btn btn-block btn-danger"
                                                    value="Delete your profile">
                                         </div>
                                     </div>
@@ -566,75 +565,3 @@
 </script>
 </body>
 </html>
-
-
-<%--<div class="input-group">--%>
-<%--<span class="input-group-addon"><i--%>
-<%--class="glyphicon glyphicon-user"></i></span>--%>
-<%--<div id="profileGenderButtons" class="btn-group-justified btn-group-md">--%>
-<%--<a class="btn btn-primary btn-md active" data-toggle="profileGender"--%>
-<%--data-title="Male">Male</a>--%>
-<%--<a class="btn btn-primary btn-md notActive" data-toggle="profileGender"--%>
-<%--data-title="Female">Female</a>--%>
-<%--<a class="btn btn-primary btn-md notActive" data-toggle="profileGender"--%>
-<%--data-title="Other">Other</a>--%>
-<%--</div>--%>
-<%--<input type="hidden" name="profileGender" id="profileGenderID">--%>
-<%--</div>--%>
-
-<%--<div class="input-group">--%>
-<%--<span class="input-group-addon"><i--%>
-<%--class="glyphicon glyphicon-user"></i></span>--%>
-<%--<div id="profileEducationButtons" class="btn-group-justified btn-group-md">--%>
-<%--<a class="btn btn-primary btn-md active" data-toggle="profileEducation"--%>
-<%--data-title="primary">Primary</a>--%>
-<%--<a class="btn btn-primary btn-md notActive" data-toggle="profileEducation"--%>
-<%--data-title="secondary">Secondary</a>--%>
-<%--<a class="btn btn-primary btn-md notActive" data-toggle="profileEducation"--%>
-<%--data-title="tertiary">Tertiary</a>--%>
-<%--<a class="btn btn-primary btn-md notActive" data-toggle="profileEducation"--%>
-<%--data-title="postgraduate">Postgraduate</a>--%>
-<%--<a class="btn btn-primary btn-md notActive" data-toggle="profileEducation"--%>
-<%--data-title="doctorate">Doctorate</a>--%>
-<%--</div>--%>
-<%--<input type="hidden" name="profileGender" id="profileEducationID">--%>
-<%--</div>--%>
-
-<%--<div class="input-group">--%>
-<%--<span class="input-group-addon"><i--%>
-<%--class="glyphicon glyphicon-user"></i></span>--%>
-<%--<div class="btn-group-md">--%>
-<%--<a class="btn btn-primary btn-md active" data-toggle="profilePolitical"--%>
-<%--data-title="extremely_liberal">Extremely Liberal</a>--%>
-<%--<a class="btn btn-primary btn-md notActive" data-toggle="profilePolitical"--%>
-<%--data-title="liberal">Liberal</a>--%>
-<%--<a class="btn btn-primary btn-md notActive" data-toggle="profilePolitical"--%>
-<%--data-title="slightly_liberal">Slightly Liberal</a>--%>
-<%--<a class="btn btn-primary btn-md notActive" data-toggle="profilePolitical"--%>
-<%--data-title="neutral">Neutral</a>--%>
-<%--<a class="btn btn-primary btn-md notActive" data-toggle="profilePolitical"--%>
-<%--data-title="slightly_conservative">Slightly Conservative</a>--%>
-<%--<a class="btn btn-primary btn-md notActive" data-toggle="profilePolitical"--%>
-<%--data-title="conservative">Conservative</a>--%>
-<%--<a class="btn btn-primary btn-md notActive" data-toggle="profilePolitical"--%>
-<%--data-title="extremely_conservative">Extremely Conservative</a>--%>
-<%--</div>--%>
-<%--<input type="hidden" name="profilePolitical" id="profilePoliticalID">--%>
-<%--</div>--%>
-
-<%--function toggleEnabler(element) {--%>
-<%--element.on('click', function () {--%>
-<%--var sel = $(this).data('title');--%>
-<%--var tog = $(this).data('toggle');--%>
-<%--$('#' + tog).prop('value', sel);--%>
-
-<%--$('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');--%>
-<%--$('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');--%>
-<%--});--%>
-<%--}--%>
-
-<%--var gender = $("#profileGenderButtons a");--%>
-<%--toggleEnabler(gender);--%>
-
-<%--var education = $("#profileEducationButtons a");--%>
-<%--toggleEnabler(education);--%>
