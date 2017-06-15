@@ -55,11 +55,8 @@
     request.setAttribute("articles", articles);
 
     try {
-        if (articles.get(0) != null) {
-            request.setAttribute("status", true);
-        } else {
-            request.setAttribute("status", false);
-        }
+        request.setAttribute("status", articles.get(0) != null);
+        request.setAttribute("author", author.equals(username));
     } catch (NullPointerException | IndexOutOfBoundsException e) {
         request.setAttribute("status", false);
     }
@@ -81,7 +78,7 @@
                 <div id="displayMainPanelBodyID" class="panel-body">
                     <div class="row">
                         <c:choose>
-                            <c:when test="${status == true}">
+                            <c:when test="${status}">
                                 <c:forEach items="${articles}" var="article">
                                     <!--Article panel-->
                                     <div class="col-lg-12">
@@ -122,8 +119,13 @@
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
+                                <c:when test="${author}">
                                 <p style="text-align: center">You have not created any articles.<a href="CreateArticle.jsp">
                                     Please click here to get started.</a></p>
+                                </c:when>
+                                <c:otherwise>
+                                    <p style="text-align: center">This user has not authored any articles yet!!</p>
+                                </c:otherwise>
                             </c:otherwise>
                         </c:choose>
                     </div>
