@@ -19,12 +19,11 @@
     Article article = ArticleDAO.getArticleById(DB, articleId);
 
     Boolean deletionRights = false;
-    if (article.getAuthor().equals(username))
-        deletionRights = true;
+    if (article.getAuthor().equals(username)) deletionRights = true;
+    else ArticleDAO.increaseViews(DB, articleId);
 
-
-
-//    Add script to increase Article views by one one each load.
+    request.setAttribute("username", username);
+    request.setAttribute("deletionRights", deletionRights);
     request.setAttribute("article", article);
 %>
 
@@ -51,7 +50,6 @@
 <body>
 
 <%@ include file="../WEB-INF/Header_Navbar.jsp" %>
-
 
 <div class="container">
     <div class="row">
@@ -156,15 +154,32 @@
                                                 Replies: ${comment.replyCount}</a>
                                             <p style="display: inline-block"><i class="fa">&#xf044;</i>
                                                 Edited: ${comment.dateLastEdited}</p>
-                                            <%if (deletionRights) {%>
-                                            <form action="<%=sitePath%>TextUpdate" method="post">
-                                                <input type="radio" name="articleId" value="<%=articleId%>" checked
-                                                       hidden/>
-                                                <input type="radio" name="id" value="${comment.id}" checked hidden/>
-                                                <input type="submit" class="btn btn-block btn-danger"
-                                                       name="deleteComment" value="Delete Comment"/>
-                                            </form>
-                                            <%}%>
+                                            <c:if test="${username.equals(comment.author)}">
+                                                <form action="<%=sitePath%>TextUpdate" method="post">
+                                                    <input type="radio" name="articleId" value="<%=articleId%>" checked
+                                                           hidden/>
+                                                    <input type="radio" name="id" value="${comment.id}" checked hidden/>
+                                                    <input type="submit" class="form-control btn btn-login"
+                                                           name="updateComment" value="Edit Comment" style="background-color: #00AA8D;
+                                                                                                                                                           border-color: #00AA8D;
+                                                                                                                                                           outline: none;
+                                                                                                                                                           color: white;
+                                                                                                                                                           text-transform: uppercase"/>
+                                                </form>
+                                            </c:if>
+                                            <c:if test="${deletionRights || username.equals(comment.author)}">
+                                                <form action="<%=sitePath%>TextUpdate" method="post">
+                                                    <input type="radio" name="articleId" value="<%=articleId%>" checked
+                                                           hidden/>
+                                                    <input type="radio" name="id" value="${comment.id}" checked hidden/>
+                                                    <input type="submit" class="form-control btn btn-login"
+                                                           name="deleteComment" value="Delete Comment" style="background-color: #00AA8D;
+                                                                                                                                                           border-color: #00AA8D;
+                                                                                                                                                           outline: none;
+                                                                                                                                                           color: white;
+                                                                                                                                                           text-transform: uppercase"/>
+                                                </form>
+                                            </c:if>
                                         </div>
                                     </div>
                                 </div>
@@ -225,18 +240,40 @@
                                                                     class="fa">&#xf044;</i>
                                                                 Last
                                                                 Edited: ${reply.dateLastEdited}</p>
-                                                            <%if (deletionRights) {%>
-                                                            <form action="<%=sitePath%>TextUpdate" method="post">
-                                                                <input type="radio" name="articleId"
-                                                                       value="<%=articleId%>"
-                                                                       checked hidden/>
-                                                                <input type="radio" name="id" value="${reply.id}"
-                                                                       checked
-                                                                       hidden/>
-                                                                <input type="submit" class="btn btn-block btn-danger"
-                                                                       name="deleteReply" value="Delete Reply"/>
-                                                            </form>
-                                                            <%}%>
+                                                            <c:if test="${username.equals(reply.author)}">
+                                                                <form action="<%=sitePath%>TextUpdate" method="post">
+                                                                    <input type="radio" name="articleId"
+                                                                           value="<%=articleId%>"
+                                                                           checked hidden/>
+                                                                    <input type="radio" name="id" value="${reply.id}"
+                                                                           checked
+                                                                           hidden/>
+                                                                    <input type="submit"
+                                                                           class="form-control btn btn-login"
+                                                                           name="updateReply" value="Update Reply"
+                                                                           style="background-color: #f5f5f5;
+                                                                                                                                                           border-color: #ddd;
+                                                                                                                                                           outline: none;
+                                                                                                                                                           text-transform: uppercase"/>
+                                                                </form>
+                                                            </c:if>
+                                                            <c:if test="${deletionRights || username.equals(reply.author)}">
+                                                                <form action="<%=sitePath%>TextUpdate" method="post">
+                                                                    <input type="radio" name="articleId"
+                                                                           value="<%=articleId%>"
+                                                                           checked hidden/>
+                                                                    <input type="radio" name="id" value="${reply.id}"
+                                                                           checked
+                                                                           hidden/>
+                                                                    <input type="submit"
+                                                                           class="form-control btn btn-login"
+                                                                           name="deleteReply" value="Delete Reply"
+                                                                           style="background-color: #f5f5f5;
+                                                                                                                                                           border-color: #ddd;
+                                                                                                                                                           outline: none;
+                                                                                                                                                           text-transform: uppercase"/>
+                                                                </form>
+                                                            </c:if>
                                                         </div>
                                                     </div>
                                                 </div>

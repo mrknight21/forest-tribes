@@ -1,6 +1,7 @@
 package Article;
 
 import Utility.AbstractDB;
+import Utility.MySQL;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,9 +20,7 @@ public class ArticleDAO {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Articles")) {
                 try (ResultSet r = p.executeQuery()) {
-                    while (r.next()) {
-                        articles.add(fullArticleFromResultSet(r, c));
-                    }
+                    while (r.next()) articles.add(fullArticleFromResultSet(r, c));
                 }
             }
         } catch (SQLException | ClassNotFoundException e) {
@@ -39,9 +38,7 @@ public class ArticleDAO {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Articles WHERE username = ?")) {
                 p.setString(1, username);
                 try (ResultSet r = p.executeQuery()) {
-                    while (r.next()) {
-                        articles.add(fullArticleFromResultSet(r, c));
-                    }
+                    while (r.next()) articles.add(fullArticleFromResultSet(r, c));
                 }
             }
         } catch (SQLException | ClassNotFoundException e) {
@@ -53,11 +50,6 @@ public class ArticleDAO {
     // Method to return an article relating to the parsed-in article ID, from the database.
     public static Article getArticleById(AbstractDB db, int articleId) {
         try (Connection c = db.connection()) {
-
-            try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_Articles SET views = views + 1 WHERE ID = ?")) {
-                p.setInt(1, articleId);
-                p.executeUpdate();
-            }
 
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Articles WHERE ID = ?")) {
                 p.setInt(1, articleId);
@@ -71,6 +63,17 @@ public class ArticleDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static void increaseViews(AbstractDB db, int articleId) {
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_Articles SET views = views + 1 WHERE ID = ?")) {
+                p.setInt(1, articleId);
+                p.executeUpdate();
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public static Comment getCommentById(AbstractDB db, int commentId) {
@@ -141,15 +144,11 @@ public class ArticleDAO {
         boolean success;
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_Articles (username, title, content, likes, views, commentCount, shortIntro) VALUE (?, ?, ?, ?, ?, ?, ?)")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_Articles (username, title, content, shortIntro) VALUE (?, ?, ?, ?)")) {
                 p.setString(1, article.getAuthor());
                 p.setString(2, article.getTitle());
                 p.setString(3, article.getText());
-                p.setInt(4, article.getLikes());
-                p.setInt(5, article.getViews());
-                p.setInt(6, article.getResponseCount());
-                p.setString(7, article.getShortIntro());
-
+                p.setString(4, article.getShortIntro());
                 p.executeUpdate();
                 success = true;
             }
@@ -160,7 +159,6 @@ public class ArticleDAO {
         return success;
 
     }
-
 
     public static boolean createNewComment(AbstractDB db, Comment comment) {
         boolean success;
@@ -185,17 +183,14 @@ public class ArticleDAO {
 
     }
 
-
     public static boolean createNewReply(AbstractDB db, Reply reply) {
         boolean success;
         //Comment(String author, String text, int parentID)//
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_Replies (parent_ID, username,content, likes, views) VALUE (?, ?, ?, ?, ?)")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_Replies (parent_ID, username,content) VALUE (?, ?, ?)")) {
                 p.setInt(1, reply.getParentID());
                 p.setString(2, reply.getAuthor());
                 p.setString(3, reply.getText());
-                p.setInt(4, reply.getLikes());
-                p.setInt(5, reply.getViews());
                 p.executeUpdate();
                 success = true;
             }
@@ -207,16 +202,171 @@ public class ArticleDAO {
 
     }
 
+    // Method to insert a parsed-in Article, Comment & Reply into the database.
+    public static boolean createNewText(AbstractDB db, Text newText, int parentId) {
+        String statement = "INSERT INTO #1 (#2, username, content) VALUE (?, ?, ?)";
+        if (parentId == -1) {
+            statement.replaceFirst("#1", "inFoJaxs_Articles");
+            statement.replaceFirst("#2", "title");
+        } else {
+            if (newText instanceof Comment)
+                statement.replaceFirst("#1","inFoJaxs_Comments");
+            else if (newText instanceof Reply)
+                statement.replaceFirst("#1","inFoJaxs_Replies");
+            statement.replaceFirst("#2","parent_ID");
+        }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement(statement)) {
+                if (parentId == -1) {
+                    p.setString(1, ((Article) newText).getTitle());
+                } else {
+                    p.setInt(1, parentId);
+                }
+                p.setString(2, newText.getAuthor());
+                p.setString(3, newText.getText());
+                p.executeUpdate();
+                return true;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Methods to update the parsed-in Article, Comment, Reply in the database.
+    public static boolean updateText(AbstractDB db, Text text) {
+        String statement1 = "UPDATE #1 SET content = ?, lastEdit = ?";
+        String injection = " ";
+        String statement2 = "WHERE ID = ?";
+
+        boolean article = false;
+        int id = 3;
+
+        if (text instanceof  Article) {
+            injection = ", title = ?, shortIntro = ?, ";
+            statement1.replaceFirst("#1", "inFoJaxs_Articles");
+            article = true;
+            id = 5;
+        } else {
+            if (text instanceof Comment) statement1.replaceFirst("#1","inFoJaxs_Comments");
+            else if (text instanceof Reply) statement1.replaceFirst("#1","inFoJaxs_Replies");
+        }
+
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement(statement1 + injection + statement2)) {
+                p.setString(1, text.getText());
+                p.setString(2, new Timestamp(System.currentTimeMillis()).toString());
+                if (article) {
+                    p.setString(3, ((Article) text).getTitle());
+                    p.setString(4, ((Article) text).getShortIntro());
+                }
+                p.setInt(id, text.getId());
+                p.executeUpdate();
+                return true;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 
-    /////////////////////Update texts///////////////////////////////////////////////////////////////////////////////////////////////
+    // Methods to return Article/Comment/Reply instances from the information stored in the ResultSet.
+    private static Article fullArticleFromResultSet(ResultSet r, Connection c) throws SQLException {
+        int id = r.getInt("ID");
+        //(int id, String author, String title, String text, String shortIntro, List<Comment> comments,  int likes, int view, String dateCreated, String dateLastEdited)//
+        return new Article(
+                id,
+                r.getString("username"),
+                r.getString("title"),
+                r.getString("content"),
+                r.getString("shortIntro"),
+                getArticleComments(id, c),
+                r.getInt("likes"),
+                r.getInt("views"),
+                r.getTimestamp("creationDate").toString(),
+                r.getTimestamp("lastEdit").toString());
+    }
+
+    private static Comment commentFromResultSet(ResultSet r, Connection c) throws SQLException {
+        int commentId = r.getInt("ID");
+//        (int id, String author, String text, List<Reply> replies, int likes, int views,  String dateCreated, String dateLastEdited)
+        return new Comment(
+                commentId,
+                r.getInt("parent_ID"),
+                r.getString("username"),
+                r.getString("content"),
+                getCommentReplies(commentId, c),
+                r.getInt("likes"),
+                r.getInt("views"),
+                r.getTimestamp("creationDate").toString(),
+                r.getTimestamp("lastEdit").toString());
+    }
+
+    private static Reply replyFromResultSet(ResultSet r, Connection c) throws SQLException {
+        int replyId = r.getInt("ID");
+//        (int id, String author, String text,  int likes, int views, String dateCreated, String dateLastEdited)
+        return new Reply(
+                replyId,
+                r.getInt("parent_ID"),
+                r.getString("username"),
+                r.getString("content"),
+                r.getInt("likes"),
+                // getTextLikes(c, replyId,"Reply")),
+                r.getInt("views"),
+                r.getTimestamp("creationDate").toString(),
+                r.getTimestamp("lastEdit").toString());
+    }
+
+    // Method to delete the Article, Comment, Reply in the database.
+    public static boolean deleteText(Connection c, int textId, String textClassName) throws SQLException {
+
+        String statement = "DELETE FROM #1 WHERE #2 = ?";
+
+        switch (textClassName) {
+            case "Article":
+                statement = statement.replaceFirst("#1", "inFoJaxs_Articles");
+                statement = statement.replaceFirst("#2", "ID");
+                deleteText(c, textId, "ArticleChildren");
+                break;
+
+            case "ArticleChildren":
+                statement = statement.replaceFirst("#1", "inFoJaxs_Comments");
+                statement = statement.replaceFirst("#2", "parent_ID");
+                for (Comment comment : getArticleComments(textId, c))
+                    deleteText(c, comment.getId(), "CommentChildren");
+                break;
+
+            case "Comment":
+                statement = statement.replaceFirst("#1", "inFoJaxs_Comments");
+                statement = statement.replaceFirst("#2", "ID");
+                deleteText(c, textId, "CommentChildren");
+                break;
+
+            case "CommentChildren":
+                statement = statement.replaceFirst("#1", "inFoJaxs_Replies");
+                statement = statement.replaceFirst("#2", "parent_ID");
+                break;
+
+            case "Reply":
+                statement = statement.replaceFirst("#1", "inFoJaxs_Replies");
+                statement = statement.replaceFirst("#2", "ID");
+                break;
+        }
+        System.out.println(statement);
+
+        PreparedStatement p = c.prepareStatement(statement);
+        p.setInt(1, textId);
+        p.executeUpdate();
+        return true;
+    }
 
 
-    //new Timestamp(System.currentTimeMillis() for current timeStamp//
 
-    public static boolean updateArticle(AbstractDB db, Article article) {
+    // Legacy update text methods
+
+    /*public static boolean updateArticle(AbstractDB db, Article article) {
         boolean status;
 
         try (Connection c = db.connection()) {
@@ -241,7 +391,7 @@ public class ArticleDAO {
         boolean status;
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_Comments SET content = ?,lastEdit = ? WHERE ID = ?;")) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_Comments SET content = ?, lastEdit = ? WHERE ID = ?;")) {
                 //p.setString(1, colunm);
                 p.setString(1, comment.getText());
                 p.setString(2, new Timestamp(System.currentTimeMillis()).toString());
@@ -274,13 +424,13 @@ public class ArticleDAO {
             status = false;
         }
         return status;
-    }
+    }*/
 
 
-///////////////////////////////////////////////////////Deleting text/////////////////////////////////////////////////////////////////
 
+    // Legacy delete text methods
 
-    public static boolean deleteArticle(AbstractDB db, int articleID) {
+    /*public static boolean deleteArticle(AbstractDB db, int articleID) {
         boolean success = false;
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("DELETE FROM inFoJaxs_Articles WHERE ID = ?;")) {
@@ -328,83 +478,13 @@ public class ArticleDAO {
             success = false;
         }
         return success;
-    }
-
-
-    // Method to insert a parsed-in Article, Comment & Reply into the database.
-    /*public static boolean createNewText(AbstractDB db, Text newText, int parentId) {
-        String statement = "INSERT INTO #1 (#2, username, content) VALUE (?, ?, ?)";
-        if (parentId == -1) {
-            statement.replaceFirst("#1", "inFoJaxs_Articles");
-            statement.replaceFirst("#2", "title");
-        } else {
-            if (newText instanceof Comment)
-                statement.replaceFirst("#1","inFoJaxs_Comments");
-            else if (newText instanceof Reply)
-                statement.replaceFirst("#1","inFoJaxs_Replies");
-            statement.replaceFirst("#2","parent_ID");
-        }
-
-        try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement(statement)) {
-                if (parentId == -1) {
-                    p.setString(1, ((Article) newText).getTitle());
-                } else {
-                    p.setInt(1, parentId);
-                }
-                p.setString(2, newText.getAuthor());
-                p.setString(3, newText.getText());
-                p.executeUpdate();
-                return true;
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return false;
-        }
     }*/
 
-    // Methods to update the parsed-in Article, Comment, Reply in the database.
-    /*public static boolean updateText(AbstractDB db, Text text) {
-        String statement = "UPDATE #1 SET $2content = ? WHERE ID = ?";
-        if (text instanceof  Article) {
-            statement.replaceFirst("#1", "inFoJaxs_Articles");
-            statement.replaceFirst("#2", "title = " + ((Article) text).getTitle() + ", ");
-        } else {
-            statement.replaceFirst("#2","");
-            if (text instanceof Comment)
-                statement.replaceFirst("#1","inFoJaxs_Comments");
-            else if (text instanceof Reply)
-                statement.replaceFirst("#1","inFoJaxs_Replies");
-        }
 
-        try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement(statement)) {
-                p.setString(1, text.getText());
-                p.setInt(2, text.getId());
-                p.executeUpdate();
-                return true;
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }*/
 
-    /*
-    ID INT AUTO_INCREMENT,
-  username VARCHAR(50) NOT NULL,
-  title VARCHAR(80) NOT NULL,
-  content VARCHAR (8000) NOT NULL,
-  likes INT,
-  views INT,
-  commentCount INT,
-  shortIntro VARCHAR(120),
-  creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  lastEdit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-     */
+    // Legacy article instance
 
-    // Methods to create a new Article/Comment/Reply objects from the information stored in the ResultSet.
-    private static Article articleSummaryFromResultSet(ResultSet r) throws SQLException {
+    /*private static Article articleSummaryFromResultSet(ResultSet r) throws SQLException {
 
         //(int id, String author, String title, String text,int likes, int view, int commentsCount,  String shortIntro, String dateCreated, String dateLastEdited)//
         return new Article(
@@ -418,57 +498,12 @@ public class ArticleDAO {
                 r.getString("shortIntro"),
                 r.getTimestamp("creationDate").toString(),
                 r.getTimestamp("lastEdit").toString());
-    }
+    }*/
 
 
-    private static Article fullArticleFromResultSet(ResultSet r, Connection c) throws SQLException {
-        int id = r.getInt("ID");
-        //(int id, String author, String title, String text, String shortIntro, List<Comment> comments,  int likes, int view, String dateCreated, String dateLastEdited)//
-        return new Article(
-                id,
-                r.getString("username"),
-                r.getString("title"),
-                r.getString("content"),
-                r.getString("shortIntro"),
-                getArticleComments(id, c),
-                r.getInt("likes"),
-                r.getInt("views"),
-                r.getTimestamp("creationDate").toString(),
-                r.getTimestamp("lastEdit").toString());
-    }
+    // Legacy Likes code:
 
-    private static Comment commentFromResultSet(ResultSet r, Connection c) throws SQLException {
-        int commentId = r.getInt("ID");
-//        (int id, String author, String text, List<Reply> replies, int likes, int views,  String dateCreated, String dateLastEdited)
-        return new Comment(
-                commentId,
-                r.getInt("parent_ID"),
-                r.getString("username"),
-                r.getString("content"),
-                getCommentReplies(commentId, c),
-                r.getInt("likes"),
-                r.getInt("views"),
-                r.getTimestamp("creationDate").toString(),
-                r.getTimestamp("lastEdit").toString());
-    }
-
-    private static Reply replyFromResultSet(ResultSet r, Connection c) throws SQLException {
-        int replyId = r.getInt("ID");
-//        (int id, String author, String text,  int likes, int views, String dateCreated, String dateLastEdited)
-        return new Reply(
-                replyId,
-                r.getInt("parent_ID"),
-                r.getString("username"),
-                r.getString("content"),
-                r.getInt("likes"),
-                // getTextLikes(c, replyId,"Reply")),
-                r.getInt("views"),
-                r.getTimestamp("creationDate").toString(),
-                r.getTimestamp("lastEdit").toString());
-    }
-
-
-   /* private static int getTextLikes( Connection c, int textId, String textClassName) throws SQLException {
+    /* private static int getTextLikes( Connection c, int textId, String textClassName) throws SQLException {
         String statement = "SELECT likes FROM #1 WHERE ID = ?";
         statement.replaceFirst("#1", likesTableSelector(textClassName));
 
@@ -520,47 +555,4 @@ public class ArticleDAO {
         }
         return null;
     }*/
-
-    // Method to delete the Article, Comment, Reply in the database.
-    public static boolean deleteText(Connection c, int textId, String textClassName) throws SQLException {
-
-        String statement = "DELETE FROM #1 WHERE #2 = ?";
-
-        switch (textClassName) {
-            case "Article":
-                statement = statement.replaceFirst("#1", "inFoJaxs_Articles");
-                statement = statement.replaceFirst("#2", "ID");
-                deleteText(c, textId, "ArticleChildren");
-                break;
-
-            case "ArticleChildren":
-                statement = statement.replaceFirst("#1", "inFoJaxs_Comments");
-                statement = statement.replaceFirst("#2", "parent_ID");
-                for (Comment comment : getArticleComments(textId, c))
-                    deleteText(c, comment.getId(), "CommentChildren");
-                break;
-
-            case "Comment":
-                statement = statement.replaceFirst("#1", "inFoJaxs_Comments");
-                statement = statement.replaceFirst("#2", "ID");
-                deleteText(c, textId, "CommentChildren");
-                break;
-
-            case "CommentChildren":
-                statement = statement.replaceFirst("#1", "inFoJaxs_Replies");
-                statement = statement.replaceFirst("#2", "parent_ID");
-                break;
-
-            case "Reply":
-                statement = statement.replaceFirst("#1", "inFoJaxs_Replies");
-                statement = statement.replaceFirst("#2", "ID");
-                break;
-        }
-        System.out.println(statement);
-
-        PreparedStatement p = c.prepareStatement(statement);
-        p.setInt(1, textId);
-        p.executeUpdate();
-        return true;
-    }
 }

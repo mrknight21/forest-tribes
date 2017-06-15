@@ -7,8 +7,8 @@
 --%>
 <%!
     // Server upload pathway:
-    //public String sitePath = "/ForestTribes/";
+    public String sitePath = "/ForestTribes/";
 
-    //local host pathway:
-    public String sitePath = "/";
+    // Local host pathway:
+    // public String sitePath = "/";
 %>
