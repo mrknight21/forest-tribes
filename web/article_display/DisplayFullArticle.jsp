@@ -159,9 +159,9 @@
                                                 Edited: ${comment.dateLastEdited}</p>
                                             <div class="row">
                                                 <c:if test="${username.equals(comment.author)}">
-                                                    <form action="<%=sitePath%>TextUpdate" method="post"
+                                                    <form action="<%=sitePath%>article_display/EditResponse.jsp" method="post"
                                                           style="display: inline-block; float: left; width: 48%; margin: 1%">
-                                                        <input type="radio" name="articleId" value="<%=articleId%>"
+                                                        <input type="radio" name="parentId" value="<%=articleId%>"
                                                                checked
                                                                hidden/>
                                                         <input type="radio" name="id" value="${comment.id}" checked
@@ -247,10 +247,10 @@
                                                                 Edited: ${reply.dateLastEdited}</p>
                                                             <div class="row">
                                                                 <c:if test="${username.equals(reply.author)}">
-                                                                    <form action="<%=sitePath%>TextUpdate"
+                                                                    <form action="<%=sitePath%>article_display/EditResponse.jsp"
                                                                           method="post" style="display: inline-block; float: left; width: 48%; margin: 1%">
                                                                         <input type="radio" name="articleId"
-                                                                               value="<%=articleId%>"
+                                                                               value="${comment.id}"
                                                                                checked hidden/>
                                                                         <input type="radio" name="id"
                                                                                value="${reply.id}"
