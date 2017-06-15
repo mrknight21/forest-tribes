@@ -18,34 +18,29 @@
 
     <%--Page Specific CSS--%>
     <tags:Style_Full-Tree/>
+    <%
+        if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
+        String username = (String) session.getAttribute("username");
+
+    %>
+    <script>
+        $(document).ready(function () {
+        var username = "<%=username%>";
+        var author = "${tree.author}";
+        if(username != author){
+            $(".URL_Adder").remove();
+            $(".URL_editor").remove();
+            $(".URL_deleter").remove();
+            $(".reaction_deleter").remove();
+            $(".reaction_editor").remove();
+        }
+        });
+
+    </script>
 </head>
 <body>
 
-<%
-    if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
-    String username = (String) session.getAttribute("username");
-    /*
-        private String title;
-    private List<T_URL> factual;
-    private List<T_URL> commentary;
-    private List<T_Reaction> reactoin;
-    private int stage;
-    private int size;
-    private int exp;
-    private int coordinX;
-    private int coordinY;
-    private int leaves;
 
-
-    /* protected int id;
-    protected String author;
-    protected String dateCreated;
-    protected String dateLastEdited;
-    protected int likes;
-    protected String text;
-    protected int views;*/
-
-%>
 
 <%@ include file="../WEB-INF/Header_Navbar.jsp" %>
 
