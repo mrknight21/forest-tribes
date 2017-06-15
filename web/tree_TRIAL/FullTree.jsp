@@ -127,6 +127,7 @@
                                                         <input type="hidden" value="factual" name="type">
                                                         <input type="hidden" value="${tree.id}" name="TreeID">
                                                         <input type="hidden" value="for" name="support">
+                                                        <input type="hidden" value="Update" name="request">
                                                         <button type="submit" form="urlFactEditorForID${URLS.id}"
                                                                 value="Submit"
                                                                 class="btn btn-primary"><i class="fa">&#xf044;</i>
@@ -140,6 +141,7 @@
                                                         <input type="hidden" value="1" name="deletetype">
                                                         <input type="hidden" value="${tree.id}" name="TreeID">
                                                         <input type="hidden" value="factual" name="type">
+                                                        <input type="hidden" value="Update" name="request">
                                                         <button type="submit" form="urlFactDeleterForID${URLS.id}" value="Submit"
                                                                 class="btn btn-danger"><i class="fa">&#xf014;</i> Delete
                                                         </button>
@@ -160,6 +162,7 @@
                                                         <input type="hidden" value="factual" name="type">
                                                         <input type="hidden" value="${tree.id}" name="TreeID">
                                                         <input type="hidden" value="against" name="support">
+                                                        <input type="hidden" value="Update" name="request">
                                                         <button type="submit" form="urlFactEditorAgainstID${URLS.id}"
                                                                 value="Submit"
                                                                 class="btn btn-primary"><i class="fa">&#xf044;</i>
@@ -173,6 +176,7 @@
                                                         <input type="hidden" value="1" name="deletetype">
                                                         <input type="hidden" value="${tree.id}" name="TreeID">
                                                         <input type="hidden" value="factual" name="type">
+                                                        <input type="hidden" value="Update" name="request">
                                                         <button type="submit" form="urlFactDeleterAgainstID${URLS.id}"
                                                                 value="Submit"
                                                                 class="btn btn-danger"><i class="fa">&#xf014;</i> Delete
@@ -194,6 +198,7 @@
                                       method="get">
                                     <input type="hidden" value="${tree.id}" name="TreeID">
                                     <input type="hidden" value="factual" name="type">
+                                    <input type="hidden" value="add" name="request">
                                     <button type="submit" form="urlFactAdderID${tree.id}" value="Submit"
                                             class="btn btn-block btn-success"><i class="fa">&#xf067;</i> Add
                                     </button>
@@ -235,6 +240,7 @@
                                                         <input type="hidden" value="commentary" name="type">
                                                         <input type="hidden" value="for" name="support">
                                                         <input type="hidden" value="${tree.id}" name="TreeID">
+                                                        <input type="hidden" value="Update" name="request">
                                                         <button type="submit" form="urlCommentaryEditorForID${URLS.id}"
                                                                 value="Submit"
                                                                 class="btn btn-primary"><i class="fa">&#xf044;</i>
@@ -248,6 +254,7 @@
                                                         <input type="hidden" value="2" name="deletetype">
                                                         <input type="hidden" value="${tree.id}" name="TreeID">
                                                         <input type="hidden" value="commentary" name="type">
+                                                        <input type="hidden" value="Update" name="request">
                                                         <button type="submit" form="urlCommentaryDeleterForID${URLS.id}"
                                                                 value="Submit"
                                                                 class="btn btn-danger"><i class="fa">&#xf014;</i> Delete
@@ -269,6 +276,7 @@
                                                         <input type="hidden" value="commentary" name="type">
                                                         <input type="hidden" value="against" name="support">
                                                         <input type="hidden" value="${tree.id}" name="TreeID">
+                                                        <input type="hidden" value="Update" name="request">
                                                         <button type="submit" form="urlCommentaryEditorAgainstID${URLS.id}"
                                                                 value="Submit"
                                                                 class="btn btn-primary"><i class="fa">&#xf044;</i>
@@ -282,6 +290,7 @@
                                                         <input type="hidden" value="2" name="deletetype">
                                                         <input type="hidden" value="${tree.id}" name="TreeID">
                                                         <input type="hidden" value="commentary" name="type">
+                                                        <input type="hidden" value="Update" name="request">
                                                         <button type="submit" form="urlCommentaryDeleterAgainstID${URLS.id}"
                                                                 value="Submit"
                                                                 class="btn btn-danger"><i class="fa">&#xf014;</i> Delete
@@ -303,6 +312,7 @@
                                       method="get">
                                     <input type="hidden" value="${tree.id}" name="TreeID">
                                     <input type="hidden" value="commentary" name="type">
+                                    <input type="hidden" value="add" name="request">
                                     <button type="submit" form="urlCommentaryAdderID${tree.id}" value="Submit"
                                             class="btn btn-block btn-success"><i class="fa">&#xf067;</i> Add
                                     </button>
@@ -341,6 +351,7 @@
                                                         <input type="hidden" value="${reaction.id}" name="id">
                                                         <input type="hidden" value="${tree.id}" name="TreeID">
                                                         <input type="hidden" value="for" name="support">
+                                                        <input type="hidden" value="Update" name="request">
                                                         <button type="submit" form="reactionEditorForID${reaction.id}"
                                                                 value="Submit"
                                                                 class="btn btn-primary"><i class="fa">&#xf044;</i>
@@ -353,6 +364,7 @@
                                                         <input type="hidden" value="${reaction.id}" name="id">
                                                         <input type="hidden" value="3" name="deletetype">
                                                         <input type="hidden" value="${tree.id}" name="TreeID">
+                                                        <input type="hidden" value="Update" name="request">
                                                         <button type="submit" form="reactionDeleterForID${reaction.id}"
                                                                 value="Submit"
                                                                 class="btn btn-danger"><i class="fa">&#xf014;</i> Delete
@@ -371,6 +383,7 @@
                                                         <input type="hidden" value="${reaction.id}" name="id">
                                                         <input type="hidden" value="${tree.id}" name="TreeID">
                                                         <input type="hidden" value="against" name="support">
+                                                        <input type="hidden" value="Update" name="request">
                                                         <button type="submit" form="reactionEditorAgainstID${reaction.id}"
                                                                 value="Submit"
                                                                 class="btn btn-primary"><i class="fa">&#xf044;</i>
@@ -383,6 +396,7 @@
                                                         <input type="hidden" value="${reaction.id}" name="id">
                                                         <input type="hidden" value="3" name="deletetype">
                                                         <input type="hidden" value="${tree.id}" name="TreeID">
+                                                        <input type="hidden" value="Update" name="request">
                                                         <button type="submit" form="reactionDeleterAgainstID${reaction.id}"
                                                                 value="Submit"
                                                                 class="btn btn-danger"><i class="fa">&#xf014;</i> Delete
@@ -397,6 +411,7 @@
                                 <form class="Reaction_Adder" id="reactionAdderID${tree.id}"
                                       action="/tree_TRIAL/Reaction_editor.jsp" method="get">
                                     <input type="hidden" value="${tree.id}" name="TreeID">
+                                    <input type="hidden" value="add" name="request">
                                     <button type="submit" form="reactionAdderID${tree.id}" value="Submit"
                                             class="btn btn-block btn-success"><i class="fa">&#xf067;</i> Add
                                     </button>
