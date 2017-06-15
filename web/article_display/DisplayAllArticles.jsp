@@ -82,7 +82,7 @@
                                            onclick="revealArticle(this.id)">Reveal full article</a>
                                     </div>
                                     <div class="panel-footer">
-                                        <a href="<%=sitePath%>article_display/DisplayUserAllArticles.jsp?author=${article.author}" style="display: inline-block"><i class="fa">&#xf2bd;</i>
+                                        <a href="<%=sitePath%>article_display/DisplayUserAllArticles.jsp?author=${article.author}" style="display: inline-block; padding-right: 1%"><i class="fa">&#xf2bd;</i>
                                             Author: ${article.author}</a>
                                         <p style="display: inline-block"><i class="fa">&#xf0c0;</i>
                                             Views: ${article.views}</p>
