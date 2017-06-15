@@ -39,10 +39,13 @@ public class UserSecurityDAO {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_UserSecurity WHERE username = ?")) {
                 p.setString(1, username);
 
-                try (ResultSet r = p.executeQuery()) {while (r.next()) return userFromResultSet(r);}
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) return userFromResultSet(r);
+                }
             }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
-        catch (SQLException | ClassNotFoundException e) {e.printStackTrace();}
         return null;
     }
 
@@ -50,18 +53,18 @@ public class UserSecurityDAO {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_UserSSO WHERE userGoogleID = ?")) {
                 p.setString(1, userId);
-                try (ResultSet r = p.executeQuery()) {while (r.next()) return r.getString("username");}
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) return r.getString("username");
+                }
             }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
-        catch (SQLException | ClassNotFoundException e) {e.printStackTrace();}
         return null;
     }
 
     // Method to insert a parsed-in UserSecurity object into the database.
     public static boolean insertUser(AbstractDB db, UserSecurity newUser) {
-
-        boolean status;
-
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("INSERT INTO inFoJaxs_UserSecurity (username, salt, iterations, hash) VALUE (?, ?, ?, ?)")) {
 
@@ -77,13 +80,12 @@ public class UserSecurityDAO {
                 p.setBlob(4, hashBlob);
 
                 p.executeUpdate();
-                status = true;
+                return true;
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-            status = false;
         }
-        return status;
+        return false;
     }
 
     // Method to update a UserSecurity object's password database value to the parsed-in

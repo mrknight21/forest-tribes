@@ -38,9 +38,7 @@ public class Serve_Logout extends HttpServlet {
 }
 
 /*From: content Page.
-
         Hyperink : login (redirect login.jsp)
-
         Steps:
         1.checkLogginStatus
         2.Logout. removing session.attributes of LogginStatus and username.

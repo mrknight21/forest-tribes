@@ -10,7 +10,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>GoogleVerification</servlet-name>
-        <url-pattern>/tokensignin</url-pattern>
+        <url-pattern>/TokenSignIn</url-pattern>
     </servlet-mapping>
 
 
@@ -32,7 +32,6 @@
         <url-pattern>/Serve_Registration</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
         <servlet-name>Serve_Logout</servlet-name>
         <servlet-class>User.Serve_Logout</servlet-class>
@@ -41,7 +40,6 @@
         <servlet-name>Serve_Logout</servlet-name>
         <url-pattern>/Serve_Logout</url-pattern>
     </servlet-mapping>
-
 
     <servlet>
         <servlet-name>Serve_Profile</servlet-name>
@@ -52,7 +50,6 @@
         <url-pattern>/Serve_Profile</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
         <servlet-name>Serve_Changepassword</servlet-name>
         <servlet-class>User.Serve_Changepassword</servlet-class>
@@ -62,7 +59,6 @@
         <url-pattern>/Serve_Changepassword</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
         <servlet-name>Serve_UpdateProfilePicture</servlet-name>
         <servlet-class>User.Serve_UpdateProfilePicture</servlet-class>
@@ -71,7 +67,6 @@
         <servlet-name>Serve_UpdateProfilePicture</servlet-name>
         <url-pattern>/Serve_UpdateProfilePicture</url-pattern>
     </servlet-mapping>
-
 
     <servlet>
         <servlet-name>Serve_DeleteUser</servlet-name>
@@ -83,6 +78,8 @@
     </servlet-mapping>
 
 
+
+
     <servlet>
         <servlet-name>ArticleServlet</servlet-name>
         <servlet-class>Article.ArticleServlet</servlet-class>
@@ -91,6 +88,9 @@
         <servlet-name>ArticleServlet</servlet-name>
         <url-pattern>/TextUpdate</url-pattern>
     </servlet-mapping>
+
+
+
 
     <servlet>
         <servlet-name>Serve_FullTree</servlet-name>
@@ -123,8 +123,6 @@
         <url-pattern>/Serve_TreeURL</url-pattern>
     </servlet-mapping>
 
-
-
     <servlet>
         <servlet-name>Serve_TreeReaction</servlet-name>
         <servlet-class>Tree.Serve_TreeReaction</servlet-class>
@@ -133,8 +131,6 @@
         <servlet-name>Serve_TreeReaction</servlet-name>
         <url-pattern>/Serve_TreeReaction</url-pattern>
     </servlet-mapping>
-
-
 
     <servlet>
         <servlet-name>Serve_DeleteTreeComponents</servlet-name>

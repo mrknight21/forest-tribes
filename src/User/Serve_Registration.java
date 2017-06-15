@@ -9,6 +9,7 @@ import Utility.MiscellaneousUtility;
 import Utility.MySQL;
 import Utility.SecurityUtility;
 
+import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 
 public class Serve_Registration extends HttpServlet {
@@ -58,7 +60,7 @@ public class Serve_Registration extends HttpServlet {
                     // Register user details
                     ServletContext servletContext = getServletContext();
                     String  imagePathway = servletContext.getRealPath("/images_material/Default/Userdefault.jpg");
-                    UserDAO.registerUserDetails(DB, servletContext, username, registrationFirstName, registrationLastName, registrationEmail, imagePathway);
+                    UserDAO.registerUserDetails(DB, servletContext, username, registrationFirstName, registrationLastName, registrationEmail, ImageIO.read(new File(imagePathway)));
 
                     // Register user security details
                     byte[] salt = SecurityUtility.getNextSalt();

@@ -6,13 +6,15 @@ package User;
 
 import Utility.MySQL;
 import Utility.SecurityUtility;
+
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
+
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.jackson.JacksonFactory;
-
+import com.google.api.client.json.jackson2.JacksonFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,7 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
 
@@ -40,70 +43,15 @@ public class Serve_Authentication extends HttpServlet {
             response.sendRedirect("user_interface/Home.jsp");
             return;
         }
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login_interface/Login.jsp");
 
         String idTokenString = request.getParameter("idtoken");
 
-//        if (idTokenString != null) {
-//
-//            JsonFactory jsonFactory = new JacksonFactory();
-//            NetHttpTransport transport = new NetHttpTransport();
-//
-//            GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
-//                    .setAudience(Collections.singletonList("528062179592-r23sffi9bm4tnntec1e6eei3s1oot0k9.apps.googleusercontent.com"))
-//                    // Or, if multiple clients access the backend:
-//                    //.setAudience(Arrays.asList(CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3))
-//                    .build();
-//
-//            // (Receive idTokenString by HTTPS POST)
-//
-//            GoogleIdToken idToken = null;
-//
-//            try {
-//                idToken = verifier.verify(idTokenString);
-//            } catch (GeneralSecurityException e) {
-//                e.printStackTrace();
-//            }
-//
-//            if (idToken != null) {
-//                GoogleIdToken.Payload payload = idToken.getPayload();
-//
-//                // Print user identifier
-//                String userId = payload.getSubject();
-//                System.out.println("User ID: " + userId);
-//
-//                String userName = UserSecurityDAO.getUserByGoogleID(DB, userId);
-//
-//                // Use or store profile information
-//                // ...
-//                PrintWriter out = response.getWriter();
-//
-//                if (userName == null) {
-//
-//                    // Get profile information from payload
-//                    String email = payload.getEmail();
-//                    boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
-//                    userName = (String) payload.get("name");
-//                    String pictureUrl = (String) payload.get("picture");
-//                    String locale = (String) payload.get("locale");
-//                    String familyName = (String) payload.get("family_name");
-//                    String givenName = (String) payload.get("given_name");
-//
-//                    UserDAO.registerUserDetails(DB, getServletContext(), userName, givenName, familyName, email, pictureUrl);
-//                }
-//
-//                out.write(userName);
-//
-////                loginTrue(request, response, userName);
-//                return;
-//
-//            } else {
-//                System.out.println("Invalid ID token.");
-//                request.setAttribute("message", "Invalid ID token.");
-//                dispatcher.forward(request, response);
-//            }
-//        }
+        if (idTokenString != null) {
+            authenticateGoogleToken(request, response, idTokenString);
+            return;
+        }
 
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login_interface/Login.jsp");
 
         String username = request.getParameter("loginUsername");
         String password = request.getParameter("loginPassword");
@@ -113,8 +61,9 @@ public class Serve_Authentication extends HttpServlet {
             System.out.println("No parameters received.");
         } else if (UserDAO.getUserByUserName(DB, username) != null) {
             if (SecurityUtility.passwordAuthentication(username, password)) {
-                loginTrue(request, response, username);
-                return;
+                loginTrue(request, username);
+                request.setAttribute("message", "You genius! Log in is successful!!");
+                dispatcher = getServletContext().getRequestDispatcher("/user_interface/Home.jsp");
             } else {
                 request.setAttribute("message", "The combination of username and password you have entered is incorrect");
                 System.out.println("Password was wrong");
@@ -126,14 +75,61 @@ public class Serve_Authentication extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    private void loginTrue(HttpServletRequest request, HttpServletResponse response, String username) throws ServletException, IOException {
+    private void authenticateGoogleToken(HttpServletRequest request, HttpServletResponse response, String idTokenString) {
+
+        JsonFactory jsonFactory = new JacksonFactory();
+        HttpTransport httpTransport = new NetHttpTransport();
+
+        GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(httpTransport, jsonFactory)
+                .setAudience(Collections.singletonList("528062179592-r23sffi9bm4tnntec1e6eei3s1oot0k9.apps.googleusercontent.com"))
+                // Or, if multiple clients access the backend:
+                //.setAudience(Arrays.asList(CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3))
+                .build();
+
+        // (Receive idTokenString by HTTPS POST)
+        GoogleIdToken idToken = null;
+        String userName = null;
+
+        try {idToken = verifier.verify(idTokenString);}
+        catch (GeneralSecurityException | IOException e) {e.printStackTrace();}
+
+        if (idToken != null) {
+            Payload payload = idToken.getPayload();
+
+            // Print user identifier
+            String userId = payload.getSubject();
+            userName = UserSecurityDAO.getUserByGoogleID(DB, userId);
+            System.out.println("User ID: " + userId);
+
+            // Use or store profile information
+            if (userName == null) {
+                // Get profile information from payload
+                // boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
+                // String locale = (String) payload.get("locale");
+                String email = payload.getEmail();
+                userName = (String) payload.get("name");
+                String pictureUrl = (String) payload.get("picture");
+                String familyName = (String) payload.get("family_name");
+                String givenName = (String) payload.get("given_name");
+
+                URL imageUrl = null;
+                try {imageUrl = new URL(pictureUrl);}
+                catch (MalformedURLException e) {e.printStackTrace();}
+
+                try {UserDAO.registerUserDetails(DB, getServletContext(), userId, userName, givenName, familyName, email, imageUrl);}
+                catch (IOException e) {e.printStackTrace();}
+            }
+            loginTrue(request, userName);
+        }
+        try {response.getWriter().write(userName);}
+        catch (IOException e) {e.printStackTrace();}
+    }
+
+    private void loginTrue(HttpServletRequest request, String username) {
         HttpSession session = request.getSession();
         session.setAttribute("loggingStatus", true);
         session.setAttribute("username", username);
-        request.setAttribute("message", "You genius! Log in is successful!!");
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user_interface/Home.jsp");
         System.out.println("logged in");
-        dispatcher.forward(request, response);
     }
 }
 
@@ -152,12 +148,6 @@ public class Serve_Authentication extends HttpServlet {
 * 5. redirect to Content page.
 * 6. or redirect to login page if authentification fail.
 *
-*
 * Output:
 * Cookie (loginAttempt: unsuccessful) to Login.jsp
-*
-*
-*
-*
-*
 * */

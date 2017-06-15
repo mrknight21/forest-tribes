@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -318,25 +319,47 @@ public class UserDAO {
         return success;
     }
 
-    public static void registerUserDetails(AbstractDB DB, ServletContext servletContext, String username, String registrationFirstName, String registrationLastName, String registrationEmail, String imagePathway) throws IOException {
+    public static boolean insertGoogleIdByUser(AbstractDB db, String userId, String username) {
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_User SET userGoogleID = ? WHERE username = ?")) {
+                p.setString(1, userId);
+                p.setString(2, username);
+                p.executeUpdate();
+                return true;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static void registerUserDetails(AbstractDB DB, ServletContext servletContext, String userId, String username, String registrationFirstName, String registrationLastName, String registrationEmail, URL imageURL) throws IOException {
+
+        BufferedImage sourceImage = ImageIO.read(imageURL);
+
+        registerUserDetails(DB, servletContext, username, registrationFirstName, registrationLastName, registrationEmail, sourceImage);
+
+        insertGoogleIdByUser(DB, userId, username);
+    }
+
+    public static void registerUserDetails(AbstractDB DB, ServletContext servletContext, String username, String registrationFirstName, String registrationLastName, String registrationEmail, BufferedImage sourceImage) throws IOException {
 
         // Register user and create profile
         User newUser = new User(username, registrationFirstName, registrationLastName, registrationEmail, "/User/"+username+"/User_profile_picture.jpg", "/User/"+username);
 
         //auto set-up user profile photo
-        setUserDP(imagePathway, username, servletContext);
+        setUserDP(sourceImage, username, servletContext);
 
         registerUser(DB, newUser);
 
         createProfile(DB, username);
     }
 
-    private static void setUserDP(String imagePathway, String username, ServletContext servletContext) throws IOException {
+
+    private static void setUserDP(BufferedImage sourceImage, String username, ServletContext servletContext) throws IOException {
 
         // Create user dir
         String userDirPath = MiscellaneousUtility.createUserDir(servletContext, username);
-
-        BufferedImage sourceImage = ImageIO.read(new File(imagePathway));
 
         try {
             // retrieve image
