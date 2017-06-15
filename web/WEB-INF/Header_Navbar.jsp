@@ -1,3 +1,13 @@
+<script>
+    function troll() {
+        $("#searchID").val("Lol couldn't find anything");
+        $("#searchID").prop('readonly', true);
+    }
+
+    $(document).ready(function () {
+        $("#searchID").keyup(troll);
+    });
+</script>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -43,7 +53,7 @@
             </ul>
             <form class="navbar-form navbar-right">
                 <div id="headerSearch" class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" id="searchID" class="form-control" placeholder="Search" onchange="troll();">
                 </div>
                 <button id="headerSearchSubmit" type="submit" class="btn btn-default"><i id="headerSearchIcon" class="glyphicon glyphicon-search"></i> Search</button>
             </form>
