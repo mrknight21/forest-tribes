@@ -124,7 +124,7 @@
                 </div>
                 <%----%>
 
-                <div id="commentsDivID" class="panel panel-default" style="border: none">
+                <div id="commentsDivID" class="panel panel-default" style="border: none; box-shadow: none">
                     <c:if test="${article.responseCount != 0 }">
                         <c:forEach var="comment" items="${article.comments}">
                             <div class="panel panel-default" style="margin-left: 2%; border-color: #00AA8D">
