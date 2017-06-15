@@ -73,7 +73,7 @@
                                 </legend>
                                 <a href="<%=imagePath%>"><img id="userImageID" src="<%=imagePath%>"
                                                               class="img-rounded"
-                                                              alt="User Profile Picture" style="height: 50%"></a>
+                                                              alt="User Profile Picture"></a>
                             </fieldset>
                         </div>
                     </div>
