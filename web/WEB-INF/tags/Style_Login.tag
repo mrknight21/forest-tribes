@@ -255,9 +255,13 @@
         margin-bottom: 10px;
     }
 
-    #messageLogin, #registrationMessageID {
+    #messageLogin, #registrationMessageID, #usernameExistsID, #usernameAvailableID {
         color: red;
-        font-family: Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;;
+        font-family: Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    #usernameAvailableID {
+        color: green;
     }
 
     .form-control[disabled] {
