@@ -52,4 +52,8 @@
         #headerSearchIcon {
             color: #008975;
         }
+
+        a {
+            font-family: Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
     </style>
