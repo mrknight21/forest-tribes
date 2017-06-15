@@ -108,7 +108,7 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="row form-group">
-                                        <input id="articleContentInputID" name="text" type="hidden" value="">
+                                        <input id="articleContentInputID" name="text" type="hidden" value="" required>
                                         <div id="editor-container" style="height:375px">${article.text}</div>
                                     </div>
                                 </div>
