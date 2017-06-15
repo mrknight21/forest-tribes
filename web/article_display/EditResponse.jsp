@@ -20,7 +20,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-    <title>Forest Tribes: Edit your article</title>
+    <title>Forest Tribes: Edit your response</title>
 
     <%--Importing all necessary libraries, frameworks etc.--%>
     <%@include file="../WEB-INF/Head_Scripts.jsp" %>
@@ -30,7 +30,7 @@
 
     <link href="https://cdn.quilljs.com/1.2.6/quill.snow.css" rel="stylesheet">
 
-  <tags:Style_Create-Article/>
+    <tags:Style_Create-Article/>
 </head>
 <body>
 
@@ -46,12 +46,11 @@
     Text reply = new Comment();
     if (request.getParameter("updateComment") != null) {
         reply = ArticleDAO.getCommentById(DB, textId);
-        parentId = ((Comment)reply).getParentID();
+        parentId = ((Comment) reply).getParentID();
         type = "Comment";
-    }
-    else if (request.getParameter("updateReply") != null) {
+    } else if (request.getParameter("updateReply") != null) {
         reply = ArticleDAO.getReplyById(DB, textId);
-        parentId = ((Reply)reply).getParentID();
+        parentId = ((Reply) reply).getParentID();
         type = "Reply";
     }
 
@@ -72,27 +71,25 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <h5>Amend your ways: </h5>
+                                    <h5>Edit your response: </h5>
                                 </div>
                             </div>
                         </div>
-                        <div class="panel-body" style="padding-top: 0">
+                        <div class="panel-body" style="padding-top: 0; padding-bottom: 0;">
                             <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="row form-group">
+                                <div class="col-lg-12" style="padding: 0">
+                                    <div class="form-group">
                                         <input id="articleContentInputID" name="text" type="hidden" value="">
                                         <div id="editor-container" style="height:375px">${text.text}</div>
+                                        <div class="col-lg-12">
+                                            <input type="radio" name="id" value="${text.id}" checked hidden/>
+                                            <input type="radio" name="parentId" value="<%=parentId%>" checked hidden/>
+                                            <input type="radio" name="articleId" value="<%=articleId%>" checked hidden/>
+                                            <input type="submit" class="btn btn-block btn-primary"
+                                                   name="update<%=type%>" style="margin-top: 2%"
+                                                   id="updateArticleSubmitID" value="Edit Response" disabled>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-footer">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <input type="radio" name="id" value="${text.id}" checked hidden/>
-                                    <input type="radio" name="parentId" value="<%=parentId%>" checked hidden/>
-                                    <input type="radio" name="articleId" value="<%=articleId%>" checked hidden/>
-                                    <input type="submit" class="form-control btn btn-login" name="update<%=type%>" id="updateArticleSubmitID" value="Make the change" disabled>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +114,7 @@
         theme: 'snow'
     });
 
-    quill.once("text-change", function(delta, oldDelta, source){
+    quill.once("text-change", function (delta, oldDelta, source) {
 
         var content = $("#articleContentInputID");
 
@@ -126,7 +123,7 @@
         $("#updateArticleSubmitID").prop('disabled', false);
     });
 
-    quill.on("text-change", function(delta, oldDelta, source){
+    quill.on("text-change", function (delta, oldDelta, source) {
 
         var content = $("#articleContentInputID");
 
