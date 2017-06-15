@@ -94,6 +94,22 @@
                     <div class="panel-heading" style="background-color: #008975">
                         <div class="row">
                             <div class="col-lg-12">
+                                <h4>Short Introduction:</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <p>${tree.text}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default" style="border-color: #008975">
+                    <div class="panel-heading" style="background-color: #008975">
+                        <div class="row">
+                            <div class="col-lg-12">
                                 <h4>Facts:</h4>
                             </div>
                         </div>
