@@ -21,6 +21,16 @@
 
     <%--Page Specific CSS--%>
     <tags:Style_Reaction-Editor/>
+    <script>
+        $(document).ready(function () {
+        $("#secret").click(function (event){
+            $(this).css("display","none");
+            $("#myiframe").contents().find(".trees").attr("src","<%=sitePath%>tree_TRIAL/Tree_Material/Venusaur_stage_4.png")
+        })
+
+        });
+
+    </script>
 </head>
 <body>
 <%@ include file="../WEB-INF/Header_Navbar.jsp" %>
@@ -41,7 +51,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <fieldset>
-                                <legend>Background Selector:</legend>
+                                <legend>Background Selector: <img id="secret" src="<%=sitePath%>tree_TRIAL/Tree_Material/Secret_Star_Icon.png" width="15px" height="15" style="float: right;"></legend>
                                     <select name="background" id="background_selector" style="margin-bottom: 1%">
                                         <option value="background_Mars.jpg">Mars</option>
                                         <option value="background_Schizophrenic.jpg">Schizophrenic</option>
