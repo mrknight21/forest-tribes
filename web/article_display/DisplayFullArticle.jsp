@@ -19,8 +19,8 @@
     Article article = ArticleDAO.getArticleById(DB, articleId);
 
     Boolean deletionRights = false;
-    if (article.getAuthor().equals(username))
-        deletionRights = true;
+    if (article.getAuthor().equals(username)) deletionRights = true;
+    else ArticleDAO.increaseViews(DB, articleId);
 
 
 
