@@ -271,7 +271,9 @@ public class ArticleDAO {
             case "Article":
                 statement = statement.replaceFirst("#1", "inFoJaxs_Articles");
                 statement = statement.replaceFirst("#2", "ID");
-                deleteText(c, textId, "ArticleChildren");
+
+                // Add ON DELETE CASCADE to SQL database
+                /*deleteText(c, textId, "ArticleChildren");
                 break;
 
             case "ArticleChildren":
@@ -279,18 +281,20 @@ public class ArticleDAO {
                 statement = statement.replaceFirst("#2", "parent_ID");
                 for (Comment comment : getArticleComments(textId, c))
                     deleteText(c, comment.getId(), "CommentChildren");
-                break;
+                break;*/
 
             case "Comment":
                 statement = statement.replaceFirst("#1", "inFoJaxs_Comments");
                 statement = statement.replaceFirst("#2", "ID");
-                deleteText(c, textId, "CommentChildren");
+
+                // Add ON DELETE CASCADE to SQL database
+                /*deleteText(c, textId, "CommentChildren");
                 break;
 
             case "CommentChildren":
                 statement = statement.replaceFirst("#1", "inFoJaxs_Replies");
                 statement = statement.replaceFirst("#2", "parent_ID");
-                break;
+                break;*/
 
             case "Reply":
                 statement = statement.replaceFirst("#1", "inFoJaxs_Replies");
