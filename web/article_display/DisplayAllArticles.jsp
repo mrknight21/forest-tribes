@@ -54,7 +54,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
+        <div class="col-lg-12">
             <div id="displayMainPanelID" class="panel panel-login">
                 <div class="panel-heading">
                     <div class="row">
