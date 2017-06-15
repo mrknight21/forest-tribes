@@ -85,22 +85,13 @@
                                     Edited: ${article.dateLastEdited}</p>
                                 <%if (deletionRights) {%>
                                 <div class="row" style="background-color: #f5f5f5">
-                                    <a class="form-control btn btn-login"
-                                       href="<%=sitePath%>article_display/EditArticle.jsp?articleId=<%=articleId%>" style="background-color: #008975;
-                                                                                                                                                           border-color: #008975;
-                                                                                                                                                           margin-bottom: 1%;
-                                                                                                                                                           outline: none;
-                                                                                                                                                           color: white;
-                                                                                                                                                           text-transform: uppercase">Edit Article</a>
-                                    <form action="<%=sitePath%>TextUpdate" method="post">
+                                    <a class="btn btn-success" style="display:inline-block; float: left; width: 48%; margin: 1%"
+                                       href="<%=sitePath%>article_display/EditArticle.jsp?articleId=<%=articleId%>">Edit Article</a>
+                                    <form action="<%=sitePath%>TextUpdate" method="post" style="display: inline-block; float: right; width: 48%; margin: 1%">
                                         <input type="radio" name="id" value="<%=articleId%>" checked hidden/>
                                         <input type="radio" name="articleId" value="<%=articleId%>" checked hidden/>
-                                        <input type="submit" class="form-control btn btn-login" name="deleteArticle"
-                                               value="Delete Article" style="background-color: #008975;
-                                                                                                                                                           border-color: #008975;
-                                                                                                                                                           outline: none;
-                                                                                                                                                           color: white;
-                                                                                                                                                           text-transform: uppercase"/>
+                                        <input type="submit" class="btn btn-danger" name="deleteArticle"
+                                               value="Delete Article" style="width: 100%;"/>
                                     </form>
                                 </div>
                                 <%}%>
@@ -123,12 +114,8 @@
                                     <textarea style="width: inherit" rows="3" cols="100" name="text"
                                               placeholder="Share your thoughts" required></textarea>
                                     <input type="submit" name="createComment"
-                                           class="form-control btn btn-login"
-                                           value="Submit Comment" style="background-color: #008975;
-                                                                         border-color: #008975;
-                                                                         outline: none;
-                                                                         color: white;
-                                                                         text-transform: uppercase"/>
+                                           class="btn btn-block btn-success"
+                                           value="Submit Comment"/>
                                 </div>
                             </div>
                         </div>
@@ -174,12 +161,8 @@
                                                 <input type="radio" name="articleId" value="<%=articleId%>" checked
                                                        hidden/>
                                                 <input type="radio" name="id" value="${comment.id}" checked hidden/>
-                                                <input type="submit" class="form-control btn btn-login"
-                                                       name="deleteComment" value="Delete Comment" style="background-color: #00AA8D;
-                                                                                                                                                           border-color: #00AA8D;
-                                                                                                                                                           outline: none;
-                                                                                                                                                           color: white;
-                                                                                                                                                           text-transform: uppercase"/>
+                                                <input type="submit" class="btn btn-block btn-danger"
+                                                       name="deleteComment" value="Delete Comment"/>
                                             </form>
                                             <%}%>
                                         </div>
@@ -208,12 +191,8 @@
                                                     <textarea style="width: inherit" rows="3" cols="100" name="text"
                                                               placeholder="Share your thoughts" required></textarea>
                                                     <input type="submit" name="createReply"
-                                                           class="form-control btn btn-login"
-                                                           value="Submit Reply" style="background-color: #00AA8D;
-                                                                                       border-color: #00AA8D;
-                                                                                       outline: none;
-                                                                                       color: white;
-                                                                                       text-transform: uppercase"/>
+                                                           class="btn btn-block btn-success"
+                                                           value="Submit Reply"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -254,11 +233,8 @@
                                                                 <input type="radio" name="id" value="${reply.id}"
                                                                        checked
                                                                        hidden/>
-                                                                <input type="submit" class="form-control btn btn-login"
-                                                                       name="deleteReply" value="Delete Reply" style="background-color: #f5f5f5;
-                                                                                                                                                           border-color: #ddd;
-                                                                                                                                                           outline: none;
-                                                                                                                                                           text-transform: uppercase"/>
+                                                                <input type="submit" class="btn btn-block btn-danger"
+                                                                       name="deleteReply" value="Delete Reply"/>
                                                             </form>
                                                             <%}%>
                                                         </div>
