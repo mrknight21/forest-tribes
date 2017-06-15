@@ -1,19 +1,24 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: mche618
-  Date: 13/06/2017
-  Time: 8:30 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%@ page import="Utility.SecurityUtility" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+
+<!DOCTYPE html>
+<html lang="en" class="full">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-    <title>Plant your tree</title>
-    <%@include file="../WEB-INF/Head_Scripts.jsp"%>
+    <title>Forest Tribes: Plant your tree</title>
+
+    <%--Importing all necessary libraries, frameworks etc.--%>
+    <%@include file="../WEB-INF/Head_Scripts.jsp" %>
+
     <%@include file="../WEB-INF/Mapviewer.jsp"%>
+
     <script>
         $( function() {
-
             $("#seed").click(function () {
                 console.log("click");
                 $("body").css("cursor", "url(\"Tree_Material/sprout_hand.png\"), default");
@@ -36,73 +41,87 @@
                 });
             });
 
-
-           /* $("#myiframe").keydown(function(event){
-                //up
-                if (event.keyCode == 38){
-                    $("#myiframe").contentWindow.scrollTo( ,ycoord)
-                }
-                //right
-                if (event.keyCode == 39){
-
-                }
-                //left
-                if (event.keyCode == 37){
-
-                }
-                //down
-                if (event.keyCode == 40){
-
-                }
-
-            });*/
-
-
-            $("#restart").click(function () {
+            $("#resetButtonID").click(function () {
                 $("#myiframe").contents().find("#new_seed").remove();
                 $("#seed").css("display", "initial");
                 $("#seed").css("pointer-events", "auto");
-            })
+            });
         });
-        // $("#myiframe").contents().find("#myContent")
     </script>
+
+    <%--Page Specific CSS--%>
+    <tags:Style_Reaction-Editor/>
 </head>
 <body>
-<h1>Plant your BIG ISSUE!!</h1>
 
-<p></p>
-<form action="/Serve_TreeCreation" METHOD="get">
-    <label for="title">The name of your Big issue:</label>
-    <input id="title" type="text" name="title" width="500px">
-    <p></p>
-    <label for="description">Tell use more about it:</label>
-    <br>
-    <textarea id="description" name="shortIntro" rows="6" cols="80">Please tell more about your tree...</textarea>
-    <p></p>
-    <div id="seed" >
-        <p>click me to plant your tree!!</p>
-        <img  src="Tree_Material/sprout.png">
+<%
+    if (!SecurityUtility.loggingStatusChecker(request)) response.sendRedirect("../login_interface/Login.jsp");
+    String username = (String) session.getAttribute("username");
+%>
+
+<%@ include file="../WEB-INF/Header_Navbar.jsp" %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-login">
+                <div class="panel panel-default" style="border-color: #008975">
+                    <div class="panel-heading" style="background-color: #008975">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h3><i class="fa">&#xf06c;</i> Plant your Big Issue:</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form action="/Serve_TreeCreation" METHOD="get" id="plantFormID">
+                                    <fieldset>
+                                        <legend>The Name of your Big Issue:</legend>
+                                        <div class="form-group">
+                                            <input id="title" type="text" name="title" style="width: 50%" required>
+                                        </div>
+                                        <legend>Tell use more about it:</legend>
+                                        <div class="form-group">
+                                            <textarea id="description" name="shortIntro" rows="6"
+                                                      cols="80" required></textarea>
+                                        </div>
+                                        <legend><i class="fa">&#xf245;</i> Click me to plant your tree</legend>
+                                        <div class="form-group" id="seed">
+                                            <img src="Tree_Material/sprout.png" style="display: block; margin: auto">
+                                        </div>
+                                        <legend>Coordinates:</legend>
+                                        <div class="form-group">
+                                            <label for="Xcoordinate">X Position:</label>
+                                            <input type="number" value="0" id="Xcoordinate" name="X" readonly>
+                                            <label for="Ycoordinate">Y Position:</label>
+                                            <input type="number" value="0" id="Ycoordinate" name="Y" readonly>
+                                            <button type="submit" form="plantFormID" value="Confirm Location"
+                                                    class="btn btn-success" style="display: inline-block">Confirm Location
+                                            </button>
+                                            <button type="reset" id="resetButtonID" form="plantFormID" value="Reset Location"
+                                                    class="btn btn-danger" style="display: inline-block">Reset Location
+                                            </button>
+                                        </div>
+                                        <legend>Zoom Control:</legend>
+                                        <div class="form-group" style="position:relative; float: left; z-index: 999">
+                                            <div class="slider" id="zoom-control"></div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <iframe class="whole" name="iframe_a" id="myiframe" src="ForestTribe.jsp" frameborder=0
+                            height="750px"
+                            width="1000px" scrolling="auto" style="display: block; margin: auto">
+                        <p>Your browser does not support iframes.</p>
+                    </iframe>
+                </div>
+            </div>
+        </div>
     </div>
-    <p></p>
-    <label for>Coordinate: </label>
-    <input type="number" value="0" id="Xcoordinate" name="X" readonly>
-    <input type="number" value="0" id="Ycoordinate" name="Y" readonly>
-    <input type="submit" value="Confirm location, and go further tree editing">
-    <input id="restart" type="reset" value="Click to restart planting">
-</form>
-
-    <div slider container style="position:relative; float: left; z-index: 999">
-        <label for="zoom-control"  style="color: brown;font-size: xx-large; font-family: 'Californian FB';">Zoom Control: <em id="zoom-control-lable"></em></label>
-        <div class="slider" id="zoom-control"></div>
-    </div>
-
-<div id="iframe_container" >
-    <div id="loader"></div>
-<iframe onload="StopLoader()"class="whole"  name="iframe_a" id="myiframe" src="ForestTribe.jsp" frameborder=0 height="750px" width="1000px" scrolling="auto" style="width: 100%">
-    <p>Your browser does not support iframes.</p>
-</iframe>
 </div>
-
-
 </body>
 </html>

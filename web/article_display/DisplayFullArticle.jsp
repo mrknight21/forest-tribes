@@ -19,13 +19,10 @@
     Article article = ArticleDAO.getArticleById(DB, articleId);
 
     Boolean deletionRights = false;
-    Boolean editRights = false;
     if (article.getAuthor().equals(username))
         deletionRights = true;
 
-    if (!article.getAuthor().equals(username)) {
-        response.sendRedirect("../article_display/DisplayAllArticles.jsp");
-    }
+
 
 //    Add script to increase Article views by one one each load.
     request.setAttribute("article", article);
@@ -80,8 +77,6 @@
                             <div class="col-lg-12">
                                 <p style="display: inline-block"><i class="fa">&#xf2bd;</i>
                                     Author: ${article.author}</p>
-                                <p style="display: inline-block"><i class="fa">&#xf087;</i>
-                                    Likes: ${article.likes}</p>
                                 <p style="display: inline-block"><i class="fa">&#xf0c0;</i>
                                     Views: ${article.views}</p>
                                 <a href="#" onclick="revealComments()" style="display: inline-block"><i class="fa">&#xf112;</i>

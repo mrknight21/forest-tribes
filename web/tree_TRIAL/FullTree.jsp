@@ -156,7 +156,7 @@
                                                         <li>${URLS.title}</li>
                                                     </a>
                                                     <form class="URL_editor" id="urlFactEditorAgainstID${URLS.id}"
-                                                          action="/tree_TRIAL/URL_editor.jsp"
+                                                          action="<%= sitePath%>tree_TRIAL/URL_editor.jsp"
                                                           method="get" style="display: inline-block">
                                                         <input type="hidden" value="${URLS.id}" name="id">
                                                         <input type="hidden" value="factual" name="type">
@@ -170,7 +170,7 @@
                                                         </button>
                                                     </form>
                                                     <form class="URL_deleter" id="urlFactDeleterAgainstID${URLS.id}"
-                                                          action="/Serve_DeleteTreeComponents"
+                                                          action="<%= sitePath%>Serve_DeleteTreeComponents"
                                                           method="get" style="display: inline-block">
                                                         <input type="hidden" value="${URLS.id}" name="id">
                                                         <input type="hidden" value="1" name="deletetype">
@@ -194,7 +194,7 @@
                     <div class="panel-footer">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form class="URL_Adder" id="urlFactAdderID${tree.id}" action="/tree_TRIAL/URL_editor.jsp"
+                                <form class="URL_Adder" id="urlFactAdderID${tree.id}" action="<%= sitePath%>tree_TRIAL/URL_editor.jsp"
                                       method="get">
                                     <input type="hidden" value="${tree.id}" name="TreeID">
                                     <input type="hidden" value="factual" name="type">
@@ -234,7 +234,7 @@
                                                         <li>${URLS.title}</li>
                                                     </a>
                                                     <form class="URL_editor" id="urlCommentaryEditorForID${URLS.id}"
-                                                          action="/tree_TRIAL/URL_editor.jsp"
+                                                          action="<%= sitePath%>tree_TRIAL/URL_editor.jsp"
                                                           method="get" style="display: inline-block">
                                                         <input type="hidden" value="${URLS.id}" name="id">
                                                         <input type="hidden" value="commentary" name="type">
@@ -248,7 +248,7 @@
                                                         </button>
                                                     </form>
                                                     <form class="URL_deleter" id="urlCommentaryDeleterForID${URLS.id}"
-                                                          action="/Serve_DeleteTreeComponents"
+                                                          action="<%= sitePath%>Serve_DeleteTreeComponents"
                                                           method="get" style="display: inline-block">
                                                         <input type="hidden" value="${URLS.id}" name="id">
                                                         <input type="hidden" value="2" name="deletetype">
@@ -270,7 +270,7 @@
                                                         <li>${URLS.title}</li>
                                                     </a>
                                                     <form class="URL_editor" id="urlCommentaryEditorAgainstID${URLS.id}"
-                                                          action="/tree_TRIAL/URL_editor.jsp"
+                                                          action="<%= sitePath%>tree_TRIAL/URL_editor.jsp"
                                                           method="get" style="display: inline-block">
                                                         <input type="hidden" value="${URLS.id}" name="id">
                                                         <input type="hidden" value="commentary" name="type">
@@ -284,7 +284,7 @@
                                                         </button>
                                                     </form>
                                                     <form class="URL_deleter" id="urlCommentaryDeleterAgainstID${URLS.id}"
-                                                          action="/Serve_DeleteTreeComponents"
+                                                          action="<%= sitePath%>Serve_DeleteTreeComponents"
                                                           method="get" style="display: inline-block">
                                                         <input type="hidden" value="${URLS.id}" name="id">
                                                         <input type="hidden" value="2" name="deletetype">
@@ -308,7 +308,7 @@
                     <div class="panel-footer">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form class="URL_Adder" id="urlCommentaryAdderID${tree.id}" action="/tree_TRIAL/URL_editor.jsp"
+                                <form class="URL_Adder" id="urlCommentaryAdderID${tree.id}" action="<%= sitePath%>tree_TRIAL/URL_editor.jsp"
                                       method="get">
                                     <input type="hidden" value="${tree.id}" name="TreeID">
                                     <input type="hidden" value="commentary" name="type">
@@ -346,7 +346,7 @@
                                                 <c:forEach var="reaction" items="${reaction_for}">
                                                     <li>${reaction.text}</li>
                                                     <form class="reaction_editor" id="reactionEditorForID${reaction.id}"
-                                                          action="/tree_TRIAL/Reaction_editor.jsp"
+                                                          action="<%= sitePath%>tree_TRIAL/Reaction_editor.jsp"
                                                           method="get" style="display: inline-block">
                                                         <input type="hidden" value="${reaction.id}" name="id">
                                                         <input type="hidden" value="${tree.id}" name="TreeID">
@@ -359,7 +359,7 @@
                                                         </button>
                                                     </form>
                                                     <form class="reaction_deleter" id="reactionDeleterForID${reaction.id}"
-                                                          action="/Serve_DeleteTreeComponents"
+                                                          action="<%= sitePath%>Serve_DeleteTreeComponents"
                                                           method="get" style="display: inline-block">
                                                         <input type="hidden" value="${reaction.id}" name="id">
                                                         <input type="hidden" value="3" name="deletetype">
@@ -378,7 +378,7 @@
                                                 <c:forEach var="reaction" items="${reaction_against}">
                                                     <li>${reaction.text}</li>
                                                     <form class="reaction_editor" id="reactionEditorAgainstID${reaction.id}"
-                                                          action="/tree_TRIAL/Reaction_editor.jsp"
+                                                          action="<%= sitePath%>tree_TRIAL/Reaction_editor.jsp"
                                                           method="get" style="display: inline-block">
                                                         <input type="hidden" value="${reaction.id}" name="id">
                                                         <input type="hidden" value="${tree.id}" name="TreeID">
@@ -391,7 +391,7 @@
                                                         </button>
                                                     </form>
                                                     <form class="reaction_deleter" id="reactionDeleterAgainstID${reaction.id}"
-                                                          action="/Serve_DeleteTreeComponents"
+                                                          action="<%= sitePath%>Serve_DeleteTreeComponents"
                                                           method="get" style="display: inline-block">
                                                         <input type="hidden" value="${reaction.id}" name="id">
                                                         <input type="hidden" value="3" name="deletetype">
@@ -409,7 +409,7 @@
                                     </tbody>
                                 </table>
                                 <form class="Reaction_Adder" id="reactionAdderID${tree.id}"
-                                      action="/tree_TRIAL/Reaction_editor.jsp" method="get">
+                                      action="<%= sitePath%>tree_TRIAL/Reaction_editor.jsp" method="get">
                                     <input type="hidden" value="${tree.id}" name="TreeID">
                                     <input type="hidden" value="add" name="request">
                                     <button type="submit" form="reactionAdderID${tree.id}" value="Submit"

@@ -45,14 +45,14 @@ public class Serve_TreeReaction extends HttpServlet {
                 if (reactionID == -1) {
                     T_Reaction newReaction = new T_Reaction(username, content, TreeID, support);
                     TreeDAO.createReaction(DB, newReaction);
-                    String fullTreeAdress = "/Serve_FullTree?TreeID=" + TreeID;
+                    String fullTreeAdress = "Serve_FullTree?TreeID=" + TreeID;
                     response.sendRedirect(fullTreeAdress);
                 }
                 else {
                     int replieSize = Integer.parseInt(request.getParameter("repliesNum"));
                     T_Reaction reaction = new T_Reaction(reactionID, content, support, replieSize );
                     TreeDAO.updateReaction(DB, reaction);
-                    String fullTreeAdress = "/Serve_FullTree?TreeID=" + TreeID;
+                    String fullTreeAdress = "Serve_FullTree?TreeID=" + TreeID;
                     response.sendRedirect(fullTreeAdress);
                 }
 

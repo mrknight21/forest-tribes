@@ -107,8 +107,6 @@
                                             <div class="panel-footer">
                                                 <p style="display: inline-block"><i class="fa">&#xf2bd;</i>
                                                     Author: ${article.author}</p>
-                                                <p style="display: inline-block"><i class="fa">&#xf087;</i>
-                                                    Likes: ${article.likes}</p>
                                                 <p style="display: inline-block"><i class="fa">&#xf0c0;</i>
                                                     Views: ${article.views}</p>
                                                 <p style="display: inline-block"><i class="fa">&#xf112;</i>

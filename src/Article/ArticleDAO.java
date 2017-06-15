@@ -53,6 +53,12 @@ public class ArticleDAO {
     // Method to return an article relating to the parsed-in article ID, from the database.
     public static Article getArticleById(AbstractDB db, int articleId) {
         try (Connection c = db.connection()) {
+
+            try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_Articles SET views = views + 1 WHERE ID = ?")) {
+                p.setInt(1, articleId);
+                p.executeUpdate();
+            }
+
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Articles WHERE ID = ?")) {
                 p.setInt(1, articleId);
                 try (ResultSet r = p.executeQuery()) {
