@@ -86,7 +86,7 @@
                             <div class="col-lg-12">
                                 <form action="/Serve_TreeURL" method="get" id="contributionFormID">
                                     <fieldset>
-                                        <legend>Title:</legend>
+                                        <legend><i class="fa">&#xf02b;</i> Title:</legend>
                                         <div class="form-group">
                                             <input id="urltitleID" type="text" name="title" value="<%=title%>" style="width: 100%" required>
                                         </div>
@@ -101,7 +101,7 @@
                                         <div class="form-group">
                                             <textarea id="descriptionID" name="shortIntro" rows="7" cols="90" required><%=shortIntro%></textarea>
                                         </div>
-                                        <legend>URL:</legend>
+                                        <legend><i class="fa">&#xf08e;</i> URL:</legend>
                                         <div class="form-group">
                                             <input id="urlID" type="text" name="URL" value="<%=URL%>" style="width: 100%" required>
                                             <input type="hidden" name="URLid" value="<%=URLid%>">
