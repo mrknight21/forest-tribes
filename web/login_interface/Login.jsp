@@ -57,7 +57,6 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 style="text-align: center"><i class="fa">&#xf1bb;</i> Forest Tribes</h1>
-                            <h4 style="text-align: center">The Beauty of Interconnectedness</h4>
                             <form id="loginFormID" action="<%=sitePath%>Serve_Authentication" method="post" role="form"
                                   style="display: block;">
                                 <div class="input-group">
@@ -71,11 +70,6 @@
                                            class="form-control" placeholder="Password">
                                 </div>
                                 <p id="messageLogin" style="text-align: center">${message}</p>
-                                <div class="form-group text-center">
-                                    <input type="checkbox" tabindex="3" class="" name="loginRemember"
-                                           id="loginRememberID">
-                                    <label for="loginRememberID"> Remember Me</label>
-                                </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-lg-12">
@@ -90,16 +84,6 @@
                                             <div class="text-center">
                                                 <%--Google signin button--%>
                                                 <div id="loginGoogle" class="g-signin2" data-onsuccess="onSignIn"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="text-center">
-                                                <a href="" tabindex="5" class="forgot-password">Forgot Password?</a>
                                             </div>
                                         </div>
                                     </div>

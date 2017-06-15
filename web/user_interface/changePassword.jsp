@@ -49,7 +49,6 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 style="text-align: center"><i class="fa">&#xf1bb;</i> Forest Tribes</h1>
-                            <h4 style="text-align: center">The Beauty of Interconnectedness</h4>
                             <form action="<%=sitePath%>Serve_Changepassword" method="post" role="form"
                                   style="display: block">
                                 <fieldset>
