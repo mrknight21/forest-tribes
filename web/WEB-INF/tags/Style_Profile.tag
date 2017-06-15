@@ -2,7 +2,7 @@
 
 <style>
         .full {
-            background: url('<%=sitePath%>login_interface/lake-baikal-9.jpg') no-repeat center center fixed;
+            background: url('<%=sitePath%>user_interface/background_03.jpg') no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             background-size: cover;
