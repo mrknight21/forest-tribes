@@ -12,7 +12,7 @@
             background-color: transparent;
         }
 
-        h4 {
+        h3, h4 {
             font-family: Futura;
             color: white;
         }

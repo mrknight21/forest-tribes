@@ -57,7 +57,7 @@
                     <div class="panel-heading" style="background-color: #008975">
                         <div class="row">
                             <div class="col-lg-12">
-                                <h3 style="font-family: Futura; color: white;">${tree.title}</h3>
+                                <h3>${tree.title}</h3>
                             </div>
                         </div>
                     </div>
