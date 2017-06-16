@@ -50,6 +50,9 @@
     final MySQL DB = new MySQL();
     List<Article> articles = ArticleDAO.getAllArticles(DB);
     request.setAttribute("articles", articles);
+
+    try {request.setAttribute("status", articles.size() > 0);}
+    catch (NullPointerException e) {request.setAttribute("status", false);}
 %>
 
 <div class="container">
@@ -67,6 +70,8 @@
                 </div>
                 <div id="displayMainPanelBodyID" class="panel-body">
                     <div class="row">
+                        <c:choose>
+                            <c:when test="${status}">
                         <c:forEach items="${articles}" var="article">
                             <!--Article panel-->
                             <div class="col-lg-12">
@@ -94,6 +99,12 @@
                                 </div>
                             </div>
                         </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <p style="text-align: center; font-family: Futura, 'Helvetica Neue', Helvetica, Arial, sans-serif">No one has written anything yet.
+                                    <a href="CreateArticle.jsp">Be the first to sow your seeds.</a></p>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
             </div>
