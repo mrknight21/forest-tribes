@@ -73,38 +73,37 @@
 
     <script>
         function checkPasswordMatch() {
-            var password = $("#registrationPasswordID").val();
-            var passwordConfirm = $("#registrationConfirmPasswordID").val();
-
-            if (password !== passwordConfirm) {
+            if ($("#registrationPasswordID").val() !== $("#registrationConfirmPasswordID").val()) {
                 $("#registrationSubmitID").prop('disabled', true);
                 $("#registrationMessageID").show();
             } else {
-                $("#registrationSubmitID").prop('disabled', false);
                 $("#registrationMessageID").hide();
+                checkUserNameFree();
             }
         }
 
 
         function checkUserNameFree() {
-            var registerUsername = $("#registrationUsernameID").val();
-
-            // Pass desired username to backend:
             var xhr = new XMLHttpRequest();
             xhr.open('POST', '<%=sitePath%>Serve_Registration');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            // Function on server response:
             xhr.onload = function() {
                 if (xhr.responseText === "null") {
                     $("#usernameExistsID").hide();
                     $("#usernameAvailableID").show();
-//                    $("#registrationSubmitID").prop('disabled', false);
+                    if ($("#registrationPasswordID").val() === $("#registrationConfirmPasswordID").val())
+                        $("#registrationSubmitID").prop('disabled', false);
                 } else {
                     $("#usernameExistsID").show();
                     $("#usernameAvailableID").hide();
                     $("#registrationSubmitID").prop('disabled', true);
                 }
             };
-            xhr.send('usernameCheck=' + registerUsername);
+
+            // Pass desired username to backend:
+            xhr.send('usernameCheck=' + $("#registrationUsernameID").val());
         }
 
 
@@ -143,12 +142,12 @@
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                     <input type="text" name="loginUsername" id="loginUsernameID" tabindex="1"
-                                           class="form-control" placeholder="Username" value="">
+                                           class="form-control" placeholder="Username" value="" required>
                                 </div>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                     <input type="password" name="loginPassword" id="loginPasswordID" tabindex="2"
-                                           class="form-control" placeholder="Password">
+                                           class="form-control" placeholder="Password" required>
                                 </div>
                                 <p id="messageLogin" style="text-align: center">${message}</p>
                                 <div class="form-group">
@@ -176,35 +175,35 @@
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                     <input type="text" name="registrationUsername" id="registrationUsernameID"
-                                           tabindex="1" class="form-control" placeholder="Username" value="" onchange="checkUserNameFree()">
+                                           tabindex="1" class="form-control" placeholder="Username" value="" onchange="checkUserNameFree()" required>
                                 </div>
                                 <p id="usernameExistsID" style="text-align: center; display: none;">This username already exists!</p>
-                                <p id="usernameAvailableID" style="text-align: center; display: none;">This username will pass our entry criteria.</p>
+                                <p id="usernameAvailableID" style="text-align: center; display: none;">This username passes our entry criteria. We will allow it.</p>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                     <input type="text" name="registrationFirstName" id="registrationFirstNameID"
-                                           tabindex="2" class="form-control" placeholder="First Name" value="">
+                                           tabindex="2" class="form-control" placeholder="First Name" value="" required>
                                 </div>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                     <input type="text" name="registrationLastName" id="registrationLastNameID"
-                                           tabindex="3" class="form-control" placeholder="Last Name" value="">
+                                           tabindex="3" class="form-control" placeholder="Last Name" value="" required>
                                 </div>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                                     <input type="email" name="registrationEmail" id="registrationEmailID" tabindex="4"
-                                           class="form-control" placeholder="Email" value="">
+                                           class="form-control" placeholder="Email" value="" required>
                                 </div>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                     <input type="password" name="registrationPassword" id="registrationPasswordID"
-                                           tabindex="5" class="form-control" placeholder="Password">
+                                           tabindex="5" class="form-control" placeholder="Password" required>
                                 </div>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                     <input type="password" name="registrationConfirmPassword"
                                            id="registrationConfirmPasswordID" tabindex="6" class="form-control"
-                                           placeholder="Confirm Password" onchange="checkPasswordMatch();">
+                                           placeholder="Confirm Password" onchange="checkPasswordMatch();" required>
                                 </div>
                                 <p id="registrationMessageID" style="text-align: center; display: none;">The entered-in
                                     passwords do not match. Please try again.</p>
