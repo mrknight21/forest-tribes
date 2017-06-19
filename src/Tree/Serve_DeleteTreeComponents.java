@@ -14,6 +14,10 @@ import java.io.IOException;
 
 /**
  * Created by mche618 on 14/06/2017.
+ *
+ * This small servelet handle the deletion requests for all three tree components.
+ * --Bryan
+ *
  */
 public class Serve_DeleteTreeComponents extends  HttpServlet {
 

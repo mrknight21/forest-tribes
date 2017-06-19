@@ -6,6 +6,20 @@ import java.util.List;
 
 /**
  * Created by mche618 on 12/06/2017.
+ *
+ * An introduction of InfoTree class:
+ * infoTree class is also an extention of Text abstract class, as it is also an edible type.
+ * The class object will be displayed on the iframe map in ForestTribes.jsp.
+ * Generally, beside the basic property inherited from Text parent class InfoTree consist of two groups of properties, which are text content groups and visual display control group.
+ * The text content group consists of a title, a list of factual context URL, a list commentary context URL, and a list of other user's reactions.
+ * The visual display control group consist of stage, size, coordinate X&Y, which respectively control the tree display types, zooming percentages and its coordinates on the iframe map.
+ * leaves is the number of reaction the tree received.
+ * The exp property is the ket property that links between text content group and visual display control group, as size & stage are calculated based on exp, and exp is built up by number of URLs, likes, views and reactions.
+ *However, now the exp calculation based on article has not been fully implemented yet, as the exp updating DAO not ready.
+ *
+ *  NOTE: the "text" property that is inherited from the parent class, and usually act as the major content for articles etc, is acting as short introduction text for the tree.
+ * ---Bryan
+ *
  */
 public class InfoTree extends Text{
 
@@ -156,7 +170,6 @@ public InfoTree(int id, String username, String title,String introText, int like
 
 
 //calculate exp
-
     private void calculateExp(){
         int exp = this.factual.size()*100 + this.commentary.size()*100+this.reactoin.size()*20;
         if (exp > 6000){
@@ -170,7 +183,7 @@ public InfoTree(int id, String username, String title,String introText, int like
 
 
 
-// stage
+// calculate stage base on exp
     private void calculateStage(){
        if (this.exp <500){
            this.stage =1;
@@ -198,7 +211,7 @@ public InfoTree(int id, String username, String title,String introText, int like
         }
     }
 
-    //calculate size
+    //calculate size base on exp and stages
     private void calculateSize(){
         switch (this.stage){
             case 1: this.size = (int)(100.0*(this.exp/500.0)+50.0);
@@ -224,14 +237,5 @@ public InfoTree(int id, String username, String title,String introText, int like
 
 
 
-    /* private String title;
-    private List<T_URL> Factorial;
-    private List<T_URL> Commentary;
-    private List<T_Reaction> Reactoin;
-    private int stage;
-    private int size;
-    private int coordinX;
-    private int coordinY;
-    private int leaves;
-    private int flowers;*/
+
 }

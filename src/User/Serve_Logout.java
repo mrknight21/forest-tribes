@@ -2,6 +2,7 @@ package User;
 
 /**
  * Created by mche618 on 1/06/2017.
+ * Log out
  */
 
 import Utility.SecurityUtility;

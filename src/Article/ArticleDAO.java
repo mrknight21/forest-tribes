@@ -8,84 +8,69 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-//http://alvinalexander.com/java/java-timestamp-example-current-time-now
+
 
 public class ArticleDAO {
 
-    // Method to return all Articles as an ArrayList from the database.
+    // Method to return all Articles with brief information from the Articles table in database as an ArrayList from the database.
     public static List<Article> getAllArticles(AbstractDB db) {
 
         List<Article> articles = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Articles")) {
-                try (ResultSet r = p.executeQuery()) {
+            PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Articles");
+                ResultSet r = p.executeQuery();
                     while (r.next()) articles.add(fullArticleFromResultSet(r, c));
-                }
-            }
-        } catch (SQLException | ClassNotFoundException e) {
+                } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return articles;
     }
 
-    // Method to return all Articles by Author as an ArrayList from the database.
+    // Method to return all Articles with brief information from the Articles table in database by Author as an ArrayList from the database.
     public static List<Article> getArticlesByUser(AbstractDB db, String username) {
 
         List<Article> articles = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Articles WHERE username = ?")) {
+            PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Articles WHERE username = ?");
                 p.setString(1, username);
-                try (ResultSet r = p.executeQuery()) {
+                ResultSet r = p.executeQuery();
                     while (r.next()) articles.add(fullArticleFromResultSet(r, c));
                 }
-            }
-        } catch (SQLException | ClassNotFoundException e) {
+         catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return articles;
     }
 
-    // Method to return an article relating to the parsed-in article ID, from the database.
+    // Method to return a complete article relating to the parsed-in article ID, from the database, with all comments and replies that is under the article.
+    //This method made several calls of other methods in order to collect all the relevent comment and replies as list to return a full article object.
     public static Article getArticleById(AbstractDB db, int articleId) {
         try (Connection c = db.connection()) {
 
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Articles WHERE ID = ?")) {
+           PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Articles WHERE ID = ?");
                 p.setInt(1, articleId);
-                try (ResultSet r = p.executeQuery()) {
+                ResultSet r = p.executeQuery();
                     while (r.next()) {
                         return fullArticleFromResultSet(r, c);
                     }
-                }
-            }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public static void increaseViews(AbstractDB db, int articleId) {
-        try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_Articles SET views = views + 1 WHERE ID = ?")) {
-                p.setInt(1, articleId);
-                p.executeUpdate();
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
+    // Method to return a complete comment relating to the parsed-in article ID, from the database, with all replies that is under the article.
     public static Comment getCommentById(AbstractDB db, int commentId) {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Comments WHERE ID = ?")) {
+            PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Comments WHERE ID = ?");
                 p.setInt(1, commentId);
-                try (ResultSet r = p.executeQuery()) {
+                ResultSet r = p.executeQuery();
                     while (r.next()) {
                         return commentFromResultSet(r, c);
                     }
-                }
-            }
+
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -94,30 +79,30 @@ public class ArticleDAO {
 
     public static Reply getReplyById(AbstractDB db, int replyId) {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Replies WHERE ID = ?")) {
+           PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Replies WHERE ID = ?");
                 p.setInt(1, replyId);
-                try (ResultSet r = p.executeQuery()) {
+                ResultSet r = p.executeQuery();
                     while (r.next()) {
                         return replyFromResultSet(r, c);
                     }
-                }
-            }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return null;
     }
 
+
+
+
+//get all comments under the particular article, this function is part of the get fullarticle method.
     private static List<Comment> getArticleComments(int articleId, Connection c) throws SQLException {
         List<Comment> comments = new ArrayList<>();
 
-        try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Comments WHERE parent_ID = ?")) {
+        PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Comments WHERE parent_ID = ?");
             p.setInt(1, articleId);
-            try (ResultSet r = p.executeQuery()) {
+           ResultSet r = p.executeQuery();
                 while (r.next()) {
                     comments.add(commentFromResultSet(r, c));
-                }
-            }
         }
         System.out.println("got comments");
         return comments;
@@ -126,13 +111,11 @@ public class ArticleDAO {
     private static List<Reply> getCommentReplies(int commentId, Connection c) throws SQLException {
         List<Reply> replies = new ArrayList<>();
 
-        try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Replies WHERE parent_ID = ?")) {
+        PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Replies WHERE parent_ID = ?");
             p.setInt(1, commentId);
-            try (ResultSet r = p.executeQuery()) {
+           ResultSet r = p.executeQuery();
                 while (r.next()) {
                     replies.add(replyFromResultSet(r, c));
-                }
-            }
         }
         System.out.println("got replies");
         return replies;
@@ -308,6 +291,21 @@ public class ArticleDAO {
         p.executeUpdate();
         return true;
     }
+
+
+    // Method to increase one view for article.
+    public static void increaseViews(AbstractDB db, int articleId) {
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE inFoJaxs_Articles SET views = views + 1 WHERE ID = ?")) {
+                p.setInt(1, articleId);
+                p.executeUpdate();
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     // Legacy create text methods
 

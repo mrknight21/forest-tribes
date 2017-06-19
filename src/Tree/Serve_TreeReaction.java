@@ -11,6 +11,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 /**
  * Created by mche618 on 14/06/2017.
+ *
+ * This servelet handle the request to update or create a reaction in a tree
+ * --Bryan
  */
 public class Serve_TreeReaction extends HttpServlet {
 
@@ -42,6 +45,7 @@ public class Serve_TreeReaction extends HttpServlet {
                 //public T_Reaction(int id, String text, boolean supportForArgument , int repliesCount)
 
 
+                //reaction ID is -1, if it is a new reaction.
                 if (reactionID == -1) {
                     T_Reaction newReaction = new T_Reaction(username, content, TreeID, support);
                     TreeDAO.createReaction(DB, newReaction);

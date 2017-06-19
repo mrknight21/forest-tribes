@@ -12,6 +12,11 @@ import java.io.IOException;
 
 /**
  * Created by mche618 on 14/06/2017.
+ *
+ *
+ * This servelet create a plain tree after user has decided the basic properties(title, shortIntro, coordinates) of the InfoTree.
+ * --Bryan
+ *
  */
 public class Serve_TreeCreation extends HttpServlet{
 
@@ -41,6 +46,7 @@ public class Serve_TreeCreation extends HttpServlet{
             System.out.println("FROM TREE CREATION ID: "+NewID);
 
         request.setAttribute("TreeID", NewID);
+        //user is redirected to the full tree view of the newly created tree to do more edition, adding more URLs etc.
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Serve_FullTree");
         dispatcher.forward(request, response);
         } catch (IOException e) {

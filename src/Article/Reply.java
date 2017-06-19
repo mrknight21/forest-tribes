@@ -2,6 +2,8 @@ package Article;
 
 /**
  * Created by wasia on 3/06/2017.
+ * Reply is the most basic text type, which has only one additional property, parentID, that helps to identify which parent comment it belongs to.
+ * --Bryan
  */
 public class Reply extends Text {
 

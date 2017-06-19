@@ -9,8 +9,12 @@ import java.util.List;
 
 /**
  * Created by mche618 on 14/06/2017.
+ *
+ * this class generate random tree for all users.
+ *
+ * --Bryan
  */
-public class trial {
+public class RandomTreeGenerator {
     public void start() {
 
 
@@ -29,6 +33,6 @@ public class trial {
 
     }
     public static void main(String[] args) {
-        new trial().start();
+        new RandomTreeGenerator().start();
     }
 }

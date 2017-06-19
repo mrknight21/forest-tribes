@@ -7,7 +7,9 @@ import java.util.List;
 /**
  * Created by wasia on 3/06/2017.
  * <p>
- * Article and inner classes Comment and Reply extend abstract Text class and will be used as Java beans
+ * Article and inner classes Comment and Reply extend abstract Text class and will be used as Java beans.
+ * Article can contain comments.
+ * beside the major text content, article also possess a short intro text property and a title.
  */
 public class Article extends Text {
     private String title;
@@ -48,7 +50,7 @@ public class Article extends Text {
         setResponseCount(comments);
     }
 
-    //retrieve articles brief info
+    //retrieve articles brief info for all article view.
     public Article(int id, String author, String title, String text, int likes, int view, int responseCount, String shortIntro, String dateCreated, String dateLastEdited) {
         super(id, author, text, dateCreated, dateLastEdited, likes, view);
         this.title = title;

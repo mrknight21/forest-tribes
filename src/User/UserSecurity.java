@@ -2,6 +2,8 @@ package User;
 
 import java.io.Serializable;
 
+// this class store the password in salt, hash, iteration forms.
+
 public class UserSecurity implements Serializable {
 
     private String username;

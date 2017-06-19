@@ -2,6 +2,12 @@ package Tree;
 
 /**
  * Created by mche618 on 14/06/2017.
+ *
+ * This servelet handle the creating and updateing request for both commentary and factual URL under a particular InfoTree.
+ * The type and position of the particular URL will be firstly identified, then the request type will be identified based on the URLid.
+ * Existing URL will has its own URL id, while the request to create a new URL will have id as "-1".
+ *--Bryan
+ *
  */
 
 
@@ -41,13 +47,13 @@ public class Serve_TreeURL extends HttpServlet{
             String URL = request.getParameter("URL");
             int URLid = Integer.parseInt(request.getParameter("URLid"));
             int TreeID = Integer.parseInt(request.getParameter("TreeID"));
+            //identify type of the URL
             boolean isfactual = (request.getParameter("URLtype").equals("factual"));
+            //identify position of the URL
             boolean support = (request.getParameter("support").equals("for"));
 
-            // public T_URL(String author, String title, String introText, int parentID, String URL,boolean supportForArgument, boolean isfactual)//
-
-            // public T_URL(int id,String title, String introText, String URL, boolean supportForArgument )
-
+            //Existing URL will has its own URL id, while the request to create a new URL will have id as "-1".
+            //After the URL has been either created or updated, the user will be redirected to the full tree view.
             if (URLid == -1) {
                 System.out.println(support);
                 T_URL newURL = new T_URL(username, title, shortIntro, TreeID, URL, support, isfactual);

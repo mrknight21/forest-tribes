@@ -86,6 +86,17 @@
                                     Size: ${tree.size}</p>
                                 <p style="display: inline-block; padding-right: 1%;"><i class="fa">&#xf047;</i>
                                     Coordinate: (${tree.coordinX}, ${tree.coordinY})</p>
+                                <c:if test="${( tree.author == username)}">
+                                <form class="Tree_deleter"
+                                      action="<%=sitePath%>Serve_TreeDeletion"
+                                      method="get" style="display: inline-block">
+                                    <input type="hidden" value="${tree.author}" name="author">
+                                    <input type="hidden" value="${tree.id}" name="TreeID">
+                                    <button type="submit" value="Submit"
+                                            class="btn btn-danger"><i class="fa">&#xf014;</i> Delete
+                                    </button>
+                                </form>
+                                </c:if>
                             </div>
                         </div>
                     </div>

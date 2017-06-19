@@ -10,13 +10,14 @@ import java.util.List;
 
 /**
  * Created by mche618 on 12/06/2017.
+ * --Bryan
  */
 public class TreeDAO {
 
 //infoTressDAO
 
 
-    //get summary of all
+    //get summary of all Infotrees for displaying on map.
     public static List<InfoTree> geAllInfoTrees(AbstractDB db) {
 
         List<InfoTree> trees = new ArrayList<>();
@@ -34,6 +35,7 @@ public class TreeDAO {
         return trees;
     }
 
+    //get summary information of all InfoTree that is belong to a particular user.
     public static List<InfoTree> getUserAllInfoTrees(AbstractDB db, String username) {
 
         List<InfoTree> trees = new ArrayList<>();
@@ -52,6 +54,7 @@ public class TreeDAO {
         return trees;
     }
 
+    // get a full tree by its ID. This method will call several other relevent methods to collect all URLS, Reaction and replies that are under the tree.
     public static InfoTree getInfoTreeById(AbstractDB db, int TreeId) {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Tree_Trees WHERE ID = ?")) {
@@ -68,7 +71,7 @@ public class TreeDAO {
         return null;
     }
 
-
+//get a URL by its ID
     public static T_URL getURLbyId(AbstractDB db, int URLId, boolean isfactual) {
         try (Connection c = db.connection()) {
             PreparedStatement p = null;
@@ -90,7 +93,7 @@ public class TreeDAO {
     }
 
 
-
+// get a reaction and its replies with the id
     public static T_Reaction getReactionbyId(AbstractDB db, int reactionId) {
         try (Connection c = db.connection()) {
             PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_Tree_Reactions WHERE ID = ?");
@@ -158,7 +161,7 @@ public class TreeDAO {
 
     }
 
-
+//randomly generate Trees for each user to simulate the map displayed with decent tree numbers.
     public static boolean random_trees_generator (AbstractDB db, List<String> usernames){
         boolean success;
 
@@ -262,7 +265,7 @@ ID INT AUTO_INCREMENT,
             p.setString(3, reaction.getText());
             p.setInt(4, reaction.getLikes());
             p.setInt(5, reaction.getViews());
-            p.setInt(6, reaction.getRepliesCount());
+            p.setInt(6, reaction.getReplyCount());
             p.setBoolean(7, reaction.isSupportForArgument());
             p.executeUpdate();
             success = true;
@@ -296,6 +299,7 @@ ID INT AUTO_INCREMENT,
     }
 
     //////////////////////////////////////////////////////////////////////////////assemblers
+    //assembles are methods that are part of the getter above, to help collect relevent parts from the database.
 
     //infoTrees
 
@@ -473,6 +477,7 @@ ID INT AUTO_INCREMENT,
 
 
     ////////////////////////////////Delete//////////////////////////////////////////////////////////////
+    //DAO mothods executing deletion request.
 
 
     public static boolean deleteInfoTree(AbstractDB db, int TreeID){
@@ -618,7 +623,7 @@ ID INT AUTO_INCREMENT,
                 p.setString(1, reaction.getText());
                 p.setInt(2, reaction.getLikes());
                 p.setInt(3, reaction.getViews() );
-                p.setInt(4, reaction.getRepliesCount() );
+                p.setInt(4, reaction.getReplyCount() );
                 p.setBoolean(5, reaction.isSupportForArgument() );
                 p.setString(6, new Timestamp(System.currentTimeMillis()).toString());
                 p.setInt(7, reaction.getId() );

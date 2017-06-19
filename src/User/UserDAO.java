@@ -281,10 +281,10 @@ public class UserDAO {
 
         // Get the user relating to the parsed-in username from the database.
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_UserSecurity WHERE username = ?")) {
+            PreparedStatement p = c.prepareStatement("SELECT * FROM inFoJaxs_UserSecurity WHERE username = ?");
                 p.setString(1, username);
 
-                try (ResultSet r = p.executeQuery()) {
+                ResultSet r = p.executeQuery();
                     while (r.next()) {
                         user = new UserSecurity(
                                 r.getString("username"),
@@ -292,8 +292,6 @@ public class UserDAO {
                                 r.getInt("iterations"),
                                 getByteArray(r.getBlob("hash")));
                     }
-                }
-            }
 
             // Get the salt byte array assigned to the user.
             byte[] salt = user.getSalt();
@@ -306,11 +304,10 @@ public class UserDAO {
 
             // Call SecurityUtility method, isExpectedPassword to determine whether the user-parsed password matches the password stored in the database. The the result is returned.
             if (SecurityUtility.isExpectedPassword(passwordArray, salt, iterations, hash)) {
-                try (PreparedStatement p = c.prepareStatement("DELETE FROM inFoJaxs_User WHERE username = ?;")) {
-                    p.setString(1, username);
-                    p.executeUpdate();
+               PreparedStatement a = c.prepareStatement("DELETE FROM inFoJaxs_User WHERE username = ?;");
+                    a.setString(1, username);
+                    a.executeUpdate();
                     success = true;
-                }
             }
             ;
         } catch (SQLException | ClassNotFoundException e) {
@@ -349,9 +346,9 @@ public class UserDAO {
 
         //auto set-up user profile photo
         setUserDP(sourceImage, username, servletContext);
-
+        //register User
         registerUser(DB, newUser);
-
+        //create Profile
         createProfile(DB, username);
     }
 

@@ -14,6 +14,7 @@ import java.security.SecureRandom;
  */
 public class MiscellaneousUtility {
 
+    //create scaled scaled buffered image
     public static BufferedImage scale(BufferedImage source, double ratio) {
         int w = (int) (source.getWidth() * ratio);
         int h = (int) (source.getHeight() * ratio);
@@ -27,6 +28,7 @@ public class MiscellaneousUtility {
         return bi;
     }
 
+    //create compatible
     public static BufferedImage getCompatibleImage(int w, int h) {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice gd = ge.getDefaultScreenDevice();
@@ -35,12 +37,15 @@ public class MiscellaneousUtility {
         return image;
     }
 
+
+    //check whether the user directory exist, if not create one.
     public static String createUserDir(ServletContext servletContext, String username) {
         String userDirPath = servletContext.getRealPath("/User/"+username);
         MiscellaneousUtility.DirCeation(new File(userDirPath));
         return userDirPath;
     }
 
+    //check if a particular direcor exist, if not create one.
     public static boolean DirCeation (File theDir){
         if (!theDir.exists()) {
             System.out.println("creating directory: " + theDir.getName());
@@ -57,6 +62,7 @@ public class MiscellaneousUtility {
         return false;
     }
 
+    //remove html tags in a string
     public static String htmlToStringParser (String html) {
         return Jsoup.parse(html).text();
     }
@@ -64,6 +70,8 @@ public class MiscellaneousUtility {
     static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     static SecureRandom rnd = new SecureRandom();
 
+
+    //create random string for samples.
    public static String randomString( int len ){
         StringBuilder sb = new StringBuilder( len );
         for( int i = 0; i < len; i++ )

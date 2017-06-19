@@ -141,5 +141,14 @@
         <url-pattern>/Serve_DeleteTreeComponents</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Serve_TreeDeletion</servlet-name>
+        <servlet-class>Tree.Serve_TreeDeletion</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Serve_TreeDeletion</servlet-name>
+        <url-pattern>/Serve_TreeDeletion</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

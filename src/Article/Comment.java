@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Created by wasia on 3/06/2017.
+ * comment can contain replies.
  */
 public class Comment extends Text {
     protected List<Reply> replies;

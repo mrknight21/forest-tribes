@@ -2,6 +2,24 @@ package User;
 
 /**
  * Created by Barns on 31/05/17.
+ * This servelet authentificate user for their attempt of logging.
+ * Two potential logging attemps: normal logging, google account logging.
+ *
+ * * Input: Login.jsp
+ * Parameter:
+ * loginUsername
+ * loginPassword
+ *
+ ** steps:
+ * 1. checkLogginStatus -> content page.
+ * 2. check Username exist
+ * 3. Authentificate password
+ * 4. setSession LogginStatus = true, username = username.
+ * 5. redirect to Content page.
+ * 6. or redirect to login page if authentification fail.
+ *
+ *
+ *--Bryan
  */
 
 import Utility.MySQL;
@@ -36,9 +54,10 @@ public class Serve_Authentication extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }
-
+//use post to hide password etc.
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //checking login status
         if (SecurityUtility.loggingStatusChecker(request)) {
             response.sendRedirect("user_interface/Home.jsp");
             return;
@@ -46,33 +65,41 @@ public class Serve_Authentication extends HttpServlet {
 
         String idTokenString = request.getParameter("idtoken");
 
+        //if user use google account, the autentificateGoogleToken method is evoked .
         if (idTokenString != null) {
             authenticateGoogleToken(request, response, idTokenString);
             return;
         }
 
+        //if user don't pass authentification, send back to login page
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login_interface/Login.jsp");
+
 
         String username = request.getParameter("loginUsername");
         String password = request.getParameter("loginPassword");
 
-        if (username == null || password == null) {
-            request.setAttribute("message", "Please enter a username and password to log in");
-            System.out.println("No parameters received.");
-        } else if (UserDAO.getUserByUserName(DB, username) != null) {
-            if (SecurityUtility.passwordAuthentication(username, password)) {
+
+        try {
+            // if either username or password is empty, user is pumped out.
+            if (username == null || password == null) {
+                request.setAttribute("message", "Please enter a username and password to log in");
+                //if user don't pass authentification (password not matching with database after hash and salt, user will be bumped out).
+            } else if (SecurityUtility.passwordAuthentication(username, password)) {
                 loginTrue(request, username);
                 request.setAttribute("message", "You genius! Log in is successful!!");
+                //direct to home page
                 dispatcher = getServletContext().getRequestDispatcher("/user_interface/Home.jsp");
             } else {
                 request.setAttribute("message", "The combination of username and password you have entered is incorrect");
-                System.out.println("Password was wrong");
+
             }
-        } else {
-            request.setAttribute("message", "The combination of username and password you have entered is incorrect");
-            System.out.println("Username does not exist");
+
+            dispatcher.forward(request, response);
+            // Null pointer exception might occur when the entered username does not exit in the data base. a message of "user does not exist will be send"
+        }catch (NullPointerException e){
+            request.setAttribute("message", e.getMessage());
+            dispatcher.forward(request, response);
         }
-        dispatcher.forward(request, response);
     }
 
     private void authenticateGoogleToken(HttpServletRequest request, HttpServletResponse response, String idTokenString) {
@@ -133,21 +160,3 @@ public class Serve_Authentication extends HttpServlet {
     }
 }
 
-
-/*
-* Input: Login.jsp
-* Parameter:
-* loginUsername
-* loginPassword
-*
-* steps:
-* 1. checkLogginStatus -> content page.
-* 2. check Username exist
-* 3. Authentificate password
-* 4. setSession LogginStatus = true, username = username.
-* 5. redirect to Content page.
-* 6. or redirect to login page if authentification fail.
-*
-* Output:
-* Cookie (loginAttempt: unsuccessful) to Login.jsp
-* */

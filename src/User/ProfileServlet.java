@@ -23,8 +23,10 @@ public class ProfileServlet extends HttpServlet {
     }
 
     @Override
+    //This servelet handles the updating request to profile.
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try {
+            //check login status
             if (!SecurityUtility.loggingStatusChecker(request)) {
                 response.sendRedirect("login_interface/Login.jsp");
                 return;
@@ -63,6 +65,7 @@ public class ProfileServlet extends HttpServlet {
 
                 String issues = "";
 
+                //making the issues array into a string
                 StringBuilder sb = new StringBuilder("");
 
                 for (int i = 0; i < 17; i++) {
@@ -77,7 +80,6 @@ public class ProfileServlet extends HttpServlet {
                     issues = sb.toString();
                 }
 
-                System.out.println(issues);
 
                 Profile updateProfile = new Profile(username, gender, occupation, education, political, issues);
 

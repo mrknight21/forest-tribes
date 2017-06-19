@@ -17,6 +17,9 @@ import static Article.ArticleDAO.*;
 
 /**
  * Created by mche618 on 10/06/2017.
+ *
+ * A multi-purposes servelet dealing with different article relating requests.
+ *
  */
 public class ArticleServlet extends HttpServlet {
 
@@ -27,50 +30,39 @@ public class ArticleServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
 
-//        if (!SecurityUtility.loggingStatusChecker(request)) {
-//            response.sendRedirect("login_interface/Login.jsp");
-//            return;
-//        } else if (!request.getParameterNames().hasMoreElements()) {
-//            response.sendRedirect("user_interface/Home.jsp");
-//            return;
-//        }
-//
-//        int id = 0;
-//
-//        try {
-//            id = Integer.parseInt(request.getParameter("article_id"));
-//        } catch (NumberFormatException e) {
-//            System.out.println("wrong format of article ID");
-//        }
-//
-//        Article article = ArticleDAO.getArticleById(DB, id);
-//        request.setAttribute("article", article);
-//        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/article_display/DisplayFullArticle.jsp");
-//        dispatcher.forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            //checking login status
             if (!SecurityUtility.loggingStatusChecker(request)) {
                 response.sendRedirect("login_interface/Login.jsp");
                 return;
+                //checking form not empty.
             } else if (!request.getParameterNames().hasMoreElements()) {
                 response.sendRedirect("user_interface/Home.jsp");
                 return;
             } else {
 
+                //getting all available parameters
                 List<String> params = Collections.list(request.getParameterNames());
                 String username = getUsername(request);
 
+
+                //Identify the purpose of the request: create ,update, delete.  Inside each request, identify text types from: Article, comment or reply. Article has
+                // no parent ID or has parent ID as "-1".
+                //Appropriate DAO functions are called in accordance to the types and request identified.
                 chooser:
                 for (String parameter : params) {
                     if (parameter.startsWith("create")) {
                         if (parameter.endsWith("Article")) {
                             createArticle(request);
+                            //if article has been successfully created, sent to the User's article list. The new article should already be added into the collection.
                             response.sendRedirect("article_display/DisplayUserAllArticles.jsp?author="+username);
                             return;
                         } else {
+                            //comment and reply have parent ID.
                             id = Integer.parseInt(request.getParameter("parentId"));
                             switch (parameter) {
                                 case "createComment":
@@ -134,6 +126,8 @@ public class ArticleServlet extends HttpServlet {
         }
     }
 
+
+    //functions that collect data then combine and construct appropriate text types.
     private boolean createReply(HttpServletRequest request) {
         createNewText(
                 DB,

@@ -23,6 +23,10 @@ import java.util.*;
 
 /**
  * Created by mche618 on 6/06/2017.
+ *
+ * This servelet receive the photo uploaded by user, and create a thumbnail version and overwrite the previous profile picture.
+ *
+ *
  */
 public class Serve_UpdateProfilePicture extends HttpServlet {
 
@@ -30,12 +34,17 @@ public class Serve_UpdateProfilePicture extends HttpServlet {
     MySQL DB = new MySQL();
     private int maxFileSize = 5 * 1024 * 1024;
 
+
+
+    //The doGet will handle the request that use provided options to replace the current profile picture.
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        //check loggin status
         if (!SecurityUtility.loggingStatusChecker(request)) {
             response.sendRedirect("login_interface/Login.jsp");
             return;
         }
+
 
         String newProfileImagePath = request.getParameter("DP_option");
         if (newProfileImagePath == null) {
@@ -46,8 +55,10 @@ public class Serve_UpdateProfilePicture extends HttpServlet {
         String username = (String) request.getSession().getAttribute("username");
         User user = UserDAO.getUserByUserName(DB, username);
 
+        //update profile picture
         updateDP(getServletContext().getRealPath(newProfileImagePath), username, user);
 
+        //send back to profile picture update page
         response.sendRedirect("user_interface/ProfilePictureUpdate.jsp");
 
     }
@@ -63,6 +74,7 @@ public class Serve_UpdateProfilePicture extends HttpServlet {
         // Ensure user folder exists
         MiscellaneousUtility.createUserDir(getServletContext(),username);
 
+        //check upload not empty
         Boolean isMultipart = ServletFileUpload.isMultipartContent(request);
         try {
             if (!isMultipart) {
@@ -73,9 +85,7 @@ public class Serve_UpdateProfilePicture extends HttpServlet {
             }
 
             DiskFileItemFactory factory = new DiskFileItemFactory();
-            // maximum size that will be stored in memory
             factory.setSizeThreshold(maxFileSize);
-            // Location to save data that is larger than maxMemSize.
             factory.setRepository(new File("c:\\temp"));
 
             // Create a new file upload handler

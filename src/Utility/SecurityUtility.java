@@ -233,23 +233,28 @@ public class SecurityUtility {
         return false;
     }
 
-    public static boolean passwordAuthentication(String username, String password) {
+    public static boolean passwordAuthentication(String username, String password) throws NullPointerException{
 
         char[] passwordArray = password.toCharArray();
 
         // Get the user relating to the parsed-in username from the database.
         UserSecurity user = UserSecurityDAO.getUserByUsername(DB, username);
-        
-        // Get the salt byte array assigned to the user.
-        byte[] salt = user.getSalt();
 
-        // Get the hash byte array assigned to the user.
-        byte[] hash = user.getHash();
+           if (user == null) {
+               throw new NullPointerException("User does not exist");
+           }
 
-        // Get the iterations, assigned to the user.
-        int iterations = user.getIterations();
+           // Get the salt byte array assigned to the user.
+           byte[] salt = user.getSalt();
 
-        // Call SecurityUtility method, isExpectedPassword to determine whether the user-parsed password matches the password stored in the database. The the result is returned.
-        return SecurityUtility.isExpectedPassword(passwordArray, salt, iterations, hash);
+           // Get the hash byte array assigned to the user.
+           byte[] hash = user.getHash();
+
+           // Get the iterations, assigned to the user.
+           int iterations = user.getIterations();
+
+           // Call SecurityUtility method, isExpectedPassword to determine whether the user-parsed password matches the password stored in the database. The the result is returned.
+           return SecurityUtility.isExpectedPassword(passwordArray, salt, iterations, hash);
+
     }
 }

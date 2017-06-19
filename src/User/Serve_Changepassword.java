@@ -13,6 +13,25 @@ import java.io.IOException;
 
 /**
  * Created by mche618 on 31/05/2017.
+ * /*
+ Input: from changePassword.jsp
+ username,
+ password,
+ new password,
+ confirm password,
+
+ steps:
+ 1.checkLoginStatus
+ 2. Authentification
+ 3. confirm password
+ 4. Update password
+ 5. Redirect back to content page. dispatch "password update successful".
+ destination:
+ ChangingpasssWord page: with Cookie(passWordChangingProb: values
+ *
+ *
+ *
+ * --Bryan
  */
 public class Serve_Changepassword extends HttpServlet{
 
@@ -68,28 +87,6 @@ public class Serve_Changepassword extends HttpServlet{
 
 
 
-/*
-Input: from changePassword.jsp
-username,
-password,
-new password,
-confirm password,
-
-
-steps:
-1.checkLoginStatus
-2. Authentification
-3. confirm password
-4. Update password
-5. Redirect back to content page. dispatch "password update successful".
 
 
 
-destination:
-ChangingpasssWord page: with Cookie(passWordChangingProb: values
-values: newPWconfirmFail
-passwordWrong
-
-
-
- */

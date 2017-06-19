@@ -5,6 +5,13 @@ import java.sql.Timestamp;
 
 /**
  * Created by wasia on 3/06/2017.
+ *
+ * Text is the abstract super class that consist of the basic functionality and properties of all the edible text types, including: id, author, date created, dateLastEdited, likes, views and content.
+ * Note: all edible classes( Tree, article, text etc) have at least three constructors:
+ * one for containing data when first time creating the object, and inserting into database; another one for containing changeable attributes,
+ * to update existing objects inside the database;
+ * and finally one for retreiving all details of a particular object from the database to represent the object on client side.
+ * --Bryan
  */
 public abstract class Text implements Serializable {
     protected int id;
@@ -103,19 +110,5 @@ public abstract class Text implements Serializable {
         this.likes = views;
     }
 
-//    public File getImage() {
-//        return image;
-//    }
 
-//    public void setImage(File image) {
-//        this.image = image;
-//    }
-
-//    public String getFilePath() {
-//        return filePath;
-//    }
-
-//    public void setFilePath(String filePath) {
-//        this.filePath = filePath;
-//    }
 }
