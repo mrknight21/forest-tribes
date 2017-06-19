@@ -187,7 +187,7 @@
         color: #029f5b;
     }
 
-    h4 {
+    h4, h5 {
         font-family: Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;;
     }
 
